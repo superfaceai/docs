@@ -54,7 +54,7 @@ _Merging will automatically deploy `main` branch to production._
   <summary><strong>Tech Stack</strong></summary>
   
   <br />
-  These docs are built using [Docusaurus 2](https://docusaurus.io/).
+  These docs are built using https://docusaurus.io/.
 
   The site is deployed on [Vercel](https://vercel.com/) to
   [`docs`](https://vercel.com/superface/docs) project.

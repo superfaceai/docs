@@ -8,7 +8,7 @@ on:
 
 jobs:
   check_broken_links:
-    name: Check broken links
+    name: Check links
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
