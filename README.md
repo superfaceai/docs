@@ -23,7 +23,7 @@ The official home of Superface docs.
 
 3. ### Update the content structure _(optional)_
 
-- **New page, category; or change of structure**<br />
+- **Page rename, new page, category; or change of structure**<br />
   If you added a whole new category, page or simply want to change the table of contents,
   you'll need to update [`sidebars.js`](https://github.com/superfaceai/docs/blob/main/sidebars.js).
   It uses document IDs that are simply a path to the file minus the extension (unless explicitly

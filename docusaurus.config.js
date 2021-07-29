@@ -28,9 +28,15 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          docId: 'intro',
-          position: 'right',
-          label: 'Docs',
+          docId: 'guides-intro',
+          position: 'left',
+          label: 'Guides',
+        },
+        {
+          type: 'doc',
+          docId: 'tutorial-intro',
+          position: 'left',
+          label: 'Learn',
         },
         {to: '/dashboard', label: 'Go to Dashboard', position: 'right'},
       ],
