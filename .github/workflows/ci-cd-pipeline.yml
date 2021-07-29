@@ -12,14 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Read .node-version
-        run: echo ::set-output name=NODE_VERSION::$(cat .node-version)
-        id: nvm
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Build Documentation
         run: yarn build

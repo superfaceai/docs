@@ -1,7 +1,3 @@
----
-slug: /
----
-
 # Tutorial Intro
 
 Let's discover **Docusaurus 2 in less than 5 minutes**. You can then remove this whole Tutorial flow.
