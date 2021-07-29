@@ -40,7 +40,8 @@ The official home of Superface docs.
 
 4. ### Get the changes reviewed
 - When you're happy with your changes, open a PR and get it reviewed by someone.<br />
-_Opening a PR will automatically deploy an online preview of your docs._
+_Opening a PR will automatically deploy an online preview of your docs. It also verifies the build
+doesn't contain any broken links._
 
 5. ### Deploy to production
 - Once your changes are verified and reviewed by another pair of eyes, it is ready to be merged to `main`.<br />

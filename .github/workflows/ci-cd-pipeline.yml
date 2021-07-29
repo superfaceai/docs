@@ -7,8 +7,8 @@ on:
       - main
 
 jobs:
-  verify_build:
-    name: Verify Build
+  check_broken_links:
+    name: Check broken links
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
         run: yarn build
 
   deploy_preview:
-    needs: verify_build
+    needs: check_broken_links
     name: Deploy PR Preview
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
@@ -63,7 +63,7 @@ jobs:
           env_url: ${{ steps.vercel_preview.outputs.preview-url }}
 
   deploy_production:
-    needs: verify_build
+    needs: check_broken_links
     name: Deploy to Production
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
