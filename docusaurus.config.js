@@ -6,7 +6,7 @@ module.exports = {
   title: 'Superface',
   tagline: 'Superface Docs',
   url: 'https://superface.ai',
-  baseUrl: '/docs/',
+  baseUrl: '/',
   organizationName: 'superfaceai',
   projectName: 'docs',
 
