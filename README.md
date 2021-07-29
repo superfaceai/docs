@@ -15,9 +15,12 @@ The official home of Superface docs.
   <sup>[Help for Markdown features ➚](https://docusaurus.io/docs/markdown-features)</sup>
 
 - Put your static content (e.g. images) to 
-[`/static`](https://github.com/superfaceai/docs/tree/main/static) directory<br />
-  When linking to it from the docs, just drop `/static` from path, e.g. rendering `/img/diagram.png`
-  will render an image saved at `/static/img/diagram.png`
+[`/static/docs`](https://github.com/superfaceai/docs/tree/main/static/docs) directory<br />
+  When linking to it from the docs, just drop `/static` from path, e.g. rendering `/docs/img/diagram.png`
+  will render an image saved at `/static/docs/img/diagram.png`.
+
+  :warning: Make sure to always include `/docs/` in the path when referencing the image, otherwise
+  it will not show.
 
   <sup>[Help for static assets ➚](https://docusaurus.io/docs/static-assets)</sup>
 
