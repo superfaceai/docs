@@ -8,8 +8,24 @@
  */
 
 module.exports = {
+  guidesSidebar: [
+    {
+      type: 'doc',
+      id: 'guides-intro',
+      label: 'Overview'
+    },
+    {
+      type: 'category',
+      label: 'Local Authoring',
+      collapsed: false,
+      items: [
+        'guides/setup-the-environment',
+        'guides/create-new-profile',
+      ]
+    },
+  ],
   tutorialSidebar: [
-    'intro',
+    'tutorial-intro',
     {
       type: 'category',
       label: 'Tutorial — Basics',
