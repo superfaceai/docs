@@ -6,7 +6,7 @@ module.exports = {
   title: 'Superface',
   tagline: 'Superface Docs',
   url: 'https://superface.ai',
-  baseUrl: '/',
+  baseUrl: '/docs/',
   organizationName: 'superfaceai',
   projectName: 'docs',
 
@@ -22,7 +22,7 @@ module.exports = {
       logo: {
         alt: 'Superface Logo',
         src: 'img/superface_logo.svg',
-        href: '/docs'
+        href: '/'
       },
       style: "dark",
       items: [
@@ -38,7 +38,11 @@ module.exports = {
           position: 'left',
           label: 'Learn',
         },
-        {to: '/dashboard', label: 'Go to Dashboard', position: 'right'},
+        {
+          to: '/dashboard',
+          label: 'Go to Dashboard',
+          position: 'right'
+        },
       ],
     },
 
@@ -82,6 +86,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          routeBasePath: '/',
           editUrl:
             'https://github.com/superfaceai/docs/edit/main/',
         },
