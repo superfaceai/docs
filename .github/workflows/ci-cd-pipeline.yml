@@ -88,6 +88,7 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_SCOPE }}
           vercel-args: '--prod'
+          github-comment: false
 
       - uses: bobheadxi/deployments@v0.4.3
         name: Finish deployment
