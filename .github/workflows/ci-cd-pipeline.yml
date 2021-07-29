@@ -1,0 +1,100 @@
+name: CI/CD
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify_build:
+    name: Verify Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Read .node-version
+        run: echo ::set-output name=NODE_VERSION::$(cat .node-version)
+        id: nvm
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build Documentation
+        run: yarn build
+
+  deploy_preview:
+    needs: verify_build
+    name: Deploy PR Preview
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: rlespinasse/github-slug-action@v3.x
+        name: Inject slug/short variables
+      - uses: bobheadxi/deployments@v0.4.3
+        name: Start deployment
+        id: preview_deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: ${{ env.GITHUB_HEAD_REF_SLUG_URL }}
+          ref: ${{ github.head_ref }}
+
+      - uses: amondnet/vercel-action@v20
+        name: Deploy to Vercel
+        id: vercel_preview
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          scope: ${{ secrets.VERCEL_SCOPE }}
+
+      - uses: bobheadxi/deployments@v0.4.3
+        name: Finish deployment
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.preview_deployment.outputs.deployment_id }}
+          env_url: ${{ steps.vercel_preview.outputs.preview-url }}
+
+  deploy_production:
+    needs: verify_build
+    name: Deploy to Production
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bobheadxi/deployments@v0.4.3
+        name: Start deployment
+        id: production_deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          auto_inactive: true
+          env: Production
+
+      - uses: amondnet/vercel-action@v20
+        name: Deploy to Vercel
+        id: vercel_production
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          scope: ${{ secrets.VERCEL_SCOPE }}
+          vercel-args: '--prod'
+
+      - uses: bobheadxi/deployments@v0.4.3
+        name: Finish deployment
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.production_deployment.outputs.deployment_id }}
+          env_url: ${{ steps.vercel_production.outputs.preview-url }}
