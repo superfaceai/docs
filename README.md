@@ -15,12 +15,9 @@ The official home of Superface docs.
   <sup>[Help for Markdown features ➚](https://docusaurus.io/docs/markdown-features)</sup>
 
 - Put your static content (e.g. images) to 
-[`/static/docs`](https://github.com/superfaceai/docs/tree/main/static/docs) directory<br />
-  When linking to it from the docs, just drop `/static` from path, e.g. rendering `/docs/img/diagram.png`
-  will render an image saved at `/static/docs/img/diagram.png`.
-
-  :warning: Make sure to always include `/docs/` in the path when referencing the image, otherwise
-  it will not show.
+[`/static`](https://github.com/superfaceai/docs/tree/main/static) directory<br />
+  When linking to it from the docs, just drop `/static` from path, e.g. rendering `/img/diagram.png`
+  will render an image saved at `/static/img/diagram.png`.
 
   <sup>[Help for static assets ➚](https://docusaurus.io/docs/static-assets)</sup>
 
@@ -70,9 +67,9 @@ _Merging will automatically deploy `main` branch to production._
 
   Each deploy first verifies the validity of the build.
 
-  If you'd like to run a production build locally (e.g. with Brain proxy):
+  If you'd like to build locally:
 
   ```bash
-  yarn build && yarn serve
+  yarn build
   ```
 </details>
