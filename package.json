@@ -6,7 +6,7 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "start:dev": "npm start",
-    "build": "docusaurus build --out-dir build/docs/",
+    "build": "docusaurus build --out-dir build/docs/ && touch build/hello.txt",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
