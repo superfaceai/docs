@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
+    "start": "docusaurus start -p 8001",
     "start:dev": "npm start",
-    "build": "docusaurus build --out-dir build/docs/ && touch build/hello.txt",
+    "build": "docusaurus build --out-dir build/docs/ && touch build/keep.txt",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
-    "serve": "docusaurus serve -p 8001",
+    "serve": "echo \"Error: cannot serve locally\" && exit 1",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids"
   },
