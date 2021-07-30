@@ -70,7 +70,7 @@ _Merging will automatically deploy `main` branch to production._
 
   Each deploy first verifies the validity of the build.
 
-  If you'd like to run a production build locally:
+  If you'd like to run a production build locally (e.g. with Brain proxy):
 
   ```bash
   yarn build && yarn serve
