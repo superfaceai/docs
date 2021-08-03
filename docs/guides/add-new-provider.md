@@ -53,7 +53,7 @@ Provider name serves primarily for identification. We recommend it to be as shor
 The easiest way to bootstrap a new provider is using [Superface CLI](#TODO).
 
 ```shell
-superface create --provider <provider-name>
+superface create --provider --providerName <provider-name>
 ```
 
 _Replace the `<provider-name>` in the command with the actual name you wish to use._
