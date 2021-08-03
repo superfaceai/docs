@@ -118,7 +118,11 @@ If the provider offers a public API that _does not_ require any authentication, 
 
 :::
 
-Define the expected form of authentication using _security schemes_.  The actual credentials, tokens or keys will be provided later in runtime by the consumer either directly or via environment variables. Currently 3 types of security schemes are supported.
+Define the expected form of authentication using _security schemes_.  The actual credentials, tokens or keys will be provided later in runtime by the consumer either directly or via environment variables. Currently 3 types of security schemes are supported:
+
+- [Basic Auth](#basic-auth)
+- [Bearer Token](#bearer-token)
+- [API key in header or query](#api-key)
 
 ### Basic Auth {#basic-auth}
 
@@ -184,21 +188,6 @@ _Replace the security scheme `id` value in the example with your own ID. Provide
 Use the following scheme with an arbitrary ID which can be referenced later from the mapping.
 
 
-#### key in header
-
-_e.g. `X-SECRET-KEY: <apikey>` in headers_
-
-- `in` must be set to `header`
-- `name` is the header name that holds the API key (e.g. `X-SECRET-KEY`)
-
-#### key in query
-
-_e.g. `https://api.example.com/?accessKey=<apikey>`_
-
-- `in` must be set to `query`
-- `name` is the query param name that holds the API key (e.g. `accessKey`)
-
-
 ```json title="<provider-name>.provider.json" {10-17}
 {
   "name": "<provider-name>",
@@ -222,6 +211,19 @@ _e.g. `https://api.example.com/?accessKey=<apikey>`_
 
 _Replace the security scheme `id` value in the example with your own ID. Choose the key location & name the parameter._
 
+#### For key in header
+
+_e.g. `X-SECRET-KEY: <apikey>` in headers_
+
+- `in` must be set to `header`
+- `name` is the header name that holds the API key (e.g. `X-SECRET-KEY`)
+
+#### For key in query
+
+_e.g. `https://api.example.com/?accessKey=<apikey>`_
+
+- `in` must be set to `query`
+- `name` is the query param name that holds the API key (e.g. `accessKey`)
 
 
 ## Examples
