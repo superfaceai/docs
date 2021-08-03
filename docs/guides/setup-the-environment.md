@@ -1,19 +1,65 @@
-# Set up the environment
+# How to setup local environment
 
-### Step 1
+This document guides you through the installation and basic configuration of components needed to create own skill. So you can publish it or use it locally in your application.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet ut metus et accumsan. Praesent dictum tincidunt urna quis commodo. Etiam hendrerit lobortis fermentum. Sed facilisis augue id leo posuere, ac pellentesque quam interdum. Nam a magna fermentum, dictum orci non, sodales est. Praesent cursus risus et est tincidunt aliquam. Duis augue velit, laoreet at tristique et, ultrices quis turpis. Mauris eget euismod nibh.
+## Prerequisites
 
-Fusce porttitor ac nibh aliquam dignissim. Quisque congue odio in enim pretium scelerisque. Proin finibus, est in interdum mattis, leo ipsum scelerisque diam, vitae porta est enim non orci. Integer tempus gravida dolor eget maximus. Proin et urna sed velit vehicula accumsan. Duis mi mi, varius eu eros in, tincidunt aliquam odio. Nam vestibulum sagittis erat at fringilla. Nullam accumsan varius turpis, id condimentum nisl. Aenean pharetra iaculis sapien, sed egestas turpis semper vel.
+To install and use Superface CLI, you will need to have installed:
 
-### Step 2
+- [Node.js](https://nodejs.dev/learn/how-to-install-nodejs)
+- NPM
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet ut metus et accumsan. Praesent dictum tincidunt urna quis commodo. Etiam hendrerit lobortis fermentum. Sed facilisis augue id leo posuere, ac pellentesque quam interdum. Nam a magna fermentum, dictum orci non, sodales est. Praesent cursus risus et est tincidunt aliquam. Duis augue velit, laoreet at tristique et, ultrices quis turpis. Mauris eget euismod nibh.
+## Install the CLI
 
-Fusce porttitor ac nibh aliquam dignissim. Quisque congue odio in enim pretium scelerisque. Proin finibus, est in interdum mattis, leo ipsum scelerisque diam, vitae porta est enim non orci. Integer tempus gravida dolor eget maximus. Proin et urna sed velit vehicula accumsan. Duis mi mi, varius eu eros in, tincidunt aliquam odio. Nam vestibulum sagittis erat at fringilla. Nullam accumsan varius turpis, id condimentum nisl. Aenean pharetra iaculis sapien, sed egestas turpis semper vel.
+The Superface CLI is Node.js application. Note that it requires Node.js 12 or higher.
 
-### Step 3
+```shell
+npm install --global @superfaceai/cli
+```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet ut metus et accumsan. Praesent dictum tincidunt urna quis commodo. Etiam hendrerit lobortis fermentum. Sed facilisis augue id leo posuere, ac pellentesque quam interdum. Nam a magna fermentum, dictum orci non, sodales est. Praesent cursus risus et est tincidunt aliquam. Duis augue velit, laoreet at tristique et, ultrices quis turpis. Mauris eget euismod nibh.
+## Create a new project
 
-Fusce porttitor ac nibh aliquam dignissim. Quisque congue odio in enim pretium scelerisque. Proin finibus, est in interdum mattis, leo ipsum scelerisque diam, vitae porta est enim non orci. Integer tempus gravida dolor eget maximus. Proin et urna sed velit vehicula accumsan. Duis mi mi, varius eu eros in, tincidunt aliquam odio. Nam vestibulum sagittis erat at fringilla. Nullam accumsan varius turpis, id condimentum nisl. Aenean pharetra iaculis sapien, sed egestas turpis semper vel.
+Start with creating a new directory for the project
+
+```shell
+mkdir my_project
+```
+
+and changing the directory.
+
+```shell
+cd my_project
+```
+
+Optionally create `package.json` by running the following command:
+
+```shell
+npm init
+```
+
+Now initialize Superface local folder structure in the project root.
+
+```shell
+superface init
+```
+
+It will create `superface` folder with the below structure
+
+- `grid` - folder for storing skills and mappings
+- `types` - folder with generated types
+- `super.json` - superface configuration file
+
+And as last step install [OneSDK](https://github.com/superfaceai/one-sdk-js).
+
+```shell
+npm install --save @superfaceai/one-sdk-js
+```
+
+## (Optional) Install the Visual Studio Code extension
+
+You can install the Visual Code Code extension which will give you:
+
+- Syntax highlighting for [Comlink](#todo)
+- Code snippets
+
+It can be installed from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=superfaceai.superface-language-client-vscode).
