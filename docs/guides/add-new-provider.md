@@ -102,7 +102,7 @@ Each provider needs one service to be selected as the default one. Choose one of
       "baseUrl": "https://api.example.com"
     }
   ],
-  "defaultService": "api",
+  "defaultService": "api"
 }
 ```
 
