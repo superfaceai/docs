@@ -67,8 +67,6 @@ Running the above command creates a new JSON file at `<provider-name>.provider.j
 }
 ```
 
-[TODO: Show affected super.json or not?]
-
 ## Configure the services {#services}
 
 To be able to call the provider's web services, you need to first define them. Each service points to a specific base URL and has an identifier that is unique within the provider document.
