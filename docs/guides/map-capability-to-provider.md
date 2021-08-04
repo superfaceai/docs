@@ -101,7 +101,7 @@ map UseCaseName {
 }
 ```
 
-_The above definition makes `POST` HTTP call to [the provider's default service](/guides/add-new-provider#default-service) on path `/api/messages`.<br />See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-HTTP-Call) for specifying a different service & other `http` block features._
+_The above definition makes `POST` HTTP call to [the provider's default service](#/guides/add-new-provider#default-service) on path `/api/messages`.<br />See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-HTTP-Call) for specifying a different service & other `http` block features._
 
 ### Authenticate the request (optional) {#authentication}
 
