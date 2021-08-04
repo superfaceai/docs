@@ -89,7 +89,7 @@ _Replace the `baseUrl` value in the example with the actual base URL of the prov
 
 Some providers' APIs span across more URLs, or have different API versions hosted on different base URLs. In those cases, you should define multiple services.
 
-### Choose the default service
+### Choose the default service {#default-service}
 
 Each provider needs one service to be selected as the default one. Choose one of the defined services and set its ID to `defaultService` parameter.
 
