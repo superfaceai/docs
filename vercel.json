@@ -9,8 +9,8 @@
   ],
   "rewrites": [
     {
-        "source": "/docs/comlink/profile",
-        "destination": "https://spec.superface.dev/draft/profile-spec.html",
+      "source": "/docs/comlink/profile",
+      "destination": "https://spec.superface.dev/draft/profile-spec.html",
     }
   ]
 }
