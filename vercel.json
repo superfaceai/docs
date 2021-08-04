@@ -10,7 +10,7 @@
   "rewrites": [
     {
       "source": "/docs/comlink/profile",
-      "destination": "https://spec.superface.dev/draft/profile-spec.html",
+      "destination": "https://spec.superface.dev/draft/profile-spec.html"
     }
   ]
 }
