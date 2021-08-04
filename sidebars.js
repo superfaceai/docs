@@ -21,6 +21,7 @@ module.exports = {
       items: [
         'guides/setup-the-environment',
         'guides/create-new-profile',
+        'guides/map-capability-to-provider',
       ]
     },
   ],
