@@ -23,6 +23,8 @@ module.exports = {
         'guides/create-new-profile',
         'guides/add-new-provider',
         'guides/map-capability-to-provider',
+        'guides/run-and-test',
+        'guides/use-in-app',
       ]
     },
   ],
