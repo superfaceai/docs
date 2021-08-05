@@ -33,6 +33,20 @@ module.exports = {
           label: 'Guides',
         },
         {
+          type: 'doc',
+          docId: 'reference/reference-intro',
+          position: 'left',
+          label: 'Reference',
+          activeBaseRegex: "/docs/reference"
+        },
+        {
+          type: 'doc',
+          docId: 'comlink/comlink-intro',
+          position: 'left',
+          label: 'Comlink',
+          activeBaseRegex: "/docs/comlink"
+        },
+        {
           to: '/dashboard',
           label: 'Go to Dashboard',
           position: 'right'
