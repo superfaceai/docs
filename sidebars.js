@@ -21,9 +21,14 @@ module.exports = {
       items: [
         'guides/setup-the-environment',
         'guides/create-new-profile',
+        'guides/add-new-provider',
         'guides/map-capability-to-provider',
       ]
     },
+  ],
+  providerAvailabilitySidebar: [
+    'guides/find-provider-by-name',
+    'guides/add-new-provider',
   ],
   tutorialSidebar: [
     'tutorial-intro',
