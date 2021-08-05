@@ -34,13 +34,13 @@ This definition is later used by _Map_ documents that create a request/response 
 
 Please [check our registry for existing providers](/guides/find-provider-by-name) before creating your own. Chances are the provider you're interested in was already defined by someone else. 
 
-In that case you can skip this guide & simply [create a mapping for the capability using an existing provider](#todo).
+In that case you can skip this guide & simply [create a mapping for the capability using an existing provider](/guides/map-capability-to-provider).
 
 :::
 
 ## Setup
 
-This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](#todo).
+This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](/guides/setup-the-environment).
 
 ## Create new provider definition {#create-new}
 
@@ -50,7 +50,7 @@ Provider name serves primarily for identification. We recommend it to be as shor
 
 ### Bootstrap via CLI
 
-The easiest way to bootstrap a new provider is using [Superface CLI](#TODO).
+The easiest way to bootstrap a new provider is using [Superface CLI](/reference/cli).
 
 ```shell
 superface create --provider --providerName <provider-name>

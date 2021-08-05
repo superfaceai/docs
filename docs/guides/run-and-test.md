@@ -2,15 +2,15 @@
 
 ## Setup
 
-This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](#todo).
+This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](/guides/setup-the-environment).
 
 ### Prerequisites
 
-- Existing [profile](#todo)
-- Existing [provider definition](#todo)
-- Existing [map between profile & the provider](#todo)
-- [Superface CLI](#todo) installed
-- [Superface OneSDK](#todo) installed
+- Existing [profile](/guides/create-new-profile)
+- Existing [provider definition](/guides/add-new-provider)
+- Existing [map between profile & the provider](/guides/map-capability-to-provider)
+- [Superface CLI](/reference/cli) installed
+- [Superface OneSDK](/reference/one-sdk-js) installed
 
 ## Compile Comlink documents
 
@@ -60,7 +60,7 @@ _Search in top-level `providers` object for the actual provider you want to conf
 
 ### Configure using CLI {#cli-configuration}
 
-The easiest way to bootstrap the provider's security configuration is using [Superface CLI](#todo).
+The easiest way to bootstrap the provider's security configuration is using [Superface CLI](/reference/cli).
 
 ```shell
 superface configure <path-to.provider.json> -p <profile-name> -l -f   
@@ -207,7 +207,7 @@ main();
 
 ```
 
-_Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.<br />For details on SuperfaceClient API, please consult [OneSDK reference](#todo)._
+_Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.<br />For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js)._
 
 You can then run your app which should perform the use case.
 

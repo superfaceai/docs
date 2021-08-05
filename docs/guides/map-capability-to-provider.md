@@ -1,21 +1,21 @@
 # Map capability to a provider
 
-_Map_ is a [Comlink](#todo) document that defines how a specific capability is fulfilled by a provider. It creates a mapping between the abstract profile and the concrete HTTP requests necessary to integrate with the provider.
+_Map_ is a [Comlink](/comlink) document that defines how a specific capability is fulfilled by a provider. It creates a mapping between the abstract profile and the concrete HTTP requests necessary to integrate with the provider.
 
 ## Setup
 
-This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](#todo).
+This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](/guides/setup-the-environment).
 
 ### Prerequisites
 
-- Existing [profile](#todo)
-- Existing [provider definition](#todo)
+- Existing [profile](/guides/create-new-profile)
+- Existing [provider definition](/guides/add-new-provider)
 
 ## Create new Map document
 
 Mapping happens between _a specific version of Profile_ and some _Provider_. Choose which profile version you want to fulfill by the provider.
 
-The easiest way to then bootstrap a new Map document is using [Superface CLI](#todo).
+The easiest way to then bootstrap a new Map document is using [Superface CLI](/reference/cli).
 
 ```shell
 superface create --map --profileId <profile-name@version> --providerName <provider-name>
@@ -42,7 +42,7 @@ Every profile defines one or more _use cases_. You need to map the use case inte
 
 ### Reading use case inputs {#input-object}
 
-Use cases usually define & expect some _inputs_ from the user. These inputs are [defined in profile in the dedicated field](https://spec.superface.dev/draft/profile-spec.html#sec-Use-case).
+Use cases usually define & expect some _inputs_ from the user. These inputs are [defined in profile in the dedicated field](https://superface.ai/docs/comlink/profile#sec-Use-case).
 
 You can access these inputs via `input` object which is available _inside use case mapping_.
 
@@ -101,7 +101,7 @@ map UseCaseName {
 }
 ```
 
-_The above definition makes `POST` HTTP call to [the provider's default service](#/guides/add-new-provider#default-service) on path `/api/messages`.<br />See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-HTTP-Call) for specifying a different service & other `http` block features._
+_The above definition makes `POST` HTTP call to [the provider's default service](/guides/add-new-provider#default-service) on path `/api/messages`.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Call) for specifying a different service & other `http` block features._
 
 ### Authenticate the request (optional) {#authentication}
 
@@ -119,7 +119,7 @@ map UseCaseName {
 }
 ```
 
-_Replace `scheme-id` with one of the schemes defined for the provider you're mapping to.<br />See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-HTTP-Security) for details on `security` definition._
+_Replace `scheme-id` with one of the schemes defined for the provider you're mapping to.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Security) for details on `security` definition._
 
 ### Pass data to request
 
@@ -149,7 +149,7 @@ map UseCaseName {
 }
 ```
 
-_The above definition makes call to `/api/messages?from=...` with body  of content type `application/json` including object with 2 parameters (`to` & `text`).<br />See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-HTTP-Request) for details on `request` block._
+_The above definition makes call to `/api/messages?from=...` with body  of content type `application/json` including object with 2 parameters (`to` & `text`).<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Request) for details on `request` block._
 
 ### Handle server responses {#handle-response}
 
@@ -182,7 +182,7 @@ _The above example definition:_
 
 _Any other response won't be handled and will result in an unexpected error_.
 
-_See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-HTTP-Response) for details on `response` block & response matching._
+_See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Response) for details on `response` block & response matching._
 
 :::note
 
@@ -215,11 +215,11 @@ map UseCaseName {
 }
 ```
 
-_See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-HTTP-Response.Context-Variables) for details on context variables inside `response` block._
+_See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Response.Context-Variables) for details on context variables inside `response` block._
 
 ### Map use case result {#map-result}
 
-Typically, use cases expect some [_result_](https://spec.superface.dev/draft/profile-spec.html#sec-Use-case) to be returned after they are performed. For some, it may be a simple confirmation of the success _(e.g. SMS was sent, here's in ID)_. For others, the result may be the sole reason you care about the use case _(e.g. Found this address for given coordinates)_.
+Typically, use cases expect some [_result_](https://superface.ai/docs/comlink/profile#sec-Use-case) to be returned after they are performed. For some, it may be a simple confirmation of the success _(e.g. SMS was sent, here's in ID)_. For others, the result may be the sole reason you care about the use case _(e.g. Found this address for given coordinates)_.
 
 Map the use case result from the provider's HTTP response using `map result` statement. Note that you must resolve to the same _result_ interface as defined in the profile document.
 
@@ -243,7 +243,7 @@ map UseCaseName {
 }
 ```
 
-_The above definition maps the 2 expected result fields. One from the response's body, the other is loaded from headers and transformed with a simple Comlink expression.<br />See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-Map-Result) for detailed specification of `map result` statement._
+_The above definition maps the 2 expected result fields. One from the response's body, the other is loaded from headers and transformed with a simple Comlink expression.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Map-Result) for detailed specification of `map result` statement._
 
 
 :::note 
@@ -254,7 +254,7 @@ _The above definition maps the 2 expected result fields. One from the response's
 
 ### Map errors {#map-error}
 
-In addition to the result, use cases sometimes also expect a specific [_error_](https://spec.superface.dev/draft/profile-spec.html#sec-Use-case) interface to be returned from the perform if it fails.
+In addition to the result, use cases sometimes also expect a specific [_error_](https://superface.ai/docs/comlink/profile#sec-Use-case) interface to be returned from the perform if it fails.
 
 This is very useful as you can map the provider specific API errors (that usually use a technical language) to nicer and more helpful errors that use the language of the use case domain. If the profile defines _error_ expectation, you should strongly consider mapping the possible errors since this dramatically improves the usability of the capability.
 
@@ -284,7 +284,7 @@ map UseCaseName {
 }
 ```
 
-_The above definition maps the 2 expected error fields when server responds with status `429 (Too Many Requests)`. One is hardcoded as it describes the error scenario, the other constructs a helpful message with a value from response headers using a simple Comlink expression.<br />See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-Map-Error) for detailed specification of `map error` statement._
+_The above definition maps the 2 expected error fields when server responds with status `429 (Too Many Requests)`. One is hardcoded as it describes the error scenario, the other constructs a helpful message with a value from response headers using a simple Comlink expression.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Map-Error) for detailed specification of `map error` statement._
 
 
 :::note 
@@ -352,7 +352,7 @@ _The above definition maps the use case outcome based on the presense and value 
 
 </details>
 
-_See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-Conditions) for more about conditions._
+_See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Conditions) for more about conditions._
 
 #### Multiple errors
 
@@ -380,7 +380,7 @@ _The above map expects the use case to fail in some scenarios when the user prov
 
 _Note: the `return` keyword serves the purpose of early return, as you might recognize from other programming languages. Without `return`, the execution would continue to the `map error` without any condition at the end, and that would overwrite the error returned from the response handler._
 
-_See [Comlink reference](https://spec.superface.dev/draft/map-spec.html#sec-Conditions) for more about conditions._
+_See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Conditions) for more about conditions._
 
 ## Using functions, conditions, iterations and more {#advanced}
 
@@ -390,7 +390,7 @@ For more complicated maps, you'll find a need for the general programming concep
 
 :::tip
 
-Comlink supports everything you might expect from a powerful scripting language. We recommend to explore the language by consulting [Comlink Map reference](https://spec.superface.dev/draft/map-spec.html) or [the examples below](#examples).
+Comlink supports everything you might expect from a powerful scripting language. We recommend to explore the language by consulting [Comlink Map reference](https://superface.ai/docs/comlink/map) or [the examples below](#examples).
 
 :::
 

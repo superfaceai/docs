@@ -49,7 +49,7 @@ It will create `superface` folder with the below structure
 - `types` - folder with generated types
 - `super.json` - superface configuration file
 
-And as last step install [OneSDK](https://github.com/superfaceai/one-sdk-js).
+And as last step install [OneSDK](/reference/one-sdk-js).
 
 ```shell
 npm install --save @superfaceai/one-sdk-js
@@ -59,7 +59,7 @@ npm install --save @superfaceai/one-sdk-js
 
 You can install the Visual Code Code extension which will give you:
 
-- Syntax highlighting for [Comlink](#todo)
+- Syntax highlighting for [Comlink](/comlink)
 - Code snippets
 
 It can be installed from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=superfaceai.superface-language-client-vscode).
