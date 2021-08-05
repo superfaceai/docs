@@ -9,16 +9,17 @@
 
 module.exports = {
   guidesSidebar: [
-    {
-      type: 'doc',
-      id: 'guides-intro',
-      label: 'Overview'
-    },
+    // {
+    //   type: 'doc',
+    //   id: 'guides-intro',
+    //   label: 'Overview'
+    // },
     {
       type: 'category',
-      label: 'Local Authoring',
+      label: 'How to create a capability',
       collapsed: false,
       items: [
+        {type: 'doc', id: 'guides/how-to-create', label: 'Overview'},
         'guides/setup-the-environment',
         'guides/create-new-profile',
         'guides/add-new-provider',
