@@ -2,13 +2,13 @@
 
 ## Setup
 
-This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](/guides/setup-the-environment).
+This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](./setup-the-environment.md).
 
 ### Prerequisites
 
-- Existing [profile](/guides/create-new-profile)
-- Existing [provider definition](/guides/add-new-provider)
-- Existing [map between profile & the provider](/guides/map-capability-to-provider)
+- Existing [profile](./create-new-profile.md)
+- Existing [provider definition](./add-new-provider.md)
+- Existing [map between profile & the provider](./map-capability-to-provider.md)
 - [Superface CLI](/reference/cli) installed
 - [Superface OneSDK](/reference/one-sdk-js) installed
 
@@ -257,4 +257,4 @@ For unit testing all of the Map's logic, you might need to mock the specific res
 - [Integration test for expected result data format](https://github.com/superfaceai/station/blob/main/capabilities/communication/send-message/maps/slack.test.ts)
 - [Integration test for expected output for given input](https://github.com/superfaceai/station/blob/main/capabilities/address/clean-address/maps/smartystreets.test.ts)
 
-> If you wish to use your new capability in another Node.js application, please refer to [the following guide](/guides/use-in-app).
+> If you wish to use your new capability in another Node.js application, please refer to [the following guide](./use-in-app.md).

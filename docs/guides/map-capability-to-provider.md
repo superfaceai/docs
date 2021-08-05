@@ -1,15 +1,15 @@
 # Map capability to a provider
 
-_Map_ is a [Comlink](/comlink) document that defines how a specific capability is fulfilled by a provider. It creates a mapping between the abstract profile and the concrete HTTP requests necessary to integrate with the provider.
+_Map_ is a [Comlink](../comlink/comlink-intro.mdx) document that defines how a specific capability is fulfilled by a provider. It creates a mapping between the abstract profile and the concrete HTTP requests necessary to integrate with the provider.
 
 ## Setup
 
-This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](/guides/setup-the-environment).
+This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](./setup-the-environment.md).
 
 ### Prerequisites
 
-- Existing [profile](/guides/create-new-profile)
-- Existing [provider definition](/guides/add-new-provider)
+- Existing [profile](./create-new-profile.md)
+- Existing [provider definition](./add-new-provider.md)
 
 ## Create new Map document
 
@@ -101,7 +101,7 @@ map UseCaseName {
 }
 ```
 
-_The above definition makes `POST` HTTP call to [the provider's default service](/guides/add-new-provider#default-service) on path `/api/messages`.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Call) for specifying a different service & other `http` block features._
+_The above definition makes `POST` HTTP call to [the provider's default service](./add-new-provider.md#default-service) on path `/api/messages`.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Call) for specifying a different service & other `http` block features._
 
 ### Authenticate the request (optional) {#authentication}
 
