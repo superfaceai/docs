@@ -5,7 +5,7 @@ This guide describes how a capability can be used in any production Node.js appl
 ## Prerequisites
 
 - Existing Node.js [project set up](./setup-the-environment.md)
-- Existing [profile](./create-new-profile.md) ([compiled](./run-and-test.md#compile-comlink-documents))
+- Existing profile ([compiled](./run-and-test.md#compile-comlink-documents))
 - Existing [provider definition](./add-new-provider.md)
 - Existing [map between profile & the provider](./map-capability-to-provider.md) ([compiled](./run-and-test.md#compile-comlink-documents))
 - `super.json` with [configured provider security](./run-and-test.md#configure-security)

@@ -8,7 +8,7 @@ This guide assumes you have a project set up with Superface installed. If you ne
 
 ### Prerequisites
 
-- Existing [profile](./create-new-profile.md)
+- Existing profile
 - Existing [provider definition](./add-new-provider.md)
 
 ## Create new Map document

@@ -6,7 +6,7 @@ This guide assumes you have a project set up with Superface installed. If you ne
 
 ### Prerequisites
 
-- Existing [profile](./create-new-profile.md)
+- Existing profile
 - Existing [provider definition](./add-new-provider.md)
 - Existing [map between profile & the provider](./map-capability-to-provider.md)
 - [Superface CLI](/reference/cli) installed
