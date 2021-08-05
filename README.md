@@ -21,6 +21,13 @@ The official home of Superface docs.
 
   <sup>[Help for static assets ➚](https://docusaurus.io/docs/static-assets)</sup>
 
+- Reference other docs via Markdown file path<br />
+  Linking to another document is preferably done via specifying the relative path to that
+  document (`./next-step.md`). Exceptions are pages placed in `src/pages/` directory that need
+  to be linked using their respective routes.
+
+  <sup>[Help for referencing docs ➚](https://docusaurus.io/docs/docs-markdown-features#referencing-other-documents)</sup>
+
 3. ### Update the content structure _(optional)_
 
 - **Page rename, new page, category; or change of structure**<br />
