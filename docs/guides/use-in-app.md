@@ -1,6 +1,6 @@
-# Run use case in production
+# Run capability in production
 
-This guide describes how an use case can be used in any production Node.js application, without the use of Superface [remote registry](https://superface.ai/catalog).
+This guide describes how a capability can be used in any production Node.js application, without the use of Superface [remote registry](https://superface.ai/catalog).
 
 ## Prerequisites
 
@@ -11,9 +11,9 @@ This guide describes how an use case can be used in any production Node.js appli
 - `super.json` with [configured provider security](/guides/run-and-test#configure-security)
 - [Superface OneSDK](#todo) installed
 
-## Import use case to the project
+## Import capability to the project
 
-The use case needs to be first imported to your application. This guide describes using capability from local files instead of using the remote registry. You'll be simply copying the created artifacts to your production app.
+The capability needs to be first imported to your application. This guide describes using capability from local files instead of using the remote registry. You'll be simply copying the created artifacts to your production app.
 
 > It is recommended (although not necessary) to place the files onto the same relative paths.
 
@@ -39,7 +39,7 @@ The use case needs to be first imported to your application. This guide describe
 
 ### Set necessary environment variables
 
-For apps running the use cases that require authentication, you'll typically want to supply the providers' API keys via environment variables.
+For apps running capabilities that require authentication, you'll typically want to supply the providers' API keys via environment variables.
 
 If `.env` is available, it should have the expected variables predefined. You can them simply fill in the values. Then install [`dotenv`](https://www.npmjs.com/package/dotenv) package that will load the `.env` file for you. 
 
@@ -78,6 +78,6 @@ You can then run your app that performs the use case.
 node app.js
 ```
 
-> Note: Later you'll be able to publish your use case to the Superface registry. This will give you many advantages over usage from the local files, like: injecting latest map, provider failover, observability dashboard, any more. Stay tuned.
+> Note: Later you'll be able to publish your capability to the Superface registry. This will give you many advantages over usage from the local files, like: injecting latest map, provider failover, observability dashboard, any more. Stay tuned.
 
 

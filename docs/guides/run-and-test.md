@@ -1,4 +1,4 @@
-# Test & run new use case
+# Test & run new capability
 
 ## Setup
 
@@ -178,7 +178,7 @@ _Replace `<scheme-id>` with the actual security scheme ID defined in the provide
 
 ### Set necessary environment variables
 
-For apps running the use cases that require authentication, you'll typically want to supply the providers' API keys via environment variables (see [configuration above](#configure-security)).
+For apps running the capabilities that require authentication, you'll typically want to supply the providers' API keys via environment variables (see [configuration above](#configure-security)).
 
 If you used CLI for configuring the security schemes, the chances are it created `.env` file for you. In that case, simply fill in the environment variables. Then install [`dotenv`](https://www.npmjs.com/package/dotenv) package that will load the `.env` file for you. 
 
@@ -257,4 +257,4 @@ For unit testing all of the Map's logic, you might need to mock the specific res
 - [Integration test for expected result data format](https://github.com/superfaceai/station/blob/main/capabilities/communication/send-message/maps/slack.test.ts)
 - [Integration test for expected output for given input](https://github.com/superfaceai/station/blob/main/capabilities/address/clean-address/maps/smartystreets.test.ts)
 
-> If you wish to run your new use case in another Node.js application, please refer to [the following guide](/guides/use-in-app).
+> If you wish to use your new capability in another Node.js application, please refer to [the following guide](/guides/use-in-app).
