@@ -34,9 +34,17 @@ module.exports = {
         },
         {
           type: 'doc',
-          docId: 'tutorial-intro',
+          docId: 'reference/reference-intro',
           position: 'left',
-          label: 'Learn',
+          label: 'Reference',
+          activeBaseRegex: "/docs/reference"
+        },
+        {
+          type: 'doc',
+          docId: 'comlink/comlink-intro',
+          position: 'left',
+          label: 'Comlink',
+          activeBaseRegex: "/docs/comlink"
         },
         {
           to: '/dashboard',
@@ -88,8 +96,8 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
-          editUrl:
-            'https://github.com/superfaceai/docs/edit/main/',
+          // editUrl:
+          //   'https://github.com/superfaceai/docs/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
