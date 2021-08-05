@@ -88,8 +88,8 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
-          editUrl:
-            'https://github.com/superfaceai/docs/edit/main/',
+          // editUrl:
+          //   'https://github.com/superfaceai/docs/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
