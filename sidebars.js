@@ -21,6 +21,8 @@ module.exports = {
       items: [
         'guides/setup-the-environment',
         'guides/create-new-profile',
+        'guides/run-and-test',
+        'guides/use-in-app',
       ]
     },
   ],
