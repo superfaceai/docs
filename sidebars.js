@@ -21,7 +21,7 @@ module.exports = {
       items: [
         {type: 'doc', id: 'guides/how-to-create', label: 'Overview'},
         'guides/setup-the-environment',
-        'guides/create-new-profile',
+        // 'guides/create-new-profile', Uncomment this once the page si ready
         'guides/add-new-provider',
         'guides/map-capability-to-provider',
         'guides/run-and-test',

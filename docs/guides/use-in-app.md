@@ -4,12 +4,12 @@ This guide describes how a capability can be used in any production Node.js appl
 
 ## Prerequisites
 
-- Existing Node.js [project set up](/guides/setup-the-environment)
-- Existing [profile](#todo) ([compiled](/guides/run-and-test#compile-comlink-documents))
-- Existing [provider definition](#todo)
-- Existing [map between profile & the provider](#todo) ([compiled](/guides/run-and-test#compile-comlink-documents))
-- `super.json` with [configured provider security](/guides/run-and-test#configure-security)
-- [Superface OneSDK](#todo) installed
+- Existing Node.js [project set up](./setup-the-environment.md)
+- Existing profile ([compiled](./run-and-test.md#compile-comlink-documents))
+- Existing [provider definition](./add-new-provider.md)
+- Existing [map between profile & the provider](./map-capability-to-provider.md) ([compiled](./run-and-test.md#compile-comlink-documents))
+- `super.json` with [configured provider security](./run-and-test.md#configure-security)
+- [Superface OneSDK](/reference/one-sdk-js) installed
 
 ## Import capability to the project
 
@@ -70,7 +70,7 @@ main();
 
 ```
 
-_Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.<br />For details on SuperfaceClient API, please consult [OneSDK reference](#todo)._
+_Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.<br />For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js)._
 
 You can then run your app that performs the use case.
 
