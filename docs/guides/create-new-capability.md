@@ -1,57 +1,68 @@
 # Create a new capability
 
-Capability is application functionality to serve business needs.
+Capability is an application functionality to serve business needs. It consists of one or more use-cases targeted at particular business scenarios that the capability is designed to solve.
 
-Capability is defined through use-cases, which are the business scenarios that the capability is designed to solve.
+Use-cases are defined though a [Comlink profile](https://superface.ai/docs/comlink/profile). The Comlink profile is a file with `.supr` extension. It specifies the abstract business behavior of the use-case: its input and result parameters, error behavior and data types.
 
-Use-cases are defined in [Comlink profile](https://superface.ai/docs/comlink/profile), which enables you to describe business behavior without a need to go deep into the implementation details.
-
-Comlink profile has several keywords and in this guide, you will learn how to use them to define your own capability.
+This guide will walk you through the process of defining a new capability with a Comlink profile. You will use the Superface CLI to bootstrap a new profile and learn the syntax.
 
 ## Setup
 
-This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please see the [Setup Guide](/guides/setup-the-environment).
+This guide assumes you have set up a Node.js project with Superface and OneSDK. If you need to set up a new project, please see the [Setup Guide](./setup-the-environment.md).
 
-## Create new Profile document
+## Create New Profile
 
 ### Choose Profile Name
 
-Profile name must consist of alpha-numeric characters, dashes and underscores.
+Profile's name must consist of alpha-numeric characters, dashes and underscores.
 
-**Valid:** `my_profile`, `myprofile`, `my-profile`<br/>
-**Invalid:** `my profile`, `my+profile`
+Valid
+: `my_profile`, `myprofile`, `my-profile`
 
-By convention, one profile should comprise one use-case (E.g. “Get weather” or “Make payment”).
+Invalid
+: `my profile`, `my+profile`
 
-So good practice is to name your profile after the use-case.
+While single profile file can contain multiple use-cases, we generally recommend to keep single use-case per profile. So the profile can be named after the use-case, for example:
 
-- Get weather -> `get-weather`
-- Make payment -> `make-payment`
+- Get weather: `get-weather`
+- Make payment: `make-payment`
+- Send email: `send-email`
+
+<!--
+:::info
+
+Occasionally it makes sense to put multiple use-cases into a single profile file. For example, the [communication/send-email](https://superface.ai/communication/send-email) defines two use-cases
+
+:::
+-->
 
 :::tip Scoped profiles
-Profile can be scoped, which allows to group profiles together.
-To scope a profile, add `scope-name/` before profile name `[ProfileScope/]<ProfileName>`.
-
-For example: `communication/send-email`
+Profile name can contain scope for grouping profiles together.
+To scope a profile, add `scope-name/` before profile name, for example: `communication/send-email`.
 :::
 
-### Bootstrap with CLI
+### Bootstrap With CLI
 
-The easiest way to create a new Profile document is to use [Superface CLI](https://github.com/superfaceai/cli).
+You can use the [Superface CLI](https://github.com/superfaceai/cli) to set up an empty Comlink profile:
 
 ```shell
 superface create --profile --profileId <use_case_name>
 ```
 
-_replace `<use_case_name>` with the name of use-case you wish to create._
+Where `<use_case_name>` is the name of use-case you wish to create.
 
-:::tip see help
-You can use the `--help` flag to see more options.
+:::tip CLI Help
+Use the `--help` flag for more options and examples:
+
+```shell
+superface create --help
+```
+
 :::
 
-As result you will see new file called `use_case_name.supr` and updated `superface/super.json` linking your new profile.
+The CLI creates `use_case_name.supr` file in current directory and links to it from the `superface/super.json`.
 
-Created profile will look similarly to this:
+The new profile will look similarly to this:
 
 ```hcl title=use_case_name.supr
 name = "use_case_name"
