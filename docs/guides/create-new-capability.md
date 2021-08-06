@@ -74,28 +74,50 @@ UseCaseName usecase
 usecase UseCaseName {}
 ```
 
-## Define Usecase {#usecase}
+## Define the Use-Case {#usecase}
 
-Now it is time to describe what functionality is needed in the application.
-To do that you will need to define `usecase`. If you are a programmer you can imagine use-case as a function. If programming isn't your thing, you can think of it as a task that needs to be done.
+With the Comlink profile ready, you can now define your business use-case. The use-case is a task that needs to be done. You can think of it as a function with specified input and output parameters. The use-case can also specify its safety.
+
+<!-- TODO: General usecase syntax -->
 
 ### Specify Safety of the Use-Case
 
-You can mark usecase as `safe`, `unsafe` or `idempotent`, to declare how it should be treated by OneSDK.
+The use-case can be marked as `safe`, `unsafe` or `idempotent`. If the safety is not specified, the use-case is treated as `unsafe` by default.
 
-If you do not specify safety, Superface will assume usecase is `unsafe`.
 
-`safe` usecase is a usecase that is safe to execute. It means that it doesn't change the world state. So any data reading is considered safe.
+`safe`
+: The use-case doesn't change anything or doesn't perform any action. Generally reading operations can be considered safe, for example retrieving information about shipment or geocoding a postal address.
 
-`unsafe` usecase is a usecase that changes the world state. For example, sending an email, or placing an order is unsafe usecase.
+`unsafe`
+: The use-case changes the world state and its retry may result in unintended side effects. For example, sending an email, or placing an order is unsafe: executing these use-cases repeatedly results in sending multiple emails or placing multiple orders.
 
-`idempotent` usecase is a usecase that is idempotent. It means that it can be executed multiple times without changing the result.
+`idempotent`
+: The use-case can be executed multiple times without changing the result. For example updating an article with the same data multiple times results in the same article.
+
+:::info HTTP Methods
+
+If you are familiar with REST APIs and HTTP methods, you can think of the safety in this manner:
+
+- `safe` corresponds to `GET` and `HEAD` methods,
+- `unsafe` corresponds to `POST` method,
+- `idempotent` corresponds to `PUT` and `DELETE` methods.
+
+:::
+
+The safety is defined after the use-case's name:
 
 ```hcl
-usecase SendMessage unsafe {}
 usecase ListOrders safe {}
+
+usecase SendMessage unsafe {}
+
 usecase UpdateProfile idempotent {}
+
+// if safety is not specified, the use-case is considered unsafe
+usecase SendEmail {}
 ```
+
+While the safety information is optional, it can be used by OneSDK to treat the use-case in particular manner. For example, the SDK can attempt to automatically repeat a failed request if the use-case is `safe`.
 
 ### Define input {#input}
 
