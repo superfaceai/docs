@@ -78,9 +78,11 @@ usecase UseCaseName {}
 
 With the Comlink profile ready, you can now define your business use-case. The use-case is a task that needs to be done. You can think of it as a function with specified input and output parameters. The use-case can also specify its safety.
 
+### Overview
+
 <!-- TODO: General usecase syntax -->
 
-### Specify Safety of the Use-Case
+### Specify Safety of the Use-Case {#safety}
 
 The use-case can be marked as `safe`, `unsafe` or `idempotent`. If the safety is not specified, the use-case is treated as `unsafe` by default.
 
@@ -102,6 +104,8 @@ If you are familiar with REST APIs and HTTP methods, you can think of the safety
 - `unsafe` corresponds to `POST` method,
 - `idempotent` corresponds to `PUT` and `DELETE` methods.
 
+For more information see [Understanding Idempotency and Safety in API Design](https://nordicapis.com/understanding-idempotency-and-safety-in-api-design/).
+
 :::
 
 The safety is defined after the use-case's name:
@@ -119,11 +123,13 @@ usecase SendEmail {}
 
 While the safety information is optional, it can be used by OneSDK to treat the use-case in particular manner. For example, the SDK can attempt to automatically repeat a failed request if the use-case is `safe`.
 
-### Define input {#input}
+### Define Input Fields {#input}
 
-Next should be defining [input](https://superface.ai/docs/comlink/profile#Input). To stay with the analogy of the function and the task, inputs are arguments of the function or information that are needed to complete the task.
+To execute the use-case, you typically need to provide some input. For example to send a text message, you need at least a phone number and the message's contents. 
 
-```hcl
+In Comlink profile, the use-case's input is specified in the `input` block:
+
+```hcl {2-5}
 usecase SendMessage unsafe {
   input {
     to
@@ -132,11 +138,13 @@ usecase SendMessage unsafe {
 }
 ```
 
-_In above definition adds two input fields `to` and `message`. To understand fields in depth, check [More about fields](#fields) section._
+The above use-case expects an object with two optional, untyped input fields: `to` and `message`. You may want to mark the field as required or specify that `message` must be a string - see the [More About Fields](#fields) section for more information about these features.
 
-_If the use-case doesn't need any input, you can skip it._
+If the use-case doesn't need any input, the `input` block can be omitted.
 
-### Define result {#result}
+### Define Result Fields {#result}
+
+Similar to defining the input, use-case can describe its output, or result.
 
 Once inputs are defined, you should tell what is desired outcome. Think about [result](https://spec.superface.ai/draft/profile-spec.html#Result) as of return value of the function or expected outcome of the task.
 
