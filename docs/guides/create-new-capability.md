@@ -125,7 +125,7 @@ While the safety information is optional, it can be used by OneSDK to treat the 
 
 ### Define Input Fields {#input}
 
-To execute the use-case, you typically need to provide some input. For example to send a text message, you need at least a phone number and the message's contents. 
+To execute the use-case, you typically need to provide some input. For example to send a text message, you need at least a recipient's phone number and the message's contents. 
 
 In Comlink profile, the use-case's input is specified in the `input` block:
 
@@ -144,88 +144,74 @@ If the use-case doesn't need any input, the `input` block can be omitted.
 
 ### Define Result Fields {#result}
 
-Similar to defining the input, use-case can describe its output, or result.
-
-Once inputs are defined, you should tell what is desired outcome. Think about [result](https://spec.superface.ai/draft/profile-spec.html#Result) as of return value of the function or expected outcome of the task.
+Similar to defining the input, use-case can describe its output (called result). For example the [Geocoding use-case](https://superface.ai/address/geocoding) provides and object with fields latitude and longitude:
 
 ```hcl
-usecase UseCaseName {
-  result string
-}
-```
-
-_This definition says the result should be a string._
-
-```hcl
-usecase UseCaseName {
+usecase Geocode {
+  // ...
   result {
-    field1
-    field2
+    latitude
+    longitude
   }
-}
-
-usecase UseCaseName {
-  result [number]
 }
 ```
 
-_In this cases result is object with fields, or list of numbers._
+The result can be also just a plain value (e.g. string) or array, specify optionality and type, and reuse named models. See [More About Fields](#fields) section.
 
-_Result can be one of many models, see [Field Types](#field-types) to learn more._
+### Define Error {#error}
 
-### Define error {#error}
-
-If something goes wrong [error](https://superface.ai/docs/comlink/profile#Error) should be defined, to be able to get detailed information about error that occured.
+The use-case can define optional error fields. These will be returned when the use-case execution fails:
 
 ```hcl
-usecase UseCaseName {
+usecase SendEmail unsafe {
+  // ...
   error {
-    name
-    message
+    title
+    detail
   }
 }
 ```
 
-_The above definition says that error should have name and message fields._
+## Add Human-Readable Descriptions {#descriptions}
 
-## Provide human readable descriptions {#descriptions}
+The use-case will be consumed by computers, but humans will be the ones integrating the use-case into their code. Any block and definition in the profile can be preceded by a description. It consists of title and body surrounded either by a single double quote `"`, or three double quotes `"""`.
 
-Now you should add human readable description so other developers can understand what the use-case does.
+The first description in the document should explain the overall purpose of the use case. Its title also specifies a human readable name of the profile:
 
-[Description](https://superface.ai/docs/comlink/profile#sec-Description) consists of two parts `title` and `description` and is surrounded by `"` (double quotes) or by `"""` (three double quotes).
-
-```hcl title=my_profile.supr
+```hcl title=send-email.supr {1-5}
 """
-My Profile
+Send Email
 
-This is example profile to demonstrate how to add human readable description to profile.
+Send one transactional email
 """
 
-name = "my-profile"
-version = "1.0.0"
+name = "communication/send-email"
+version = "1.1.1"
 
-usecase UseCaseName {}
+usecase SendEmail unsafe {}
 ```
 
-_The above definition adds well formated profile name (`My Profile`) and description_
+Both single quotes and triple quotes description can contain both title and a body of the description. In the single quote variant the description must be indented:
 
 ```hcl
 "Use case name
   Description of the use case"
 usecase UseCaseName {}
+```
+
+In the triple quote variant the description starts on a new line:
 
 """
 Use case name
-
 Description of the use case
 """
 usecase UseCaseName {}
 ```
 
-_This definition adds use-case title and desctiption in two possible ways._
+Individual fields can be also documented:
 
 ```hcl
-usecase UseCaseName {
+usecase SendEmail {
   input {
     "To
       The recipient's identificator."
@@ -242,7 +228,9 @@ usecase UseCaseName {
 }
 ```
 
-_It is also possible to add title and description to each field and result itself._
+<!-- TODO: Why prefer single / triple quote over the other? Can I mix them or it's discouraged? -->
+
+<!-- ???: "It is also possible to add title and description to each field >>and result itself.<<  per-spec this is not possible -->
 
 ## More about fields {#fields}
 
