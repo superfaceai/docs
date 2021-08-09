@@ -57,7 +57,6 @@ Use the `--help` flag for more options and examples:
 ```shell
 superface create --help
 ```
-
 :::
 
 The CLI creates `use_case_name.supr` file in current directory and links to it from the `superface/super.json`.
@@ -172,7 +171,7 @@ usecase SendEmail unsafe {
 }
 ```
 
-## Add Human-Readable Descriptions {#descriptions}
+### Add Human-Readable Descriptions {#descriptions}
 
 The use-case will be consumed by computers, but humans will be the ones integrating the use-case into their code. Any block and definition in the profile can be preceded by a description. It consists of title and body surrounded either by a single double quote `"`, or three double quotes `"""`.
 
@@ -201,6 +200,7 @@ usecase UseCaseName {}
 
 In the triple quote variant the description starts on a new line:
 
+```hcl
 """
 Use case name
 Description of the use case
@@ -232,44 +232,45 @@ usecase SendEmail {
 
 <!-- ???: "It is also possible to add title and description to each field >>and result itself.<<  per-spec this is not possible -->
 
-## More about fields {#fields}
+## More About Fields {#fields}
 
-In previous steps fields were used to define inputs, result and error.
 
-Fields can be defined as `scalar` or `collection` types.
-Comlink refers to types as [Models](https://superface.ai/docs/comlink/profile#sec-Model-Definition).
+In previous steps we have used fields define contents of input, result and error in the use-case. Fields can be defined as required and non-nullable, and can specify some particular type.
 
 ### Field Types {#field-types}
 
-For type safety, you can specify model of the field.
-
-Comlink supports following `scalar` models:
-
-- `string`
-- `number`
-- `boolean`
+If possible, define the types of fields your use-case accepts or provides in result. For example the [Shipment Information](https://superface.ai/delivery-tracking/shipment-info) for delivery tracking expects the tracking number and carrier identification as strings:
 
 ```hcl
-usecase UseCaseName {
+usecase ShipmentInfo safe {
   input {
-    contanctId number
-    name string
-    isActive boolean
+    trackingNumber! string
+    carrier string
   }
 }
 ```
 
-_For details about scalar types see [Scalar Model](https://superface.ai/docs/comlink/profile#sec-Scalar-Model)._
+The types can be either _scalar_ or _collections_. Scalar types are primitive values: `string`, `number`, `boolean`. Collections contain other collections or scalars.
 
-Now when you know about scalar models lets have a look at various collections.
+Comlink supports the following collections:
 
-- `Object`
-- `List`
+List
+: Corresponds to Array in JavaScript or List in Python.
+: Uses square brackets, e.g. `[string]` defines a list of strings.
 
-Result as `obejct`:
+Object
+: Acts as a dictionary with strings for keys.
+: Corresponds to Object in JavaScript or Dictionary in Python.
+: Uses curly brackets, e.g. `{myField number}` defines an object with single field of type number.
+
+Objects are commonly used to define inputs and results of use-cases: 
+
 
 ```hcl
 usecase UseCaseName {
+  input {
+    inputField string
+  }
   result {
     field1 string
     field2 number
@@ -277,7 +278,7 @@ usecase UseCaseName {
 }
 ```
 
-Result as `list` of `objects`:
+Lists can also contain objects, for example the following use-case provides a result with list of objects with two fields (`field1` and `field2`):
 
 ```hcl
 usecase UseCaseName {
@@ -288,17 +289,20 @@ usecase UseCaseName {
 }
 ```
 
-_All supported Models are decribed in [Model Definition](https://superface.ai/docs/comlink/profile#sec-Model-Definition)_
-
 ### Required fields
 
-Fields are by default optional. To make them required, you can use `!`.
+By default, all fields are optional. Add `!` after the field name to mark them as required. This is especially useful for specifying use-case's input to avoid executing the use-case unless all required fields are provided:
 
 ```hcl
 usecase SendMessage unsafe {
   input {
+    // Untyped, required field
     to!
-    message!
+
+    // Required field of type string
+    message! string
+
+    // Optional, untyped field
     attachment
   }
 }
@@ -306,7 +310,9 @@ usecase SendMessage unsafe {
 
 ### Non-null fields
 
-By default field can be null. To make it non-null, you can use `!` on type definition.
+By default, all field can be `null`. To mark them as non-nullable, add `!` after the type definition.
+
+In the following example, _if_ `contactId` is passed as input, it must be a number, not null:
 
 ```hcl
 usecase UseCaseName {
@@ -316,7 +322,14 @@ usecase UseCaseName {
 }
 ```
 
-The above definition says, if `contactId` is passed as input, it must be a number.
+:::warning
+
+Note that that marking the field as non-nullable doesn't make it required. To make the field required _and_ non-nullable, you must add `!` after both the field's name and type.
+
+:::
+
+In this use-case the `contactId` field is both required, and non-nullable:
+
 
 ```hcl
 usecase UseCaseName {
@@ -326,9 +339,7 @@ usecase UseCaseName {
 }
 ```
 
-Here is field required and must be non-null. In other words a number must be passed as input.
-
-## Additional resources
+## Additional Resources
 
 - [Comlink Profile Reference](https://superface.ai/docs/comlink/profile)
 - [Examples](https://github.com/superfaceai/station)
