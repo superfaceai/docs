@@ -14,13 +14,13 @@ This guide assumes you have set up a Node.js project with Superface and OneSDK. 
 
 ### Choose Profile Name
 
-Profile's name must consist of alpha-numeric characters, dashes and underscores.
+Profile's name must consist of lowercase letters, numbers, characters, dashes and underscores.
 
 Valid
-: `my_profile`, `myprofile`, `my-profile`
+: `my_profile`, `myprofile123`, `my-profile`
 
 Invalid
-: `my profile`, `my+profile`
+: `my profile`, `my+profile`, `MyProfile`
 
 While single profile file can contain multiple use-cases, we generally recommend to keep single use-case per profile. So the profile can be named after the use-case, for example:
 
