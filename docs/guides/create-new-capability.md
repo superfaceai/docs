@@ -77,9 +77,62 @@ usecase UseCaseName {}
 
 With the Comlink profile ready, you can now define your business use-case. The use-case is a task that needs to be done. You can think of it as a function with specified input and output parameters. The use-case can also specify its safety.
 
-### Overview
+### Overview {#usecase-overview}
 
-<!-- TODO: General usecase syntax -->
+Let's take a look at an example use-case (based on the [Shipment information](https://superface.ai/delivery-tracking/shipment-info@1.0.1) capability):
+
+```hcl
+"""
+Retrieve Shipment Status
+
+Get the current shipment status.
+"""
+usecase ShipmentInfo safe {
+  input {
+    "Shipment tracking number
+    Identifier of shipment"
+    trackingNumber! string!
+
+    "Carrier
+    Shipment carrier identification"
+    carrier string!
+  }
+
+  result {
+    "Carrier
+    Shipment carrier identification"
+    carrier! string
+
+    "Shipment tracking number
+    Identifier of shipment"
+    trackingNumber! string
+
+    events! [{
+      timestamp! string
+      statusText! string
+    }]
+
+    "Estimated date and time of delivery"
+    estimatedDeliveryDate
+  }
+
+  error {
+    title! string
+  }
+}
+```
+
+At the outer level, the use case is documented with [descriptions](#descriptions) in triple quotes. The definition itself starts with `usecase` keyword, the use-case is named `ShipmentInfo` and is marked as `safe`, so executing it shouldn't change anything (see below for [safety](#safety)).
+
+The use-case consists of three blocks: [`input`](#input) with fields required for use-case's execution, [`result`](#result) with expected fields from successful execution, and [`error`](#error) describing the fields returned in case of execution error (e.g. due to failure on provider's end).
+
+All these blocks consist of fields. The fields are documented with a single double quote (which is equivalent to triple quote, see [descriptions](#descriptions)). Most fields have their type defined (i.e. `string`), but the typing is optional - `estimatedDeliveryDate` field is untyped. The `events` field is an array of objects with `timestamp` and `statusText` fields. See [Field Types](#field-types) for more information about possible types. Some fields are marked with exclamation mark as [required](#required-fields) (e.g. `trackingNumber! string`), and some are marked as [non-null](#non-null) fields (e.g. `carrier string!`).
+
+:::tip
+
+If you prefer learning by example, you can check the source Comlink profile for all the published capabilities [in the catalog](https://superface.ai/catalog). Choose a capability and click "raw" to see the code.
+
+:::
 
 ### Specify Safety of the Use-Case {#safety}
 
@@ -190,15 +243,15 @@ version = "1.1.1"
 usecase SendEmail unsafe {}
 ```
 
-Both single quotes and triple quotes description can contain both title and a body of the description. In the single quote variant the description must be indented:
+Both single quotes and triple quotes description can contain both title and a body of the description. In the single quote variant the title is on the same line as quote:
 
 ```hcl
 "Use case name
-  Description of the use case"
+Description of the use case"
 usecase UseCaseName {}
 ```
 
-In the triple quote variant the description starts on a new line:
+While triple quotes are separated from the description with new lines:
 
 ```hcl
 """
@@ -214,16 +267,16 @@ Individual fields can be also documented:
 usecase SendEmail {
   input {
     "To
-      The recipient's identificator."
+    The recipient's identificator."
     to
 
     "Message
-      Text of the message"
+    Text of the message"
     message
   }
 
   "Message ID
-    Result should be unique message identifier."
+  Result should be unique message identifier."
   result string
 }
 ```
