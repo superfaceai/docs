@@ -113,7 +113,7 @@ usecase ShipmentInfo safe {
     }]
 
     "Estimated date and time of delivery"
-    estimatedDeliveryDate string
+    estimatedDeliveryDate
   }
 
   error {
@@ -126,7 +126,7 @@ At the outer level, the use case is documented with [descriptions](#descriptions
 
 The use-case consists of three blocks: [`input`](#input) with fields required for use-case's execution, [`result`](#result) with expected fields from successful execution, and [`error`](#error) describing the fields returned in case of execution error (e.g. due to failure on provider's end).
 
-All these blocks consist of fields. The fields are documented with a single double quote (which is equivalent to triple quote, see [descriptions](#descriptions)). All fields have their type defined (i.e. `string`), the `events` field is an array of objects with `timestamp` and `statusText` fields - see [Field Types](#field-types) for more information about possible types. Some fields are marked with exclamation mark as [required](#required-fields) (e.g. `trackingNumber! string`), and some are marked as [non-null](#non-null) fields (e.g. `carrier string!`).
+All these blocks consist of fields. The fields are documented with a single double quote (which is equivalent to triple quote, see [descriptions](#descriptions)). Most fields have their type defined (i.e. `string`), but the typing is optional - `estimatedDeliveryDate` field is untyped. The `events` field is an array of objects with `timestamp` and `statusText` fields. See [Field Types](#field-types) for more information about possible types. Some fields are marked with exclamation mark as [required](#required-fields) (e.g. `trackingNumber! string`), and some are marked as [non-null](#non-null) fields (e.g. `carrier string!`).
 
 :::tip
 
