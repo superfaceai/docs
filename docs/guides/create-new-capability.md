@@ -84,7 +84,6 @@ Let's take a look at an example use-case (based on the [Shipment information](ht
 ```hcl
 """
 Retrieve Shipment Status
-
 Get the current shipment status.
 """
 usecase ShipmentInfo safe {
@@ -94,18 +93,26 @@ usecase ShipmentInfo safe {
     trackingNumber! string!
 
     "Carrier
-    Shipment carrier identification"
+    Shipment carrier identification to narrow down the results"
     carrier string!
   }
 
   result {
     "Carrier
-    Shipment carrier identification"
-    carrier! string
+    Name of the carrier responsible for delivery"
+    carrier string!
 
-    "Shipment tracking number
-    Identifier of shipment"
-    trackingNumber! string
+    "Status
+    Description of the current shipment status"
+    status! string
+
+    "Origin
+    A postal address with the origin of the shipment"
+    origin string
+
+    "Destination
+    A postal shipping address"
+    destination string
 
     events! [{
       timestamp! string
@@ -118,6 +125,7 @@ usecase ShipmentInfo safe {
 
   error {
     title! string
+    detail string
   }
 }
 ```
@@ -167,7 +175,7 @@ For more information see [Understanding Idempotency and Safety in API Design](ht
 The safety is defined after the use-case's name:
 
 ```hcl
-usecase ListOrders safe {}
+usecase ShipmentInfo safe {}
 
 usecase SendMessage unsafe {}
 
@@ -186,40 +194,66 @@ To execute the use-case, you typically need to provide some input. For example t
 In Comlink profile, the use-case's input is specified in the `input` block:
 
 ```hcl {2-5}
-usecase SendMessage unsafe {
+usecase ShipmentInfo safe {
   input {
-    to
-    message
+    trackingNumber
+    carrier
   }
 }
 ```
 
-The above use-case expects an object with two optional, untyped input fields: `to` and `message`. You may want to mark the field as required or specify that `message` must be a string - see the [More About Fields](#fields) section for more information about these features.
+The above use-case expects an object with two optional, untyped input fields: `trackingNumber` and `carrier`. You may want to mark the field as required or specify that `carrier` must be a string - see the [More About Fields](#fields) section for more information about these features.
 
 If the use-case doesn't need any input, the `input` block can be omitted.
 
 ### Define Result Fields {#result}
 
-Similar to defining the input, use-case can describe its output (called result). For example the [Geocoding use-case](https://superface.ai/address/geocoding) provides and object with fields latitude and longitude:
+Similar to defining the input, use-case can describe its output (called result). Our Shipment info use-case returns a result object with multiple fields:
 
-```hcl
-usecase Geocode {
+```hcl {3-15}
+usecase ShipmentInfo safe {
   // ...
   result {
-    latitude
-    longitude
+    carrier
+    status
+    origin
+    destination
+
+    events [{
+      timestamp
+      statusText
+    }]
+
+    estimatedDeliveryDate
   }
 }
 ```
 
-The result can be also just a plain value (e.g. string) or array, specify optionality and type, and reuse named models. See [More About Fields](#fields) section.
+In this example, the `events` field is an array of objects with the fields `timestamp` and `statusText`. The fields can also be marked as required and non-null - see [More About Fields](#fields) section.
+
+The result itself can be also a an array or a scalar value:
+
+```
+// result is an array of objects
+usecase ShipmentInfoEvents {
+  result [{
+    timestamp
+    statusText
+  }]
+}
+
+// result is a scalar value
+usecase ShipmentInfoStatus {
+  result string
+}
+```
 
 ### Define Error {#error}
 
 The use-case can define optional error fields. These will be returned when the use-case execution fails:
 
 ```hcl
-usecase SendEmail unsafe {
+usecase ShipmentInfo safe {
   // ...
   error {
     title
@@ -230,58 +264,56 @@ usecase SendEmail unsafe {
 
 ### Add Human-Readable Descriptions {#descriptions}
 
-The use-case will be consumed by computers, but humans will be the ones integrating the use-case into their code. Any block and definition in the profile can be preceded by a description. It consists of title and body surrounded either by a single double quote `"`, or three double quotes `"""`.
+The use-case will be consumed by computers, but humans will be the ones integrating the use-case into their code. Use-cases and definitions in the profile can be preceded by descriptions. A description consists of title and body surrounded either by a single double quote `"`, or three double quotes `"""` (triple quotes).
 
-The first description in the document should explain the overall purpose of the use case. Its title also specifies a human readable name of the profile:
+The first description in the profile should explain the overall purpose of the use case. Its title also specifies a human readable name of the profile:
 
-```hcl title=send-email.supr {1-5}
+```hcl title=delivery-tracking/shipment-info.supr {1-5}
 """
-Send Email
+Shipment information
 
-Send one transactional email
+Track your shipment. Get the latest information on your shipment status. 
 """
 
-name = "communication/send-email"
-version = "1.1.1"
+name = "delivery-tracking/shipment-info"
+version = "1.0.1"
 
-usecase SendEmail unsafe {}
+usecase ShipmentInfo safe {}
 ```
 
 Both single quotes and triple quotes description can contain both title and a body of the description. In the single quote variant the title is on the same line as quote:
 
 ```hcl
-"Use case name
-Description of the use case"
-usecase UseCaseName {}
+"Retrieve Shipment Status
+Get the current shipment status."
+usecase ShipmentInfo safe {}
 ```
 
 While triple quotes are separated from the description with new lines:
 
 ```hcl
 """
-Use case name
-Description of the use case
+Retrieve Shipment Status
+Get the current shipment status.
 """
-usecase UseCaseName {}
+usecase ShipmentInfo safe {}
 ```
 
 Individual fields can be also documented:
 
 ```hcl
-usecase SendEmail {
+usecase ShipmentInfo safe {
   input {
-    "To
-    The recipient's identificator."
-    to
+    """
+    Shipment tracking number
+    Identifier of shipment
+    """
+    trackingNumber
 
-    "Message
-    Text of the message"
-    message
+    "Carrier
+    Shipment carrier identification to narrow down the results"
+    carrier string!
   }
-
-  "Message ID
-  Result should be unique message identifier."
-  result string
 }
 ```
 
@@ -293,17 +325,16 @@ Both description formats are functionally equivalent so the choice is up to your
 
 ## More About Fields {#fields}
 
-
-In previous steps we have used fields define contents of input, result and error in the use-case. Fields can be defined as required and non-nullable, and can specify some particular type.
+In previous steps we have used fields to define contents of input, result and error in the use-case. Fields can be defined as required and non-nullable, and can specify some particular type.
 
 ### Field Types {#field-types}
 
-If possible, define the types of fields your use-case accepts or provides in result. For example the [Shipment Information](https://superface.ai/delivery-tracking/shipment-info) for delivery tracking expects the tracking number and carrier identification as strings:
+If possible, define the types of fields your use-case accepts or provides in result. The example Shipment Information use-case expects the tracking number and carrier identification as strings:
 
 ```hcl
 usecase ShipmentInfo safe {
   input {
-    trackingNumber! string
+    trackingNumber string
     carrier string
   }
 }
@@ -322,7 +353,7 @@ Object
 : Corresponds to Object in JavaScript or Dictionary in Python.
 : Uses curly brackets, e.g. `{myField number}` defines an object with single field of type number.
 
-Objects are commonly used to define inputs and results of use-cases: 
+Objects are commonly used to define inputs, results, and errors: 
 
 
 ```hcl
@@ -337,32 +368,29 @@ usecase UseCaseName {
 }
 ```
 
-Lists can also contain objects, for example the following use-case provides a result with list of objects with two fields (`field1` and `field2`):
+Lists can also contain objects, for example the following use-case provides a result with a list of objects with fields `timestamp` and `statusText`:
 
 ```hcl
-usecase UseCaseName {
+usecase ShipmentInfoEvents {
   result [{
-    field1 string
-    field2 number
+    timestamp string
+    statusText string
   }]
 }
 ```
 
-### Required fields
+### Required Fields
 
-By default, all fields are optional. Add `!` after the field name to mark them as required. This is especially useful for specifying use-case's input to avoid executing the use-case unless all required fields are provided:
+By default, all fields are optional. Add `!` after the field name to mark it as required. This is especially useful for specifying use-case's input to avoid executing the use-case unless all required fields are provided:
 
 ```hcl
-usecase SendMessage unsafe {
+usecase ShipmentInfo safe {
   input {
-    // Untyped, required field
-    to!
+    // Required field with string
+    trackingNumber! string
 
-    // Required field of type string
-    message! string
-
-    // Optional, untyped field
-    attachment
+    // Required, untyped field
+    carrier!
   }
 }
 ```
@@ -371,12 +399,13 @@ usecase SendMessage unsafe {
 
 By default, all field can be `null`. To mark them as non-nullable, add `!` after the type definition.
 
-In the following example, _if_ `contactId` is passed as input, it must be a number, not null:
+In the following example, _if_ `carrier` is passed in the input, it must be a string, not `null`:
 
-```hcl
-usecase UseCaseName {
+```hcl {4}
+usecase ShipmentInfo safe {
   input {
-    contactId number!
+    trackingNumber! string!
+    carrier string!
   }
 }
 ```
@@ -387,13 +416,13 @@ Note that marking the field as non-nullable doesn't make it required. To make th
 
 :::
 
-In this use-case the `contactId` field is both required, and non-nullable:
+In the above use-case the `trackingNumber` field is both required, and non-nullable:
 
 
 ```hcl
 usecase UseCaseName {
   input {
-    contactId! number!
+    trackingNumber! string!
   }
 }
 ```
