@@ -1,57 +1,67 @@
 # Create a new capability
 
-Capability is application functionality to serve business needs.
+Capability is an application functionality to serve business needs. It consists of one or more use-cases targeted at particular business scenarios that the capability is designed to solve.
 
-Capability is defined through use-cases, which are the business scenarios that the capability is designed to solve.
+Use-cases are defined through a [Comlink profile](https://superface.ai/docs/comlink/profile). The Comlink profile is a file with `.supr` extension. It specifies the abstract business behavior of the use-case: its input and result parameters, error behavior and data types.
 
-Use-cases are defined in [Comlink profile](https://superface.ai/docs/comlink/profile), which enables you to describe business behavior without a need to go deep into the implementation details.
-
-Comlink profile has several keywords and in this guide, you will learn how to use them to define your own capability.
+This guide will walk you through the process of defining a new capability with a Comlink profile. You will use the Superface CLI to bootstrap a new profile and learn the syntax.
 
 ## Setup
 
-This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please see the [Setup Guide](/guides/setup-the-environment).
+This guide assumes you have set up a Node.js project with Superface and OneSDK. If you need to set up a new project, please see the [Setup Guide](./setup-the-environment.md).
 
-## Create new Profile document
+## Create New Profile
 
 ### Choose Profile Name
 
-Profile name must consist of alpha-numeric characters, dashes and underscores.
+Profile's name must consist of alpha-numeric characters, dashes and underscores.
 
-**Valid:** `my_profile`, `myprofile`, `my-profile`<br/>
-**Invalid:** `my profile`, `my+profile`
+Valid
+: `my_profile`, `myprofile`, `my-profile`
 
-By convention, one profile should comprise one use-case (E.g. “Get weather” or “Make payment”).
+Invalid
+: `my profile`, `my+profile`
 
-So good practice is to name your profile after the use-case.
+While single profile file can contain multiple use-cases, we generally recommend to keep single use-case per profile. So the profile can be named after the use-case, for example:
 
-- Get weather -> `get-weather`
-- Make payment -> `make-payment`
+- Get weather: `get-weather`
+- Make payment: `make-payment`
+- Send email: `send-email`
+
+<!--
+:::info
+
+Occasionally it makes sense to put multiple use-cases into a single profile file. For example, the [communication/send-email](https://superface.ai/communication/send-email) defines two use-cases
+
+:::
+-->
 
 :::tip Scoped profiles
-Profile can be scoped, which allows to group profiles together.
-To scope a profile, add `scope-name/` before profile name `[ProfileScope/]<ProfileName>`.
-
-For example: `communication/send-email`
+Profile name can contain scope for grouping profiles together.
+To scope a profile, add `scope-name/` before profile name, for example: `communication/send-email`.
 :::
 
-### Bootstrap with CLI
+### Bootstrap With CLI
 
-The easiest way to create a new Profile document is to use [Superface CLI](https://github.com/superfaceai/cli).
+You can use the [Superface CLI](https://github.com/superfaceai/cli) to set up an empty Comlink profile:
 
 ```shell
 superface create --profile --profileId <use_case_name>
 ```
 
-_replace `<use_case_name>` with the name of use-case you wish to create._
+Where `<use_case_name>` is the name of use-case you wish to create.
 
-:::tip see help
-You can use the `--help` flag to see more options.
+:::tip CLI Help
+Use the `--help` flag for more options and examples:
+
+```shell
+superface create --help
+```
 :::
 
-As result you will see new file called `use_case_name.supr` and updated `superface/super.json` linking your new profile.
+The CLI creates `use_case_name.supr` file in current directory and links to it from the `superface/super.json`.
 
-Created profile will look similarly to this:
+The new profile will look similarly to this:
 
 ```hcl title=use_case_name.supr
 name = "use_case_name"
@@ -63,34 +73,62 @@ UseCaseName usecase
 usecase UseCaseName {}
 ```
 
-## Define Usecase {#usecase}
+## Define the Use-Case {#usecase}
 
-Now it is time to describe what functionality is needed in the application.
-To do that you will need to define `usecase`. If you are a programmer you can imagine use-case as a function. If programming isn't your thing, you can think of it as a task that needs to be done.
+With the Comlink profile ready, you can now define your business use-case. The use-case is a task that needs to be done. You can think of it as a function with specified input and output parameters. The use-case can also specify its safety.
 
-### Specify Safety of the Use-Case
+### Overview
 
-You can mark usecase as `safe`, `unsafe` or `idempotent`, to declare how it should be treated by OneSDK.
+<!-- TODO: General usecase syntax -->
 
-If you do not specify safety, Superface will assume usecase is `unsafe`.
+### Specify Safety of the Use-Case {#safety}
 
-`safe` usecase is a usecase that is safe to execute. It means that it doesn't change the world state. So any data reading is considered safe.
+The use-case can be marked as `safe`, `unsafe` or `idempotent`. If the safety is not specified, the use-case is treated as `unsafe` by default.
 
-`unsafe` usecase is a usecase that changes the world state. For example, sending an email, or placing an order is unsafe usecase.
 
-`idempotent` usecase is a usecase that is idempotent. It means that it can be executed multiple times without changing the result.
+`safe`
+: The use-case doesn't change anything or doesn't perform any action. Generally reading operations can be considered safe, for example retrieving information about shipment or geocoding a postal address.
+
+`unsafe`
+: The use-case changes the world state and its retry may result in unintended side effects. For example, sending an email, or placing an order is unsafe: executing these use-cases repeatedly results in sending multiple emails or placing multiple orders.
+
+`idempotent`
+: The use-case can be executed multiple times without changing the result. For example updating an article with the same data multiple times results in the same article.
+
+:::info HTTP Methods
+
+If you are familiar with REST APIs and HTTP methods, you can think of the safety in this manner:
+
+- `safe` corresponds to `GET` and `HEAD` methods,
+- `unsafe` corresponds to `POST` method,
+- `idempotent` corresponds to `PUT` and `DELETE` methods.
+
+For more information see [Understanding Idempotency and Safety in API Design](https://nordicapis.com/understanding-idempotency-and-safety-in-api-design/).
+
+:::
+
+The safety is defined after the use-case's name:
 
 ```hcl
-usecase SendMessage unsafe {}
 usecase ListOrders safe {}
+
+usecase SendMessage unsafe {}
+
 usecase UpdateProfile idempotent {}
+
+// if safety is not specified, the use-case is considered unsafe
+usecase SendEmail {}
 ```
 
-### Define input {#input}
+While the safety information is optional, it can be used by OneSDK to treat the use-case in particular manner. For example, the SDK can attempt to automatically repeat a failed request if the use-case is `safe`.
 
-Next should be defining [input](https://superface.ai/docs/comlink/profile#Input). To stay with the analogy of the function and the task, inputs are arguments of the function or information that are needed to complete the task.
+### Define Input Fields {#input}
 
-```hcl
+To execute the use-case, you typically need to provide some input. For example to send a text message, you need at least a recipient's phone number and the message's contents. 
+
+In Comlink profile, the use-case's input is specified in the `input` block:
+
+```hcl {2-5}
 usecase SendMessage unsafe {
   input {
     to
@@ -99,92 +137,81 @@ usecase SendMessage unsafe {
 }
 ```
 
-_In above definition adds two input fields `to` and `message`. To understand fields in depth, check [More about fields](#fields) section._
+The above use-case expects an object with two optional, untyped input fields: `to` and `message`. You may want to mark the field as required or specify that `message` must be a string - see the [More About Fields](#fields) section for more information about these features.
 
-_If the use-case doesn't need any input, you can skip it._
+If the use-case doesn't need any input, the `input` block can be omitted.
 
-### Define result {#result}
+### Define Result Fields {#result}
 
-Once inputs are defined, you should tell what is desired outcome. Think about [result](https://spec.superface.ai/draft/profile-spec.html#Result) as of return value of the function or expected outcome of the task.
-
-```hcl
-usecase UseCaseName {
-  result string
-}
-```
-
-_This definition says the result should be a string._
+Similar to defining the input, use-case can describe its output (called result). For example the [Geocoding use-case](https://superface.ai/address/geocoding) provides and object with fields latitude and longitude:
 
 ```hcl
-usecase UseCaseName {
+usecase Geocode {
+  // ...
   result {
-    field1
-    field2
+    latitude
+    longitude
   }
-}
-
-usecase UseCaseName {
-  result [number]
 }
 ```
 
-_In this cases result is object with fields, or list of numbers._
+The result can be also just a plain value (e.g. string) or array, specify optionality and type, and reuse named models. See [More About Fields](#fields) section.
 
-_Result can be one of many models, see [Field Types](#field-types) to learn more._
+### Define Error {#error}
 
-### Define error {#error}
-
-If something goes wrong [error](https://superface.ai/docs/comlink/profile#Error) should be defined, to be able to get detailed information about error that occured.
+The use-case can define optional error fields. These will be returned when the use-case execution fails:
 
 ```hcl
-usecase UseCaseName {
+usecase SendEmail unsafe {
+  // ...
   error {
-    name
-    message
+    title
+    detail
   }
 }
 ```
 
-_The above definition says that error should have name and message fields._
+### Add Human-Readable Descriptions {#descriptions}
 
-## Provide human readable descriptions {#descriptions}
+The use-case will be consumed by computers, but humans will be the ones integrating the use-case into their code. Any block and definition in the profile can be preceded by a description. It consists of title and body surrounded either by a single double quote `"`, or three double quotes `"""`.
 
-Now you should add human readable description so other developers can understand what the use-case does.
+The first description in the document should explain the overall purpose of the use case. Its title also specifies a human readable name of the profile:
 
-[Description](https://superface.ai/docs/comlink/profile#sec-Description) consists of two parts `title` and `description` and is surrounded by `"` (double quotes) or by `"""` (three double quotes).
-
-```hcl title=my_profile.supr
+```hcl title=send-email.supr {1-5}
 """
-My Profile
+Send Email
 
-This is example profile to demonstrate how to add human readable description to profile.
+Send one transactional email
 """
 
-name = "my-profile"
-version = "1.0.0"
+name = "communication/send-email"
+version = "1.1.1"
 
-usecase UseCaseName {}
+usecase SendEmail unsafe {}
 ```
 
-_The above definition adds well formated profile name (`My Profile`) and description_
+Both single quotes and triple quotes description can contain both title and a body of the description. In the single quote variant the description must be indented:
 
 ```hcl
 "Use case name
   Description of the use case"
 usecase UseCaseName {}
+```
 
+In the triple quote variant the description starts on a new line:
+
+```hcl
 """
 Use case name
-
 Description of the use case
 """
 usecase UseCaseName {}
 ```
 
-_This definition adds use-case title and desctiption in two possible ways._
+Individual fields can be also documented:
 
 ```hcl
-usecase UseCaseName {
+usecase SendEmail {
   input {
     "To
       The recipient's identificator."
@@ -201,46 +228,51 @@ usecase UseCaseName {
 }
 ```
 
-_It is also possible to add title and description to each field and result itself._
+:::note Single Quote vs. Triple Quote
 
-## More about fields {#fields}
+Both description formats are functionally equivalent so the choice is up to your preference. Our current practice is to use triple quotes for high-level descriptions (for the profile itself and use-cases), and single quotes for individual fields. Single quotes are also convenient when you want a single-line description (i.e. just a title).
 
-In previous steps fields were used to define inputs, result and error.
+:::
 
-Fields can be defined as `scalar` or `collection` types.
-Comlink refers to types as [Models](https://superface.ai/docs/comlink/profile#sec-Model-Definition).
+## More About Fields {#fields}
+
+
+In previous steps we have used fields define contents of input, result and error in the use-case. Fields can be defined as required and non-nullable, and can specify some particular type.
 
 ### Field Types {#field-types}
 
-For type safety, you can specify model of the field.
-
-Comlink supports following `scalar` models:
-
-- `string`
-- `number`
-- `boolean`
+If possible, define the types of fields your use-case accepts or provides in result. For example the [Shipment Information](https://superface.ai/delivery-tracking/shipment-info) for delivery tracking expects the tracking number and carrier identification as strings:
 
 ```hcl
-usecase UseCaseName {
+usecase ShipmentInfo safe {
   input {
-    contanctId number
-    name string
-    isActive boolean
+    trackingNumber! string
+    carrier string
   }
 }
 ```
 
-_For details about scalar types see [Scalar Model](https://superface.ai/docs/comlink/profile#sec-Scalar-Model)._
+The types can be either _scalar_ or _collections_. Scalar types are primitive values: `string`, `number`, `boolean`. Collections contain other collections or scalars.
 
-Now when you know about scalar models lets have a look at various collections.
+Comlink supports the following collections:
 
-- `Object`
-- `List`
+List
+: Corresponds to Array in JavaScript or List in Python.
+: Uses square brackets, e.g. `[string]` defines a list of strings.
 
-Result as `obejct`:
+Object
+: Acts as a dictionary with strings for keys.
+: Corresponds to Object in JavaScript or Dictionary in Python.
+: Uses curly brackets, e.g. `{myField number}` defines an object with single field of type number.
+
+Objects are commonly used to define inputs and results of use-cases: 
+
 
 ```hcl
 usecase UseCaseName {
+  input {
+    inputField string
+  }
   result {
     field1 string
     field2 number
@@ -248,7 +280,7 @@ usecase UseCaseName {
 }
 ```
 
-Result as `list` of `objects`:
+Lists can also contain objects, for example the following use-case provides a result with list of objects with two fields (`field1` and `field2`):
 
 ```hcl
 usecase UseCaseName {
@@ -259,17 +291,20 @@ usecase UseCaseName {
 }
 ```
 
-_All supported Models are decribed in [Model Definition](https://superface.ai/docs/comlink/profile#sec-Model-Definition)_
-
 ### Required fields
 
-Fields are by default optional. To make them required, you can use `!`.
+By default, all fields are optional. Add `!` after the field name to mark them as required. This is especially useful for specifying use-case's input to avoid executing the use-case unless all required fields are provided:
 
 ```hcl
 usecase SendMessage unsafe {
   input {
+    // Untyped, required field
     to!
-    message!
+
+    // Required field of type string
+    message! string
+
+    // Optional, untyped field
     attachment
   }
 }
@@ -277,7 +312,9 @@ usecase SendMessage unsafe {
 
 ### Non-null fields
 
-By default field can be null. To make it non-null, you can use `!` on type definition.
+By default, all field can be `null`. To mark them as non-nullable, add `!` after the type definition.
+
+In the following example, _if_ `contactId` is passed as input, it must be a number, not null:
 
 ```hcl
 usecase UseCaseName {
@@ -287,7 +324,14 @@ usecase UseCaseName {
 }
 ```
 
-The above definition says, if `contactId` is passed as input, it must be a number.
+:::warning
+
+Note that marking the field as non-nullable doesn't make it required. To make the field required _and_ non-nullable, you must add `!` after both the field's name and type.
+
+:::
+
+In this use-case the `contactId` field is both required, and non-nullable:
+
 
 ```hcl
 usecase UseCaseName {
@@ -297,9 +341,7 @@ usecase UseCaseName {
 }
 ```
 
-Here is field required and must be non-null. In other words a number must be passed as input.
-
-## Additional resources
+## Additional Resources
 
 - [Comlink Profile Reference](https://superface.ai/docs/comlink/profile)
 - [Examples](https://github.com/superfaceai/station)
