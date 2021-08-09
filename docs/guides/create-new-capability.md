@@ -326,7 +326,7 @@ usecase UseCaseName {
 
 :::warning
 
-Note that that marking the field as non-nullable doesn't make it required. To make the field required _and_ non-nullable, you must add `!` after both the field's name and type.
+Note that marking the field as non-nullable doesn't make it required. To make the field required _and_ non-nullable, you must add `!` after both the field's name and type.
 
 :::
 
