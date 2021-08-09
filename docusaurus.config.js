@@ -1,5 +1,6 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const remarkDeflist = require('remark-deflist');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
@@ -94,10 +95,13 @@ module.exports = {
           routeBasePath: '/',
           // editUrl:
           //   'https://github.com/superfaceai/docs/edit/main/',
+          remarkPlugins: [
+            remarkDeflist
+          ]
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        },
+        }
       },
     ],
   ],
