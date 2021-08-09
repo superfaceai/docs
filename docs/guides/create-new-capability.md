@@ -2,7 +2,7 @@
 
 Capability is an application functionality to serve business needs. It consists of one or more use-cases targeted at particular business scenarios that the capability is designed to solve.
 
-Use-cases are defined though a [Comlink profile](https://superface.ai/docs/comlink/profile). The Comlink profile is a file with `.supr` extension. It specifies the abstract business behavior of the use-case: its input and result parameters, error behavior and data types.
+Use-cases are defined through a [Comlink profile](https://superface.ai/docs/comlink/profile). The Comlink profile is a file with `.supr` extension. It specifies the abstract business behavior of the use-case: its input and result parameters, error behavior and data types.
 
 This guide will walk you through the process of defining a new capability with a Comlink profile. You will use the Superface CLI to bootstrap a new profile and learn the syntax.
 
