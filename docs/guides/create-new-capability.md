@@ -228,9 +228,11 @@ usecase SendEmail {
 }
 ```
 
-<!-- TODO: Why prefer single / triple quote over the other? Can I mix them or it's discouraged? -->
+:::note Single Quote vs. Triple Quote
 
-<!-- ???: "It is also possible to add title and description to each field >>and result itself.<<  per-spec this is not possible -->
+Both description formats are functionally equivalent so the choice is up to your preference. Our current practice is to use triple quotes for high-level descriptions (for the profile itself and use-cases), and single quotes for individual fields. Single quotes are also convenient when you want a single-line description (i.e. just a title).
+
+:::
 
 ## More About Fields {#fields}
 
