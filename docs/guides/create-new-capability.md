@@ -79,7 +79,7 @@ With the Comlink profile ready, you can now define your business use-case. The u
 
 ### Overview {#usecase-overview}
 
-Let's take a look at an example use-case (based on the [Shipment information](https://superface.ai/delivery-tracking/shipment-info) capability):
+Let's take a look at an example use-case (based on the [Shipment information](https://superface.ai/delivery-tracking/shipment-info@1.0.1) capability):
 
 ```hcl
 """
