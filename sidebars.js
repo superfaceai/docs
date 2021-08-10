@@ -19,7 +19,7 @@ module.exports = {
       label: 'How to create a capability',
       collapsed: false,
       items: [
-        {type: 'doc', id: 'guides/how-to-create', label: 'Overview'},
+        { type: 'doc', id: 'guides/how-to-create', label: 'Overview' },
         'guides/setup-the-environment',
         // 'guides/create-new-profile', Uncomment this once the page si ready
         'guides/create-new-capability',
@@ -27,7 +27,7 @@ module.exports = {
         'guides/map-capability-to-provider',
         'guides/run-and-test',
         'guides/use-in-app',
-      ]
+      ],
     },
   ],
   providerAvailabilitySidebar: [

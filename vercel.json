@@ -1,9 +1,9 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { 
+    {
       "source": "/",
-      "destination": "/docs", 
+      "destination": "/docs",
       "permanent": false
     }
   ]

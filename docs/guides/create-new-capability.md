@@ -57,6 +57,7 @@ Use the `--help` flag for more options and examples:
 ```shell
 superface create --help
 ```
+
 :::
 
 The CLI creates `use_case_name.supr` file in current directory and links to it from the `superface/super.json`.
@@ -150,7 +151,6 @@ If you prefer learning by example, you can check the source Comlink profile for 
 
 The use-case can be marked as `safe`, `unsafe` or `idempotent`. If the safety is not specified, the use-case is treated as `unsafe` by default.
 
-
 `safe`
 : The use-case doesn't change anything or doesn't perform any action. Generally reading operations can be considered safe, for example retrieving information about shipment or geocoding a postal address.
 
@@ -189,7 +189,7 @@ While the safety information is optional, it can be used by OneSDK to treat the 
 
 ### Define Input Fields {#input}
 
-To execute the use-case, you typically need to provide some input. For example to send a text message, you need at least a recipient's phone number and the message's contents. 
+To execute the use-case, you typically need to provide some input. For example to send a text message, you need at least a recipient's phone number and the message's contents.
 
 In Comlink profile, the use-case's input is specified in the `input` block:
 
@@ -272,7 +272,7 @@ The first description in the profile should explain the overall purpose of the u
 """
 Shipment information
 
-Track your shipment. Get the latest information on your shipment status. 
+Track your shipment. Get the latest information on your shipment status.
 """
 
 name = "delivery-tracking/shipment-info"
@@ -353,8 +353,7 @@ Object
 : Corresponds to Object in JavaScript or Dictionary in Python.
 : Uses curly brackets, e.g. `{myField number}` defines an object with single field of type number.
 
-Objects are commonly used to define inputs, results, and errors: 
-
+Objects are commonly used to define inputs, results, and errors:
 
 ```hcl
 usecase UseCaseName {
@@ -417,7 +416,6 @@ Note that marking the field as non-nullable doesn't make it required. To make th
 :::
 
 In the above use-case the `trackingNumber` field is both required, and non-nullable:
-
 
 ```hcl
 usecase UseCaseName {

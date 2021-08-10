@@ -5,17 +5,19 @@ The official home of Superface docs.
 ## Updating the docs
 
 1. ### Run the docs locally
+
 - Clone the repo, then `yarn install` and `yarn start`
 
 2. ### Update the content
-- Make your desired changes to the documents inside 
-[`/docs`](https://github.com/superfaceai/docs/tree/main/docs) directory<br />
+
+- Make your desired changes to the documents inside
+  [`/docs`](https://github.com/superfaceai/docs/tree/main/docs) directory<br />
   It uses a standard Markdown syntax, but can be extended with custom React components via MDX.
 
   <sup>[Help for Markdown features ➚](https://docusaurus.io/docs/markdown-features)</sup>
 
-- Put your static content (e.g. images) to 
-[`/static`](https://github.com/superfaceai/docs/tree/main/static) directory<br />
+- Put your static content (e.g. images) to
+  [`/static`](https://github.com/superfaceai/docs/tree/main/static) directory<br />
   When linking to it from the docs, just drop `/static` from path, e.g. rendering `/img/diagram.png`
   will render an image saved at `/static/img/diagram.png`.
 
@@ -44,16 +46,16 @@ The official home of Superface docs.
 
   <sup>[Help for config ➚](https://docusaurus.io/docs/docusaurus.config.js)</sup>
 
-
 4. ### Get the changes reviewed
+
 - When you're happy with your changes, open a PR and get it reviewed by someone.<br />
-_Opening a PR will automatically deploy an online preview of your docs. It also verifies the build
-doesn't contain any broken links._
+  _Opening a PR will automatically deploy an online preview of your docs. It also verifies the build
+  doesn't contain any broken links._
 
 5. ### Deploy to production
-- Once your changes are verified and reviewed by another pair of eyes, it is ready to be merged to `main`.<br />
-_Merging will automatically deploy `main` branch to production._
 
+- Once your changes are verified and reviewed by another pair of eyes, it is ready to be merged to `main`.<br />
+  _Merging will automatically deploy `main` branch to production._
 
 ---
 
@@ -63,20 +65,21 @@ _Merging will automatically deploy `main` branch to production._
   <br />
   These docs are built using https://docusaurus.io/.
 
-  The site is deployed on [Vercel](https://vercel.com/) to
-  [`docs`](https://vercel.com/superface/docs) project.
+The site is deployed on [Vercel](https://vercel.com/) to
+[`docs`](https://vercel.com/superface/docs) project.
 
-  All deployments are automated via GitHub Actions and you can keep track of them
-  in [the repository's environments](https://github.com/superfaceai/docs/deployments).
+All deployments are automated via GitHub Actions and you can keep track of them
+in [the repository's environments](https://github.com/superfaceai/docs/deployments).
 
-  - Preview: gets deployed for each PR
-  - Production: gets deployed continuously from `main` branch
+- Preview: gets deployed for each PR
+- Production: gets deployed continuously from `main` branch
 
-  Each deploy first verifies the validity of the build.
+Each deploy first verifies the validity of the build.
 
-  If you'd like to build locally:
+If you'd like to build locally:
 
-  ```bash
-  yarn build
-  ```
+```bash
+yarn build
+```
+
 </details>
