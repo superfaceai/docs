@@ -32,7 +32,7 @@ This definition is later used by _Map_ documents that create a request/response 
 
 :::info Before you start
 
-Please [check our registry for existing providers](./find-provider-by-name.md) before creating your own. Chances are the provider you're interested in was already defined by someone else. 
+Please [check our registry for existing providers](./find-provider-by-name.md) before creating your own. Chances are the provider you're interested in was already defined by someone else.
 
 In that case you can skip this guide & simply [create a mapping for the capability using an existing provider](./map-capability-to-provider.md).
 
@@ -70,7 +70,6 @@ Running the above command creates a new JSON file at `<provider-name>.provider.j
 ## Configure the services {#services}
 
 To be able to call the provider's web services, you need to first define them. Each service points to a specific base URL and has an identifier that is unique within the provider document.
-
 
 ```json title="<provider-name>.provider.json" {3-8}
 {
@@ -116,7 +115,7 @@ If the provider offers a public API that _does not_ require any authentication, 
 
 :::
 
-Define the expected form of authentication using _security schemes_.  The actual credentials, tokens or keys will be provided later in runtime by the consumer either directly or via environment variables. Currently 3 types of security schemes are supported:
+Define the expected form of authentication using _security schemes_. The actual credentials, tokens or keys will be provided later in runtime by the consumer either directly or via environment variables. Currently 3 types of security schemes are supported:
 
 - [Basic Auth](#basic-auth)
 - [Bearer Token](#bearer-token)
@@ -143,7 +142,7 @@ Use the following scheme with an arbitrary ID which can be referenced later from
       "id": "<scheme-id>",
       "type": "http",
       "scheme": "basic"
-    }   
+    }
   ]
 }
 ```
@@ -185,7 +184,6 @@ _Replace the security scheme `id` value in the example with your own ID. Provide
 
 Use the following scheme with an arbitrary ID which can be referenced later from the mapping.
 
-
 ```json title="<provider-name>.provider.json" {10-17}
 {
   "name": "<provider-name>",
@@ -222,7 +220,6 @@ _e.g. `https://api.example.com/?accessKey=<apikey>`_
 
 - `in` must be set to `query`
 - `name` is the query param name that holds the API key (e.g. `accessKey`)
-
 
 ## Examples
 

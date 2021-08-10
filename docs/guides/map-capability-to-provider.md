@@ -21,7 +21,7 @@ The easiest way to then bootstrap a new Map document is using [Superface CLI](/r
 superface create --map --profileId <profile-name@version> --providerName <provider-name>
 ```
 
-_Replace the `<profile-name@version>` and `<provider-name>` in the command with the actual profile and provider you wish to create new Map for._ 
+_Replace the `<profile-name@version>` and `<provider-name>` in the command with the actual profile and provider you wish to create new Map for._
 
 Running the above command creates a new Comlink file and links the new map in your local `super.json` configuration file. The new empty map will look something like this:
 
@@ -34,7 +34,6 @@ Comment for the map to UseCaseName
 """
 map UseCaseName {} // UseCaseName will be different based on the actual use case in the profile
 ```
-
 
 ## Map use cases
 
@@ -49,7 +48,7 @@ You can access these inputs via `input` object which is available _inside use ca
 <details>
   <summary>Example</summary>
 
-  Given the following use case definition in a profile:
+Given the following use case definition in a profile:
 
 ```hcl title="profile.supr" {4-7}
 ...
@@ -68,7 +67,7 @@ usecase GetWeather {
 ...
 ```
 
-  These input props are accessible in the use case mapping.
+These input props are accessible in the use case mapping.
 
 ```hcl title="profile.provider.suma" {4-6}
 ...
@@ -149,7 +148,7 @@ map UseCaseName {
 }
 ```
 
-_The above definition makes call to `/api/messages?from=...` with body  of content type `application/json` including object with 2 parameters (`to` & `text`).<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Request) for details on `request` block._
+_The above definition makes call to `/api/messages?from=...` with body of content type `application/json` including object with 2 parameters (`to` & `text`).<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Request) for details on `request` block._
 
 ### Handle server responses {#handle-response}
 
@@ -177,8 +176,9 @@ map UseCaseName {
 ```
 
 _The above example definition:_
-- _handles any response with status code `201` and  `application/json` content type in success context,_
-- _handles any response with status code `400` and  `application/problem+json` content type in error context._
+
+- _handles any response with status code `201` and `application/json` content type in success context,_
+- _handles any response with status code `400` and `application/problem+json` content type in error context._
 
 _Any other response won't be handled and will result in an unexpected error_.
 
@@ -245,8 +245,7 @@ map UseCaseName {
 
 _The above definition maps the 2 expected result fields. One from the response's body, the other is loaded from headers and transformed with a simple Comlink expression.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Map-Result) for detailed specification of `map result` statement._
 
-
-:::note 
+:::note
 
 `map result` is a regular Comlink statement; and as such can theoretically happen from anywhere inside the use case mapping, not necessarily from an inside of the response handler. An example of this would be a capability that doesn't need to call a remote server. However this is _very rare_ and the results are usually mapped from the HTTP responses so the example shows the most common place where the result mapping happens.
 
@@ -286,8 +285,7 @@ map UseCaseName {
 
 _The above definition maps the 2 expected error fields when server responds with status `429 (Too Many Requests)`. One is hardcoded as it describes the error scenario, the other constructs a helpful message with a value from response headers using a simple Comlink expression.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Map-Error) for detailed specification of `map error` statement._
 
-
-:::note 
+:::note
 
 `map error` is a regular Comlink statement; and as such can theoretically happen from anywhere inside the use case mapping, not necessarily from an inside of the response handler. Although the errors are usually mapped from the failed HTTP responses, sometimes you might want to map error from different places. _One example would be validating the inputs against some domain rule. In such case, you might want to map error (or; fail early) when invalid inputs were provided, even before making the request._
 
@@ -363,7 +361,7 @@ response 400 "application/problem+json" {
   return map error if (body.error_code === "InvalidPhone") {
     title = "Invalid phone number"
     detail = "Please provide phone number in E.164 format"
-  } 
+  }
 
   return map error if (body.error_code === "InvalidKey") {
     title = "Unauthorized"

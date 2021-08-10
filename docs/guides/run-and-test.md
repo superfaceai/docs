@@ -27,7 +27,7 @@ _Running the above commands will create `*.ast.json` files next to the original 
 
 > Note: You have to recompile the profile or the map every time you make changes to them.
 
-<sub>* The compilation will happen automatically in a future release of OneSDK. You won't have to compile manually using CLI.</sub>
+<sub>\* The compilation will happen automatically in a future release of OneSDK. You won't have to compile manually using CLI.</sub>
 
 ## Configure provider authentication {#configure-security}
 
@@ -63,7 +63,7 @@ _Search in top-level `providers` object for the actual provider you want to conf
 The easiest way to bootstrap the provider's security configuration is using [Superface CLI](/reference/cli).
 
 ```shell
-superface configure <path-to.provider.json> -p <profile-name> -l -f   
+superface configure <path-to.provider.json> -p <profile-name> -l -f
 ```
 
 _Replace the `<path-to.provider.json>` in the command with the actual provider you're trying to configure for some `<profile-name>`._
@@ -92,7 +92,7 @@ You can be prepend any value assigned in `super.json` with a dollar sign (`$`) t
 ```json
 {
   // ...
-  "token": "$PROVIDER_API_TOKEN",
+  "token": "$PROVIDER_API_TOKEN"
   // ...
 }
 ```
@@ -180,7 +180,7 @@ _Replace `<scheme-id>` with the actual security scheme ID defined in the provide
 
 For apps running the capabilities that require authentication, you'll typically want to supply the providers' API keys via environment variables (see [configuration above](#configure-security)).
 
-If you used CLI for configuring the security schemes, the chances are it created `.env` file for you. In that case, simply fill in the environment variables. Then install [`dotenv`](https://www.npmjs.com/package/dotenv) package that will load the `.env` file for you. 
+If you used CLI for configuring the security schemes, the chances are it created `.env` file for you. In that case, simply fill in the environment variables. Then install [`dotenv`](https://www.npmjs.com/package/dotenv) package that will load the `.env` file for you.
 
 ### Write & run the app
 
@@ -188,23 +188,22 @@ If you followed the directions throughout the guide, you should have a project p
 
 ```javascript title="app.js" {8,11,12}
 // If you're using .env file, you should also install and init `dotenv` package
-require('dotenv').config()
+require('dotenv').config();
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
 const sdk = new SuperfaceClient();
 
 async function main() {
-	const profile = await sdk.getProfile('scope/profile-name');
+  const profile = await sdk.getProfile('scope/profile-name');
 
-	const result = await profile
-		.getUseCase('UseCaseName')
-		.perform(/* Input object as defined in the profile */);
+  const result = await profile
+    .getUseCase('UseCaseName')
+    .perform(/* Input object as defined in the profile */);
 
-	console.info('Hooray!', result.unwrap())
+  console.info('Hooray!', result.unwrap());
 }
 
 main();
-
 ```
 
 _Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.<br />For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js)._
@@ -215,7 +214,6 @@ You can then run your app which should perform the use case.
 node app.js
 ```
 
-
 ### Test the provider map
 
 Since profile & provider are simple descriptions of entities and actions, we don't usually test them. However the maps typically contain non-trivial logic that benefits from being properly tested. In addition, you might want to run integration tests against the provider's sandbox or live servers.
@@ -225,7 +223,7 @@ Testing is easy since you simply perform the use case via OneSDK. Then, you test
 See the example of a test written using [`jest`](https://jestjs.io) framework:
 
 ```javascript title="profile.provider.test.js" {10,16}
-require('dotenv').config()
+require('dotenv').config();
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
 describe('scope/profile-name', () => {
@@ -236,19 +234,17 @@ describe('scope/profile-name', () => {
 
     const provider = await sdk.getProvider('provider-name');
 
-    const result = await profile
-      .getUseCase('UseCaseName')
-      .perform(
-      	{ /* Input object as defined in the profile */ },
-      	{ provider }
-      );
+    const result = await profile.getUseCase('UseCaseName').perform(
+      {
+        /* Input object as defined in the profile */
+      },
+      { provider }
+    );
 
-    expect(result.isOk()).toBe(true)
+    expect(result.isOk()).toBe(true);
   });
 });
-
 ```
-
 
 For unit testing all of the Map's logic, you might need to mock the specific responses. We recommend using [`nock`](https://www.npmjs.com/package/nock) for this.
 

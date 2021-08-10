@@ -28,7 +28,6 @@ The capability needs to be first imported to your application. This guide descri
 1. If `.env` file is present, place it in the root of your project (or merge contents if you have one already existing)
 2. Place the entire `superface` directory to your project
 
-
 #### Ensure `super.json` has valid paths
 
 1. Open `/superface/super.json`
@@ -41,7 +40,7 @@ The capability needs to be first imported to your application. This guide descri
 
 For apps running capabilities that require authentication, you'll typically want to supply the providers' API keys via environment variables.
 
-If `.env` is available, it should have the expected variables predefined. You can them simply fill in the values. Then install [`dotenv`](https://www.npmjs.com/package/dotenv) package that will load the `.env` file for you. 
+If `.env` is available, it should have the expected variables predefined. You can them simply fill in the values. Then install [`dotenv`](https://www.npmjs.com/package/dotenv) package that will load the `.env` file for you.
 
 If `.env` is not available, you can find the expected environment variables in `/superface/super.json`. Any value that starts with a dollar sign (`$`) is a reference to an env variable.
 
@@ -51,23 +50,22 @@ Use Superface OneSDK to load & perform the use case:
 
 ```javascript title="app.js" {8,11,12}
 // If you're using .env file, you should also install and init `dotenv` package
-require('dotenv').config()
+require('dotenv').config();
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
 const sdk = new SuperfaceClient();
 
 async function main() {
-	const profile = await sdk.getProfile('scope/profile-name');
+  const profile = await sdk.getProfile('scope/profile-name');
 
-	const result = await profile
-		.getUseCase('UseCaseName')
-		.perform(/* Input object as defined in the profile */);
+  const result = await profile
+    .getUseCase('UseCaseName')
+    .perform(/* Input object as defined in the profile */);
 
-	console.info('Hooray!', result.unwrap())
+  console.info('Hooray!', result.unwrap());
 }
 
 main();
-
 ```
 
 _Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.<br />For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js)._
@@ -79,5 +77,3 @@ node app.js
 ```
 
 > Note: Later you'll be able to publish your capability to the Superface registry. This will give you many advantages over usage from the local files, like: injecting latest map, provider failover, observability dashboard, any more. Stay tuned.
-
-

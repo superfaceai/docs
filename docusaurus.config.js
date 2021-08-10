@@ -23,9 +23,9 @@ module.exports = {
       logo: {
         alt: 'Superface Logo',
         src: '/img/superface_logo.svg',
-        href: '/'
+        href: '/',
       },
-      style: "dark",
+      style: 'dark',
       items: [
         {
           type: 'doc',
@@ -46,7 +46,7 @@ module.exports = {
         {
           to: '/dashboard',
           label: 'Go to Dashboard',
-          position: 'right'
+          position: 'right',
         },
       ],
     },
@@ -95,13 +95,11 @@ module.exports = {
           routeBasePath: '/',
           // editUrl:
           //   'https://github.com/superfaceai/docs/edit/main/',
-          remarkPlugins: [
-            remarkDeflist
-          ]
+          remarkPlugins: [remarkDeflist],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        }
+        },
       },
     ],
   ],
