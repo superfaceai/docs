@@ -7,6 +7,7 @@
     "start": "docusaurus start -p 8001",
     "start:dev": "npm start",
     "build": "docusaurus build --out-dir build/docs/ && touch build/keep.txt",
+    "postbuild": "./scripts/postbuild.sh",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
