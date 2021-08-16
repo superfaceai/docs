@@ -1,5 +1,23 @@
 {
   "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/docs/comlink/profile",
+      "destination": "https://spec.superface.dev/2021.04.26/profile-spec.html"
+    },
+    {
+      "source": "/docs/comlink/map",
+      "destination": "https://spec.superface.dev/2021.04.26/map-spec.html"
+    },
+    {
+      "source": "/docs/comlink/provider.yaml",
+      "destination": "https://spec.superface.dev/2021.04.26/provider-spec.yaml"
+    },
+    {
+      "source": "/docs/comlink/super.json",
+      "destination": "https://spec.superface.dev/2021.04.26/superjson-spec.json"
+    }
+  ],
   "redirects": [
     {
       "source": "/",
