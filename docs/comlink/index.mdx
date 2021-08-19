@@ -8,27 +8,26 @@ slug: /comlink
 
 Superface aims to change the way we integrate with APIs, and Comlink is the suite of languages that makes this possible. Comlink is a description format for autonomous APIs. It allows you to declaratively describe your API integrations in a way that separates the **design-time semantics** from the **run-time implementation details**. In other words, these formats combine the words we use to describe the capability of an API with the details for implementing that capability.
 
-## Getting started
-
-* Setting up your development environment
-* Installing the VS Code Extension
-
-## Comlink Languages
-
-### Comlink Profile
-
-### Comlink Maps
-
-### Comlink Provides
-
-## Problems Comlink solves
+This creates other challenges.
 
 * **Every API has a different OpenAPI file**. This is one of the biggest struggles developers have when they're integrating with APIs. Since every API has it's own OpenAPI file, they have to write separate integrations for each API. This takes time and money to build, maintain, and evolve—time and money that could be spent elsewhere.
-* **Nothing can change at runtime**. Since semantic and implementation details are mixed together, nothing can change at runtime. 
+* **Nothing can change at runtime**. Since semantic and implementation details are mixed together, nothing can change at runtime.
 
-## Quick Example
+Comlink addresses these problems by providing a description language specifically for describing business capabilities called Comlink Profile and a separate language for implementation details and how to map API providers and their services to business capabilities called Comlink Map.
 
-This is a Comlink example at a glance. It shows how you can use Comlink to separate the capability from the implementation by using the Complink profile to describe the capability and using the Comlink map to describe the implementation.
+## Comlink Language References
+
+We provide reference documentation to help you learn how these languages work. To learn how to use these languages with Superface and our tools and services, check out our [guides](../guides/how-to-create.md).
+
+* [Comlink Profile](./references/profile.mdx) - describe business capabilities
+* [Comlink Map](./references/map.mdx) - describe implementation details
+* [Comlink Provider](./references/provider.mdx) - define provider definitions
+
+If you're a tooling author, please refer to our [technical specifications](./specifications.mdx) for our languages.
+
+## Quick Examples
+
+These are Comlink examples at a glance. They show how you can use Comlink to separate the capability from the implementation by using the Complink Profile to describe the capability and using the Comlink Map to describe the implementation.
 
 ### Profile for sending emails
 

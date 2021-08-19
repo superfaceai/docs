@@ -11,7 +11,7 @@ A Provider Definition is a JSON description of provider and the provider's servi
 This is the root of the Provider Definition file.
 
 - `services` (array of Service)
-- `securitySchemes` (array of Security Scheme)
+- `securitySchemes` (array of Security Scheme, optional)
 - `defaultService` (string) - References the ID of an existing Service
 
 ```js example
@@ -37,7 +37,7 @@ This is the root of the Provider Definition file.
 
 A service is software that makes itself available over the internet.
 
-- `id` (string) - Unique ID for service
+- `id` (string) - Unique ID for service across entire provider definition
 - `baseUrl` - Base URL for the service
 
 ### Default Service
@@ -60,7 +60,7 @@ The Provider Definition includes security schemes that describe the ways a clien
 
 For this security scheme, the client should add the API key into a specified HTTP header.
 
-- `id` (string) - Unique ID for security scheme
+- `id` (string) - Unique ID for security scheme across entire provider definition
 - `type`: "apiKey" (string)
 - `in`: "header" (string)
 - `name` (string) - Name of HTTP header
@@ -127,6 +127,13 @@ This security scheme refers to HTTP Basic Authentication as described in [RFC 72
   "bearerFormat": "JWT"
 }
 ```
+
+## Examples
+
+- [Provider using Basic auth](https://github.com/superfaceai/station/blob/main/providers/twilio.json)
+- [Provider using Bearer token](https://github.com/superfaceai/station/blob/main/providers/slack.json)
+- [Provider using API key in request headers](https://github.com/superfaceai/station/blob/main/providers/dhl.json)
+- [Provider using API key in request query](https://github.com/superfaceai/station/blob/main/providers/google-apis.json)
 
 ## JSON Schema
 
