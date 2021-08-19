@@ -4,4 +4,429 @@ slug: /comlink/references/map
 
 # Comlink Map Reference
 
-Coming soon.
+Comlink Map provides a language for describing how an API provider's services map to the use-cases in a [Comlink Profile](./profile.mdx).
+
+## Map Details
+
+```hcl title="Map details example"
+profile = "conversation/send-message"
+provider = "some-telco-api"
+
+map SendMessage {
+  ...
+}
+
+map RetrieveMessageStatus {
+  ...
+}
+```
+
+### Profile
+
+The `profile` property is the profile identifier to which the map corresponds. You can write it in multiple formats.
+
+- without version: `starwars/character-information`
+- with version (must not include the patch number): `starwars/character-information@1.1`
+
+### Provider
+
+The `provider` property corresponds to the provider identifier found in the Provider Definition.
+
+### Variant
+
+The `variant` property is optional and allows for multiple maps for the same profile and provider.
+
+## Use-case Map
+
+Use-cases define and expect some inputs from the user. These inputs are [defined in the profile](./profile.mdx#inputs).
+
+Maps can access these inputs via `input` object which is available inside the use-case map.
+
+### Example
+
+Given the following use-case definition in a profile:
+
+```hcl title="profile.supr" {4-7}
+# ...
+
+usecase GetWeather {
+  input {
+    location
+    units
+  }
+
+  result {
+    # ...
+  }
+}
+
+# ...
+```
+
+These input props are accessible in the use-case mapping.
+
+```hcl title="profile.provider.suma" {4-6}
+# ...
+
+map GetWeather {
+  // `input` object available
+  // `input.location`
+  // `input.units`
+}
+
+# ...
+```
+
+## HTTP Call
+
+The HTTP Call uses `http` and defines the information needed to make a call and map the inputs, result, and error to the profile use-cases.
+
+* HTTP Method
+* URI Template
+* HTTP Transaction
+
+All widely known HTTP methods are supported. The path is a _string_ and can be templated. For example, if you need to request a resource whose ID was provided in the input, you might use something like `/resources/{input.id}`.
+
+The example below shows an HTTP Transaction that uses the HTTP method `POST` and the URI template `/api/messages`.
+
+```hcl title="HTTP transaction example"
+profile = "<profile-name>@<version>"
+provider = "<provider-name>"
+
+map UseCaseName {
+  http POST "/api/messages" {
+
+  }
+}
+```
+
+## HTTP Transaction
+
+An HTTP Transaction is made up of a request and multiple responses. 
+
+### Security
+
+You can define the security requirements for an HTTP transaction that align with the security schemes in a provider definition. If no security requirement is provided, the default is `none`. The security requirement is enclosed within double quotes `"`.
+
+#### Example
+
+```hcl title="Default security requirement"
+http GET "/public-endpoint" {
+  security "api_key_scheme_id"
+  
+  response {
+    # ...
+  }
+}
+```
+
+The above definition makes a `POST` HTTP call to [the provider's default service](./provider.mdx#default-service) on path `/api/messages`.
+
+### HTTP Request
+
+The HTTP Request uses `request` and is optional. It defines the request for the HTTP Transaction. It can include URL query parameters, HTTP headers, and a body. It can also include the content type and specify different services included in the provider definition.
+
+This shows an example of an HTTP request.
+
+```hcl title="HTTP Request example with content type"
+profile = "<profile-name>@<version>"
+provider = "<provider-name>"
+
+map UseCaseName {
+  http POST "/api/messages" {
+    security "scheme-id"
+
+    request "application/json" {
+      query {
+        from = input.from
+      }
+
+      body {
+        to = input.to
+        text = input.text
+      }
+    }
+  }
+}
+```
+
+The definition makes call to `/api/messages?from=...` with body of content type `application/json` including object with two parameters `to` and `text`.
+
+#### Query Parameters
+
+A `query` maps query parameters to their values. Variables are accessible here, so `input` may be used to map profile inputs to query parameters.
+
+This example shows an how to map an HTTP Request with a `myName` query parameter to the value `"John"`.
+
+
+```hcl title="Query parameter"
+http GET "/greeting" {
+  request {
+    query {
+      myName = "John"
+    }
+  }
+}
+```
+
+#### HTTP Headers
+
+The `headers` property maps HTTP headers to their values. Variables are accessible here, so `input` may be used to map profile inputs to HTTP headers. If an HTTP header name contains a hyphen, enclose the name in double quotes.
+
+```hcl title="HTTP Headers"
+http POST "/users" {
+  request "application/json" {
+    headers {
+      "my-header" = 42
+    }
+  }
+}
+```
+
+#### HTTP Request Body
+
+The `body` property maps body properties to their values. 
+
+This example shows a request body mapped to an object.
+
+```hcl title="HTTP Request Body object"
+http POST "/users" {
+  request "application/json" {
+    body = {
+      key = 1
+    }
+  }
+}
+```
+
+Arrays may also be used.
+
+```hcl title="HTTP Request Body array"
+http POST "/users" {
+  request "application/json" {
+    body = [1, 2, 3]
+  }
+}
+```
+
+### HTTP Response
+
+An HTTP Response describes the responses for a transaction that map the response to the profile's result or error. An HTTP Transcaction can have multiple responses based on HTTP status codes and content types. This allows for handling many different types of responses and mapping them into the use-case's `result` and `error` definitions.
+
+A response has a:
+
+- status code
+- content type
+- content language (optional)
+- response block
+
+#### Response variables
+
+The follow variables are available in a response block. These can be used to map response data to a use-case.
+
+- `statusCode` (number): HTTP response status code
+- `headers` (object): HTTP response headers
+- `body` (object): HTTP response body
+
+This example shows where response variables are available.
+
+```hcl title="Accessing variables in a response block" {11}
+profile = "<profile-name>@<version>"
+provider = "<provider-name>"
+
+map UseCaseName {
+  http POST "/api/messages" {
+    security "scheme-id"
+
+    request "application/json" { /* ... */ }
+
+    response 201 "application/json" {
+      // code in this block can reference `statusCode`, `headers` and `body`
+    }
+  }
+}
+```
+
+#### Mapping a Use-Case Result
+
+You can map to a use-case [result](./profile.mdx#result) using a `map result` statement. You must resolve the same `result` as defined in the use-case. 
+
+```hcl title="Mapping to a use-case result" {11-14}
+profile = "<profile-name>@<version>"
+provider = "<provider-name>"
+
+map UseCaseName {
+  http POST "/api/messages" {
+    security "scheme-id"
+
+    request "application/json" { /* ... */ }
+
+    response 201 "application/json" {
+      map result {
+        messageId = body.message_sid
+        remainingMessages = headers["X-CREDIT-LEFT"] / 0.3
+      }
+    }
+  }
+}
+```
+
+The above definition maps the two expected result fields. One from the response's body and the other is from the headers, which is then transformed with a Comlink expression.
+
+:::note
+
+`map result` is a regular Comlink statement and can happen from anywhere inside the use-case mapping, not only from an inside of the response handler.
+
+:::
+
+#### Map to a Use-Case Error
+
+You can also map a response to a use-case [error](./profile.mdx#error) using `map error` statement. Like when mapping to a `result`, you must resolve the same `error` as defined in the use-case.
+
+
+
+```hcl title="<profile-name>.<provider-name>.suma" {12-17}
+profile = "<profile-name>@<version>"
+provider = "<provider-name>"
+
+map UseCaseName {
+  http POST "/api/messages" {
+    security "scheme-id"
+
+    request "application/json" { /* ... */ }
+
+    response 201 "application/json" { /* ... */ }
+
+    response 429 {
+      map error {
+        title = "Sending messages too frequently"
+        details = (`You can send more message after ${headers['Retry-After']} seconds`)
+      }
+    }
+  }
+}
+```
+
+This maps to the two expected error fields when server responds with status `429 (Too Many Requests)`. One is hardcoded as it describes the error scenario, the other constructs a helpful message with a value from response headers using a simple Comlink expression.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Map-Error) for detailed specification of `map error` statement._
+
+:::note
+
+`map error` Comlink statement and can happen from anywhere inside the use-case mapping, not only from an inside of the response handler.
+
+:::
+
+#### Multiple Response mappings
+
+You may map multiple responses in a single HTTP Transaction. This is how to match different status codes for a single request.
+
+The example belows shows a single `POST` with responses for mulitple success and error HTTP Responses.
+
+```hcl title="Multiple Response Mappings"
+profile = "communication/send-email@1.1"
+provider = "postmark"
+
+map SendEmail {
+  http POST "/email" {
+    security "server_token"
+    
+    request "application/json" {
+      body {
+        From = input.from
+        To = input.to
+        Subject= input.subject
+        TextBody = input.text
+        HtmlBody = input.html
+      }
+    }
+    
+    response 200 "application/json" {
+      map result {
+        messageId = body.MessageID
+      }
+    }
+
+    response 422 "application/json" {
+      map error {
+        title = "Invalid inputs"
+        detail = body.Message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.Message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.Message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.Message
+      }
+    }
+  }
+}
+```
+
+#### Conditional Response Mapping
+
+Sometimes more conditions are needed to map HTTP responses to the profile results and errors. For this, you can conditionally handle mappings.
+
+This example shows how to map a result if `body.ok` is truthy or map an error if `body.ok` is falsey.
+
+```hcl title="Conditionally handling responses"
+http POST "/users" {
+  response 201 "application/json" {
+    map result if(body.ok) {
+      ...
+    }
+
+    map error if(!body.ok) {
+      ...
+    }
+  }
+}
+```
+
+## Operation
+
+
+
+## Set Variables
+
+
+
+## Operation Call
+
+
+
+## Outcome
+
+
+
+## Network Operation
+
+
+
+## Conditions
+
+
+
+## Iterations
+
+
+
+## Scripts
+
+## Examples
+
+- [Map with reusable operations, iterations & expressions](https://github.com/superfaceai/station/blob/main/capabilities/delivery-tracking/shipment-info/maps/dhl.suma)
+- [Map with multiple error response mappings](https://github.com/superfaceai/station/blob/main/capabilities/communication/send-email/maps/postmark.suma)
