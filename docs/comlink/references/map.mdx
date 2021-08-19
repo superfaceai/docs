@@ -36,46 +36,9 @@ The `provider` property corresponds to the provider identifier found in the Prov
 
 The `variant` property is optional and allows for multiple maps for the same profile and provider.
 
-## Use-case Map
+## Use-Case Maps
 
-Use-cases define and expect some inputs from the user. These inputs are [defined in the profile](./profile.mdx#inputs).
-
-Maps can access these inputs via `input` object which is available inside the use-case map.
-
-### Example
-
-Given the following use-case definition in a profile:
-
-```hcl title="profile.supr" {4-7}
-# ...
-
-usecase GetWeather {
-  input {
-    location
-    units
-  }
-
-  result {
-    # ...
-  }
-}
-
-# ...
-```
-
-These input props are accessible in the use-case mapping.
-
-```hcl title="profile.provider.suma" {4-6}
-# ...
-
-map GetWeather {
-  // `input` object available
-  // `input.location`
-  // `input.units`
-}
-
-# ...
-```
+Map to a use-case using the `map <use-case-name>` statement. Use-cases may define and expect inputs from the user. These inputs are [defined in the profile](./profile.mdx#inputs). A Use-Case Map can have multiple [HTTP Calls](#http-call) defined within it.
 
 ## HTTP Call
 
@@ -102,7 +65,7 @@ map UseCaseName {
 
 You can define the security requirements for an HTTP transaction that align with the security schemes in a provider definition. If no security requirement is provided, the default is `none`. The security requirement is enclosed within double quotes `"`.
 
-### Example
+This example shows a `POST` HTTP call to [the provider's default service](./provider.mdx#default-service) on path `/api/messages`.
 
 ```hcl title="Default security requirement"
 http GET "/public-endpoint" {
@@ -113,8 +76,6 @@ http GET "/public-endpoint" {
   }
 }
 ```
-
-The above definition makes a `POST` HTTP call to [the provider's default service](./provider.mdx#default-service) on path `/api/messages`.
 
 ## HTTP Request
 
@@ -144,13 +105,13 @@ map UseCaseName {
 }
 ```
 
-The definition makes call to `/api/messages?from=...` with body of content type `application/json` including object with two parameters `to` and `text`.
+The definition makes a call to `/api/messages?from=...` with body of content type `application/json` including object with two parameters `to` and `text`.
 
 ### Query Parameters
 
 A `query` maps query parameters to their values. Variables are accessible here, so `input` may be used to map profile inputs to query parameters.
 
-This example shows an how to map an HTTP Request with a `myName` query parameter to the value `"John"`.
+This example shows how to map an HTTP Request with a `myName` query parameter to the value `"John"`.
 
 
 ```hcl title="Query parameter"
@@ -205,7 +166,7 @@ http POST "/users" {
 
 ## HTTP Response
 
-An HTTP Response describes the responses for a transaction that map the response to the profile's result or error. An HTTP Transcaction can have multiple responses based on HTTP status codes and content types. This allows for handling many different types of responses and mapping them into the use-case's `result` and `error` definitions.
+An HTTP Response describes the responses for a transaction that map the response to the profile's result or error. An HTTP Transaction can have multiple responses based on HTTP status codes and content types. This allows for handling many different types of responses and mapping them into the use-case's `result` and `error` definitions.
 
 A response has a:
 
@@ -216,7 +177,7 @@ A response has a:
 
 ### Response variables
 
-The follow variables are available in a response block. These can be used to map response data to a use-case.
+The following variables are available in a response block. These can be used to map response data to a use-case.
 
 - `statusCode` (number): HTTP response status code
 - `headers` (object): HTTP response headers
@@ -241,7 +202,7 @@ map UseCaseName {
 }
 ```
 
-### Mapping a Use-Case Result
+### Map a Use-Case Result
 
 You can map to a use-case [result](./profile.mdx#result) using a `map result` statement. You must resolve the same `result` as defined in the use-case. 
 
@@ -275,7 +236,7 @@ The above definition maps the two expected result fields. One from the response'
 
 ### Map to a Use-Case Error
 
-You can also map a response to a use-case [error](./profile.mdx#error) using `map error` statement. Like when mapping to a `result`, you must resolve the same `error` as defined in the use-case.
+You can also map a response to a use-case [error](./profile.mdx#error) using the `map error` statement. Like when mapping to a `result`, you must resolve the same `error` as defined in the use-case.
 
 
 
@@ -301,7 +262,7 @@ map UseCaseName {
 }
 ```
 
-This maps to the two expected error fields when server responds with status `429 (Too Many Requests)`. One is hardcoded as it describes the error scenario, the other constructs a helpful message with a value from response headers using a simple Comlink expression.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Map-Error) for detailed specification of `map error` statement._
+This maps to the two expected error fields when the server responds with status `429 (Too Many Requests)`. One is hardcoded as it describes the error scenario, the other constructs a helpful message with a value from response headers using a simple Comlink expression.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Map-Error) for detailed specification of `map error` statement._
 
 :::note
 
@@ -309,11 +270,11 @@ This maps to the two expected error fields when server responds with status `429
 
 :::
 
-### Multiple Response mappings
+### Multiple Response Mappings
 
 You may map multiple responses in a single HTTP Transaction. This is how to match different status codes for a single request.
 
-The example belows shows a single `POST` with responses for mulitple success and error HTTP Responses.
+The example belows shows a single `POST` with responses for multiple success and error HTTP Responses.
 
 ```hcl title="Multiple Response Mappings"
 profile = "communication/send-email@1.1"
@@ -370,7 +331,7 @@ map SendEmail {
 }
 ```
 
-### Conditional Response Mapping
+### Conditional Response Mappings
 
 Sometimes more conditions are needed to map HTTP responses to the profile results and errors. For this, you can conditionally handle mappings.
 

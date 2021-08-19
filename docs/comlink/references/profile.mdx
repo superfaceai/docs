@@ -79,7 +79,7 @@ Use-cases can have descriptions similar to a Profile Description. It can be eith
 
 #### Example
 
-This example shows a title of "Retreive Shipment Status" and a description of "Get the current shipment status" using triple double-quotes.
+This example shows a title of "Retrieve Shipment Status" and a description of "Get the current shipment status" using triple double-quotes.
 
 ```hcl title="Use-case triple double-quote description"
 """
@@ -139,7 +139,7 @@ Some notes about this example and its fields.
 
 * The `estimatedDeliveryDate` field is untyped
 * The `events` field is an array of objects with `timestamp` and `statusText` 
-* Fields marked with exclamation mark are required as in `trackingNumber! string`
+* Fields marked with an exclamation mark are required as in `trackingNumber! string`
 * Field types marked with an exclamation mark are non-null as in `carrier string!`
 
 ### Result
@@ -341,9 +341,9 @@ Union Models are used to define a model that might be one of the referenced mode
 model WeatherData WeatherHistory | WeatherInformation
 ```
 
-#### Primatives
+#### Primitives
 
-Comlink has support for primatives that can be used as field specifications.
+Comlink has support for primitives that can be used as field specifications.
 
 * `string`
 * `boolean`

@@ -10,7 +10,7 @@ Superface aims to change the way we integrate with APIs, and Comlink is the suit
 
 This creates other challenges.
 
-* **Every API has a different OpenAPI file**. This is one of the biggest struggles developers have when they're integrating with APIs. Since every API has it's own OpenAPI file, they have to write separate integrations for each API. This takes time and money to build, maintain, and evolve—time and money that could be spent elsewhere.
+* **Every API has a different OpenAPI file**. This is one of the biggest struggles developers have when they're integrating with APIs. Since every API has its own OpenAPI file, they have to write separate integrations for each API. This takes time and money to build, maintain, and evolve—time and money that could be spent elsewhere.
 * **Nothing can change at runtime**. Since semantic and implementation details are mixed together, nothing can change at runtime.
 
 Comlink addresses these problems by providing a description language specifically for describing business capabilities called Comlink Profile and a separate language for implementation details and how to map API providers and their services to business capabilities called Comlink Map.
@@ -31,7 +31,7 @@ These are Comlink examples at a glance. They show how you can use Comlink to sep
 
 ### Profile for sending emails
 
-Here is an example of a Comlink Profile for sending emails. The use-case, inputs, result, and error are defined apart from an implementation details. This profile declaratively describes the use-case so it can be reused across different API providers.
+Here is an example of a Comlink Profile for sending emails. The use-case, inputs, result, and error are defined apart from implementation details. This profile declaratively describes the use-case so it can be reused across different API providers.
 
 ```hcl title="Profile for sending email"
 """

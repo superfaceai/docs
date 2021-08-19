@@ -4,7 +4,7 @@ slug: /comlink/references/provider
 
 # Comlink Provider Reference
 
-A Provider Definition is a JSON description of provider and the provider's services. Comlink Maps make use of the Provider Definition by defining which service to call based on the Service ID and which security scheme to use based on the Security Scheme ID. A Provider Definition can be reused across many profiles and maps which is why it has its own separate definition.
+A Provider Definition is a JSON description of provider's services and security schemes. Comlink Maps make use of the Provider Definition by defining which service to call based on the Service ID and which security scheme to use based on the Security Scheme ID. A Provider Definition can be reused across many profiles and maps which is why it has its own separate definition.
 
 ## Provider Definition
 
@@ -143,7 +143,7 @@ type: object
 properties:
   name:
     type: string
-    pattern: "^[a-z][_\\-0-9a-z]*$"
+    pattern: "^(unverified\\/)?[a-z][_\\-a-z]*$"
   services:
     type: array
     items:
@@ -177,7 +177,7 @@ definitions:
     $ref: "#/definitions/Identifier"
   Identifier:
     type: string
-    pattern: "[_A-Za-z][_0-9A-Za-z]*"
+    pattern: "[_A-Za-z][A-Za-z]*"
     examples:
     - swapidev
   SecurityScheme:
