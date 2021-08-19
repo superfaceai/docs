@@ -1,0 +1,152 @@
+---
+slug: /comlink
+---
+
+# Comlink
+
+## Overview
+
+Superface aims to change the way we integrate with APIs, and Comlink is the suite of languages that makes this possible. Comlink is a description format for autonomous APIs. It allows you to declaratively describe your API integrations in a way that separates the **design-time semantics** from the **run-time implementation details**. In other words, these formats combine the words we use to describe the capability of an API with the details for implementing that capability.
+
+## Getting started
+
+* Setting up your development environment
+* Installing the VS Code Extension
+
+## Comlink Languages
+
+### Comlink Profile
+
+### Comlink Maps
+
+### Comlink Provides
+
+## Problems Comlink solves
+
+* **Every API has a different OpenAPI file**. This is one of the biggest struggles developers have when they're integrating with APIs. Since every API has it's own OpenAPI file, they have to write separate integrations for each API. This takes time and money to build, maintain, and evolve—time and money that could be spent elsewhere.
+* **Nothing can change at runtime**. Since semantic and implementation details are mixed together, nothing can change at runtime. 
+
+## Quick Example
+
+This is a Comlink example at a glance. It shows how you can use Comlink to separate the capability from the implementation by using the Complink profile to describe the capability and using the Comlink map to describe the implementation.
+
+### Profile for sending emails
+
+Here is an example of a Comlink Profile for sending emails. The use-case, inputs, result, and error are defined apart from an implementation details. This profile declaratively describes the use-case so it can be reused across different API providers.
+
+```hcl title="Profile for sending email"
+"""
+Send Email
+Send one transactional email
+"""
+
+name = "communication/send-email"
+version = "1.1.1"
+
+"""
+Send transactional email to one recipient
+
+Email can contain text and/or html representation
+"""
+usecase SendEmail unsafe {
+  input {
+    from!
+    to!
+    subject!
+    text
+    html
+  }
+
+  result {
+    messageId
+  }
+
+  error Error
+}
+```
+
+### Mapping an email provider to the send email profile
+
+This is a Comlink Map that maps the inputs, result, and error defined in a Comlink Profile to the actual implementation which would include HTTP requests and responses and their respective JSON bodies.
+
+```hcl title="Map Postmark provider to Send Email profile"
+// API Reference: https://postmarkapp.com/developer/api/overview
+
+profile = "communication/send-email@1.1"
+provider = "postmark"
+
+map SendEmail {
+  http POST "/email" {
+    security "server_token"
+    
+    request "application/json" {
+      body {
+        From = input.from
+        To = input.to
+        Subject= input.subject
+        TextBody = input.text
+        HtmlBody = input.html
+      }
+    }
+    
+    response 200 "application/json" {
+      map result {
+        messageId = body.MessageID
+      }
+    }
+
+    response 422 "application/json" {
+      map error {
+        title = "Invalid inputs"
+        detail = body.Message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.Message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.Message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.Message
+      }
+    }
+  }
+}
+```
+
+### Provider definition for an email provider
+
+Comlink keeps the provider details separate as well so they can be reused in other Comlink Maps. This example shows the Provider Definition for Postmark which includes their services and security schemes.
+
+```hcl title="Provider definition for Postmark"
+{
+  "name": "postmark",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://api.postmarkapp.com"
+    }
+  ],
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "server_token",
+      "type": "apiKey",
+      "in": "header",
+      "name": "x-postmark-server-token"
+    }
+  ]
+}
+```

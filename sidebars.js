@@ -34,4 +34,16 @@ module.exports = {
     'guides/find-provider-by-name',
     'guides/add-new-provider',
   ],
+  comlinkReferenceSidebar: [
+    {
+      type: 'category',
+      label: 'Comlink References',
+      collapsed: false,
+      items: [
+        {type: 'doc', id: 'comlink/references/profile', label: 'Profile'},
+        {type: 'doc', id: 'comlink/references/map', label: 'Map'},
+        {type: 'doc', id: 'comlink/references/provider', label: 'Provider'}
+      ]
+    },
+  ],
 };

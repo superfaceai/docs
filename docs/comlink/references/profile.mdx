@@ -1,0 +1,353 @@
+---
+slug: /comlink/references/profile
+---
+
+# Comlink Profile Reference
+
+## Profile details
+
+### Name
+
+The `name` property defines the profile name. It can be a basic profile name or a scoped name. To scope a profile, add `scope-name/` before profile name, for example: `communication/send-email`.
+
+### Version
+
+The `version` property specifies the profile version following [SemVer](https://semver.org/).
+
+#### Example
+
+```hcl title="Name and version example"
+name = "communication/send-email"
+version = "1.1.1"
+
+# ...
+```
+
+### Description
+
+A profile description goes at the top of the profile and is either a string literal with a single double-quote or a block string literal with three double-quotes.
+
+#### Example as block string literal
+
+```hcl title="Block string literal description example"
+"""
+Send Email
+"""
+
+# ...
+```
+
+#### Example as string literal
+
+```hcl title="String literal description example"
+"Send Email"
+
+# ...
+```
+
+## Use-cases
+
+The use-case is a task that needs to be done to support a business need. Use-cases have inputs and outputs similar to functions in code. They provide a higher-level abstraction that can separate the business need from the implementation as defined in a Comlink Map.
+
+### Safety
+
+You can define a safety level for a use-case. This safety level follows the use-case name and is optional. By default it is `safe`. The safety level can be:
+
+* `safe` - The use-case doesn't result in server-side changes, so the client can retry the use-case when there's a failure
+* `unsafe` - The use-case may result in a change on the service, so any attempt to retry a use-case may result in unintended changes
+* `idempotent` - The client can execute the use-case multiple times while the server will only process it once, so clients may safely retry failures
+
+This is informational for the tooling to know how it should handle retrying failures.
+
+:::info HTTP Methods
+
+If you are familiar with REST APIs and HTTP methods, you can think of safety in this manner:
+
+- `safe` corresponds to `GET` and `HEAD` methods
+- `unsafe` corresponds to the `POST` method
+- `idempotent` corresponds to `PUT` and `DELETE` methods
+
+For more information see [Understanding Idempotency and Safety in API Design](https://nordicapis.com/understanding-idempotency-and-safety-in-api-design/).
+
+:::
+
+### Description
+
+Use-cases can have descriptions similar to a Profile Description. It can be either single double-quotes or three double-quotes and goes directly before the use-case declaration. Both single quotes and triple double-quotes descriptions can contain both title and a body of the description. The single double-quote variant has the title on the same line as quote.
+
+#### Example
+
+This example shows a title of "Retreive Shipment Status" and a description of "Get the current shipment status" using triple double-quotes.
+
+```hcl title="Use-case triple double-quote description"
+"""
+Retrieve Shipment Status
+Get the current shipment status.
+"""
+usecase ShipmentInfo safe {
+  # ...
+}
+```
+
+Here is the same example with single double-quotes.
+
+```hcl title="Use-case sing double-quote description"
+"Retrieve Shipment Status
+Get the current shipment status."
+usecase ShipmentInfo safe {
+  # ...
+}
+```
+
+### Inputs
+
+The `inputs` define the inputs needed to perform the use-case. The `inputs` MUST be defined as an Object Model.
+
+#### Example
+
+```hcl title="Inputs example" {4-7}
+# ...
+
+usecase ShipmentInfo safe {
+  input {
+    trackingNumber! string!
+    carrier string!
+  }
+
+  result {
+    carrier string!
+    status! string
+    origin string
+    destination string
+    events! [{
+      timestamp! string
+      statusText! string
+    }]
+    estimatedDeliveryDate
+  }
+
+  error {
+    title! string
+    detail string
+  }
+}
+```
+
+Some notes about this example and its fields.
+
+* The `estimatedDeliveryDate` field is untyped
+* The `events` field is an array of objects with `timestamp` and `statusText` 
+* Fields marked with exclamation mark are required as in `trackingNumber! string`
+* Field types marked with an exclamation mark are non-null as in `carrier string!`
+
+### Result
+
+#### Example
+
+```hcl title="Result example" {9-19}
+# ...
+
+usecase ShipmentInfo safe {
+  input {
+    trackingNumber! string!
+    carrier string!
+  }
+
+  result {
+    carrier string!
+    status! string
+    origin string
+    destination string
+    events! [{
+      timestamp! string
+      statusText! string
+    }]
+    estimatedDeliveryDate
+  }
+
+  error {
+    title! string
+    detail string
+  }
+}
+```
+
+### Error
+
+The use-case can define an optional error which will be returned when the use-case execution fails.
+
+#### Example
+
+This example 
+
+```hcl title="Error example" {21-24}
+# ...
+
+usecase ShipmentInfo safe {
+  input {
+    trackingNumber! string!
+    carrier string!
+  }
+
+  result {
+    carrier string!
+    status! string
+    origin string
+    destination string
+    events! [{
+      timestamp! string
+      statusText! string
+    }]
+    estimatedDeliveryDate
+  }
+
+  error {
+    title! string
+    detail string
+  }
+}
+```
+
+## Models
+
+Any `input`, `result`, or `error` can use models directly or reference a named model. The examples throughout this reference have used inline models.
+
+### Named models
+
+This shows a Named Model example. This model can be referenced in other models and in the use-case `inputs`, `result`, and `error`.
+
+```hcl title="Named model"
+model WeatherInformation {
+  airTemperature
+  atmosphericPressure
+}
+```
+
+### Alias model
+
+Models can be aliased by using a Named Model and referencing an existing model.
+
+```hcl title="Alias model"
+model MyWeatherInformation WeatherInformation
+```
+
+### Field definitions
+
+Field definitions describe the name, specification, and whether or not the field is required. Field names may be documented with single or triple quotes. The field name is the only required part of a field definition—types are optional.
+
+The defaults for a field definition are:
+
+* Fields are optional by default. Add a `!` to the field name to make it required.
+* Field specifications are of type `string` by default.
+* Field specifications are nullable by default. Add a `!` to the field specification to make it non-nullable.
+
+:::warning
+
+Marking a field as non-nullable doesn't make it required. To make the field required _and_ non-nullable, you must add `!` after both the field's name and type.
+
+:::
+
+#### Field description
+
+Individual fields can be described the same way as the profile can. This example shows two fields with descriptions, the `trackingNumber` field using triple double-quotes and the `carrier` using single double-quotes.
+
+```hcl
+usecase ShipmentInfo safe {
+  input {
+    """
+    Shipment tracking number
+    Identifier of shipment
+    """
+    trackingNumber
+
+    "Carrier
+    Shipment carrier identification to narrow down the results"
+    carrier string!
+  }
+}
+```
+
+#### Field name
+
+The field name is the first part listed in a field definition. There are two field definitions below with field names `airTemperature`, and `atmosphericPressure`.
+
+```hcl title="Named model"
+model WeatherInformation {
+  airTemperature
+  atmosphericPressure
+}
+```
+
+#### Field specification
+
+The field specification defines the type of the field which is a Model Definition. By default it is nullable. Add a `!` to make it a non-null field.
+
+### Model definitions
+
+#### Object Model
+
+Object Models include a list of field definitions and are enclosed by curly brackets `{` and `}`. They correspond to an Object in JavaScript or Dictionary in Python. Refer to the field definitions above to see how to define field definitions in an Object Model.
+
+```hcl title="Named model"
+model WeatherInformation {
+  airTemperature
+  atmosphericPressure
+}
+```
+
+#### List Model
+
+List Models include a list of models enclosed by a `[` and `]`. They correspond to an Array in JavaScript or List in Python.
+
+```hcl title="List model"
+model WeatherHistory [ WeatherInformation ]
+```
+
+#### Enum Model
+
+```hcl title="Enum model"
+model Channel enum {
+  sms
+  whatsapp
+  viber
+}
+```
+
+The enum names can also have a value associated with them.
+
+```hcl title="Enum model with values"
+model Unit enum {
+  "Degrees of Celsius"
+  C = 'celsius'
+
+  "Degrees of Fahrenheit"
+  F = 'fahrenheit'
+}
+```
+
+Lastly, enums can be separated by newlines as shown above or with commas
+
+```hcl title="Enum model with commas"
+model Channel enum { sms, whatsapp, viber }
+```
+
+#### Union Model
+
+Union Models are used to define a model that might be one of the referenced models. Model references are separated by a `|`.
+
+```hcl title="Union model"
+model WeatherData WeatherHistory | WeatherInformation
+```
+
+#### Primatives
+
+Comlink has support for primatives that can be used as field specifications.
+
+* `string`
+* `boolean`
+* `number`
+
+## Additional Resources
+
+- [Comlink Profile Reference](https://superface.ai/docs/comlink/profile)
+- [Examples](https://github.com/superfaceai/station)
