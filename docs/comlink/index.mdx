@@ -10,18 +10,20 @@ Comlink is description language for autonomous APIs. It allows you to declarativ
 
 When API description formats don't make this seperations and combine design-time and run-time details, it creates challenges for developers.
 
-* **Every API needs a its own OpenAPI file to describe the implementation**. This is one of the biggest struggles developers have when they're integrating with APIs. Since the semantics and implementation are mixed together, developers have to write separate integrations for each API they use even when those APIs provide the same capabilities. This takes time and money to build, maintain, and evolve these integrations—time and money that could be spent elsewhere.
-* **Nothing can change at runtime**. Since semantic and implementation details are mixed together, nothing can change at runtime. This makes our code rigid and make it challenging to react to what's happening when our software is running.
+* **Every API needs its own OpenAPI file to describe the implementation**. This is one of the biggest struggles developers have when they're integrating with APIs. Since the semantics and implementation are mixed together, developers have to write separate integrations for each API they use even when those APIs provide the same capabilities. This takes time and money to build, maintain, and evolve these integrations—time and money that could be spent elsewhere.
+* **Nothing can change at runtime**. Since semantic and implementation details are mixed together, we can't react to any changes while our software is running. Any implementation change requires redeployment.
 
 Comlink addresses these problems by separating the design-time and run-time descriptions by providing Comlink Profile for describing business capabilities and Comlink Map for implementation details and how to map API providers and their services to business capabilities.
+
+An example of this would be using Comlink Profile to describe how to send emails, using Comlink Map as describing implementation details for sending emails with Sendgrid, and Comlink Provider for describing Sendgrid's services and security schemes.
 
 ## Comlink Language References
 
 To learn how to use the Comlink language with Superface and our tools and services, check out our [guides](../guides/how-to-create.md).
 
 * [Comlink Profile](./references/profile.mdx) - describe business capabilities
-* [Comlink Map](./references/map.mdx) - describe implementation details
-* [Comlink Provider](./references/provider.mdx) - define provider definitions
+* [Comlink Map](./references/map.mdx) - describe implementation details for fulfilling a capability
+* [Comlink Provider](./references/provider.mdx) - define provider definitions that describe API services and security schemes
 
 If you're a tooling author, please refer to our [formal language specifications](./specifications.mdx).
 
@@ -33,7 +35,7 @@ These are Comlink examples at a glance. They show how you can use Comlink to sep
 
 Here is an example of a Comlink Profile for sending emails. The use-case, inputs, result, and error are defined apart from implementation details. This profile declaratively describes the use-case so it can be reused across different API providers.
 
-```hcl title="Profile for sending email"
+```hcl title="Profile for sending email: send-email.supr"
 """
 Send Email
 Send one transactional email
@@ -71,7 +73,7 @@ usecase SendEmail unsafe {
 
 This is a Comlink Map that maps the inputs, result, and error defined in a Comlink Profile to the actual implementation which would include HTTP requests and responses and their respective JSON bodies.
 
-```hcl title="Map Postmark provider to Send Email profile"
+```hcl title="Map Postmark provider to Send Email profile: send-email.postmark.suma"
 // API Reference: https://postmarkapp.com/developer/api/overview
 
 profile = "communication/send-email@1.1"
@@ -132,7 +134,7 @@ map SendEmail {
 
 Comlink keeps the provider details separate as well so they can be reused in other Comlink Maps. This example shows the Provider Definition for Postmark which includes their services and security schemes.
 
-```hcl title="Provider definition for Postmark"
+```json title="Provider definition for Postmark: postmark.provider.json"
 {
   "name": "postmark",
   "services": [

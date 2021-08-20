@@ -8,6 +8,12 @@ Comlink Map is a format for describing how an API provider's services map to the
 
 ## Map Details
 
+- `profile` - the profile identifier to which the map corresponds
+  - can be written without version: `starwars/character-information`
+  - can be writtent with version omitting the patch number: `starwars/character-information@1.1`
+- `provider` - corresponds to the provider identifier found in the Provider Definition
+- `variant` (optional) - allows for multiple maps for the same profile and provider
+
 ```hcl title="Map details example"
 profile = "conversation/send-message"
 provider = "some-telco-api"
@@ -20,21 +26,6 @@ map RetrieveMessageStatus {
   ...
 }
 ```
-
-### Profile
-
-The `profile` property is the profile identifier to which the map corresponds. You can write it in multiple formats.
-
-- without version: `starwars/character-information`
-- with version (must not include the patch number): `starwars/character-information@1.1`
-
-### Provider
-
-The `provider` property corresponds to the provider identifier found in the Provider Definition.
-
-### Variant
-
-The `variant` property is optional and allows for multiple maps for the same profile and provider.
 
 ## Use-Case Maps
 
