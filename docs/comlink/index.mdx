@@ -8,7 +8,65 @@ slug: /comlink
 
 Comlink is description language for autonomous APIs. It allows you to declaratively describe your API integrations in a way that separates the **design-time semantics** from the **run-time implementation details**. In other words, Comlink allows for defining the words we use to describe the capability of an API separate from the details for implementing that capability.
 
-When API description formats don't make this seperations and combine design-time and run-time details, it creates challenges for developers.
+## Comlink Language References
+
+To learn how to use the Comlink language with Superface and our tools and services, check out our [guides](../guides/how-to-create.md).
+
+<!-- * [Comlink Profile](./references/profile.mdx) - describe business capabilities
+* [Comlink Map](./references/map.mdx) - describe implementation details for fulfilling a capability
+* [Comlink Provider](./references/provider.mdx) - define provider definitions that describe API services and security schemes -->
+
+<div class="row">
+  <div class="col col--4">
+    <div class="card shadow">
+      <div class="card__body">
+        <h3>Comlink Profile</h3>
+        <p>
+          Describe business capabilities apart from the implementation details
+        </p>
+      </div>
+      <div class="card__footer">
+        <a href="/docs/comlink/references/profile/" class="button button--primary button--block">Comlink Profile</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col col--4">
+    <div class="card shadow">
+      <div class="card__body">
+        <h3>Comlink Map</h3>
+        <p>
+          Describe implementation details for fulfilling a business capability from a Comlink Profile
+        </p>
+      </div>
+      <div class="card__footer">
+        <a target="_blank" href="/docs/comlink/references/map/" class="button button--primary button--block">Comlink Map</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col col--4">
+    <div class="card shadow">
+      <div class="card__body">
+        <h3>Comlink Provider</h3>
+        <p>
+          Define a provider's API services and security schemes to use in a Comlink Map
+        </p>
+      </div>
+      <div class="card__footer">
+        <a target="_blank" href="/docs/comlink/references/provider/" class="button button--primary button--block">Comlink Provider</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
+
+If you're a tooling author, please refer to our [formal language specifications](./specifications.mdx).
+
+## Motivation
+
+It creates challenges for developers when API description formats mix together design-time and run-time details.
 
 * **Every API needs its own OpenAPI file to describe the implementation**. This is one of the biggest struggles developers have when they're integrating with APIs. Since the semantics and implementation are mixed together, developers have to write separate integrations for each API they use even when those APIs provide the same capabilities. This takes time and money to build, maintain, and evolve these integrations—time and money that could be spent elsewhere.
 * **Nothing can change at runtime**. Since semantic and implementation details are mixed together, we can't react to any changes while our software is running. Any implementation change requires redeployment.
@@ -16,16 +74,6 @@ When API description formats don't make this seperations and combine design-time
 Comlink addresses these problems by separating the design-time and run-time descriptions by providing Comlink Profile for describing business capabilities and Comlink Map for implementation details and how to map API providers and their services to business capabilities.
 
 An example of this would be using Comlink Profile to describe how to send emails, using Comlink Map as describing implementation details for sending emails with Sendgrid, and Comlink Provider for describing Sendgrid's services and security schemes.
-
-## Comlink Language References
-
-To learn how to use the Comlink language with Superface and our tools and services, check out our [guides](../guides/how-to-create.md).
-
-* [Comlink Profile](./references/profile.mdx) - describe business capabilities
-* [Comlink Map](./references/map.mdx) - describe implementation details for fulfilling a capability
-* [Comlink Provider](./references/provider.mdx) - define provider definitions that describe API services and security schemes
-
-If you're a tooling author, please refer to our [formal language specifications](./specifications.mdx).
 
 ## Quick Examples
 
