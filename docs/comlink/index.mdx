@@ -6,24 +6,24 @@ slug: /comlink
 
 ## Overview
 
-Superface aims to change the way we integrate with APIs, and Comlink is the suite of languages that makes this possible. Comlink is a description format for autonomous APIs. It allows you to declaratively describe your API integrations in a way that separates the **design-time semantics** from the **run-time implementation details**. In other words, Comlink allows for defining the words we use to describe the capability of an API separate from the details for implementing that capability.
+Comlink is description language for autonomous APIs. It allows you to declaratively describe your API integrations in a way that separates the **design-time semantics** from the **run-time implementation details**. In other words, Comlink allows for defining the words we use to describe the capability of an API separate from the details for implementing that capability.
 
-When formats don't make this seperations and combine design-time and run-time details, it creates challenges for developers.
+When API description formats don't make this seperations and combine design-time and run-time details, it creates challenges for developers.
 
 * **Every API needs a its own OpenAPI file to describe the implementation**. This is one of the biggest struggles developers have when they're integrating with APIs. Since the semantics and implementation are mixed together, developers have to write separate integrations for each API they use even when those APIs provide the same capabilities. This takes time and money to build, maintain, and evolve these integrations—time and money that could be spent elsewhere.
 * **Nothing can change at runtime**. Since semantic and implementation details are mixed together, nothing can change at runtime. This makes our code rigid and make it challenging to react to what's happening when our software is running.
 
-Comlink addresses these problems by providing a description language specifically for describing business capabilities called Comlink Profile and a separate language for implementation details and how to map API providers and their services to business capabilities called Comlink Map.
+Comlink addresses these problems by separating the design-time and run-time descriptions by providing Comlink Profile for describing business capabilities and Comlink Map for implementation details and how to map API providers and their services to business capabilities.
 
 ## Comlink Language References
 
-We provide reference documentation to help you learn how these languages work. To learn how to use these languages with Superface and our tools and services, check out our [guides](../guides/how-to-create.md).
+To learn how to use the Comlink language with Superface and our tools and services, check out our [guides](../guides/how-to-create.md).
 
 * [Comlink Profile](./references/profile.mdx) - describe business capabilities
 * [Comlink Map](./references/map.mdx) - describe implementation details
 * [Comlink Provider](./references/provider.mdx) - define provider definitions
 
-If you're a tooling author, please refer to our [technical specifications](./specifications.mdx) for our languages.
+If you're a tooling author, please refer to our [formal language specifications](./specifications.mdx).
 
 ## Quick Examples
 
@@ -60,7 +60,10 @@ usecase SendEmail unsafe {
     messageId
   }
 
-  error Error
+  error {
+    title
+    detail
+  }
 }
 ```
 

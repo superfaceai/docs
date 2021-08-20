@@ -4,7 +4,7 @@ slug: /comlink/references/map
 
 # Comlink Map Reference
 
-Comlink Map provides a language for describing how an API provider's services map to the use-cases in a [Comlink Profile](./profile.mdx).
+Comlink Map is a format for describing how an API provider's services map to the use-cases in a [Comlink Profile](./profile.mdx).
 
 ## Map Details
 
@@ -262,7 +262,7 @@ map UseCaseName {
 }
 ```
 
-This maps to the two expected error fields when the server responds with status `429 (Too Many Requests)`. One is hardcoded as it describes the error scenario, the other constructs a helpful message with a value from response headers using a simple Comlink expression.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Map-Error) for detailed specification of `map error` statement._
+This maps to the two expected error fields when the server responds with status `429 (Too Many Requests)`. One is hardcoded as it describes the error scenario, the other constructs a helpful message with a value from response headers using a simple Comlink expression.
 
 :::note
 

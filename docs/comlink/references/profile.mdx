@@ -4,7 +4,7 @@ slug: /comlink/references/profile
 
 # Comlink Profile Reference
 
-Comlink Profile is a language for describing business capabilities as use-cases apart from implementation details.
+Comlink Profile is a format for describing business capabilities as use-cases apart from implementation details.
 
 ## Profile details
 
@@ -55,23 +55,11 @@ The use-case is a task that needs to be done to support a business need. Use-cas
 
 You can define a safety level for a use-case. This safety level follows the use-case name and is optional. By default it is `safe`. The safety level can be:
 
-* `safe` - The use-case doesn't result in server-side changes, so the client can retry the use-case when there's a failure
+* `safe` (default) - The use-case doesn't result in server-side changes, so the client can retry the use-case when there's a failure
 * `unsafe` - The use-case may result in a change on the service, so any attempt to retry a use-case may result in unintended changes
 * `idempotent` - The client can execute the use-case multiple times while the server will only process it once, so clients may safely retry failures
 
-This is informational for the tooling to know how it should handle retrying failures.
-
-:::info HTTP Methods
-
-If you are familiar with REST APIs and HTTP methods, you can think of safety in this manner:
-
-- `safe` corresponds to `GET` and `HEAD` methods
-- `unsafe` corresponds to the `POST` method
-- `idempotent` corresponds to `PUT` and `DELETE` methods
-
-For more information see [Understanding Idempotency and Safety in API Design](https://nordicapis.com/understanding-idempotency-and-safety-in-api-design/).
-
-:::
+This is informational for the tooling to know how it should handle retrying failures. For more information, see [Understanding Idempotency and Safety in API Design](https://nordicapis.com/understanding-idempotency-and-safety-in-api-design/).
 
 ### Description
 
