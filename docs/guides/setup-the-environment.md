@@ -52,7 +52,7 @@ It will create `superface` folder with the below structure
 And as last step install [OneSDK](/reference/one-sdk-js).
 
 ```shell
-npm install --save @superfaceai/one-sdk-js
+npm install --save @superfaceai/one-sdk
 ```
 
 ## (Optional) Install the Visual Studio Code extension
