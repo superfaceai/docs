@@ -40,9 +40,9 @@ module.exports = {
       label: 'Comlink References',
       collapsed: false,
       items: [
-        {type: 'doc', id: 'comlink/references/profile', label: 'Profile'},
-        {type: 'doc', id: 'comlink/references/map', label: 'Map'},
-        {type: 'doc', id: 'comlink/references/provider', label: 'Provider'}
+        {type: 'doc', id: 'comlink/reference/profile', label: 'Profile'},
+        {type: 'doc', id: 'comlink/reference/map', label: 'Map'},
+        {type: 'doc', id: 'comlink/reference/provider', label: 'Provider'}
       ]
     },
   ],
