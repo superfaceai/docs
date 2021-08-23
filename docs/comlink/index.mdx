@@ -65,7 +65,7 @@ If you're a tooling author, please refer to our [formal language specifications]
 It creates challenges for developers when API description formats mix together design-time and run-time details.
 
 * **Every API needs its own OpenAPI file to describe the implementation**. This is one of the biggest struggles developers have when they're integrating with APIs. Since the semantics and implementation are mixed together, developers have to write separate integrations for each API they use even when those APIs provide the same capabilities. This takes time and money to build, maintain, and evolve these integrations—time and money that could be spent elsewhere.
-* **Nothing can change at runtime**. Since semantic and implementation details are mixed together, we can't react to any changes while our software is running. Any implementation change requires redeployment.
+* **Nothing can change at runtime**. Since the semantics and implementation details are mixed together, we can't react to any changes while our software is running. Any implementation change requires redeployment.
 
 Comlink addresses these problems by separating the design-time and run-time descriptions by providing Comlink Profile for describing business capabilities and Comlink Map for implementation details and how to map API providers and their services to business capabilities.
 

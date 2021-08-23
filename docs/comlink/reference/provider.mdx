@@ -4,7 +4,7 @@ slug: /comlink/reference/provider
 
 # Comlink Provider Reference
 
-A Provider Definition is a JSON description of provider's services and security schemes. Comlink Maps make use of the Provider Definition by defining which service to call based on the Service ID and which security scheme to use based on the Security Scheme ID. A Provider Definition can be reused across many profiles and maps which is why it has its own separate definition.
+A Provider Definition is a JSON description of provider's services and security schemes. Comlink Maps make use of the Provider Definition by defining which service to call based on the Service ID and which security scheme to use based on the Security Scheme ID. A Provider Definition keeps the provider information separate so it can be reused across maps that might implement other profiles.
 
 ## Provider Definition
 
@@ -15,7 +15,7 @@ This is the root of the Provider Definition file.
 - `securitySchemes` (array of [Security Scheme](#security-scheme), optional)
 - `defaultService` (string) - References the ID of an existing Service
 
-```js example
+```json example
 {
   "name": "twilio",
   "services": [

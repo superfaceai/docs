@@ -35,7 +35,7 @@ Map to a use-case using the `map <use-case-name>` statement. Use-cases may defin
 
 The HTTP Call uses `http` and defines the information needed to make a call and map the inputs, result, and error to the profile use-cases.
 
-* HTTP Method - Comlink supports all widely-support HTTP methods
+* HTTP Method - Comlink supports all widely-support [HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
 * URI Template - URI template as defined by [RFC6570](https://datatracker.ietf.org/doc/html/rfc6570)
 * HTTP Transaction - a scope that defines the [HTTP Security](#http-security), [HTTP Request](#http-request), and [HTTP Responses](#http-response) for a given HTTP Call.
 
@@ -168,7 +168,7 @@ A response has a:
 
 ### Response variables
 
-The following variables are available in a response block. These can be used to map response data to a use-case.
+The following variables are available in a response block. These can be used to map response data to use-case results or errors. They can also be used to conditionally map to results or errors.
 
 - `statusCode` (number): HTTP response status code
 - `headers` (object): HTTP response headers
@@ -219,17 +219,9 @@ map UseCaseName {
 
 The above definition maps the two expected result fields. One from the response's body and the other is from the headers, which is then transformed with a Comlink expression.
 
-:::note
-
-`map result` is a regular Comlink statement and can happen from anywhere inside the use-case mapping, not only from an inside of the response handler.
-
-:::
-
 ### Map to a Use-Case Error
 
 You can also map a response to a use-case [error](./profile.mdx#error) using the `map error` statement. Like when mapping to a `result`, you must resolve the same `error` as defined in the use-case.
-
-
 
 ```hcl title="<profile-name>.<provider-name>.suma" {12-17}
 profile = "<profile-name>@<version>"
