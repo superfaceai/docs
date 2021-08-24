@@ -43,14 +43,16 @@ jobs:
       - uses: amondnet/vercel-action@v20
         name: Deploy to Vercel
         id: vercel_preview
+        env:
+          PREVIEW_URL: pr-{{PR_NUMBER}}-superface-docs.${{ secrets.VERCEL_DOMAIN }}
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_SCOPE }}
-          alias-domains: superface-docs-pr-{{PR_NUMBER}}.${{ secrets.VERCEL_DOMAIN }}
-          github-comment: "✅ Preview at https://superface-docs-pr-{{PR_NUMBER}}.{{ secrets.VERCEL_DOMAIN }}"
+          alias-domains: ${{ env.PREVIEW_URL }}
+          github-comment: "✅ Preview at https://{{env.PREVIEW_URL}}"
 
       - uses: bobheadxi/deployments@v0.4.3
         name: Finish deployment
