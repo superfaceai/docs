@@ -52,7 +52,6 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_SCOPE }}
           alias-domains: ${{ env.PREVIEW_URL }}
-          github-comment: ${{ '✅ Preview at https://${{env.PREVIEW_URL}}' }}
 
       - uses: bobheadxi/deployments@v0.4.3
         name: Finish deployment
