@@ -50,6 +50,7 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_SCOPE }}
           alias-domains: superface-docs-pr-{{PR_NUMBER}}.${{ secrets.VERCEL_DOMAIN }}
+          github-comment: "✅ Preview at https://superface-docs-pr-{{PR_NUMBER}}.{{ secrets.VERCEL_DOMAIN }}"
 
       - uses: bobheadxi/deployments@v0.4.3
         name: Finish deployment
