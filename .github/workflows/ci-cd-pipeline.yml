@@ -44,7 +44,7 @@ jobs:
         name: Deploy to Vercel
         id: vercel_preview
         env:
-          PREVIEW_URL: pr-{{PR_NUMBER}}-superface-docs.${{ secrets.VERCEL_DOMAIN }}
+          PREVIEW_URL: pr-{{PR_NUMBER}}-superface-docs.{{ secrets.VERCEL_DOMAIN }}
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -52,7 +52,7 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_SCOPE }}
           alias-domains: ${{ env.PREVIEW_URL }}
-          github-comment: ${{ env.PREVIEW_URL }}
+          github-comment: "{{ env.PREVIEW_URL }}"
 
       - uses: bobheadxi/deployments@v0.4.3
         name: Finish deployment
