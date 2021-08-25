@@ -9,7 +9,7 @@
 
   The instructions how to make a call are downloaded during your App runtime and resolved by One SDK to make a **direct HTTP** call to the API. The calls go straight from your App to the provider's API and are **never proxied through Superface**.
 
-  <img src="/static/img/how-it-works-detail.png" alt="how it works" width="500px" />
+  <img src="/docs/img/how-it-works-detail.png" alt="how it works" width="500px" />
 
   The following steps will guide you how to get started with Superface and One SDK in 5 minutes.
 
