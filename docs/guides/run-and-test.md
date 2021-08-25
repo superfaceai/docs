@@ -1,4 +1,4 @@
-# Test & run new capability
+# Run & test new capability
 
 ## Setup
 
@@ -12,22 +12,57 @@ This guide assumes you have a project set up with Superface installed. If you ne
 - [Superface CLI](/reference/cli) installed
 - [Superface OneSDK](/reference/one-sdk-js) installed
 
-## Compile Comlink documents
+## Configure existing profile and map {#configure-profile}
 
-Comlink is a simple description and integration language that is designed to be interpreted in any programming language by using the respective SDK. In order for the SDK to understand the operations defined in Comlink, it needs to be compiled.
+To run and test your capabilities, you have to have configured profile and map in `super.json`.
 
-This is currently done manually<sup>\*</sup> using Superface CLI:
+### Configuring profile
 
-```shell
-superface compile ./path/to-profile.supr
-superface compile ./path/to-map.provider.suma
+To configure local profile, within your `super.json`, you have to add object representation of profile inside `profiles`, it's key have to be profile id matching id inside referenced file and value is object containing file path and providers.
+
+```json title="superface/super.json" {3-7}
+{
+  "profiles": {
+    "<profile-id>": {
+      "file": "./profiles/my-profile.supr",
+      "providers": {
+        // ...
+      }
+    }
+  },
+  "providers": {
+    // ...
+  }
+}
 ```
 
-_Running the above commands will create `*.ast.json` files next to the original Profile & Map. You should leave these files in their place._
+### Configuring map
 
-> Note: You have to recompile the profile or the map every time you make changes to them.
+To configure local map, you have to add object representation of map with file path similar to profile specification.
 
-<sub>\* The compilation will happen automatically in a future release of OneSDK. You won't have to compile manually using CLI.</sub>
+```json title="superface/super.json" {6-8}
+{
+  "profiles": {
+    "<profile-id>": {
+      "file": "./profiles/my-profile.supr",
+      "providers": {
+        "<provider-id>": {
+          "file": "./maps/my-map.suma"
+        }
+      }
+    }
+  },
+  "providers": {
+    // ...
+  }
+}
+```
+
+:::info
+
+To know more about profiles and maps ...
+
+:::
 
 ## Configure provider authentication {#configure-security}
 
@@ -174,70 +209,89 @@ _Replace `<scheme-id>` with the actual security scheme ID defined in the provide
 
 </details>
 
-## Run in a Node.js app
-
-### Set necessary environment variables
+## Set necessary environment variables
 
 For apps running the capabilities that require authentication, you'll typically want to supply the providers' API keys via environment variables (see [configuration above](#configure-security)).
 
 If you used CLI for configuring the security schemes, the chances are it created `.env` file for you. In that case, simply fill in the environment variables. Then install [`dotenv`](https://www.npmjs.com/package/dotenv) package that will load the `.env` file for you.
 
-### Write & run the app
-
-If you followed the directions throughout the guide, you should have a project properly configured with a working capability. You can then use Superface OneSDK to simply run it.
-
-```javascript title="app.js" {8,11,12}
-// If you're using .env file, you should also install and init `dotenv` package
-require('dotenv').config();
-const { SuperfaceClient } = require('@superfaceai/one-sdk');
-
-const sdk = new SuperfaceClient();
-
-async function main() {
-  const profile = await sdk.getProfile('scope/profile-name');
-
-  const result = await profile
-    .getUseCase('UseCaseName')
-    .perform(/* Input object as defined in the profile */);
-
-  console.info('Hooray!', result.unwrap());
-}
-
-main();
-```
-
-_Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.<br />For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js)._
-
-You can then run your app which should perform the use case.
-
-```shell
-node app.js
-```
-
-### Test the provider map
+## Test the provider map
 
 Since profile & provider are simple descriptions of entities and actions, we don't usually test them. However the maps typically contain non-trivial logic that benefits from being properly tested. In addition, you might want to run integration tests against the provider's sandbox or live servers.
 
 Testing is easy since you simply perform the use case via OneSDK. Then, you test it as any other function. The only difference is that you want to make OneSDK use a specific provider when running in test. You can do that by specifying `provider` parameter inside options for `.perform` method.
 
-See the example of a test written using [`jest`](https://jestjs.io) framework:
+<!-- For unit testing all of the Map's logic, you might need to mock the specific responses. We recommend using [`nock`](https://www.npmjs.com/package/nock) for this. -->
 
-```javascript title="profile.provider.test.js" {10,16}
+### Setting up testing enviroment
+
+In this guide, we use `jest`, but it's up to you what testing framework will you choose.
+
+Install necessary packages into your project
+
+```shell
+yarn add -D jest
+```
+
+<details>
+<summary>if you are using typescript</summary>
+
+```shell
+yarn add -D jest @types/jest ts-jest
+```
+
+to run jest with typescript, create jest configuration file
+
+```javascript title="jest.config.js"
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  rootDir: 'src/',
+};
+```
+
+</details>
+
+and add test script to your package.json
+
+```json title="package.json"
+{
+  // ...
+  "scripts": {
+    "test": "jest"
+  }
+  // ...
+}
+```
+
+### Write a test for the provider map
+
+If you [configured security](#configure-security) you have to load environment variables, in this guide we use `dotenv` to load enviroment variables and we import `@superfaceai/one-sdk` to perform our usecases.
+
+
+:::info
+In example below we declare variables for `sdk`, `profile` and `provider` at top level test, you can structure your tests by profile with multiple providers, or even having one test with multiple profiles, but **you have to cover all usecases within map if you want to publish it** in station. 
+:::
+
+```javascript title="profile.provider.test.js" {5,8-10,17-20}
 require('dotenv').config();
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
-describe('scope/profile-name', () => {
+describe('scope/profile-name/provider', () => {
+  let sdk, profile, provider;
+
+  beforeAll(async () => {
+    sdk = new SuperfaceClient()
+    profile = await sdk.getProfile('scope/profile-name');
+    provider = await sdk.getProvider('provider-name');
+  })
+
   it('should return a result when called with ...', async () => {
-    const sdk = new SuperfaceClient();
-
-    const profile = await sdk.getProfile('scope/profile-name');
-
-    const provider = await sdk.getProvider('provider-name');
-
+    const input = {
+      /* Input object as defined in the profile */
+    }
     const result = await profile.getUseCase('UseCaseName').perform(
-      {
-        /* Input object as defined in the profile */
-      },
+      input,
       { provider }
     );
 
@@ -246,7 +300,130 @@ describe('scope/profile-name', () => {
 });
 ```
 
-For unit testing all of the Map's logic, you might need to mock the specific responses. We recommend using [`nock`](https://www.npmjs.com/package/nock) for this.
+#### Asserting result
+
+Usually we want to assert result comming from our map. To do that we can define results manually in each test or use jest snapshots. If you prefer to not use jest snaphots and don't want to manually write testing cases, you can use Superface CLI to generate tests for you, based on test configuration file `sf-test-config.json`.
+
+:::tip CLI HELP
+[Setting up test configuration file](#set-test-configuration-file) will be described in more detail later.
+```shell
+npx superface test --generate
+```
+:::
+
+:::info
+To use jest snapshots, you have to omit error timestamps before storing snapshot of it.
+:::
+
+```javascript title="profile.provider.test.js" {20-23}
+require('dotenv').config();
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
+
+describe('scope/profile-name/provider', () => {
+  let sdk, profile, provider;
+
+  beforeAll(async () => {
+    ...
+  })
+
+  it('should return a result when called with ...', async () => {
+    const input = { 
+      // ... 
+    }
+    const result = await profile.getUseCase('UseCaseName').perform(
+      input,
+      { provider }
+    );
+
+    expect(result.isOk()).toBe(true);
+    expect(result.unwrap()).toEqual({
+      result: "test"
+    });
+  });
+});
+```
+<details>
+
+<summary>typescript example with typed client</summary>
+
+```typescript title="profile.provider.test.ts" {5,8-10,17-20}
+import dotenv from 'dotenv';
+import { SuperfaceClient } from 'superface/sdk';
+
+describe('scope/profile-name/provider', () => {
+  let sdk: SuperfaceClient, profile: Profile, provider: Provider;
+
+  beforeAll(async () => {
+    sdk = new SuperfaceClient()
+    profile = await sdk.getProfile('scope/profile-name');
+    provider = await sdk.getProvider('provider-name');
+  })
+
+  it('should return a result when called with ...', async () => {
+    const input = {
+      /* Input object as defined in the profile */
+    }
+    const result = await profile.useCases.UseCaseName.perform(
+      input,
+      { provider }
+    );
+
+    expect(result.isOk()).toBe(true);
+  });
+});
+```
+
+</details>
+
+#### Recording traffic
+
+If you don't want to hit providers API all the time, you can set up recording with `nock` and use mocked responses in development.
+
+There are four modes of `nock` recording support and playback, you can read more about them [here](https://github.com/nock/nock#modes). You can also use `nock.rec()` and `nock.play()` and handle recordings yourself (more about `rec` and `play` [here](https://github.com/nock/nock#recording)). It's easier to handle recordings through `nock.rec()` because we can enter configuration with property `enable_reqheaders_recording`.
+
+```javascript title="profile.provider.test.js" {11,12,20,25}
+require('dotenv').config();
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
+const nockBack = require('nock').back
+
+describe('scope/profile-name/provider', () => {
+  let sdk, profile, provider;
+
+  beforeAll(async () => {
+    // ...
+
+    nockBack.fixtures = '/path/to/fixtures/'
+    nockBack.setMode('record')
+  })
+
+  it('should return a result when called with ...', async () => {
+    const input = { 
+      // ... 
+    }
+  
+    const { nockDone } = await back('your-recording.json');
+    const result = await profile.getUseCase('UseCaseName').perform(
+      input,
+      { provider }
+    );
+    nockDone();
+
+    expect(result.isOk()).toBe(true);
+    expect(result.unwrap()).toEqual({
+      result: "test"
+    });
+  });
+});
+```
+
+### Write tests with Superface testing library
+
+... 
+
+
+### Generating tests with Superface CLI
+
+...
 
 ## Examples
 
