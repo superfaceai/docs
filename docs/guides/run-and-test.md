@@ -60,7 +60,7 @@ To configure local map, you have to add object representation of map with file p
 
 :::info
 
-To know more about profiles and maps ...
+To know more about profiles, maps and their configurations in `super.json`, check out our documentation about **[Comlink](comlink/comlink-intro.mdx)**
 
 :::
 
@@ -270,17 +270,17 @@ If you [configured security](#configure-security) you have to load environment v
 
 
 :::info
-In example below we declare variables for `sdk`, `profile` and `provider` at top level test, you can structure your tests by profile with multiple providers, or even having one test with multiple profiles, but **you have to cover all usecases within map if you want to publish it** in station. 
+In example below we declare variables for `sdk`, `profile` and `provider` at top level test, you can structure your tests by profile with multiple providers, or even having one test with multiple profiles, but **you have to cover all usecases within map if you want to publish it** in [station](https://github.com/superfaceai/station). 
 :::
 
-```javascript title="profile.provider.test.js" {5,8-10,17-20}
-require('dotenv').config();
+```javascript title="profile.provider.test.js" {4,8-10,17-20}
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
 describe('scope/profile-name/provider', () => {
   let sdk, profile, provider;
 
   beforeAll(async () => {
+    require('dotenv').config();
     sdk = new SuperfaceClient()
     profile = await sdk.getProfile('scope/profile-name');
     provider = await sdk.getProvider('provider-name');
@@ -300,7 +300,43 @@ describe('scope/profile-name/provider', () => {
 });
 ```
 
-#### Asserting result
+
+<details>
+
+<summary>typescript example with typed client</summary>
+
+```typescript title="profile.provider.test.ts"
+import dotenv from 'dotenv';
+import { SuperfaceClient } from 'superface/sdk';
+
+describe('scope/profile-name/provider', () => {
+  let sdk: SuperfaceClient, profile: Profile, provider: Provider;
+
+  beforeAll(async () => {
+    dotenv.config()
+
+    sdk = new SuperfaceClient()
+    profile = await sdk.getProfile('scope/profile-name');
+    provider = await sdk.getProvider('provider-name');
+  })
+
+  it('should return a result when called with ...', async () => {
+    const input = {
+      /* Input object as defined in the profile */
+    }
+    const result = await profile.useCases.UseCaseName.perform(
+      input,
+      { provider }
+    );
+
+    expect(result.isOk()).toBe(true);
+  });
+});
+```
+
+</details>
+
+### Asserting result
 
 Usually we want to assert result comming from our map. To do that we can define results manually in each test or use jest snapshots. If you prefer to not use jest snaphots and don't want to manually write testing cases, you can use Superface CLI to generate tests for you, based on test configuration file `sf-test-config.json`.
 
@@ -312,11 +348,10 @@ npx superface test --generate
 :::
 
 :::info
-To use jest snapshots, you have to omit error timestamps before storing snapshot of it.
+To use jest snapshots, you have to omit error timestamps before storing snapshot of it. This is resolved in Superface [testing library](#writing-tests-lib) described later.
 :::
 
 ```javascript title="profile.provider.test.js" {20-23}
-require('dotenv').config();
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
 describe('scope/profile-name/provider', () => {
@@ -342,48 +377,14 @@ describe('scope/profile-name/provider', () => {
   });
 });
 ```
-<details>
 
-<summary>typescript example with typed client</summary>
-
-```typescript title="profile.provider.test.ts" {5,8-10,17-20}
-import dotenv from 'dotenv';
-import { SuperfaceClient } from 'superface/sdk';
-
-describe('scope/profile-name/provider', () => {
-  let sdk: SuperfaceClient, profile: Profile, provider: Provider;
-
-  beforeAll(async () => {
-    sdk = new SuperfaceClient()
-    profile = await sdk.getProfile('scope/profile-name');
-    provider = await sdk.getProvider('provider-name');
-  })
-
-  it('should return a result when called with ...', async () => {
-    const input = {
-      /* Input object as defined in the profile */
-    }
-    const result = await profile.useCases.UseCaseName.perform(
-      input,
-      { provider }
-    );
-
-    expect(result.isOk()).toBe(true);
-  });
-});
-```
-
-</details>
-
-#### Recording traffic
+### Recording traffic
 
 If you don't want to hit providers API all the time, you can set up recording with `nock` and use mocked responses in development.
 
-There are four modes of `nock` recording support and playback, you can read more about them [here](https://github.com/nock/nock#modes). You can also use `nock.rec()` and `nock.play()` and handle recordings yourself (more about `rec` and `play` [here](https://github.com/nock/nock#recording)). It's easier to handle recordings through `nock.rec()` because we can enter configuration with property `enable_reqheaders_recording`.
+There are four modes of `nock` recording support and playback, you can read more about them [here](https://github.com/nock/nock#modes). You can also use `nock.rec()` and `nock.play()` and handle recordings yourself (more about `rec` and `play` [here](https://github.com/nock/nock#recording)).
 
-```javascript title="profile.provider.test.js" {11,12,20,25}
-require('dotenv').config();
-const { SuperfaceClient } = require('@superfaceai/one-sdk');
+```javascript title="profile.provider.test.js" {1,9-10,18,23}
 const nockBack = require('nock').back
 
 describe('scope/profile-name/provider', () => {
@@ -416,12 +417,136 @@ describe('scope/profile-name/provider', () => {
 });
 ```
 
-### Write tests with Superface testing library
+## Test the provider map with Superface testing library {#writing-tests-lib}
 
-... 
+To make it easier you can write your tests with class `TestConfig` from testing library `@superfaceai/testing-lib`.
 
+```javascript title="profile.provider.test.js" {1,4,7-10,12,16,21,29-30}
+const { TestConfig } = require('@superfaceai/testing-lib')
 
-### Generating tests with Superface CLI
+describe('scope/profile-name/provider', () => {
+  let testConfig;
+
+  beforeAll(() => {
+    testConfig = new TestConfig({
+      profile: 'scope/profile-name',
+      provider: 'provider-name'
+    });
+
+    testConfig.recordOrLoad();
+  });
+
+  afterAll(async () => {
+    await testConfig.endRecording();
+  });
+
+  describe('usecase 1', () => {
+    beforeAll(async () => {
+      await testConfig.setup({ useCase: "first-usecase" });
+    });
+
+    it('should return a result when called with ...', async () => {
+      const input = { 
+        // ... 
+      };
+
+      await expect(testConfig.test()).resolves.not.toThrow();
+      await expect(testConfig.run(input)).resolves.toMatchSnapshot();
+    });
+  });
+});
+```
+
+:::info
+Some implementations of `TestConfig` class might change in future.
+
+check out `@superfaceai/testing-lib` [on Github](https://github.com/superfaceai/testing-lib)
+:::
+
+### Setting up your Superface configuration {#setup-superface-config}
+
+To test provider map, you have to create necessary components, such as profile, provider and usecase which are esential to perform your usecase. Superface testing library enables to setup these components in multiple ways.
+
+Configuration itself can be represented either with corresponding instances or as string representation of corresponding instances. In example above, we use configuration with string representation of profile, provider and usecase, but we could also pass already created instances into `TestConfig` instance and work with those. 
+
+```javascript
+const testConfig = new TestConfig({
+  profile: 'scope/profile-name',
+  provider: 'provider-name'
+});
+
+// or
+
+const client = new SuperfaceClient();
+const testConfig = new TestConfig({
+  client,
+  profile: client.getProfile('scope/profile-name'),
+  provider: client.getProvider('provider-name'),
+});
+
+// or use TestConfig's method `setup`
+
+const testConfig = new TestConfig({});
+testConfig.setup({
+  profile: 'scope/profile-name',
+  provider: 'provider-name',
+})
+
+```
+
+:::info mutation of Configuration
+Setting up Superface configuration can be done in constructor of `TestConfig`, in method `setup` or in method `test`. Note that configuration is mutated in each one, so when configuration gets changed in `setup` or `test` it will stay that way until you change it again.
+:::
+
+### Testing your configuration
+
+To test your capabilities, you can use two methods from `TestConfig` class: `test()` and `run()`.
+
+Method `test()` checks whether your configuration is valid. To have valid configuration, your profile, provider and usecase have to be defined in your instance of `TestConfig`. You can also enter your superface configuration here if you didn't specify it yet.
+
+```javascript
+// inside jest test
+
+await expect(testConfig.test()).resolves.not.toThrow();
+
+// or
+
+await expect(testConfig.test({ useCase: 'UseCaseName' })).resolves.not.toThrow();
+```
+
+Method `run(input)` checks that perform runs successfully and that it always returns value or error. It requires one parameter, which is `input` based on your usecase. 
+
+```javascript
+// inside jest test
+
+const input = { 
+  // ... 
+};
+
+await expect(testConfig.run(input)).resolves.toMatchSnapshot();
+```
+
+:::info
+In the example above, we're using jest matcher `.toMatchSnapshot()` because in method `run()`, error timestamps are already omitted.
+:::info
+
+### Recording
+
+describe record or load
+
+describe setupRecordings
+
+### Examples
+
+describe other examples
+
+## Generating tests with Superface CLI
+
+...
+
+## Running tests
+
+Talk about DEBUG more
 
 ...
 
