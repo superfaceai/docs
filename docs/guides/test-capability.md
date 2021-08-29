@@ -13,11 +13,11 @@ This guide assumes you have a project set up with Superface installed. If you ne
 - [Superface CLI](/reference/cli) installed
 - [Superface OneSDK](/reference/one-sdk-js) installed
 
-## Configure existing profile and map {#configure-profile}
+## Configure existing profile and map {#configure-profile-map}
 
 To run and test your capabilities, you have to have configured profile and map in `super.json`.
 
-### Configuring profile
+### Configuring profile {#configure-profile}
 
 To configure local profile, within your `super.json`, you have to add object representation of profile inside `profiles`, it's key have to be profile id matching id inside referenced file and value is object containing file path and providers.
 
@@ -37,7 +37,7 @@ To configure local profile, within your `super.json`, you have to add object rep
 }
 ```
 
-### Configuring map
+### Configuring map {#configure-profile}
 
 To configure local map, you have to add object representation of map with file path similar to profile specification.
 
@@ -61,7 +61,7 @@ To configure local map, you have to add object representation of map with file p
 
 :::info
 
-To know more about profiles, maps and their configurations in `super.json`, check out our documentation about **[Comlink](comlink/comlink-intro.mdx)**
+To know more about profiles, maps and their configurations in `super.json`, check out our documentation about **[Comlink](/comlink)**
 
 :::
 

@@ -5,9 +5,9 @@ This guide describes how a capability can be used in any production Node.js appl
 ## Prerequisites
 
 - Existing Node.js [project set up](./setup-the-environment.md)
-- Existing profile ([compiled](./test-capability.md#compile-comlink-documents))
+- Existing profile ([configured](./test-capability.md#configure-profile))
 - Existing [provider definition](./add-new-provider.md)
-- Existing [map between profile & the provider](./map-capability-to-provider.md) ([compiled](./test-capability.md#compile-comlink-documents))
+- Existing [map between profile & the provider](./map-capability-to-provider.md) ([configured](./test-capability.md#configure-map))
 - `super.json` with [configured provider security](./test-capability.md#configure-security)
 - [Superface OneSDK](/reference/one-sdk-js) installed
 
