@@ -253,18 +253,6 @@ module.exports = {
 
 </details>
 
-and add test script to your package.json
-
-```json title="package.json"
-{
-  // ...
-  "scripts": {
-    "test": "jest"
-  }
-  // ...
-}
-```
-
 ### Write a test for the provider map
 
 If you [configured security](#configure-security) you have to load environment variables, in this guide we use `dotenv` to load enviroment variables and we import `@superfaceai/one-sdk` to perform our usecases.
@@ -382,7 +370,7 @@ describe('scope/profile-name/provider', () => {
 
 If you don't want to hit providers API all the time, you can set up recording with `nock` and use mocked responses in development.
 
-There are four modes of `nock` recording support and playback, you can read more about them [here](https://github.com/nock/nock#modes). You can also use `nock.rec()` and `nock.play()` and handle recordings yourself (more about `rec` and `play` [here](https://github.com/nock/nock#recording)).
+There are four modes of `nock.back` recording support and playback, you can read more about them [here](https://github.com/nock/nock#modes). You can also use `nock.recorder.rec()` and `nock.recorder.play()` and handle recordings yourself (more about `rec` and `play` [here](https://github.com/nock/nock#recording)).
 
 ```javascript title="profile.provider.test.js" {1,9-10,18,24}
 const nockBack = require('nock').back;
