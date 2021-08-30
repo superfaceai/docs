@@ -605,11 +605,42 @@ testConfig.endNockBackRecord();
 
 To be added
 
-## Running tests
-
-<!-- TODO: DEBUG  -->
+### Setting up test configuration file {#set-test-configuration-file}
 
 To be added
+
+## Running tests
+
+Since in this guide, we are using `jest` framework, we can run tests with its CLI tool and call `jest` within CLI or add it in `package.json` and run it with `npm` or `yarn`. 
+
+`jest` has multiple [CLI options](https://jestjs.io/docs/cli). It also has a flag `--updateSnapshot` to update snapshots, when modifying tests in some way.
+
+### DEBUG
+
+Superface uses [DEBUG package](https://github.com/visionmedia/debug), which you can use when testing or running your app. To use it, you simply have to add environment variable `DEBUG="superface*"` before running tests.
+
+There are mutiple parts of Superface, which implemented this package and created debug context:
+
+in `OneSDK`:
+- `superface:config`
+- `superface:profile-parameter-validator`
+- `superface:map-interpreter`
+- `superface:http`, `superface:http:sensitive`
+- `superface:superjson`
+- `superface:failover`, `superface:failover:sensitive`
+- `superface:bound-profile-provider`
+- `superface:registry`
+- `superface:usecase`
+- `superface:lib/env`
+- `superface:events`
+- `superface:metric-reporter`
+
+in `Parser`:
+
+- `superface-parser:map-validator`
+- `superface-parser:profile-io-analyzer`
+
+To know more about setting up specific contexts, check out [conventions](https://github.com/visionmedia/debug#conventions) and [wildcards](https://github.com/visionmedia/debug#wildcards) of debug package.
 
 ## Examples
 
