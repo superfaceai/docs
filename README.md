@@ -1,6 +1,7 @@
 # Superface Documentation
 
-The home of the official Superface documentation.
+
+This repository contains the documentation website code and Markdown source files for https://superface.ai/docs.
 
 ## Contribute to docs
 
