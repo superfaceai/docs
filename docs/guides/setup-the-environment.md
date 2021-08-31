@@ -1,6 +1,6 @@
 # How to setup local environment
 
-This document guides you through the installation and basic configuration of components needed to create own skill. So you can publish it or use it locally in your application.
+This document guides you through the installation and basic configuration of components needed to create own capability. So you can publish it or use it locally in your application.
 
 ## Prerequisites
 
@@ -45,7 +45,7 @@ superface init
 
 It will create `superface` folder with the below structure
 
-- `grid` - folder for storing skills and mappings
+- `grid` - folder for storing capabilities and mappings
 - `types` - folder with generated types
 - `super.json` - superface configuration file
 
