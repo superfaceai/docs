@@ -48,6 +48,12 @@ module.exports = {
           label: 'Go to Dashboard',
           position: 'right',
         },
+        {
+          href: 'https://github.com/superfaceai/docs',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
+        },
       ],
     },
 
