@@ -81,7 +81,6 @@ If you'd like to build locally:
 yarn build
 ```
 </details>
-<br />
 
 ## License
 
