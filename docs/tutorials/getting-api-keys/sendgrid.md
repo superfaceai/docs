@@ -24,5 +24,4 @@
     ![sendgrid-api-key.png](/img/tutorials/getting-api-keys/sendgrid-api-key.png)
 
 6. Copy and store your newly created key. You will be asked to provide to by the installation command.
-7. Run `npx @superfaceai/cli install communication/send-email -i`
-8. Follow instructions at [https://www.superface.ai/solutions/resilient-email](https://www.superface.ai/solutions/resilient-email).
+7. Follow instructions at [https://www.superface.ai/solutions/resilient-email](https://www.superface.ai/solutions/resilient-email).

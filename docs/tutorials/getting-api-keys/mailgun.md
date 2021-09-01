@@ -18,5 +18,4 @@
 3. When you have your trial going, [add a custom domain](https://documentation.mailgun.com/en/latest/quickstart-sending.html#verify-your-domain).
 4. You will have to verify ownership of the domain by adding new records to its DNS. The easiest way is to follow the [tutorial from Mailgun](https://help.mailgun.com/hc/en-us/articles/360026833053-Domain-Verification-Walkthrough). 
 5. Retrieve your API key in [Settings → API Keys](https://app.mailgun.com/app/dashboard)
-6. Run `npx @superfaceai/cli install communication/send-email -i`
-7. Follow instructions at [https://www.superface.ai/solutions/resilient-email](https://www.superface.ai/solutions/resilient-email).
+6. Follow instructions at [https://www.superface.ai/solutions/resilient-email](https://www.superface.ai/solutions/resilient-email).

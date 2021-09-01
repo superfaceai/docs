@@ -26,5 +26,4 @@
 
     ![postmark-dns.png](/img/tutorials/getting-api-keys/postmark-dns.png)
 
-6. Run `npx @superfaceai/cli install communication/send-email -i`
-7. Follow instructions at [https://www.superface.ai/solutions/resilient-email](https://www.superface.ai/solutions/resilient-email).
+6. Follow instructions at [https://www.superface.ai/solutions/resilient-email](https://www.superface.ai/solutions/resilient-email).
