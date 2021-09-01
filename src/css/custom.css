@@ -20,6 +20,8 @@
   --tailwind-gray-600: #4b5563;
   --tailwind-gray-800: #1f2937;
   --tailwind-gray-900: #111827;
+
+  --ifm-navbar-height: 4rem
 }
 
 html[data-theme='dark'] {
@@ -47,10 +49,6 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 }
 
 /* Navbar */
-.navbar {
-  max-height: 3.5rem;
-}
-
 .navbar--dark {
   --ifm-navbar-background-color: var(--tailwind-gray-800);
 }
