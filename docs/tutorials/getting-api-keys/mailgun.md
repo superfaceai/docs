@@ -3,7 +3,7 @@
 ### TL;DR
 
 1. Create an account at [https://signup.mailgun.com/new/signup](https://signup.mailgun.com/new/signup).
-2. Use a [sandbox domain](https://app.mailgun.com/app/sending/domains/\) provided by Mailgun to send tests (which is for free) or [add a custom domain](https://documentation.mailgun.com/en/latest/quickstart-sending.html#verify-your-domain) (which requires [upgrading to a plan](https://app.mailgun.com/app/billing/plans)). 
+2. Use a [sandbox domain](https://app.mailgun.com/app/sending/domains/) provided by Mailgun to send tests (which is for free) or [add a custom domain](https://documentation.mailgun.com/en/latest/quickstart-sending.html#verify-your-domain) (which requires [upgrading to a plan](https://app.mailgun.com/app/billing/plans)). 
 3. Verify your domain following [this tutorial](https://help.mailgun.com/hc/en-us/articles/360026833053-Domain-Verification-Walkthrough).
 4. Retrieve your API key in [Settings → API Keys](https://app.mailgun.com/app/dashboard).
 5. Follow instructions at [https://www.superface.ai/solutions/resilient-email](https://www.superface.ai/solutions/resilient-email).
