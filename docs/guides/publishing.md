@@ -1,6 +1,6 @@
 # Publishing capability
 
-Once your capability is tested and works, consider publishing it in the Superface registry. This will simplify the reuse of profile, map, and/or provider in other projects. The published capabilities will be also usable by other developers.
+Once your capability is tested and works, consider publishing it to the Superface registry. This will simplify the reuse of profile, map, and/or provider in other projects. The published capabilities will be also usable by other developers.
 
 <!-- TODO: Note about private capabilities / registries -->
 
@@ -8,11 +8,10 @@ Once your capability is tested and works, consider publishing it in the Superfac
 
 To publish content to the Superface registry, you need to:
 
-1. Have a user account at [Superface registry](https://superface.ai/).
+1. Have an existing [Superface account](https://superface.ai/).
 2. Have the [Superface CLI installed](./setup-the-environment.md).
 3. Have the local profile, map, and/or provider linked in `super.json` (as described in previous steps).
 
-Next follow these steps.
 
 ## Log in to the registry
 
@@ -22,7 +21,7 @@ First login with Superface CLI:
 superface login
 ```
 
-This will prompt you to open a browser or, if you decline, provides a link you can paste to a browser. Once you confirm the login return back to the terminal. You may need to optionally sign into the user account if you weren't signed in previously.
+This will prompt you to login using the browser. Once you confirm the login return back to the terminal.
 
 You can confirm the login process was successful with `whoami` command:
 
