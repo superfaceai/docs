@@ -27,6 +27,7 @@ module.exports = {
         'guides/map-capability-to-provider',
         'guides/run-and-test',
         'guides/use-in-app',
+        'guides/publishing',
       ],
     },
   ],
@@ -40,10 +41,10 @@ module.exports = {
       label: 'Comlink References',
       collapsed: false,
       items: [
-        {type: 'doc', id: 'comlink/reference/profile', label: 'Profile'},
-        {type: 'doc', id: 'comlink/reference/map', label: 'Map'},
-        {type: 'doc', id: 'comlink/reference/provider', label: 'Provider'}
-      ]
+        { type: 'doc', id: 'comlink/reference/profile', label: 'Profile' },
+        { type: 'doc', id: 'comlink/reference/map', label: 'Map' },
+        { type: 'doc', id: 'comlink/reference/provider', label: 'Provider' },
+      ],
     },
   ],
 };
