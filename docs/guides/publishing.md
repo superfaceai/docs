@@ -23,15 +23,9 @@ superface login
 
 This will prompt you to login using the browser. Once you confirm the login return back to the terminal.
 
-You can confirm the login process was successful with `whoami` command:
-
-```shell
-superface whoami
-```
-
 ## Publish the content
 
-Use the `publish` command with `profile`, `provider`, or `map`. You always need to specify a profile ID and provider name. The command has the following format"
+Use the `publish` command with `profile`, `provider`, or `map`. You always need to specify a profile ID and provider name. The command has the following format:
 
 ```shell
 superface publish profile|map|provider --profileId <profile-id> --provider <provider-name> [--dryRun]
