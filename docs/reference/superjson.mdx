@@ -8,7 +8,7 @@ Super.json is the main Superface configuration file. It contains the configurati
 
 ## Anatomy
 
-At the top level, super.json file consists of two sections: [profiles](#profiles) and [providers](#providers). The main purpose profile section is to set up profiles which are to be used, their versions and/or file locations, and their default values. The purpose of provider section is to set up providers that are to be used and their credentials.
+At the top level, super.json file consists of two sections: [profiles](#profiles) and [providers](#providers). the main purpose profile section is to set up profiles which are to be used, their versions and/or file locations, and their default values. The purpose of provider section is to set up providers that are to be used and their credentials.
 
 ```json
 {
@@ -23,7 +23,7 @@ At the top level, super.json file consists of two sections: [profiles](#profiles
 
 ## Profiles
 
-The profiles section consists of a record of all installed profiles. The key is the name of the profile and value is either semantic version string, a file URI or a [ProfileSettings](#ProfileSettings) object.
+The profiles section consists of a record of all installed profiles. The key is the name of the profile and value is either semantic version string, a file URI or a [ProfileSettings](#profilesettings) object.
 
 ```json
 {
@@ -42,8 +42,8 @@ The profiles section consists of a record of all installed profiles. The key is 
 The ProfileSettings object contains either `file` or `version` property, analogous to the shortcut strings above and following optional properties:
 
 - `priority`: an array of strings containing provider names in desired order for failover
-- `providers`: an array of [ProfileProviderSettings](#ProfileProviderSettings) objects or URI strings, used for configuring providers for the profile. Not to be confused with top-level Providers record
-- `defaults`: a record of defaults for the usecase, key is usecase name, value is [UsecaseDefaults](#UsecaseDefaults) object
+- `providers`: an array of [ProfileProviderSettings](#profileprovidersettings) objects or URI strings, used for configuring providers for the profile. Not to be confused with top-level Providers record
+- `defaults`: a record of defaults for the usecase, key is usecase name, value is [UsecaseDefaults](#usecasedefaults) object
 
 ```json
 {
@@ -85,7 +85,7 @@ UsecaseDefaults is a record used to configure default values for a usecase, inde
 
 ProfileProviderSettings object is used for configuring specific providers for a profile. It can point to either file or specific variant and revision. It contains following optional property:
 
-- `defaults`: a record of defaults per usecase, key is usecase name and value is a [ProfileProviderDefaults](#ProfileProviderDefaults) object
+- `defaults`: a record of defaults per usecase, key is usecase name and value is a [ProfileProviderDefaults](#profileproviderdefaults) object
 
 ```json
 {
@@ -115,7 +115,7 @@ ProfileProviderSettings object is used for configuring specific providers for a 
 ProfileProviderDefaults is an object with following optional properties:
 
 - `input`: an object providing default values according to usecase's input
-- `retryPolicy`: a [RetryPolicy](#RetryPolicy) object
+- `retryPolicy`: a [RetryPolicy](#retrypolicy) object
 
 ```json
 {
@@ -155,7 +155,7 @@ RetryPolicy is used for setting up retry policy for a provider and usecase. Ther
 
 ## Providers
 
-The providers section consists of a record of all used providers. The key is the name of the provider and the value is either a file URI or a [ProviderSettings](#ProviderSettings) object.
+The providers section consists of a record of all used providers. The key is the name of the provider and the value is either a file URI or a [ProviderSettings](#providersettings) object.
 
 ```json
 {
@@ -173,7 +173,7 @@ The providers section consists of a record of all used providers. The key is the
 The ProviderSettings object has following optional properties:
 
 - `file`: a file URI string
-- `security`: an array of [SecurityValues](#SecurityValues) objects
+- `security`: an array of [SecurityValues](#securityvalues) objects
 
 ```json
 {
