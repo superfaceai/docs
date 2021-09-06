@@ -51,8 +51,8 @@ superface publish profile --profileId my-profile --provider github
 
 When publishing a provider, its name **must** start with `unverified-` prefix otherwise the publishing fails (see [Add a new provider](add-new-provider.md) for details about naming).
 
-```
-shell publish map --profileId communication/send-sms --provider unverified-my-provider
+```shell
+publish map --profileId communication/send-sms --provider unverified-my-provider
 ```
 
 
@@ -62,7 +62,7 @@ shell publish map --profileId communication/send-sms --provider unverified-my-pr
 
 When publishing a new map, both its provider and the mapped profile must be already published.
 
-```
+```shell
 superface publish map --profileId communication/send-sms --providerName twilio
 ```
 
