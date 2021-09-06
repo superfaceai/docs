@@ -1,0 +1,294 @@
+---
+slug: /reference/superjson
+---
+
+# Super.json Reference
+
+Super.json is the main Superface configuration file. It contains the configuration about profiles, maps and providers used.
+
+## Anatomy
+
+At the top level, super.json file consists of two sections: [profiles](#profiles) and [providers](#providers). The main purpose profile section is to set up profiles which are to be used, their versions and/or file locations, and their default values. The purpose of provider section is to set up providers that are to be used and their credentials.
+
+```json
+{
+  "profiles": {
+    // ...
+  },
+  "providers": {
+   // ...
+  }
+}
+```
+
+## Profiles
+
+The profiles section consists of a record of all installed profiles. The key is the name of the profile and value is either semantic version string, a file URI or a [ProfileSettings](#ProfileSettings) object.
+
+```json
+{
+  "profiles": {
+    "myprofile1": "1.0.0",
+    "myprofile2": "file:path/to/profile.supr",
+    "myprofile3": {
+      // ...
+    }
+  }
+}
+```
+
+### ProfileSettings
+
+The ProfileSettings object contains either `file` or `version` property, analogous to the shortcut strings above and following optional properties:
+
+- `priority`: an array of strings containing provider names in desired order for failover
+- `providers`: an array of [ProfileProviderSettings](#ProfileProviderSettings) objects or URI strings, used for configuring providers for the profile. Not to be confused with top-level Providers record
+- `defaults`: a record of defaults for the usecase, key is usecase name, value is [UsecaseDefaults](#UsecaseDefaults) object
+
+```json
+{
+  "version": "1.0.0",
+  "priority": ["provider1", "provider2"],
+  "defaults": {
+    "myusecase": {
+      // ...
+    }
+  },
+  "providers": {
+    "provider1": {
+      // ...
+    },
+    "provider2": "file:path/to/provider.json"
+  }
+}
+```
+
+### UsecaseDefaults
+
+UsecaseDefaults is a record used to configure default values for a usecase, independent of provider. The key is usecase name and the value is an object with following optional properties.
+
+- `input`: an object providing default values according to usecase's input
+- `providerFailover`: a boolean specific whether provider failover should be allowed for the usecase
+
+```json
+{
+  "myusecase": {
+    "input": {
+      "someInputProperty": 42
+    },
+    "providerFailover": true
+  }
+}
+```
+
+### ProfileProviderSettings
+
+ProfileProviderSettings object is used for configuring specific providers for a profile. It can point to either file or specific variant and revision. It contains following optional property:
+
+- `defaults`: a record of defaults per usecase, key is usecase name and value is a [ProfileProviderDefaults](#ProfileProviderDefaults) object
+
+```json
+{
+  "file": "file:path/to/provider.json",
+  "defaults": {
+    "myusecase": {
+      // ...
+    }
+  }
+}
+```
+
+```json
+{
+  "mapVariant": "my-variant",
+  "mapRevision": "3",
+  "defaults": {
+    "myusecase": {
+      // ...
+    }
+  }
+}
+```
+
+### ProfileProviderDefaults
+
+ProfileProviderDefaults is an object with following optional properties:
+
+- `input`: an object providing default values according to usecase's input
+- `retryPolicy`: a [RetryPolicy](#RetryPolicy) object
+
+```json
+{
+  "input": {
+    "someInputProperty": 42
+  },
+  "retryPolicy": {
+    // ...
+  }
+}
+```
+
+### RetryPolicy
+
+RetryPolicy is used for setting up retry policy for a provider and usecase. There are currently two types of retry policy, `none` or `circuit-breaker`. When using `none`, no retry is attempted. When using `circuit-breaker`, several attemps are made with backoff. Following properties are used to configure the policy (all optional except kind). When using default values, `none` or `circuit-breaker` string can be used as shorthand instead of the object.
+
+- `kind`: `none` or `circuit-breaker`
+- `maxContiguousRetries`: maximum number of retry attempts, positive integer, default 5
+- `requestTimeout`: timeout after which a request fails, positive integer, milliseconds, default 30000
+- `backoff`: either string `exponential` or an object with following properties:
+    - `kind`: string `exponential`
+    - `start`: the initial delay time, optional, positive integer, milliseconds, default 2000
+    - `factor`: the factor by which is the delay time multiplied, optional, positive integer, default 2
+
+```json
+{
+  "kind": "circuit-breaker",
+  "maxContiguousRetries": 3,
+  "requestTimeout": 60000,
+  "backoff": {
+    "kind": "exponential",
+    "start": 1000,
+    "factor": 3
+  }
+}
+```
+
+## Providers
+
+The providers section consists of a record of all used providers. The key is the name of the provider and the value is either a file URI or a [ProviderSettings](#ProviderSettings) object.
+
+```json
+{
+  "providers": {
+    "provider1": "file:path/to/provider.json",
+    "provider2": {
+      // ...
+    }
+  }
+}
+```
+
+### ProviderSettings
+
+The ProviderSettings object has following optional properties:
+
+- `file`: a file URI string
+- `security`: an array of [SecurityValues](#SecurityValues) objects
+
+```json
+{
+  "file": "file:path/to/provider.json",
+  "security": [
+      {
+        // ...
+      }
+  ]
+}
+```
+
+### SecurityValues
+
+SecurityValues is an union of several types of security configuration objects: API Key, Basic Auth, Bearer Token or Digest. All of them have a property in common:
+
+- `id`: identifier of the security scheme, referenced in map
+
+#### API Key 
+API key uses provided API key in a header, body, path or query string (specified in provider.json)
+
+- `apikey`: string containing API key
+
+#### Basic Auth
+Basic Auth uses provided username and password and sends them base64 encoded in Authorization header as per [RFC 7617](https://datatracker.ietf.org/doc/html/rfc7617)
+
+- `username`: string containing user name
+- `password`: string containing password
+
+#### Bearer Token
+Bearer Token uses provided token and sends it in Authorization header as per [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750)
+
+- `token`: string containing bearer token
+
+#### Digest
+Digest uses provided token and sends it in Authorization header as per [RFC 2617](https://datatracker.ietf.org/doc/html/rfc2617).
+*This is not implemented yet.*
+
+- `digest`: string containing digest
+
+```json
+[
+  {
+    "id": "first",
+    "apikey": "my-api-key"
+  },
+  {
+    "id": "second",
+    "username": "myname",
+    "password": "mypass"
+  },
+  {
+    "id": "third",
+    "token": "my-bearer-token"
+  },
+  {
+    "id": "fourth",
+    "digest": "my-digest"
+  }
+]
+```
+
+## Example
+```json
+{
+  "profiles": {
+    "myprofile1": "1.0.0",
+    "myprofile2": "file:path/to/my/profile.supr",
+    "myprofile3": {
+      "version": "1.0.0",
+      "priority": ["provider1", "provider2"],
+      "defaults": {
+        "myusecase": {
+          "input": {
+            "someInputProperty": 42
+          },
+          "providerFailover": true
+        }
+      },
+      "providers": {
+        "provider1": {
+          "file": "file:path/to/provider.json",
+          "defaults": {
+            "myusecase": {
+              "input": {
+                "someInputProperty": 43
+              }
+            }
+          },
+          "retryPolicy": {
+            "kind": "circuit-breaker",
+            "maxContiguousRetries": 3,
+            "requestTimeout": 60000,
+            "backoff": {
+              "kind": "exponential",
+              "start": 1000,
+              "factor": 3
+            }
+          }
+        },
+        "provider2": "file:path/to/provider.json"
+      }
+    }
+  },
+  "providers": {
+    "provider1": "file:path/to/provider.json",
+    "provider2": {
+      "file": "file:path/to/provider.json",
+      "security": [
+          {
+            "id": "my-authentication",
+            "apikey": "my-api-key"
+          }
+      ]
+    }
+  }
+}
+```
