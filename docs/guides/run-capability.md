@@ -14,7 +14,7 @@ TODO: offline/fork/transfering to local setup guide
 
 ## Import capability to the project
 
-The capability needs to be first imported to your application. This guide describes using capability from local files instead of using the remote registry. You'll be simply copying the created artifacts to your production app.
+The capability needs to be first imported to your application. Depending on your previous steps, you may have created the capability in an isolated project. In that case, you will need to copy the files over to your production application.
 
 :::info
 It is recommended (although not necessary) to place the files onto the same relative paths.
@@ -215,7 +215,7 @@ async function main() {
 main();
 ```
 
-:::note
+:::info
 Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.
 
 For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js).
