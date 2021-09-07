@@ -1,19 +1,24 @@
 # Run Capability
 
-This guide describes how a capability can be used in any production Node.js application, without the use of Superface [remote registry](https://superface.ai/catalog).
+This guide describes how a capability can be used in any production Node.js application.
 
 ## Prerequisites
 
 - Existing Node.js [project set up](./setup-the-environment.md)
 - Existing [profile](./create-new-capability)
 - Existing [provider definition](./add-new-provider.md)
-- Existing [map between profile & the provider](./map-capability-to-provider.md)
+- Existing [map between the profile & the provider](./map-capability-to-provider.md)
+
+<!--
+TODO: offline/fork/transfering to local setup guide
 
 ## Import capability to the project
 
 The capability needs to be first imported to your application. This guide describes using capability from local files instead of using the remote registry. You'll be simply copying the created artifacts to your production app.
 
-> It is recommended (although not necessary) to place the files onto the same relative paths.
+:::info
+It is recommended (although not necessary) to place the files onto the same relative paths.
+:::
 
 ### Comlink files
 
@@ -31,7 +36,7 @@ The capability needs to be first imported to your application. This guide descri
 1. Open `/superface/super.json`
 2. Search for all references to `.supr`, `.suma` & `.json` files
 3. Make sure the relative path references are correct
-
+-->
 
 ## Configure provider authentication {#configure-security}
 
@@ -186,7 +191,7 @@ If `.env` is available, it should have the expected variables predefined. You ca
 
 If `.env` is not available, you can find the expected environment variables in `/superface/super.json`. Any value that starts with a dollar sign (`$`) is a reference to an env variable.
 
-## Write & run the app
+## Write node.js app
 
 Use Superface OneSDK to load & perform the use case:
 
@@ -210,12 +215,53 @@ async function main() {
 main();
 ```
 
-_Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.<br />For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js)._
+:::note
+Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.
+
+For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js).
+:::
+
+## Run the app
 
 You can then run your app that performs the use case.
 
 ```shell
 node app.js
 ```
+
+:::tip Offline Use
+To use capibility without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
+
+TODO: link to offline use guide
+:::
+
+### DEBUG
+
+Superface uses [DEBUG package](https://github.com/visionmedia/debug), which you can use when running or testing your app. To use it, you simply have to add environment variable `DEBUG="superface*"` before running tests.
+
+There are mutiple parts of Superface, which implemented this package and created debug context:
+
+in `OneSDK`:
+
+- `superface:config`
+- `superface:profile-parameter-validator`
+- `superface:map-interpreter`
+- `superface:http`, `superface:http:sensitive`
+- `superface:superjson`
+- `superface:failover`, `superface:failover:sensitive`
+- `superface:bound-profile-provider`
+- `superface:registry`
+- `superface:usecase`
+- `superface:lib/env`
+- `superface:events`
+- `superface:metric-reporter`
+
+in `Parser`:
+
+- `superface-parser:map-validator`
+- `superface-parser:profile-io-analyzer`
+
+To know more about setting up specific contexts, check out [conventions](https://github.com/visionmedia/debug#conventions) and [wildcards](https://github.com/visionmedia/debug#wildcards) of debug package.
+
 
 > Note: Later you'll be able to publish your capability to the Superface registry. This will give you many advantages over usage from the local files, like: injecting latest map, provider failover, observability dashboard, any more. Stay tuned.
