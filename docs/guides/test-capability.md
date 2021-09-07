@@ -14,6 +14,12 @@ Since profile & provider are simple descriptions of entities and actions, we don
 
 Testing is easy since you simply perform the use case via OneSDK. Then, you test it as any other function. The only difference is that you want to make OneSDK use a specific provider when running in test. You can do that by specifying `provider` parameter inside options for `.perform` method.
 
+:::info SuperJson
+
+To know more about profiles, maps and their configurations in `super.json`, check out our documentation about **[Comlink](/comlink)**
+
+:::
+
 ### Setting up testing enviroment
 
 In this guide, we use `jest`, but it's up to you what testing framework will you choose.
@@ -392,33 +398,6 @@ To be added
 Since in this guide, we are using `jest` framework, we can run tests with its CLI tool and call `jest` within CLI or add it in `package.json` and run it with `npm` or `yarn`. 
 
 `jest` has multiple [CLI options](https://jestjs.io/docs/cli). It also has a flag `--updateSnapshot` to update snapshots, when modifying tests in some way.
-
-### DEBUG
-
-Superface uses [DEBUG package](https://github.com/visionmedia/debug), which you can use when testing or running your app. To use it, you simply have to add environment variable `DEBUG="superface*"` before running tests.
-
-There are mutiple parts of Superface, which implemented this package and created debug context:
-
-in `OneSDK`:
-- `superface:config`
-- `superface:profile-parameter-validator`
-- `superface:map-interpreter`
-- `superface:http`, `superface:http:sensitive`
-- `superface:superjson`
-- `superface:failover`, `superface:failover:sensitive`
-- `superface:bound-profile-provider`
-- `superface:registry`
-- `superface:usecase`
-- `superface:lib/env`
-- `superface:events`
-- `superface:metric-reporter`
-
-in `Parser`:
-
-- `superface-parser:map-validator`
-- `superface-parser:profile-io-analyzer`
-
-To know more about setting up specific contexts, check out [conventions](https://github.com/visionmedia/debug#conventions) and [wildcards](https://github.com/visionmedia/debug#wildcards) of debug package.
 
 ## Examples
 
