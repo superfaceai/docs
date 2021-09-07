@@ -221,14 +221,7 @@ describe('scope/profile-name/provider', () => {
       }
     );
 
-    testConfig.record(
-      { 
-        path: "src", 
-        dir: "usecase/1",
-        update: true,
-        hideHeaders: true,
-      }
-    );
+    testConfig.record({ path: "src" });
   });
 
   afterAll(async () => {
