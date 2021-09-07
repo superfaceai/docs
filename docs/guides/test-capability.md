@@ -1,4 +1,3 @@
-
 # Test Capability
 
 ### Prerequisites
@@ -106,10 +105,9 @@ describe('scope/profile-name/provider', () => {
     const input = {
       /* Input object as defined in the profile */
     };
-    const result = await profile
-      .useCases
-      .UseCaseName
-      .perform(input, { provider });
+    const result = await profile.useCases.UseCaseName.perform(input, {
+      provider,
+    });
 
     expect(result.isOk()).toBe(true);
   });
@@ -213,21 +211,19 @@ describe('scope/profile-name/provider', () => {
   let testConfig;
 
   beforeAll(() => {
-    testConfig = new TestConfig(
-      {
-        profile: 'scope/profile-name',
-        provider: 'provider-name',
-        useCase: 'first-usecase',
-      }
-    );
+    testConfig = new TestConfig({
+      profile: 'scope/profile-name',
+      provider: 'provider-name',
+      useCase: 'first-usecase',
+    });
 
-    testConfig.record({ path: "src" });
+    testConfig.record({ path: 'src' });
   });
 
   afterAll(async () => {
     await testConfig.endRecording();
   });
-    
+
   it('should return a result when called with ...', async () => {
     const input = {
       // ...
@@ -318,15 +314,15 @@ If you want to set up where will recordings and fixtures resides, you can enter 
 ```javascript
 const testConfig = new TestConfig(
   {},
-  { 
-    path: "src", 
-    dir: "some/dir", 
-    fixture: "test", 
-    mode: "record",
-    hideHeaders: true, 
+  {
+    path: 'src',
+    dir: 'some/dir',
+    fixture: 'test',
+    mode: 'record',
+    hideHeaders: true,
     update: true,
   }
-)
+);
 ```
 
 :::info
@@ -345,7 +341,7 @@ testConfig.record({
   path: 'src',
   fixture: 'my-fixture',
   update: true,
-  hideHeaders: true
+  hideHeaders: true,
 });
 
 // ... performs
@@ -354,23 +350,27 @@ await testConfig.endRecording();
 ```
 
 :::caution
-You can also set up `nockConfig` in `endRecording()` method, but `hideHeaders` option have to be set up in `record` or `TestConfig` constructor. 
+You can also set up `nockConfig` in `endRecording()` method, but `hideHeaders` option have to be set up in `record` or `TestConfig` constructor.
 :::
 
 #### `nock.back` recording
 
 - `setupNockBack()` sets up path to recording fixtures and mode of recording
 - `nockBackRecord()` starts recording
-- `endNockRecording()` ends recording - this also calls `nock.restore()` 
+- `endNockRecording()` ends recording - this also calls `nock.restore()`
 
 :::info
 Currently this approach does not support updating fixtures or hiding headers.
 :::
 
 ```javascript
-const testConfig = new TestConfig({})
+const testConfig = new TestConfig({});
 
-testConfig.setupNockBack({ path: 'src', fixture: 'nockBackTest', mode: 'record' });
+testConfig.setupNockBack({
+  path: 'src',
+  fixture: 'nockBackTest',
+  mode: 'record',
+});
 testConfig.nockBackRecord();
 
 // ... performs
@@ -388,7 +388,7 @@ To be added
 
 ## Running tests
 
-Since in this guide, we are using `jest` framework, we can run tests with its CLI tool and call `jest` within CLI or add it in `package.json` and run it with `npm` or `yarn`. 
+Since in this guide, we are using `jest` framework, we can run tests with its CLI tool and call `jest` within CLI or add it in `package.json` and run it with `npm` or `yarn`.
 
 `jest` has multiple [CLI options](https://jestjs.io/docs/cli). It also has a flag `--updateSnapshot` to update snapshots, when modifying tests in some way.
 

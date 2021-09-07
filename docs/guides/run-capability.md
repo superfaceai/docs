@@ -263,5 +263,4 @@ in `Parser`:
 
 To know more about setting up specific contexts, check out [conventions](https://github.com/visionmedia/debug#conventions) and [wildcards](https://github.com/visionmedia/debug#wildcards) of debug package.
 
-
 > Note: Later you'll be able to publish your capability to the Superface registry. This will give you many advantages over usage from the local files, like: injecting latest map, provider failover, observability dashboard, any more. Stay tuned.

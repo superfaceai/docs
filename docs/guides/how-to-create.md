@@ -11,8 +11,7 @@ First let's cover the terms you will deal with throughout this guide. The Superf
 Let's unpack this:
 
 - **Capability** represents a functionality that serves a business need. For example: sending emails, geocoding a postal address, or tracking a package.
-- **Profile** is a file with extension `.supr` which describes the capability both for the computer and the developer in the Comlink language.
-It consists of one or many _use-cases_.
+- **Profile** is a file with extension `.supr` which describes the capability both for the computer and the developer in the Comlink language. It consists of one or many _use-cases_.
 - **Use-Case** describes a specific situation where the capability can be used - its expected input and result data. It's a part of the `.supr` file. For example:
   - the [Send SMS capability](https://superface.ai/communication/send-sms@1.0.1) contains two use-cases: _Send SMS message_ and _Retrieve Message Status_.
   - for the [Geocoding capability](https://superface.ai/address/geocoding@3.0.1) contains two use-cases: _Geocode address_ and _Reverse geocode_.
