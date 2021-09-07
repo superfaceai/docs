@@ -17,6 +17,14 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
 
+  scripts: [
+    {
+      src: '/docs/crisp.js',
+      'crisp-website-id': process.env.CRISP_WEBSITE_ID || '',
+      defer: true,
+    },
+  ],
+
   themeConfig: {
     navbar: {
       title: undefined,
@@ -99,8 +107,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
-          editUrl:
-            'https://github.com/superfaceai/docs/edit/main/',
+          editUrl: 'https://github.com/superfaceai/docs/edit/main/',
           remarkPlugins: [remarkDeflist],
         },
         theme: {

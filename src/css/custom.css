@@ -37,6 +37,10 @@ html[data-theme='dark'] {
   --ifm-background-surface-color: var(--tailwind-gray-900);
 }
 
+button[class*='backToTopButton'] {
+  display: none;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;
