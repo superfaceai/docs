@@ -27,11 +27,24 @@ module.exports = {
         'guides/map-capability-to-provider',
         'guides/run-capability',
         'guides/test-capability',
+        'guides/publishing',
       ],
     },
   ],
   providerAvailabilitySidebar: [
     'guides/find-provider-by-name',
     'guides/add-new-provider',
+  ],
+  comlinkReferenceSidebar: [
+    {
+      type: 'category',
+      label: 'Comlink References',
+      collapsed: false,
+      items: [
+        { type: 'doc', id: 'comlink/reference/profile', label: 'Profile' },
+        { type: 'doc', id: 'comlink/reference/map', label: 'Map' },
+        { type: 'doc', id: 'comlink/reference/provider', label: 'Provider' },
+      ],
+    },
   ],
 };

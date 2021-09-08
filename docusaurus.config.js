@@ -17,6 +17,14 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
 
+  scripts: [
+    {
+      src: '/docs/crisp.js',
+      'crisp-website-id': process.env.CRISP_WEBSITE_ID || '',
+      defer: true,
+    },
+  ],
+
   themeConfig: {
     navbar: {
       title: undefined,
@@ -47,6 +55,12 @@ module.exports = {
           to: '/dashboard',
           label: 'Go to Dashboard',
           position: 'right',
+        },
+        {
+          href: 'https://github.com/superfaceai/docs',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
@@ -93,8 +107,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
-          // editUrl:
-          //   'https://github.com/superfaceai/docs/edit/main/',
+          editUrl: 'https://github.com/superfaceai/docs/edit/main/',
           remarkPlugins: [remarkDeflist],
         },
         theme: {

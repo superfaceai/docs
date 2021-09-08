@@ -1,8 +1,9 @@
 # Superface Documentation
 
-The official home of Superface docs.
 
-## Updating the docs
+This repository contains the documentation website code and Markdown source files for https://superface.ai/docs.
+
+## Contribute to docs
 
 1. ### Run the docs locally
 
@@ -57,16 +58,15 @@ The official home of Superface docs.
 - Once your changes are verified and reviewed by another pair of eyes, it is ready to be merged to `main`.<br />
   _Merging will automatically deploy `main` branch to production._
 
----
+
+## Tech Stack
+
+These docs are built using [Docusaurus 2](https://docusaurus.io/).
 
 <details>
-  <summary><strong>Tech Stack</strong></summary>
-  
-  <br />
-  These docs are built using https://docusaurus.io/.
+  <summary><strong>Details</strong></summary>
 
-The site is deployed on [Vercel](https://vercel.com/) to
-[`docs`](https://vercel.com/superface/docs) project.
+The site is deployed on [Vercel](https://vercel.com/).
 
 All deployments are automated via GitHub Actions and you can keep track of them
 in [the repository's environments](https://github.com/superfaceai/docs/deployments).
@@ -81,5 +81,8 @@ If you'd like to build locally:
 ```bash
 yarn build
 ```
-
 </details>
+
+## License
+
+The Superface documentation is licensed under a [Creative Commons Attribution 4.0 International license](./LICENSE).

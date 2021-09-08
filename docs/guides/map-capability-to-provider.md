@@ -1,6 +1,6 @@
 # Map capability to a provider
 
-_Map_ is a [Comlink](../comlink/comlink-intro.mdx) document that defines how a specific capability is fulfilled by a provider. It creates a mapping between the abstract profile and the concrete HTTP requests necessary to integrate with the provider.
+_Map_ is a [Comlink](../comlink/index.mdx) document that defines how a specific capability is fulfilled by a provider. It creates a mapping between the abstract profile and the concrete HTTP requests necessary to integrate with the provider.
 
 ## Setup
 

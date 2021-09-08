@@ -49,6 +49,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_SCOPE }}
+          alias-domains: pr-{{PR_NUMBER}}-superface-docs.${{ secrets.VERCEL_DOMAIN }}
 
       - uses: bobheadxi/deployments@v0.4.3
         name: Finish deployment
