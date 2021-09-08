@@ -230,7 +230,7 @@ node app.js
 ```
 
 :::tip Offline Use
-To use capibility without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
+To use capability without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
 
 <!-- TODO: link to offline use guide -->
 :::
@@ -246,7 +246,7 @@ DEBUG="superface*" node app.js
 To observe API calls, you can use `superface:http` debug context.
 
 :::info Credentials
-If you want to debug sensitive information, you can use context `superface:http:sensitive`.
+If you want to debug sensitive information, you can use context `superface:http:sensitive`
 :::
 
 :::note Other debug contexts
