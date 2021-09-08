@@ -243,12 +243,19 @@ OneSDK uses the [debug package](https://github.com/visionmedia/debug) which is u
 DEBUG="superface*" node app.js
 ```
 
-To observe API calls, you can use `superface:http` debug context.
+To observe just the API calls, you can use `superface:http` debug context:
 
-:::info Credentials
-If you want to debug sensitive information, you can use context `superface:http:sensitive`
+```shell
+DEBUG="superface:http*" node app.js
+```
+
+:::caution Sensitive Output
+
+Using the `superface:http*` context will output full HTTP requests and responses including API credentials and other sensitive data. 
+
 :::
 
-:::note Other debug contexts
+
+<!-- :::note Other debug contexts
 There are mutiple parts of Superface, which implemented this package and created debug context, you can find more about these contexts in [OneSDK repository](https://github.com/superfaceai/one-sdk-js#usage) or [Parser repository](https://github.com/superfaceai/parser) on Github.
-:::
+::: -->
