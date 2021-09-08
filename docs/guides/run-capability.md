@@ -215,9 +215,9 @@ async function main() {
 main();
 ```
 
-:::info
-Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.
+_Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use._
 
+:::info
 For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js).
 :::
 
@@ -232,10 +232,10 @@ node app.js
 :::tip Offline Use
 To use capibility without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
 
-TODO: link to offline use guide
+<!-- TODO: link to offline use guide -->
 :::
 
-### DEBUG
+### Observe and debug API calls
 
 OneSDK uses the [debug package](https://github.com/visionmedia/debug) which is useful for observing the behavior of the SDK and debugging. To use it, set environment variable to `DEBUG="superface*"` before running the application:
 
@@ -243,28 +243,12 @@ OneSDK uses the [debug package](https://github.com/visionmedia/debug) which is u
 DEBUG="superface*" node app.js
 ```
 
+To observe API calls, you can use `superface:http` debug context.
 
-There are mutiple parts of Superface, which implemented this package and created debug context:
+:::info Credentials
+If you want to debug sensitive information, you can use context `superface:http:sensitive`.
+:::
 
-in `OneSDK`:
-
-- `superface:config`
-- `superface:profile-parameter-validator`
-- `superface:map-interpreter`
-- `superface:http`, `superface:http:sensitive`
-- `superface:superjson`
-- `superface:failover`, `superface:failover:sensitive`
-- `superface:bound-profile-provider`
-- `superface:registry`
-- `superface:usecase`
-- `superface:lib/env`
-- `superface:events`
-- `superface:metric-reporter`
-
-in `Parser`:
-
-- `superface-parser:map-validator`
-- `superface-parser:profile-io-analyzer`
-
-To know more about setting up specific contexts, check out [conventions](https://github.com/visionmedia/debug#conventions) and [wildcards](https://github.com/visionmedia/debug#wildcards) of debug package.
-
+:::note Other debug contexts
+There are mutiple parts of Superface, which implemented this package and created debug context, you can find more about these contexts in [OneSDK repository](https://github.com/superfaceai/one-sdk-js#usage) or [Parser repository](https://github.com/superfaceai/parser) on Github.
+:::
