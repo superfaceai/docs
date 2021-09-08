@@ -183,17 +183,17 @@ _Replace `<scheme-id>` with the actual security scheme ID defined in the provide
 
 </details>
 
-## Set necessary environment variables
+## Set environment variables
 
 For apps running the capabilities that require authentication, you'll typically want to supply the providers' API keys via environment variables (see [configuration above](#configure-security)).
 
-If `.env` is available, it should have the expected variables predefined. You can them simply fill in the values. Then install [`dotenv`](https://www.npmjs.com/package/dotenv) package that will load the `.env` file for you.
+If `.env` file exists and you used the CLI, the required environment variables will be present in the file. Fill in the providers' API keys. Then install the [`dotenv`](https://www.npmjs.com/package/dotenv) package to load the `.env` file.
 
-If `.env` is not available, you can find the expected environment variables in `/superface/super.json`. Any value that starts with a dollar sign (`$`) is a reference to an env variable.
+If `.env` file doesn't exist, you can find the expected environment variables in `/superface/super.json`. Any value that starts with a dollar sign (`$`) is a reference to an environment variable.
 
-## Write node.js app
+## Write Node.js app
 
-Use Superface OneSDK to load & perform the use case:
+Use the OneSDK to load and perform the use case:
 
 ```javascript title="app.js" {8,11,12}
 // If you're using .env file, you should also install and init `dotenv` package
@@ -223,7 +223,7 @@ For details on SuperfaceClient API, please consult [OneSDK reference](/reference
 
 ## Run the app
 
-You can then run your app that performs the use case.
+Now run the application to perform the use case and check the results:
 
 ```shell
 node app.js
@@ -237,7 +237,12 @@ TODO: link to offline use guide
 
 ### DEBUG
 
-Superface uses [DEBUG package](https://github.com/visionmedia/debug), which you can use when running or testing your app. To use it, you simply have to add environment variable `DEBUG="superface*"` before running tests.
+OneSDK uses the [debug package](https://github.com/visionmedia/debug) which is useful for observing the behavior of the SDK and debugging. To use it, set environment variable to `DEBUG="superface*"` before running the application:
+
+```shell
+DEBUG="superface*" node app.js
+```
+
 
 There are mutiple parts of Superface, which implemented this package and created debug context:
 
@@ -263,4 +268,3 @@ in `Parser`:
 
 To know more about setting up specific contexts, check out [conventions](https://github.com/visionmedia/debug#conventions) and [wildcards](https://github.com/visionmedia/debug#wildcards) of debug package.
 
-> Note: Later you'll be able to publish your capability to the Superface registry. This will give you many advantages over usage from the local files, like: injecting latest map, provider failover, observability dashboard, any more. Stay tuned.
