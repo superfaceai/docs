@@ -21,55 +21,29 @@ To know more about profiles, maps and their configurations in `super.json`, chec
 
 ### Setting up testing enviroment
 
-In this guide, we use `jest`, but it's up to you what testing framework will you choose.
-
-Install necessary packages into your project
+Install necessary packages into your project:
 
 ```shell
-yarn add -D jest
+npm install --save-dev jest
 ```
-
-<details>
-<summary>if you are using typescript</summary>
-
-```shell
-yarn add -D jest @types/jest ts-jest
-```
-
-to run jest with typescript, create jest configuration file
-
-```javascript title="jest.config.js"
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  rootDir: 'src/',
-};
-```
-
-</details>
 
 ### Write a test for the provider map
 
-If you [configured security](#configure-security) you have to load environment variables, in this guide we use `dotenv` to load enviroment variables and we import `@superfaceai/one-sdk` to perform our usecases.
+Use OneSDK like in [Run Capability](./run-capability#write-node.js-app) and test out result coming from perform.
 
-:::info
-In example below we declare variables for `sdk`, `profile` and `provider` at top level test, you can structure your tests by profile with multiple providers, or even having one test with multiple profiles, but **you have to cover all usecases within map if you want to publish it** in [station](https://github.com/superfaceai/station).
-:::
-
-```javascript title="profile.provider.test.js" {1,4,8-10,17-20}
+```javascript title="profile.provider.test.js"
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
 describe('scope/profile-name/provider', () => {
   let sdk, profile, provider;
 
   beforeAll(async () => {
-    require('dotenv').config();
     sdk = new SuperfaceClient();
     profile = await sdk.getProfile('scope/profile-name');
-    provider = await sdk.getProvider('provider-name');
+    provider = await sdk.getProvider('provider');
   });
 
-  it('should return a result when called with ...', async () => {
+  it('returns a result when called with ...', async () => {
     const input = {
       /* Input object as defined in the profile */
     };
@@ -82,66 +56,33 @@ describe('scope/profile-name/provider', () => {
 });
 ```
 
-<details>
+:::caution
+This test example will hit live APIs.
 
-<summary>typescript example with typed client</summary>
+If your capabilities require authorization, you can load keys from enviroment variables as described in [Run Capability](./run-capability#set-environment-variables)
 
-```typescript title="profile.provider.test.ts"
-import dotenv from 'dotenv';
-import { SuperfaceClient } from 'superface/sdk';
-
-describe('scope/profile-name/provider', () => {
-  let sdk: SuperfaceClient, profile: Profile, provider: Provider;
-
-  beforeAll(async () => {
-    dotenv.config();
-
-    sdk = new SuperfaceClient();
-    profile = await sdk.getProfile('scope/profile-name');
-    provider = await sdk.getProvider('provider-name');
-  });
-
-  it('should return a result when called with ...', async () => {
-    const input = {
-      /* Input object as defined in the profile */
-    };
-    const result = await profile.useCases.UseCaseName.perform(input, {
-      provider,
-    });
-
-    expect(result.isOk()).toBe(true);
-  });
-});
-```
-
-</details>
-
-### Asserting result
-
-Usually we want to assert result comming from our map. To do that we can define results manually in each test or use jest snapshots. If you prefer to not use jest snaphots and don't want to manually write testing cases, you can use Superface CLI to generate tests for you, based on test configuration file `sf-test-config.json`.
-
-:::tip CLI HELP
-[Setting up test configuration file](#set-test-configuration-file) will be described in more detail later.
-
-```shell
-npx superface test --generate
-```
-
+If you want to reduce amount of calls to live APIs, see section about [recording traffic](#recording-traffic). 
 :::
 
-:::info
-To use jest snapshots, you have to omit error timestamps before storing snapshot of it. This is resolved in Superface [testing library](#writing-tests-lib) described later.
-:::
+### Asserting results
 
-```javascript title="profile.provider.test.js" {20-23}
+Usually we want to assert result coming from our map. Result from perform always returns a `Result` type that is either `Ok` or `Err`. This follows the [neverthrow](https://github.com/supermacro/neverthrow) approach. 
+
+We can use methods `isOk()` and `isErr()` to narrow down the result to either `result.value` or `result.error` properties which we can then test.
+
+Or we can use method `unwrap()`, which is less safe because it can throw an error.
+
+```javascript title="profile.provider.test.js" {21-24}
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
 describe('scope/profile-name/provider', () => {
   let sdk, profile, provider;
 
   beforeAll(async () => {
-    ...
-  })
+    sdk = new SuperfaceClient();
+    profile = await sdk.getProfile('scope/profile-name');
+    provider = await sdk.getProvider('provider');
+  });
 
   it('should return a result when called with ...', async () => {
     const input = {
@@ -159,21 +100,81 @@ describe('scope/profile-name/provider', () => {
   });
 });
 ```
+:::caution
+If `result.isErr()` is true and you call `result.unwrap()`, it will throw an error.
+
+For this situation, we recommend using assertions similar to this:
+```javascript
+expect(result.isErr()).toBe(true);
+expect(() => { result.unwrap() }).toThrow()
+```
+:::
+
+### Using Jest snapshots
+
+You can also use jest snapshots for asserting result to automate capturing of results:
+
+```javascript title="profile.provider.test.js" {21-22}
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
+
+describe('scope/profile-name/provider', () => {
+  let sdk, profile, provider;
+
+  beforeAll(async () => {
+    sdk = new SuperfaceClient();
+    profile = await sdk.getProfile('scope/profile-name');
+    provider = await sdk.getProvider('provider');
+  });
+
+  it('should return a result when called with ...', async () => {
+    const input = {
+      // ...
+    }
+    const result = await profile.getUseCase('UseCaseName').perform(
+      input,
+      { provider }
+    );
+
+    expect(result.isOk()).toBe(true);
+    expect(result.unwrap()).toMatchSnapshot();
+  });
+});
+```
+
+:::caution
+If `result.isErr()` is true, `result.unwrap()` will throw an error.
+
+To capture snapshot of error, you can use jest matcher `toThrowErrorMatchingSnapshot()`:
+```javascript
+expect(result.isErr()).toBe(true);
+expect(() => { result.unwrap() }).toThrowErrorMatchingSnapshot()
+```
+
+More about this matcher [here](https://jestjs.io/docs/expect#tothrowerrormatchingsnapshothint).
+:::
+
+<!-- 
+Commented out for now, will investigate more about error format.
+
+:::caution
+Be aware that `result.error` might contain timestamp and you have to omit it before storing snapshot of it.
+::: -->
 
 ### Recording traffic
 
-If you don't want to hit providers API all the time, you can set up recording with `nock` and use mocked responses in development.
+If you don't want to hit providers API all the time, you can set up recording with [`nock`](https://github.com/nock) and use mocked responses in development.
 
-There are four modes of `nock.back` recording support and playback, you can read more about them [here](https://github.com/nock/nock#modes). You can also use `nock.recorder.rec()` and `nock.recorder.play()` and handle recordings yourself (more about `rec` and `play` [here](https://github.com/nock/nock#recording)).
-
-```javascript title="profile.provider.test.js" {1,9-10,18,24}
+```javascript title="profile.provider.test.js" {2,12-13,21,27}
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
 const nockBack = require('nock').back;
 
 describe('scope/profile-name/provider', () => {
   let sdk, profile, provider;
 
   beforeAll(async () => {
-    // ...
+    sdk = new SuperfaceClient();
+    profile = await sdk.getProfile('scope/profile-name');
+    provider = await sdk.getProvider('provider');
 
     nockBack.fixtures = '/path/to/fixtures/';
     nockBack.setMode('record');
@@ -200,7 +201,7 @@ describe('scope/profile-name/provider', () => {
 });
 ```
 
-## Test the provider map with Superface testing library {#writing-tests-lib}
+<!-- ## Test the provider map with Superface testing library {#writing-tests-lib}
 
 To make it easier you can write your tests with class `TestConfig` from testing library `@superfaceai/testing-lib`.
 
@@ -213,7 +214,7 @@ describe('scope/profile-name/provider', () => {
   beforeAll(() => {
     testConfig = new TestConfig({
       profile: 'scope/profile-name',
-      provider: 'provider-name',
+      provider: 'provider',
       useCase: 'first-usecase',
     });
 
@@ -250,7 +251,7 @@ Configuration itself can be represented either with corresponding instances or a
 ```javascript
 const testConfig = new TestConfig({
   profile: 'scope/profile-name',
-  provider: 'provider-name',
+  provider: 'provider',
 });
 ```
 
@@ -259,7 +260,7 @@ const client = new SuperfaceClient();
 const testConfig = new TestConfig({
   client,
   profile: client.getProfile('scope/profile-name'),
-  provider: client.getProvider('provider-name'),
+  provider: client.getProvider('provider'),
 });
 ```
 
@@ -267,7 +268,7 @@ const testConfig = new TestConfig({
 const testConfig = new TestConfig({});
 testConfig.setup({
   profile: 'scope/profile-name',
-  provider: 'provider-name',
+  provider: 'provider',
 });
 ```
 
@@ -384,13 +385,17 @@ To be added
 
 ### Setting up test configuration file {#set-test-configuration-file}
 
-To be added
+To be added -->
 
 ## Running tests
 
-Since in this guide, we are using `jest` framework, we can run tests with its CLI tool and call `jest` within CLI or add it in `package.json` and run it with `npm` or `yarn`.
+When your tests are ready, you can run them with Jest CLI tool:
 
-`jest` has multiple [CLI options](https://jestjs.io/docs/cli). It also has a flag `--updateSnapshot` to update snapshots, when modifying tests in some way.
+```shel
+npx jest
+```
+
+You can use `--updateSnapshot` flag when modifying tests or when the expected results change. See also [jest documentation](https://jestjs.io/docs/cli) for further CLI options.
 
 ## Examples
 

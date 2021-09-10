@@ -251,7 +251,7 @@ DEBUG="superface:http*" node app.js
 
 :::caution Sensitive Output
 
-Using the `superface:http*` context will output full HTTP requests and responses including API credentials and other sensitive data. 
+Using the `superface:http*` context will output full HTTP requests and responses including API keys and other sensitive data. 
 
 :::
 
