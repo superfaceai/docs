@@ -15,6 +15,7 @@ module.exports = {
     //   label: 'Overview'
     // },
     'getting-started',
+    'integrations-monitoring',
     {
       type: 'category',
       label: 'How to create a capability',

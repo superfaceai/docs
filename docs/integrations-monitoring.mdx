@@ -1,0 +1,67 @@
+# Integrations monitoring
+
+Superface comes with out-of-the-box monitoring of integrations used by your App. With Superface project you will get insights on your App's API dependencies and their health status. In case of use-case failure, you will also receive an email notification with details about the failing API calls.
+
+:::info
+
+This guide assumes you have created a Node.js app with first integration. If you missed that, see the previous step: [Getting&nbsp;Started](./getting-started.mdx)
+
+:::
+
+## Create new project
+
+Create a new project in [Superface dashboard](/dashboard).
+
+<!-- TODO: screenshot -->
+
+## Get your SDK token
+
+Copy the project's SDK token.
+
+## Use the SDK token with your Application
+
+In command line, set the token as `SUPERFACE_SDK_TOKEN` environment variable:
+
+```shell
+export SUPERFACE_SDK_TOKEN="<your token>"
+```
+
+Run your application again:
+
+```shell
+node index.js
+```
+
+## Check your dashboard
+
+Observe how are the capabilities used by your application.
+
+<!-- TODO: screenshot -->
+
+## Monitor your API dependencies
+
+In the case of API failure Superface will email you with the notification.
+
+<!-- TODO: screenshot -->
+
+<!--
+
+## Next steps
+
+### Install other capabilities
+
+Lorem ipsum.
+
+### Configure additional providers
+
+Lorem ipsum.
+
+### Setup failover
+
+Lorem ipsum.
+
+### Add custom capabilties
+
+Lorem ipsum. [How to Create a Capability](guides/how-to-create).
+
+-->
