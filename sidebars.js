@@ -14,6 +14,7 @@ module.exports = {
     //   id: 'guides-intro',
     //   label: 'Overview'
     // },
+    'getting-started',
     {
       type: 'category',
       label: 'How to create a capability',

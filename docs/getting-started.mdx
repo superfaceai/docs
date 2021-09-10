@@ -1,169 +1,134 @@
-import useBaseUrl from '@docusaurus/useBaseUrl';
+# Getting Started
 
-# Getting started with Superface 
+Superface is all about you, the consumer of API capabilities. To get started, first pick a capability and its provider, install it to your App and use Superface OneSDK to make the call.
 
 ## How Superface works
 
-  Superface is all about you, the consumer of API capabilities. To get started, first pick a capability and its provider, install it to your application and use Superface OneSDK to make the call.
+Unlike every other API client, absolutely **no API information is hard-coded in your App or the SDK**.
 
-  Unlike every other API client, **absolutely no API information is hard-coded in your application or the SDK**. 
+The instructions how to make a call are downloaded during your App runtime and resolved by OneSDK to make a **direct HTTP** call to the API. The calls go straight from your App to the provider's API and are **never proxied through Superface**. This lets you change the instructions at runtime without updating or redeploying your App. You can even change providers while it’s running.
 
-  The instructions how to make a call are downloaded during your App runtime and resolved by OneSDK to make a **direct HTTP** call to the API. The calls go straight from your App to the provider's API and are **never proxied through Superface**. This lets you change the instructions at runtime without updating or redeploying your app. You can even change providers while it’s running...
-  
-  <img src={useBaseUrl('/img/how-it-works-detail.png')} alt="how it works" width="500px" />
+<img
+  src={require('../assets/getting-started-how-it-works.png').default}
+  width="800"
+  alt="During the app development you install a capability and OneSDK. In the runtime the instructions for calling the API are downloaded from the Superface registry and the API is called directly from your app."
+/>
 
-  The following steps will guide you how to get started with Superface and OneSDK in 3 minutes.
+## Superface in 3 minutes
 
-1. ### Pick a capability
-	  
-    Decide what capability you would like to use in your application. A capability is described by its profile with unique id. In this guide, we will use the capability **List user repositories of a VCS** like GitHub or Gitlab. It has id `vcs/user-repos`.
-    
-    <sup>To see detailed description of the capability, check its <a href="https://superface.ai/vcs/user-repos">profile detail page ➚</a>.</sup><br />
-    <sup>Discover more <a>capabilties at Superface.ai ➚</a>.</sup>
+The following steps will guide you how to quickly get started with Superface and OneSDK.
 
-1. ### Pick provider
-	
-    The next step is to **pick a provider you would like to use**. In this guide we will continue with `github`. 
+## Pick a capability
 
-    <sup>Find the list of capability providers at its <a href="https://superface.ai/vcs/user-repos">profile detail page ➚</a>.</sup><br />
+Decide what capability you would like to use in your App. A capability is described by its profile with unique ID.
 
-1. ### Install OneSDK
+In this guide, we will use the capability **List user repositories of a VCS** like GitHub or GitLab. Its ID is `vcs/user-repos`.
 
-    In your application directory, install the OneSDK library (`@superfaceai/one-sdk`):
+:::note
 
-    ```shell
-    $ npm install @superfaceai/one-sdk
-    ```
+To see a detailed description of the capability, check the [`vcs/user-repos` profile page](https://superface.ai/vcs/user-repos).
 
-1. ### Install capability
+You can discover more capabilities at [Superface.ai](https://superface.ai/catalog).
 
-    Next, add the `vcs/user-repos` capability to your application using the Superface CLI (`@superfaceai/cli`):
- 
-    ```shell
-    $ npx @superfaceai/cli install vcs/user-repos
-    ```
+:::
 
-1. ### Configure provider
+## Pick a provider
 
-    The next step is to configure the provider. In our case we configure `github` for capability profile `vcs/user-repos`:
+The next step is to **pick a provider you would like to use**. In this guide we will use the `github`.
 
-    ```shell
-    $ npx @superfaceai/cli configure github --profile vcs/user-repos
-    ```
+:::note
 
-    <sup>In many cases this step may need to setup provider credentials. Since we are using the unauthenticatd GitHub API we can skip it for now. To learn how to authenticate providers check the <a href="#">provider authentication ➚</a>.</sup>
+Find the list of supported capability providers at [`vcs/user-repos` profile page](https://superface.ai/vcs/user-repos).
 
-1. ### Code
+:::
 
-    Finally, use OneSDK in your Application. Create the `index.js` with the following JavaScript code:
-	
-    ```js title="index.js"
-    const { SuperfaceClient } = require('@superfaceai/one-sdk');
-    const sdk = new SuperfaceClient();
+## Install OneSDK
 
-    async function main() {
-      // Load the capability profile
-      const profile = await sdk.getProfile('vcs/user-repos');
+In your App directory, install the OneSDK library (`@superfaceai/one-sdk`):
 
-      // Invoke the capability use case
-      const result = await profile
-        .getUseCase('UserRepos')
-        .perform({
-          user: 'superfaceai'
-        });
+```shell
+npm install @superfaceai/one-sdk
+```
 
-      // Handle the result
-      try {
-        const data = result.unwrap();
-        console.log(data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
+## Install the capability
 
-    main();
-    ```
+Next, add the `vcs/user-repos` capability to your App using the Superface CLI (`@superfaceai/cli`):
 
-1. ### Run
+```shell
+npx @superfaceai/cli install vcs/user-repos
+```
 
-    With capability installed, provider configured and OneSDK, it is the time to execute your App:
-    
-    ```shell
-    $ node index.js
-    ```
+## Configure the provider
 
-1. ### Introspecting HTTP communication
+The next step is to configure the provider. In our case we configure `github` for capability profile `vcs/user-repos`:
 
-    Set the environment variable `DEBUG` to `superface:http*` to see what API calls OneSDK makes to GitHub API:
+```shell
+$ npx @superfaceai/cli configure github --profile vcs/user-repos
+```
 
-    ```shell
-    $ DEBUG="superface:http*" node index.js
-    ```
+:::note Provider authentication
+In many cases you also need to set up provider credentials. Since we
+are using the unauthenticated GitHub API we can skip it for now.
 
-    <sup>Note this can print out potentially sensitive informations. Set the DEBUG value to `*` to see everything what is going in under the hood. Check OneSDK's documentation and source code for more details.</sup>
+<!-- TODO:
+To learn how to authenticate providers check the provider authentication.
+-->
 
-1. ### Understanding runtime integration
+:::
 
-    During the application runtime, OneSDK downloaded Comlink map from Superface servers. The Comlink map instructs the OneSDK how to make the direct call to GitHub API to perform the capability. 
+## Code
 
-    You can always check the Comlink map at profile's detail page for the given provider.
-    
-    [The latest map for `vcs/user-repos` and `github` ➚](https://superface.ai/raw/vcs/user-repos.github@1.0.2.suma).
+Finally, use OneSDK in your App. Create the `index.js` file with the following JavaScript code:
 
-<br /><br /><br /><br /><br />
+```js title="index.js"
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
+const sdk = new SuperfaceClient();
 
-## Integration monitoring
----
+async function main() {
+  // Load the capability profile
+  const profile = await sdk.getProfile('vcs/user-repos');
 
-Superface comes with out-of-the box monitoring of your application integrations. With Superface project you will get inst insights in your application's API dependencies and their health status. In the case of use case failure, you will also recieve an email notifications with details about failing API calls.
+  // Invoke the capability use case
+  const result = await profile.getUseCase('UserRepos').perform({
+    user: 'superfaceai',
+  });
 
-1. ### Create new project
+  // Handle the result
+  try {
+    const data = result.unwrap();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-    Create a new project in your Superface dashboard.
+main();
+```
 
-1. ### Get your SDK token
+## Run
 
-    Copy the project's SDK token. 
+With the capability installed, provider configured, and OneSDK, it is the time to execute your App:
 
-1. ### Use the SDK token with your Application
+```shell
+node index.js
+```
 
-    In command line, set the token as `SUPERFACE_SDK_TOKEN` environment variable:
+## Check the HTTP communication
 
-    ```shell
-    $ export SUPERFACE_SDK_TOKEN="your token"
-    ```
+Set the environment variable `DEBUG` to `superface:http*` to see API calls from OneSDK to GitHub API:
 
-    Run your application again
+```shell
+DEBUG="superface:http*" node index.js
+```
 
-    ```shell
-    $ node index.js
-    ```
+:::info
+This can print out potentially sensitive information.
 
-1. ### Check your dashboard
+Set the DEBUG value to `*` to see everything what is going in under the hood. Check [OneSDK's documentation and source code](https://github.com/superfaceai/one-sdk-js) for more details.
+:::
 
-    Observe how are the capabilities used by your application.
+## Understand runtime integration
 
-1. ### Monitor your API dependencies
+During the App runtime OneSDK downloaded a Comlink map from Superface servers. The Comlink map instructs the OneSDK how to make the direct call to GitHub API to perform the capability.
 
-    In the case of API failure Superface will email you with the notification .... 
-
-<br /><br /><br /><br /><br />
-
-## Next steps
----
-
-1. ### Install other capabilities
-
-    Lorem ipsum.
-
-1. ### Configure additional providers
-
-    Lorem ipsum.
-
-1. ### Setup failover
-
-    Lorem ipsum.
-
-1. ### Add custom capabilties
-
-    Lorem ipsum. [How to Create a Capability](guides/how-to-create).
+You can always check the Comlink map at profile's detail page for the given provider by clicking the "raw" link. For example here's the [latest map for `vcs/user-repos` and `github`](https://superface.ai/raw/vcs/user-repos.github@1.0.suma).
