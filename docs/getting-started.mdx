@@ -18,7 +18,9 @@ The instructions how to make a call are downloaded during your App runtime and r
 
 The following steps will guide you how to quickly get started with Superface and OneSDK.
 
-## Pick a capability
+<div class="count-steps-h3">
+
+### Pick a capability
 
 Decide what capability you would like to use in your App. A capability is described by its profile with unique ID.
 
@@ -32,7 +34,7 @@ You can discover more capabilities at [Superface.ai](https://superface.ai/catalo
 
 :::
 
-## Pick a provider
+### Pick a provider
 
 The next step is to **pick a provider you would like to use**. In this guide we will use the `github`.
 
@@ -42,7 +44,7 @@ Find the list of supported capability providers at [`vcs/user-repos` profile pag
 
 :::
 
-## Install OneSDK
+### Install OneSDK
 
 In your App directory, install the OneSDK library (`@superfaceai/one-sdk`):
 
@@ -58,7 +60,7 @@ Next, add the `vcs/user-repos` capability to your App using the Superface CLI (`
 npx @superfaceai/cli install vcs/user-repos
 ```
 
-## Configure the provider
+### Configure the provider
 
 The next step is to configure the provider. In our case we configure `github` for capability profile `vcs/user-repos`:
 
@@ -76,7 +78,7 @@ To learn how to authenticate providers check the provider authentication.
 
 :::
 
-## Code
+### Code
 
 Finally, use OneSDK in your App. Create the `index.js` file with the following JavaScript code:
 
@@ -105,7 +107,7 @@ async function main() {
 main();
 ```
 
-## Run
+### Run
 
 With the capability installed, provider configured, and OneSDK, it is the time to execute your App:
 
@@ -113,7 +115,7 @@ With the capability installed, provider configured, and OneSDK, it is the time t
 node index.js
 ```
 
-## Check the HTTP communication
+### Check the HTTP communication
 
 Set the environment variable `DEBUG` to `superface:http*` to see API calls from OneSDK to GitHub API:
 
@@ -127,11 +129,13 @@ This can print out potentially sensitive information.
 Set the DEBUG value to `*` to see everything what is going in under the hood. Check [OneSDK's documentation and source code](https://github.com/superfaceai/one-sdk-js) for more details.
 :::
 
-## Understand runtime integration
+### Understand runtime integration
 
 During the App runtime OneSDK downloaded a Comlink map from Superface servers. The Comlink map instructs the OneSDK how to make the direct call to GitHub API to perform the capability.
 
 You can always check the Comlink map at profile's detail page for the given provider by clicking the "raw" link. For example here's the [latest map for `vcs/user-repos` and `github`](https://superface.ai/raw/vcs/user-repos.github@1.0.suma).
+
+</div>
 
 ## Next step
 
