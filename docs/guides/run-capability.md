@@ -233,6 +233,7 @@ node app.js
 To use capability without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
 
 <!-- TODO: link to offline use guide -->
+
 :::
 
 ### Observe and debug API calls
@@ -251,10 +252,9 @@ DEBUG="superface:http*" node app.js
 
 :::caution Sensitive Output
 
-Using the `superface:http*` context will output full HTTP requests and responses including API keys and other sensitive data. 
+Using the `superface:http*` context will output full HTTP requests and responses including API keys and other sensitive data.
 
 :::
-
 
 <!-- :::note Other debug contexts
 There are mutiple parts of Superface, which implemented this package and created debug context, you can find more about these contexts in [OneSDK repository](https://github.com/superfaceai/one-sdk-js#usage) or [Parser repository](https://github.com/superfaceai/parser) on Github.

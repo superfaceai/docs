@@ -61,12 +61,12 @@ This test example will hit live APIs.
 
 If your capabilities require authorization, you can load keys from enviroment variables as described in [Run Capability](./run-capability#set-environment-variables)
 
-If you want to reduce amount of calls to live APIs, see section about [recording traffic](#recording-traffic). 
+If you want to reduce amount of calls to live APIs, see section about [recording traffic](#recording-traffic).
 :::
 
 ### Asserting results
 
-Usually we want to assert result coming from our map. Result from perform always returns a `Result` type that is either `Ok` or `Err`. This follows the [neverthrow](https://github.com/supermacro/neverthrow) approach. 
+Usually we want to assert result coming from our map. Result from perform always returns a `Result` type that is either `Ok` or `Err`. This follows the [neverthrow](https://github.com/supermacro/neverthrow) approach.
 
 We can use methods `isOk()` and `isErr()` to narrow down the result to either `result.value` or `result.error` properties which we can then test.
 
@@ -87,27 +87,31 @@ describe('scope/profile-name/provider', () => {
   it('should return a result when called with ...', async () => {
     const input = {
       // ...
-    }
-    const result = await profile.getUseCase('UseCaseName').perform(
-      input,
-      { provider }
-    );
+    };
+    const result = await profile
+      .getUseCase('UseCaseName')
+      .perform(input, { provider });
 
     expect(result.isOk()).toBe(true);
     expect(result.unwrap()).toEqual({
-      result: "test"
+      result: 'test',
     });
   });
 });
 ```
+
 :::caution
 If `result.isErr()` is true and you call `result.unwrap()`, it will throw an error.
 
 For this situation, we recommend using assertions similar to this:
+
 ```javascript
 expect(result.isErr()).toBe(true);
-expect(() => { result.unwrap() }).toThrow()
+expect(() => {
+  result.unwrap();
+}).toThrow();
 ```
+
 :::
 
 ### Using Jest snapshots
@@ -129,11 +133,10 @@ describe('scope/profile-name/provider', () => {
   it('should return a result when called with ...', async () => {
     const input = {
       // ...
-    }
-    const result = await profile.getUseCase('UseCaseName').perform(
-      input,
-      { provider }
-    );
+    };
+    const result = await profile
+      .getUseCase('UseCaseName')
+      .perform(input, { provider });
 
     expect(result.isOk()).toBe(true);
     expect(result.unwrap()).toMatchSnapshot();
@@ -145,15 +148,18 @@ describe('scope/profile-name/provider', () => {
 If `result.isErr()` is true, `result.unwrap()` will throw an error.
 
 To capture snapshot of error, you can use jest matcher `toThrowErrorMatchingSnapshot()`:
+
 ```javascript
 expect(result.isErr()).toBe(true);
-expect(() => { result.unwrap() }).toThrowErrorMatchingSnapshot()
+expect(() => {
+  result.unwrap();
+}).toThrowErrorMatchingSnapshot();
 ```
 
 More about this matcher [here](https://jestjs.io/docs/expect#tothrowerrormatchingsnapshothint).
 :::
 
-<!-- 
+<!--
 Commented out for now, will investigate more about error format.
 
 :::caution
