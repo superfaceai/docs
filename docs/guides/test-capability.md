@@ -9,9 +9,9 @@
 
 ## Test the provider map
 
-Since profile & provider are simple descriptions of entities and actions, we don't usually test them. However the maps typically contain non-trivial logic that benefits from being properly tested. In addition, you might want to run integration tests against the provider's sandbox or live servers.
+Out of profile, provider definition, and map, only the map contains logic which should be automatically tested. This document describes the process of testing the map using Jest and Nock libraries. Additionally these tests can be used as continuous integration tests against the provider's sandbox or live servers.
 
-Testing is easy since you simply perform the use case via OneSDK. Then, you test it as any other function. The only difference is that you want to make OneSDK use a specific provider when running in test. You can do that by specifying `provider` parameter inside options for `.perform` method.
+You can use OneSDK in your tests to perform the use cases through the provider's map. You need to explicitly set the provider to make sure that the correct map is being tested.
 
 :::info SuperJson
 
