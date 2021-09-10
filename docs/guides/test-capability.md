@@ -207,7 +207,7 @@ describe('scope/profile-name/provider', () => {
 });
 ```
 
-<!-- ## Test the provider map with Superface testing library {#writing-tests-lib}
+<!-- ## Use Superface testing library {#testing-lib}
 
 To make it easier you can write your tests with class `TestConfig` from testing library `@superfaceai/testing-lib`.
 
