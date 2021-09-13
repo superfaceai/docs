@@ -4,7 +4,10 @@ Superface comes with out-of-the-box monitoring of integrations used by your App.
 
 ## Set up integrations monitoring
 
-This guide assumes you have created a Node.js app with first integration. If you missed that, see the previous step: [Getting&nbsp;started](./getting-started.mdx)
+### Prerequisites
+
+- Node.js app with OneSDK and a capability set up; see [Getting&nbsp;started](./getting-started.mdx) to create one
+- Registered account on [superface.ai](https://superface.ai/) to access catalog and dashboard
 
 <div class="count-steps-h3">
 
@@ -36,13 +39,13 @@ node index.js
 
 Observe how are the capabilities used by your application.
 
-<!-- TODO: screenshot -->
+![Project detail from the dashboard with call statistics and health status of the VCS User Repositories use-case.](../assets/integrations-monitoring-dashboard.png)
 
 ### Monitor your API dependencies
 
 In the case of API failure Superface will email you with the notification.
 
-<!-- TODO: screenshot -->
+![Email stating that github has problems, try using a different provider.](../assets/integrations-monitoring-email.png)
 
 </div>
 
