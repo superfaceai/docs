@@ -23,11 +23,12 @@ The instructions how to make a call are downloaded during your App runtime and r
 
 The following steps will guide you how to quickly get started with Superface and OneSDK.
 
-:::info Prerequisites
+### Prerequisites
 
-This guide assumes you have [Node.js](https://nodejs.dev/) version 14 or newer installed.
+For the following guide you will need:
 
-:::
+- [Node.js](https://nodejs.dev/) version 14 or newer installed
+- Registered account on [superface.ai](https://superface.ai/) to access catalog and dashboard
 
 <div class="count-steps-h3">
 
@@ -93,6 +94,8 @@ To learn how to authenticate providers check the provider authentication.
 
 Finally, use OneSDK in your App. Create the `index.js` file with the following JavaScript code:
 
+<!-- prettier-ignore-start -->
+
 ```js title="index.js"
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
 const sdk = new SuperfaceClient();
@@ -102,9 +105,11 @@ async function main() {
   const profile = await sdk.getProfile('vcs/user-repos');
 
   // Invoke the capability use case
-  const result = await profile.getUseCase('UserRepos').perform({
-    user: 'superfaceai',
-  });
+  const result = await profile
+    .getUseCase('UserRepos')
+    .perform({
+      user: 'superfaceai',
+    });
 
   // Handle the result
   try {
@@ -117,6 +122,9 @@ async function main() {
 
 main();
 ```
+
+<!-- prettier-ignore-end -->
+
 
 ### Run
 
