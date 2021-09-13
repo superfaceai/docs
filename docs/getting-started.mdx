@@ -1,3 +1,5 @@
+import HowItWorksDiagram from '../assets/getting-started-how-superface-works.svg';
+
 # Getting started
 
 Superface is all about you, the consumer of API capabilities. To get started, first pick a capability and its provider, install it to your App and use Superface OneSDK to make the call.
@@ -8,11 +10,14 @@ Unlike every other API client, absolutely **no API information is hard-coded in 
 
 The instructions how to make a call are downloaded during your App runtime and resolved by OneSDK to make a **direct HTTP** call to the API. The calls go straight from your App to the provider's API and are **never proxied through Superface**. This lets you change the instructions at runtime without updating or redeploying your App. You can even change providers while it’s running.
 
-<img
-  src={require('../assets/getting-started-how-it-works.png').default}
-  width="800"
-  alt="During the app development you install a capability and OneSDK. In the runtime the instructions for calling the API are downloaded from the Superface registry and the API is called directly from your app."
-/>
+<figure>
+  <HowItWorksDiagram />
+  <figcaption>
+    During the app development you install a capability and OneSDK. In the
+    runtime the instructions for calling the API are downloaded from the
+    Superface registry and the API is called directly from your app.
+  </figcaption>
+</figure>
 
 ## Superface in 3 minutes
 
