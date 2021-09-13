@@ -21,7 +21,7 @@
   --tailwind-gray-800: #1f2937;
   --tailwind-gray-900: #111827;
 
-  --ifm-navbar-height: 4rem
+  --ifm-navbar-height: 4rem;
 }
 
 html[data-theme='dark'] {
@@ -192,4 +192,15 @@ aside.docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme
     display: block;
     flex-grow: 1;
   }
+}
+
+.count-steps-h3 {
+  counter-reset: stepsCounter;
+}
+
+.count-steps-h3 h3::before {
+  content: counter(stepsCounter) '.\0000a0';
+  counter-increment: stepsCounter;
+  /* needed because of invisible .anchor with display: block */
+  float: left;
 }

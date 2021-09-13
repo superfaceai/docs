@@ -14,10 +14,12 @@ module.exports = {
     //   id: 'guides-intro',
     //   label: 'Overview'
     // },
+    'getting-started',
+    'integrations-monitoring',
     {
       type: 'category',
       label: 'How to create a capability',
-      collapsed: false,
+      collapsed: true,
       items: [
         { type: 'doc', id: 'guides/how-to-create', label: 'Overview' },
         'guides/setup-the-environment',
