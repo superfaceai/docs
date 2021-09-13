@@ -1,6 +1,6 @@
 # How to Create a Capability: Overview
 
-While the [Superface catalog](https://superface.ai/catalog) continuously grows, it's possible your particular use-case or provider might be missing. This guide walks you through the process of authoring new capabilities, from setting up the environment to running the capability in production.
+This guide walks you through the process of authoring new capabilities, from setting up the environment to running the capability in production.
 
 ## Understand the Superface Terms
 
