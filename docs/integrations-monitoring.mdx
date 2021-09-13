@@ -2,23 +2,23 @@
 
 Superface comes with out-of-the-box monitoring of integrations used by your App. With Superface project you will get insights on your App's API dependencies and their health status. In case of use-case failure, you will also receive an email notification with details about the failing API calls.
 
-:::info
+## Set up integrations monitoring
 
-This guide assumes you have created a Node.js app with first integration. If you missed that, see the previous step: [Getting&nbsp;Started](./getting-started.mdx)
+This guide assumes you have created a Node.js app with first integration. If you missed that, see the previous step: [Getting&nbsp;started](./getting-started.mdx)
 
-:::
+<div class="count-steps-h3">
 
-## Create new project
+### Create new project
 
 Create a new project in [Superface dashboard](/dashboard).
 
 <!-- TODO: screenshot -->
 
-## Get your SDK token
+### Get your SDK token
 
 Copy the project's SDK token.
 
-## Use the SDK token with your Application
+### Use the SDK token with your Application
 
 In command line, set the token as `SUPERFACE_SDK_TOKEN` environment variable:
 
@@ -32,21 +32,25 @@ Run your application again:
 node index.js
 ```
 
-## Check your dashboard
+### Check your dashboard
 
 Observe how are the capabilities used by your application.
 
 <!-- TODO: screenshot -->
 
-## Monitor your API dependencies
+### Monitor your API dependencies
 
 In the case of API failure Superface will email you with the notification.
 
 <!-- TODO: screenshot -->
 
-<!--
+</div>
+
+<!-- TODO: Publish other topics first
 
 ## Next steps
+
+This covers basic usage of the Superface and OneSDK. Start using Superface capabilities with your existing apps or check out the following topics.
 
 ### Install other capabilities
 
@@ -60,8 +64,8 @@ Lorem ipsum.
 
 Lorem ipsum.
 
-### Add custom capabilties
+### Add custom capabilities
 
-Lorem ipsum. [How to Create a Capability](guides/how-to-create).
+If you need a capability which is not available in the catalog, see [How to create a capability](guides/how-to-create.md) guide to make a custom capability from scratch.
 
 -->
