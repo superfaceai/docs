@@ -4,13 +4,13 @@ slug: /reference/superjson
 
 # Super.json Reference
 
-Super.json is the main Superface configuration file. It contains the configuration about profiles, maps and providers used.
+`super.json` is the main Superface configuration file. It specifies which profiles, maps, and providers are used.
 
 ## Anatomy
 
-At the top level, super.json file consists of two sections: [profiles](#profiles) and [providers](#providers). the main purpose profile section is to set up profiles which are to be used, their versions and/or file locations, and their default values. The purpose of provider section is to set up providers that are to be used and their credentials.
+At the top level, the `super.json` file consists of two sections: [profiles](#profiles) and [providers](#providers). The profiles section contains a list of installed profiles, their versions or file locations, and default values. The providers section contains a list of installed providers and their credentials.
 
-```json
+```json title="superface/super.json" 
 {
   "profiles": {
     // ...
@@ -50,7 +50,7 @@ The ProfileSettings object contains either `file` or `version` property, analogo
   "version": "1.0.0",
   "priority": ["provider1", "provider2"],
   "defaults": {
-    "myusecase": {
+    "MyUseCase": {
       // ...
     }
   },
@@ -65,7 +65,7 @@ The ProfileSettings object contains either `file` or `version` property, analogo
 
 ### UsecaseDefaults
 
-UsecaseDefaults is a record used to configure default values for a usecase, independent of provider. The key is usecase name and the value is an object with following optional properties.
+UsecaseDefaults specifies default values for a use-case for all providers. The key is use-case's name and the value is an object with following optional properties:
 
 - `input`: an object providing default values according to usecase's input
 - `providerFailover`: a boolean specific whether provider failover should be allowed for the usecase
@@ -83,7 +83,7 @@ UsecaseDefaults is a record used to configure default values for a usecase, inde
 
 ### ProfileProviderSettings
 
-ProfileProviderSettings object is used for configuring specific providers for a profile. It can point to either file or specific variant and revision. It contains following optional property:
+ProfileProviderSettings object defines profile-specific configuration of providers. The provider definition can be either a file path (in `file` property), or a specific variant and revision (with `mapVariant` and `mapRevision`). It can also contain the optional property `defaults`:
 
 - `defaults`: a record of defaults per usecase, key is usecase name and value is a [ProfileProviderDefaults](#profileproviderdefaults) object
 
