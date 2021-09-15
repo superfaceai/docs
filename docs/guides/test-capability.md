@@ -24,7 +24,7 @@ To know more about profiles, maps and their configurations in `super.json`, chec
 Install necessary packages into your project:
 
 ```shell
-npm install --save-dev jest
+npm install --save-dev jest nock
 ```
 
 ### Write a test for the provider map
