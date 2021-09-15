@@ -1,33 +1,42 @@
-# Test & run new capability
+# Run Capability
 
-## Setup
+This guide describes how a capability can be used in any production Node.js application.
 
-This guide assumes you have a project set up with Superface installed. If you need to set up a new project, please reference the [Setup Guide](./setup-the-environment.md).
+## Prerequisites
 
-### Prerequisites
-
-- Existing profile
+- Existing Node.js [project set up](./setup-the-environment.md)
+- Existing [profile](./create-new-capability)
 - Existing [provider definition](./add-new-provider.md)
-- Existing [map between profile & the provider](./map-capability-to-provider.md)
-- [Superface CLI](/reference/cli) installed
-- [Superface OneSDK](/reference/one-sdk-js) installed
+- Existing [map between the profile & the provider](./map-capability-to-provider.md)
 
-## Compile Comlink documents
+<!--
+TODO: offline/fork/transfering to local setup guide
 
-Comlink is a simple description and integration language that is designed to be interpreted in any programming language by using the respective SDK. In order for the SDK to understand the operations defined in Comlink, it needs to be compiled.
+## Import capability to the project
 
-This is currently done manually<sup>\*</sup> using Superface CLI:
+The capability needs to be first imported to your application. Depending on your previous steps, you may have created the capability in an isolated project. In that case, you will need to copy the files over to your production application.
 
-```shell
-superface compile ./path/to-profile.supr
-superface compile ./path/to-map.provider.suma
-```
+:::info
+It is recommended (although not necessary) to place the files onto the same relative paths.
+:::
 
-_Running the above commands will create `*.ast.json` files next to the original Profile & Map. You should leave these files in their place._
+### Comlink files
 
-> Note: You have to recompile the profile or the map every time you make changes to them.
+1. Place Profile document (`*.supr`) and its compiled version (`*.ast.json`) to your project
+2. Place Map document (`*.suma`) and its compiled version (`*.ast.json`) to your project
+3. Place Provider document (`*.provider.json`) to your project
 
-<sub>\* The compilation will happen automatically in a future release of OneSDK. You won't have to compile manually using CLI.</sub>
+### Superface configuration
+
+1. If `.env` file is present, place it in the root of your project (or merge contents if you have one already existing)
+2. Place the entire `superface` directory to your project
+
+#### Ensure `super.json` has valid paths
+
+1. Open `/superface/super.json`
+2. Search for all references to `.supr`, `.suma` & `.json` files
+3. Make sure the relative path references are correct
+-->
 
 ## Configure provider authentication {#configure-security}
 
@@ -174,17 +183,17 @@ _Replace `<scheme-id>` with the actual security scheme ID defined in the provide
 
 </details>
 
-## Run in a Node.js app
-
-### Set necessary environment variables
+## Set environment variables
 
 For apps running the capabilities that require authentication, you'll typically want to supply the providers' API keys via environment variables (see [configuration above](#configure-security)).
 
-If you used CLI for configuring the security schemes, the chances are it created `.env` file for you. In that case, simply fill in the environment variables. Then install [`dotenv`](https://www.npmjs.com/package/dotenv) package that will load the `.env` file for you.
+If `.env` file exists and you used the CLI, the required environment variables will be present in the file. Fill in the providers' API keys. Then install the [`dotenv`](https://www.npmjs.com/package/dotenv) package to load the `.env` file.
 
-### Write & run the app
+If `.env` file doesn't exist, you can find the expected environment variables in `/superface/super.json`. Any value that starts with a dollar sign (`$`) is a reference to an environment variable.
 
-If you followed the directions throughout the guide, you should have a project properly configured with a working capability. You can then use Superface OneSDK to simply run it.
+## Write Node.js app
+
+Use the OneSDK to load and perform the use case:
 
 ```javascript title="app.js" {8,11,12}
 // If you're using .env file, you should also install and init `dotenv` package
@@ -206,51 +215,47 @@ async function main() {
 main();
 ```
 
-_Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use.<br />For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js)._
+_Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use._
 
-You can then run your app which should perform the use case.
+:::info
+For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js).
+:::
+
+## Run the app
+
+Now run the application to perform the use case and check the results:
 
 ```shell
 node app.js
 ```
 
-### Test the provider map
+:::tip Offline Use
+To use capability without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
 
-Since profile & provider are simple descriptions of entities and actions, we don't usually test them. However the maps typically contain non-trivial logic that benefits from being properly tested. In addition, you might want to run integration tests against the provider's sandbox or live servers.
+<!-- TODO: link to offline use guide -->
 
-Testing is easy since you simply perform the use case via OneSDK. Then, you test it as any other function. The only difference is that you want to make OneSDK use a specific provider when running in test. You can do that by specifying `provider` parameter inside options for `.perform` method.
+:::
 
-See the example of a test written using [`jest`](https://jestjs.io) framework:
+### Observe and debug API calls
 
-```javascript title="profile.provider.test.js" {10,16}
-require('dotenv').config();
-const { SuperfaceClient } = require('@superfaceai/one-sdk');
+OneSDK uses the [debug package](https://github.com/visionmedia/debug) which is useful for observing the behavior of the SDK and debugging. To use it, set environment variable to `DEBUG="superface*"` before running the application:
 
-describe('scope/profile-name', () => {
-  it('should return a result when called with ...', async () => {
-    const sdk = new SuperfaceClient();
-
-    const profile = await sdk.getProfile('scope/profile-name');
-
-    const provider = await sdk.getProvider('provider-name');
-
-    const result = await profile.getUseCase('UseCaseName').perform(
-      {
-        /* Input object as defined in the profile */
-      },
-      { provider }
-    );
-
-    expect(result.isOk()).toBe(true);
-  });
-});
+```shell
+DEBUG="superface*" node app.js
 ```
 
-For unit testing all of the Map's logic, you might need to mock the specific responses. We recommend using [`nock`](https://www.npmjs.com/package/nock) for this.
+To observe just the API calls, you can use `superface:http` debug context:
 
-## Examples
+```shell
+DEBUG="superface:http*" node app.js
+```
 
-- [Integration test for expected result data format](https://github.com/superfaceai/station/blob/main/capabilities/communication/send-message/maps/slack.test.ts)
-- [Integration test for expected output for given input](https://github.com/superfaceai/station/blob/main/capabilities/address/clean-address/maps/smartystreets.test.ts)
+:::caution Sensitive Output
 
-> If you wish to use your new capability in another Node.js application, please refer to [the following guide](./use-in-app.md).
+Using the `superface:http*` context will output full HTTP requests and responses including API keys and other sensitive data.
+
+:::
+
+<!-- :::note Other debug contexts
+There are mutiple parts of Superface, which implemented this package and created debug context, you can find more about these contexts in [OneSDK repository](https://github.com/superfaceai/one-sdk-js#usage) or [Parser repository](https://github.com/superfaceai/parser) on Github.
+::: -->
