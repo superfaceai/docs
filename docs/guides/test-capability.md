@@ -13,7 +13,7 @@ Out of profile, provider definition, and map, only the map contains logic which 
 
 You can use OneSDK in your tests to perform the use cases through the provider's map. You need to explicitly set the provider to make sure that the correct map is being tested.
 
-:::info SuperJson
+:::info super.json
 
 To know more about profiles, maps and their configurations in `super.json`, check out our documentation about **[Comlink](/comlink)**
 
@@ -103,7 +103,7 @@ describe('scope/profile-name/provider', () => {
 :::caution
 If `result.isErr()` is true and you call `result.unwrap()`, it will throw an error.
 
-For this situation, we recommend using assertions similar to this:
+For this situation you can use the [`toThrow` matcher](https://jestjs.io/docs/expect#tothrowerror):
 
 ```javascript
 expect(result.isErr()).toBe(true);
@@ -116,7 +116,7 @@ expect(() => {
 
 ### Using Jest snapshots
 
-You can also use jest snapshots for asserting result to automate capturing of results:
+You can use [Jest snapshots](https://jestjs.io/docs/snapshot-testing) to automatically capture the result:
 
 ```javascript title="profile.provider.test.js" {21-22}
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
@@ -147,7 +147,7 @@ describe('scope/profile-name/provider', () => {
 :::caution
 If `result.isErr()` is true, `result.unwrap()` will throw an error.
 
-To capture snapshot of error, you can use jest matcher `toThrowErrorMatchingSnapshot()`:
+To capture snapshot of error, you can use [`toThrowErrorMatchingSnapshot` matcher](https://jestjs.io/docs/expect#tothrowerrormatchingsnapshothint):
 
 ```javascript
 expect(result.isErr()).toBe(true);
@@ -156,7 +156,6 @@ expect(() => {
 }).toThrowErrorMatchingSnapshot();
 ```
 
-More about this matcher [here](https://jestjs.io/docs/expect#tothrowerrormatchingsnapshothint).
 :::
 
 <!--
@@ -168,7 +167,7 @@ Be aware that `result.error` might contain timestamp and you have to omit it bef
 
 ### Recording traffic
 
-If you don't want to hit providers API all the time, you can set up recording with [`nock`](https://github.com/nock) and use mocked responses in development.
+If you don't want to hit providers API upon each test run you can set up recording with [`nock`](https://github.com/nock) and use prerecorded responses during development.
 
 ```javascript title="profile.provider.test.js" {2,12-13,21,27}
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
@@ -395,13 +394,13 @@ To be added -->
 
 ## Running tests
 
-When your tests are ready, you can run them with Jest CLI tool:
+When your tests are ready run them with Jest CLI:
 
 ```shel
 npx jest
 ```
 
-You can use `--updateSnapshot` flag when modifying tests or when the expected results change. See also [jest documentation](https://jestjs.io/docs/cli) for further CLI options.
+You can use `--updateSnapshot` flag when modifying tests or when the expected results change. See [Jest documentation](https://jestjs.io/docs/cli) for further CLI options.
 
 ## Examples
 
