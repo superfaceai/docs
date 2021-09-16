@@ -34,17 +34,17 @@ At the top level, the `super.json` file consists of two sections: [profiles](#pr
             "MyUseCase": { // ProfileProviderDefaults
               "input": {
                 "someInputProperty": 43
+              },
+              "retryPolicy": { // RetryPolicy
+                "kind": "circuit-breaker",
+                "maxContiguousRetries": 3,
+                "requestTimeout": 60000,
+                "backoff": {
+                  "kind": "exponential",
+                  "start": 1000,
+                  "factor": 3
+                }
               }
-            }
-          },
-          "retryPolicy": { // RetryPolicy
-            "kind": "circuit-breaker",
-            "maxContiguousRetries": 3,
-            "requestTimeout": 60000,
-            "backoff": {
-              "kind": "exponential",
-              "start": 1000,
-              "factor": 3
             }
           }
         },
