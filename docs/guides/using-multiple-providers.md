@@ -152,8 +152,8 @@ but you need it to happen reliably (e.g. in commodity use cases like sending ema
 
 ### Enabling failover
 
-The failover is configured for each use case separately by enabling `providerFailover`
-option in the use case defaults.
+The failover has to be configured for each use case separately by enabling
+`providerFailover` option in the use case defaults.
 
 For example, if you want to send SMS messages reliably, you'll use the
 `SendMessage` use case from [`communication/send-sms`](https://superface.ai/communication/send-sms)
@@ -185,9 +185,10 @@ Then, the configuration of the failover for `SendMessage` use case would look li
 }
 ```
 
-For more information about the use case defaults, please see [super.json reference](/reference/superjson#usecasedefaults).
+For more information about the use case defaults, please see
+[super.json reference](/reference/superjson#usecasedefaults).
 
-### Specifying failover order
+### Specifying failover order {#failover-priority}
 
 OneSDK by default uses the first provider that was added to the application
 as primary, with failover to other providers in order they were added to the app.
@@ -227,11 +228,21 @@ The configuration of the provider priority for this case would look like this:
 }
 ```
 
-### Configuring the provider retry
+### Retry on failure {#retry-policy}
 
 By default, OneSDK attempts to perform the use case with each provider **exactly once**.
 
-For more information about the provider retries, please refer to
+OneSDK also ships with a configurable
+[circuit breaker](https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern)
+retry policy. The retry policy has to be configured for each provider by setting
+`retryPolicy` option in the use case defaults for provider.
+
+For example, enabling the circuit breaker retry policy for `twilio` when
+performing `SendMessage` use case (from [`communication/send-sms`](https://superface.ai/communication/send-sms))
+would look like the snippet below.
+
+The default circuit breaker policy makes 5 retries using an exponential backoff
+and times out after 30 seconds. For full retry configuration, please see
 [super.json reference](/reference/superjson#retrypolicy).
 
 ```json title="superface/super.json" {13-18}
@@ -263,17 +274,45 @@ For more information about the provider retries, please refer to
 }
 ```
 
-
 ### Failover in code
+
+When using automatic failover, your code doesn't need to specify anything
+about the providers. The priority of providers, their behavior and failover
+is configured solely in your local `super.json` file.
+
+For example, using [`communication/send-sms`](https://superface.ai/communication/send-sms)
+to send SMS reliably with 3 providers configured (as shown [in examples above](#failover)),
+your application code for performing `SendMessage` would look like this:
+
+```js title="app.js"
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
+
+const sdk = new SuperfaceClient();
+
+async function run() {
+  // Load the installed profile
+  const profile = await sdk.getProfile('communication/send-sms');
+
+  // Use the profile
+  const result = await profile
+    .getUseCase('SendMessage')
+    .perform({
+      to: '+123456789',
+      from: '+987654321',
+      text: 'Really important message!'
+    });
+
+  return result.unwrap();
+}
+
+run();
+```
 
 :::caution
 
-When using automatic failover, you mustn't specify the provider in the
-code, as shown in the example above.
+Automatic failover cannot be combined with [explicit provider selection](#explicit).
 
 :::
-
-
 
 <!-- ## Monitor the provider usage
 
