@@ -5,15 +5,15 @@ import TabItem from '@theme/TabItem';
 
 Consuming a single capability from multiple providers is at heart of Superface.
 **You can add as many providers as you need for every profile.**
-This guide will walk you through the process of configuring these providers the way you need them to work.
+
+This guide will walk you through the process of configuring these providers the 
+way you need them to work. You'll need a Node.js app with OneSDK and a capability set up.
+We recommend you to read through the [Getting&nbsp;started](../getting-started.mdx) first if you haven’t done so.
 
 There are currently 2 different ways you might want to switch between the providers:
 - [Choose the specific provider for each perform](#manual): fulfill the use case by the chosen provider
 - [Setup automatic failover](#failover): switch to another provider when the primary fails
 
-## Prerequisites
-
-- Node.js app with OneSDK and a capability set up; see [Getting&nbsp;started](../getting-started.mdx) to create one
 
 ## Manual provider selection {#manual}
 
