@@ -10,15 +10,15 @@ This guide will walk you through the process of configuring these providers the 
 <!-- We recommend you to read through the [Getting Started documentation](../getting-started.mdx) first if you haven’t done so. -->
 
 There are currently 2 different ways you might want to switch between the providers:
-- [Choose the specific provider for each perform](#explicit): fulfill the use case by the chosen provider
+- [Choose the specific provider for each perform](#manual): fulfill the use case by the chosen provider
 - [Setup automatic failover](#failover): switch to another provider when the primary fails
 
 
-## Explicit choice of provider {#explicit}
+## Manual provider selection {#manual}
 
 In integration scenarios where you need to fulfill the use case by
 the specific provider (e.g. because the user content is saved on their servers),
-you can explicitly choose which provider you want to use.
+you can manually choose which provider you want to use.
 
 The provider choice is bound to a single perform. This means you can choose
 different providers for different `perform` calls.
@@ -146,9 +146,8 @@ When using provider failover, OneSDK will **automatically switch to another
 provider when the previously used one fails**.
 
 This will give you a maximum out-of-the-box resiliency useful for integration
-scenarios where you don't care so much about which providers fulfills the use case
+scenarios where you don't care so much about which provider fulfills the use case
 but you need it to happen reliably (e.g. in commodity use cases like sending emails, SMS, etc).
-
 
 ### Enabling failover
 
@@ -310,7 +309,7 @@ run();
 
 :::caution
 
-Automatic failover cannot be combined with [explicit provider selection](#explicit).
+Automatic failover cannot be combined with [manual provider selection](#manual).
 
 :::
 
