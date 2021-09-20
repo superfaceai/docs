@@ -7,12 +7,13 @@ Consuming a single capability from multiple providers is at heart of Superface.
 **You can add as many providers as you need for every profile.**
 This guide will walk you through the process of configuring these providers the way you need them to work.
 
-<!-- We recommend you to read through the [Getting Started documentation](../getting-started.mdx) first if you haven’t done so. -->
-
 There are currently 2 different ways you might want to switch between the providers:
 - [Choose the specific provider for each perform](#manual): fulfill the use case by the chosen provider
 - [Setup automatic failover](#failover): switch to another provider when the primary fails
 
+## Prerequisites
+
+- Node.js app with OneSDK and a capability set up; see [Getting&nbsp;started](../getting-started.mdx) to create one
 
 ## Manual provider selection {#manual}
 
@@ -28,7 +29,7 @@ on the use case. You can fetch the provider configuration in runtime using
 `getProvider` method exposed from OneSDK.
 
 
-### Example
+### Example {#manual-example}
 
 Let's say your app lists user repositories and you want to support multiple
 version control systems. You'd use [`vcs/user-repos`](https://superface.ai/vcs/user-repos)
@@ -149,14 +150,14 @@ This will give you a maximum out-of-the-box resiliency useful for integration
 scenarios where you don't care so much about which provider fulfills the use case
 but you need it to happen reliably (e.g. in commodity use cases like sending emails, SMS, etc).
 
-### Enabling failover
+### Enabling failover {#enabling-failover}
 
 The failover has to be configured for each use case separately by enabling
 `providerFailover` option in the use case defaults.
 
 For example, if you want to send SMS messages reliably, you'll use the
 `SendMessage` use case from [`communication/send-sms`](https://superface.ai/communication/send-sms)
-and have two or 3 providers configured.
+and have two or three providers configured.
 
 Then, the configuration of the failover for `SendMessage` use case would look like this:  
 
@@ -273,15 +274,16 @@ and times out after 30 seconds. For full retry configuration, please see
 }
 ```
 
-### Failover in code
+### Failover in code {#failover-code}
 
 When using automatic failover, your code doesn't need to specify anything
 about the providers. The priority of providers, their behavior and failover
 is configured solely in your local `super.json` file.
 
 For example, using [`communication/send-sms`](https://superface.ai/communication/send-sms)
-to send SMS reliably with 3 providers configured (as shown [in examples above](#failover)),
-your application code for performing `SendMessage` would look like this:
+to send SMS reliably with multiple providers configured using automatic failover,
+your application code for performing `SendMessage` would look like this
+(note that there's no provider-specific information included):
 
 ```js title="app.js"
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
@@ -312,7 +314,3 @@ run();
 Automatic failover cannot be combined with [manual provider selection](#manual).
 
 :::
-
-<!-- ## Monitor the provider usage
-
-Connect the project -->
