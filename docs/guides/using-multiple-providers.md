@@ -135,7 +135,7 @@ Then, switching between the 3 configured providers would look like this:
 
 :::note
 
-If there's only 1 provider configured for the profile, that provider is
+If there's only one provider configured for the profile, that provider is
 automatically used and you don't have to explicitly choose the provider in the code.
 
 :::
@@ -144,7 +144,7 @@ automatically used and you don't have to explicitly choose the provider in the c
 ## Automatic failover {#failover}
 
 When using provider failover, OneSDK will **automatically switch to another
-provider when the previously used one fails**.
+provider in the case of failure**.
 
 This will give you a maximum out-of-the-box resiliency useful for integration
 scenarios where you don't care so much about which provider fulfills the use case
@@ -190,7 +190,7 @@ For more information about the use case defaults, please see
 
 ### Specifying failover order {#failover-priority}
 
-OneSDK by default uses the first provider that was added to the application
+By default, OneSDK uses the first provider that was added to the application
 as primary, with failover to other providers in order they were added to the app.
 You can specify your preferred order in which OneSDK should use and fail over
 between the providers.
@@ -198,8 +198,8 @@ between the providers.
 For example, you're using [`communication/send-sms`](https://superface.ai/communication/send-sms)
 to send SMS reliably and have 3 providers configured (e.g. `tyntec`, `plivo` and `twilio`).
 
-Based on your previous knowledge, you want to primarily use `twilio`. If that fails,
-you prefer `plivo` and if the secondary fails as well, you want to switch to `tyntec`.
+You want to primarily use `twilio`. If that fails, you prefer `plivo` and if
+the secondary fails as well, you want to switch to `tyntec`.
 The configuration of the provider priority for this case would look like this:  
 
 ```json title="superface/super.json" {10-14}
