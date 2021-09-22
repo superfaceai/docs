@@ -16,6 +16,7 @@ module.exports = {
     // },
     'getting-started',
     'integrations-monitoring',
+    'guides/using-multiple-providers',
     {
       type: 'category',
       label: 'How to create a capability',
