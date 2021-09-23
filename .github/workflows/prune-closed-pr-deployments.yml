@@ -17,3 +17,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: ${{ env.GITHUB_HEAD_REF_SLUG_URL }}
+          onlyRemoveDeployments: true
