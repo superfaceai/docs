@@ -72,10 +72,10 @@ _Search in top-level `providers` object for the actual provider you want to conf
 The easiest way to bootstrap the provider's security configuration is using [Superface CLI](/reference/cli).
 
 ```shell
-superface configure <path-to.provider.json> -p <profile-name> -l -f
+superface configure <provider-name> -p <profile-name> --localProvider <path-to.provider.json> --localMap <path-to-provider-map.suma> -f
 ```
 
-_Replace the `<path-to.provider.json>` in the command with the actual provider you're trying to configure for some `<profile-name>`._
+_Replace the `<path-to.provider.json>`, `<provider-name->` and `<path-to-provider-map.suma>` in the command with the actual provider you're trying to configure for some `<profile-name>`._
 
 Running the above command automatically creates security schemes configuration in `super.json` based on Provider definition. It also prepares expected environment variables (if any are required) inside a `.env` file.
 
