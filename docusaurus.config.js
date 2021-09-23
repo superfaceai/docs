@@ -74,7 +74,7 @@ module.exports = {
           items: [
             {
               label: 'Support',
-              href: 'mailto:support@superface.ai',
+              href: '/support',
             },
             {
               label: 'Privacy Policy',
