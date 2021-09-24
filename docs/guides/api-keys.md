@@ -34,11 +34,11 @@ This will create a new entry in the `super.json` file:
 }
 ```
 
-Value starting with `$` refers to an environment variable, so OneSDK will read the API credentials for Sendgrid from `SENDGRID_TOKEN`. You can change this name to fit your needs.
+Value starting with `$` refers to an environment variable, so OneSDK will read the API credentials for SendGrid from `SENDGRID_TOKEN`. You can change this name to fit your needs.
 
 ## Storing and reading API keys
 
-A common practice is to store environment variables into `.env` file which is not checked into a version control system. Following the Sendgrid example above, you can store the `SENDGRID_TOKEN` variable in `.env` file:
+A common practice is to store environment variables into `.env` file which is not checked into a version control system. Following the SendGrid example above, you can store the `SENDGRID_TOKEN` variable in `.env` file:
 
 ```title=".env"
 SENDGRID_TOKEN=some.token.value
