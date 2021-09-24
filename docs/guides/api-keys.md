@@ -4,7 +4,7 @@ Providers may require authentication details in order to use their APIs, typical
 
 ## Getting API keys from provider
 
-Every provider has different way of obtaining keys, usually you need to sign up for an account. The documentation covers tutorials for several providers. In case you have trouble obtaining credentials from your selected provider, [reach to us](/support).
+Every provider has different way of obtaining keys, usually you need to sign up for an account. The documentation covers tutorials for several providers. In case you have trouble obtaining credentials from your selected provider, [reach to us](../support.mdx).
 
 <!-- TODO: Fix links -->
 
@@ -53,4 +53,3 @@ SENDGRID_TOKEN=some.token.value
 ```
 
 Then in your Node.js application, load the variables from `.env` using the [dotenv](https://www.npmjs.com/package/dotenv) package. Alternatively if you use Docker Compose, the `.env` file is [read automatically](https://docs.docker.com/compose/environment-variables/).
-
