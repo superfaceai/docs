@@ -16,6 +16,7 @@ module.exports = {
     // },
     'getting-started',
     'integrations-monitoring',
+    'guides/api-keys',
     'guides/using-multiple-providers',
     {
       type: 'category',
