@@ -4,9 +4,7 @@ Providers may require authentication details in order to use their APIs, typical
 
 ## Getting API keys from provider
 
-Every provider has different way of obtaining keys, usually you need to sign up for an account. The documentation covers tutorials for several providers. In case you have trouble obtaining credentials from your selected provider, [reach to us](../support.mdx).
-
-<!-- TODO: Fix links -->
+Every provider has different way of obtaining keys, usually you need to sign up for an account. In case you have trouble obtaining credentials from your selected provider, [reach to us](../support.mdx).
 
 ## Configuring the provider
 
