@@ -4,11 +4,19 @@ import HowItWorksDiagram from '../assets/getting-started-how-superface-works.svg
 
 Superface is all about you, the consumer of API capabilities. To get started, first pick a capability and its provider, install it to your App and use Superface OneSDK to make the call.
 
+:::info
+
+This guide is more detailed version of the in-product [Getting started](https://superface.ai/getting-started) available at superface.ai.
+
+You don't need an account at superface.ai to follow this guide.
+
+:::
+
 ## How Superface works
 
 Unlike every other API client, absolutely **no API information is hard-coded in your App or the SDK**.
 
-The instructions how to make a call are downloaded during your App runtime and resolved by OneSDK to make a **direct HTTP** call to the API. The calls go straight from your App to the provider's API and are **never proxied through Superface**. This lets you change the instructions at runtime without updating or redeploying your App. You can even change providers while it’s running.
+The instructions how to make a call are downloaded during your App runtime and resolved by OneSDK to make a **direct HTTP call** to the API. The calls go straight from your App to the provider's API and are **never proxied through Superface**. This lets you change the instructions at runtime without updating or redeploying your App. You can even change providers while it’s running.
 
 <figure>
   <HowItWorksDiagram />
@@ -81,9 +89,7 @@ npx @superfaceai/cli configure github --profile vcs/user-repos
 In many cases you also need to set up provider credentials. Since we
 are using the unauthenticated GitHub API we can skip it for now.
 
-<!-- TODO:
-To learn how to authenticate providers check the provider authentication.
--->
+To learn how to handle API credentials, see [Setting provider API keys](guides/api-keys.md).
 
 :::
 
