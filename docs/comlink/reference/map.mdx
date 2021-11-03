@@ -98,6 +98,18 @@ map UseCaseName {
 
 The definition makes a call to `/api/messages?from=...` with body of content type `application/json` including object with two parameters `to` and `text`.
 
+### Path Parameters
+You can reference variables in URI template with `{variable}` syntax. This is a simple variable substitution, non-string values are converted to their JSON equivalents.
+
+```hcl title="Path parameter"
+http GET "/messges/{input.id}" {
+  response {
+    # ...
+  }
+}
+```
+
+
 ### Query Parameters
 
 A `query` maps query parameters to their values. Variables are accessible here, so `input` may be used to map profile inputs to query parameters.
