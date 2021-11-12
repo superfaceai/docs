@@ -226,4 +226,4 @@ _e.g. `https://api.example.com/?accessKey=<apikey>`_
 - [Provider using Basic auth](https://github.com/superfaceai/station/blob/main/providers/twilio.json)
 - [Provider using Bearer token](https://github.com/superfaceai/station/blob/main/providers/slack.json)
 - [Provider using API key in request headers](https://github.com/superfaceai/station/blob/main/providers/dhl.json)
-- [Provider using API key in request query](https://github.com/superfaceai/station/blob/main/providers/google-apis.json)
+- [Provider using API key in request query](https://github.com/superfaceai/station/blob/main/providers/google-apis-maps.json)
