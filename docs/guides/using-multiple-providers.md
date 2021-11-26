@@ -6,14 +6,14 @@ import TabItem from '@theme/TabItem';
 Consuming a single capability from multiple providers is at heart of Superface.
 **You can add as many providers as you need for every profile.**
 
-This guide will walk you through the process of configuring these providers the 
+This guide will walk you through the process of configuring these providers the
 way you need them to work. You'll need a Node.js app with OneSDK and a capability set up.
 We recommend you to read through the [Getting&nbsp;started](../getting-started.mdx) first if you haven’t done so.
 
 There are currently 2 different ways you might want to switch between the providers:
+
 - [Choose the specific provider for each perform](#manual): fulfill the use case by the chosen provider
 - [Setup automatic failover](#failover): switch to another provider when the primary fails
-
 
 ## Manual provider selection {#manual}
 
@@ -27,7 +27,6 @@ different providers for different `perform` calls.
 It works by passing the chosen provider configuration to `perform` method
 on the use case. You can fetch the provider configuration in runtime using
 `getProvider` method exposed from OneSDK.
-
 
 ### Example {#manual-example}
 
@@ -44,92 +43,86 @@ npx @superfaceai/cli configure bitbucket --profile=vcs/user-repos
 Then, switching between the 3 configured providers would look like this:
 
 <Tabs
-  defaultValue="github"
-  values={[
-    { label: 'GitHub', value: 'github', },
-    { label: 'GitLab', value: 'gitlab', },
-    { label: 'Bitbucket', value: 'bitbucket', },
-  ]
+defaultValue="github"
+values={[
+{ label: 'GitHub', value: 'github', },
+{ label: 'GitLab', value: 'gitlab', },
+{ label: 'Bitbucket', value: 'bitbucket', },
+]
 }>
-  <TabItem value="github">
+<TabItem value="github">
 
-  ```js title="app.js" {8-9,15}
-  const { SuperfaceClient } = require('@superfaceai/one-sdk');
+```js title="app.js" {8-9,15}
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
-  const sdk = new SuperfaceClient();
+const sdk = new SuperfaceClient();
 
-  async function run() {
-    const profile = await sdk.getProfile('vcs/user-repos');
+async function run() {
+  const profile = await sdk.getProfile('vcs/user-repos');
 
-    // Load the specific provider for this perform
-    const provider = await sdk.getProvider('github');
+  // Load the specific provider for this perform
+  const provider = await sdk.getProvider('github');
 
-    const result = await profile
-      .getUseCase('UserRepos')
-      .perform(
-        { user: 'superfaceai' },
-        { provider }
-      );
+  const result = await profile
+    .getUseCase('UserRepos')
+    .perform({ user: 'superfaceai' }, { provider });
 
-    return result.unwrap();
-  }
+  return result.unwrap();
+}
 
-  run();
-  ```
+run();
+```
+
   </TabItem>
 
   <TabItem value="gitlab">
 
-  ```js title="app.js" {8-9,15}
-  const { SuperfaceClient } = require('@superfaceai/one-sdk');
+```js title="app.js" {8-9,15}
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
-  const sdk = new SuperfaceClient();
+const sdk = new SuperfaceClient();
 
-  async function run() {
-    const profile = await sdk.getProfile('vcs/user-repos');
+async function run() {
+  const profile = await sdk.getProfile('vcs/user-repos');
 
-    // Load the specific provider for this perform
-    const provider = await sdk.getProvider('gitlab');
+  // Load the specific provider for this perform
+  const provider = await sdk.getProvider('gitlab');
 
-    const result = await profile
-      .getUseCase('UserRepos')
-      .perform(
-        { user: 'superfaceai' },
-        { provider }
-      );
+  const result = await profile
+    .getUseCase('UserRepos')
+    .perform({ user: 'superfaceai' }, { provider });
 
-    return result.unwrap();
-  }
+  return result.unwrap();
+}
 
-  run();
-  ```
+run();
+```
+
   </TabItem>
 
   <TabItem value="bitbucket">
 
-  ```js title="app.js" {8-9,15}
-  const { SuperfaceClient } = require('@superfaceai/one-sdk');
+```js title="app.js" {8-9,15}
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
 
-  const sdk = new SuperfaceClient();
+const sdk = new SuperfaceClient();
 
-  async function run() {
-    const profile = await sdk.getProfile('vcs/user-repos');
+async function run() {
+  const profile = await sdk.getProfile('vcs/user-repos');
 
-    // Load the specific provider for this perform
-    const provider = await sdk.getProvider('bitbucket');
+  // Load the specific provider for this perform
+  const provider = await sdk.getProvider('bitbucket');
 
-    const result = await profile
-      .getUseCase('UserRepos')
-      .perform(
-        { user: 'superfaceai' },
-        { provider }
-      );
+  const result = await profile
+    .getUseCase('UserRepos')
+    .perform({ user: 'superfaceai' }, { provider });
 
-    return result.unwrap();
-  }
+  return result.unwrap();
+}
 
-  run();
-  ```
+run();
+```
+
   </TabItem>
 </Tabs>
 
@@ -139,7 +132,6 @@ If there's only one provider configured for the profile, that provider is
 automatically used and you don't have to explicitly choose the provider in the code.
 
 :::
-
 
 ## Automatic failover {#failover}
 
@@ -159,7 +151,7 @@ For example, if you want to send SMS messages reliably, you'll use the
 `SendMessage` use case from [`communication/send-sms`](https://superface.ai/communication/send-sms)
 and have two or three providers configured.
 
-Then, the configuration of the failover for `SendMessage` use case would look like this:  
+Then, the configuration of the failover for `SendMessage` use case would look like this:
 
 ```json title="superface/super.json" {5-9}
 {
@@ -200,7 +192,7 @@ to send SMS reliably and have 3 providers configured (e.g. `tyntec`, `plivo` and
 
 You want to primarily use `twilio`. If that fails, you prefer `plivo` and if
 the secondary fails as well, you want to switch to `tyntec`.
-The configuration of the provider priority for this case would look like this:  
+The configuration of the provider priority for this case would look like this:
 
 ```json title="superface/super.json" {10-14}
 {
@@ -212,11 +204,7 @@ The configuration of the provider priority for this case would look like this:
           "providerFailover": true
         }
       },
-      "priority": [
-        "twilio",
-        "plivo",
-        "tyntec"
-      ],
+      "priority": ["twilio", "plivo", "tyntec"],
       "providers": {
         // ...
       }
@@ -260,7 +248,7 @@ and times out after 30 seconds. For full retry configuration, please see
         "twilio": {
           "defaults": {
             "SendMessage": {
-              "retryPolicy": "circuit-breaker",
+              "retryPolicy": "circuit-breaker"
               // ...
             }
           }
@@ -295,13 +283,11 @@ async function run() {
   const profile = await sdk.getProfile('communication/send-sms');
 
   // Use the profile
-  const result = await profile
-    .getUseCase('SendMessage')
-    .perform({
-      to: '+123456789',
-      from: '+987654321',
-      text: 'Really important message!'
-    });
+  const result = await profile.getUseCase('SendMessage').perform({
+    to: '+123456789',
+    from: '+987654321',
+    text: 'Really important message!',
+  });
 
   return result.unwrap();
 }

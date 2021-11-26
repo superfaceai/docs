@@ -11,16 +11,20 @@ slug: /reference/superjson
 At the top level, the `super.json` file consists of two sections: [profiles](#profiles) and [providers](#providers). The profiles section contains a list of installed profiles, their versions or file locations, and default values. The providers section contains a list of installed providers and their credentials.
 
 ### Example
-```json title="superface/super.json" 
+
+```json title="superface/super.json"
 {
-  "profiles": { // Profiles
+  "profiles": {
+    // Profiles
     "myprofile1": "1.0.0", // Semver shorthand
     "myprofile2": "file:path/to/my/profile.supr", // File URI shorthand
-    "myprofile3": { // ProfileSettings
-      "version": "1.0.0", 
+    "myprofile3": {
+      // ProfileSettings
+      "version": "1.0.0",
       "priority": ["provider-one", "provider-two"],
       "defaults": {
-        "MyUseCase": { // UsecaseDefaults
+        "MyUseCase": {
+          // UsecaseDefaults
           "input": {
             "someInputProperty": 42
           },
@@ -28,14 +32,17 @@ At the top level, the `super.json` file consists of two sections: [profiles](#pr
         }
       },
       "providers": {
-        "provider-one": { // ProfileProviderSettings
+        "provider-one": {
+          // ProfileProviderSettings
           "file": "path/to/provider.json",
           "defaults": {
-            "MyUseCase": { // ProfileProviderDefaults
+            "MyUseCase": {
+              // ProfileProviderDefaults
               "input": {
                 "someInputProperty": 43
               },
-              "retryPolicy": { // RetryPolicy
+              "retryPolicy": {
+                // RetryPolicy
                 "kind": "circuit-breaker",
                 "maxContiguousRetries": 3,
                 "requestTimeout": 60000,
@@ -52,15 +59,18 @@ At the top level, the `super.json` file consists of two sections: [profiles](#pr
       }
     }
   },
-  "providers": { // Providers
+  "providers": {
+    // Providers
     "provider-one": "file:path/to/provider.json", // File URI shorthand
-    "provider-two": { // ProviderSettings
+    "provider-two": {
+      // ProviderSettings
       "file": "path/to/provider.json",
-      "security": [ // SecurityValues
-          {
-            "id": "my-authentication",
-            "apikey": "my-api-key"
-          }
+      "security": [
+        // SecurityValues
+        {
+          "id": "my-authentication",
+          "apikey": "my-api-key"
+        }
       ]
     }
   }
@@ -74,7 +84,7 @@ The profiles section consists of a record of all installed profiles. The key is 
 - [a semantic version string](https://semver.org)
 - a file URI string, which is an absolute or relative path prepended by `file:`
 
-```json title="superface/super.json" 
+```json title="superface/super.json"
 {
   "profiles": {
     "myprofile1": "1.0.0",
@@ -90,11 +100,11 @@ The profiles section consists of a record of all installed profiles. The key is 
 
 The ProfileSettings object contains either `file` or `version` property, analogous to the shortcut strings above (the `file:` prefix is optional in this case) and following optional properties:
 
-- `priority`: an array of strings containing provider names in desired order for failover. If omitted, it is constructed from the order of  providers in this file that have `providerFailover` set to `true`
+- `priority`: an array of strings containing provider names in desired order for failover. If omitted, it is constructed from the order of providers in this file that have `providerFailover` set to `true`
 - `providers`: an array of [ProfileProviderSettings](#profileprovidersettings) objects or URI strings, used for configuring providers for the profile. Not to be confused with top-level Providers record
 - `defaults`: a record of defaults for the use-case, key is use-case name, value is [UsecaseDefaults](#usecasedefaults) object
 
-```json {3-17} title="superface/super.json" 
+```json {3-17} title="superface/super.json"
 {
   "profiles": {
     "myprofile": {
@@ -123,7 +133,7 @@ UsecaseDefaults specifies default values for a use-case for all providers. The k
 - `input`: an object providing default values according to use-case's input
 - `providerFailover`: a boolean specific whether provider failover should be allowed for the use-case. Defaults to `false`
 
-```json {5-10} title="superface/super.json" 
+```json {5-10} title="superface/super.json"
 {
   "profiles": {
     "myprofile": {
@@ -146,7 +156,7 @@ ProfileProviderSettings object defines profile-specific configuration of provide
 
 - `defaults`: a record of defaults per use-case, key is use-case name and value is a [ProfileProviderDefaults](#profileproviderdefaults) object
 
-```json {5-11} title="superface/super.json" 
+```json {5-11} title="superface/super.json"
 {
   "profiles": {
     "myprofile": {
@@ -165,7 +175,7 @@ ProfileProviderSettings object defines profile-specific configuration of provide
 }
 ```
 
-```json {5-12} title="superface/super.json" 
+```json {5-12} title="superface/super.json"
 {
   "profiles": {
     "myprofile": {
@@ -192,7 +202,7 @@ ProfileProviderDefaults is an object with following optional properties:
 - `input`: an object providing default values according to the use-case's input
 - `retryPolicy`: a [RetryPolicy](#retrypolicy) object
 
-```json {7-14} title="superface/super.json" 
+```json {7-14} title="superface/super.json"
 {
   "profiles": {
     "myprofile": {
@@ -223,11 +233,11 @@ RetryPolicy is used for setting up retry policy for a provider and use-case. The
 - `maxContiguousRetries`: maximum number of retry attempts, positive integer, default 5
 - `requestTimeout`: timeout after which a request fails, positive integer, milliseconds, default 30000
 - `backoff`: either string `exponential` or an object with following properties:
-    - `kind`: string `exponential`
-    - `start`: the initial delay time, optional, positive integer, milliseconds, default 2000
-    - `factor`: the factor by which is the delay time multiplied, optional, positive integer, default 2
+  - `kind`: string `exponential`
+  - `start`: the initial delay time, optional, positive integer, milliseconds, default 2000
+  - `factor`: the factor by which is the delay time multiplied, optional, positive integer, default 2
 
-```json {8-17} title="superface/super.json" 
+```json {8-17} title="superface/super.json"
 {
   "profiles": {
     "myprofile": {
@@ -254,7 +264,7 @@ RetryPolicy is used for setting up retry policy for a provider and use-case. The
 }
 ```
 
-```json {8} title="superface/super.json" 
+```json {8} title="superface/super.json"
 {
   "profiles": {
     "myprofile": {
@@ -276,7 +286,7 @@ RetryPolicy is used for setting up retry policy for a provider and use-case. The
 
 The providers section consists of a record of all used providers. The key is the name of the provider and the value is either a file URI (with `file:` prefix) or a [ProviderSettings](#providersettings) object.
 
-```json title="superface/super.json" 
+```json title="superface/super.json"
 {
   "providers": {
     "provider-one": "file:path/to/provider.json",
@@ -294,14 +304,14 @@ The ProviderSettings object has following optional properties:
 - `file`: a file URI string
 - `security`: an array of [SecurityValues](#securityvalues) objects
 
-```json {3-10} title="superface/super.json" 
+```json {3-10} title="superface/super.json"
 {
   "providers": {
     "myprovider": {
       "file": "path/to/provider.json",
       "security": [
         {
-        // SecurityValues
+          // SecurityValues
         }
       ]
     }
@@ -316,17 +326,20 @@ SecurityValues is a union of several types of security configuration objects: AP
 - `id`: identifier of the security scheme, referenced in map
 
 #### API Key
+
 API key uses provided API key in a header, body, path or query string (specified in provider.json)
 
 - `apikey`: string containing API key
 
 #### Basic Auth
+
 Basic Auth uses provided username and password and sends them base64 encoded in Authorization header as per [RFC 7617](https://datatracker.ietf.org/doc/html/rfc7617)
 
 - `username`: string containing username
 - `password`: string containing password
 
 #### Bearer Token
+
 Bearer Token uses provided token and sends it in Authorization header as per [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750)
 
 - `token`: string containing bearer token
@@ -337,7 +350,7 @@ Digest uses provided token and sends it in Authorization header as per [RFC 2617
 
 - `digest`: string containing digest -->
 
-```json {4-22} title="superface/super.json" 
+```json {4-22} title="superface/super.json"
 {
   "providers": {
     "file": "path/to/provider.json",
@@ -363,4 +376,3 @@ Digest uses provided token and sends it in Authorization header as per [RFC 2617
   }
 }
 ```
-

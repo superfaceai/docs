@@ -35,9 +35,9 @@ Map to a use-case using the `map <use-case-name>` statement. Use-cases may defin
 
 The HTTP Call uses `http` and defines the information needed to make a call and map the inputs, result, and error to the profile use-cases.
 
-* HTTP Method - Comlink supports all widely-support [HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
-* URI Template - URI template as defined by [RFC6570](https://datatracker.ietf.org/doc/html/rfc6570)
-* HTTP Transaction - a scope that defines the [HTTP Security](#http-security), [HTTP Request](#http-request), and [HTTP Responses](#http-response) for a given HTTP Call.
+- HTTP Method - Comlink supports all widely-support [HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+- URI Template - URI template as defined by [RFC6570](https://datatracker.ietf.org/doc/html/rfc6570)
+- HTTP Transaction - a scope that defines the [HTTP Security](#http-security), [HTTP Request](#http-request), and [HTTP Responses](#http-response) for a given HTTP Call.
 
 The example below shows an HTTP Call that uses the HTTP method `POST` and the URI template `/api/messages`.
 
@@ -61,7 +61,7 @@ This example shows a `POST` HTTP call to [the provider's default service](./prov
 ```hcl title="Default security requirement"
 http GET "/public-endpoint" {
   security "api_key_scheme_id"
-  
+
   response {
     # ...
   }
@@ -99,6 +99,7 @@ map UseCaseName {
 The definition makes a call to `/api/messages?from=...` with body of content type `application/json` including object with two parameters `to` and `text`.
 
 ### Path Parameters
+
 You can reference variables in URI template with `{variable}` syntax. This is a simple variable substitution, non-string values are converted to their JSON equivalents.
 
 ```hcl title="Path parameter"
@@ -109,13 +110,11 @@ http GET "/messges/{input.id}" {
 }
 ```
 
-
 ### Query Parameters
 
 A `query` maps query parameters to their values. Variables are accessible here, so `input` may be used to map profile inputs to query parameters.
 
 This example shows how to map an HTTP Request with a `myName` query parameter to the value `"John"`.
-
 
 ```hcl title="Query parameter"
 http GET "/greeting" {
@@ -143,7 +142,7 @@ http POST "/users" {
 
 ### HTTP Request Body
 
-The `body` property maps body properties to their values. 
+The `body` property maps body properties to their values.
 
 This example shows a request body mapped to an object.
 
@@ -207,7 +206,7 @@ map UseCaseName {
 
 ### Map a Use-Case Result
 
-You can map to a use-case [result](./profile.mdx#result) using a `map result` statement. You must resolve the same `result` as defined in the use-case. 
+You can map to a use-case [result](./profile.mdx#result) using a `map result` statement. You must resolve the same `result` as defined in the use-case.
 
 ```hcl title="Mapping to a use-case result" {11-14}
 profile = "<profile-name>@<version>"
@@ -278,7 +277,7 @@ provider = "postmark"
 map SendEmail {
   http POST "/email" {
     security "server_token"
-    
+
     request "application/json" {
       body {
         From = input.from
@@ -288,7 +287,7 @@ map SendEmail {
         HtmlBody = input.html
       }
     }
-    
+
     response 200 "application/json" {
       map result {
         messageId = body.MessageID

@@ -1,6 +1,5 @@
 # Superface Documentation
 
-
 This repository contains the documentation website code and Markdown source files for https://superface.ai/docs.
 
 ## Contribute to docs
@@ -58,7 +57,6 @@ This repository contains the documentation website code and Markdown source file
 - Once your changes are verified and reviewed by another pair of eyes, it is ready to be merged to `main`.<br />
   _Merging will automatically deploy `main` branch to production._
 
-
 ## Tech Stack
 
 These docs are built using [Docusaurus 2](https://docusaurus.io/).
@@ -81,6 +79,7 @@ If you'd like to build locally:
 ```bash
 yarn build
 ```
+
 </details>
 
 ## License

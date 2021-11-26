@@ -12,7 +12,6 @@ To publish content to the Superface registry, you need to:
 2. Have the [Superface CLI installed](./setup-the-environment.md).
 3. Have the local profile, map, and/or provider linked in `super.json` (as described in previous steps).
 
-
 ## Log in to the registry
 
 First login with Superface CLI:
@@ -54,7 +53,6 @@ When publishing a provider, its name **must** start with `unverified-` prefix ot
 ```shell
 publish map --profileId communication/send-sms --provider unverified-my-provider
 ```
-
 
 <!-- TODO: Migrating from local provider w/out prefix -->
 
