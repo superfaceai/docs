@@ -10,7 +10,7 @@ module.exports = {
   organizationName: 'superfaceai',
   projectName: 'docs',
 
-  favicon: '/img/favicon.ico',
+  favicon: 'img/favicon.ico',
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
@@ -28,8 +28,8 @@ module.exports = {
     navbar: {
       title: undefined,
       logo: {
-        alt: 'Superface Logo',
-        src: '/img/superface_logo.svg',
+        alt: 'Superface',
+        src: 'img/superface_logo.svg',
         href: '/',
       },
       style: 'dark',
@@ -87,8 +87,8 @@ module.exports = {
         },
       ],
       logo: {
-        alt: 'Superface Logo',
-        src: '/img/superface_logo.svg',
+        alt: 'Superface',
+        src: 'img/superface_logo.svg',
         href: 'https://superface.ai/',
       },
     },
