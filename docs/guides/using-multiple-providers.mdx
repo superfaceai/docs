@@ -43,13 +43,14 @@ npx @superfaceai/cli configure bitbucket --profile=vcs/user-repos
 Then, switching between the 3 configured providers would look like this:
 
 <Tabs
-defaultValue="github"
-values={[
-{ label: 'GitHub', value: 'github', },
-{ label: 'GitLab', value: 'gitlab', },
-{ label: 'Bitbucket', value: 'bitbucket', },
-]
+  defaultValue="github"
+  values={[
+    { label: 'GitHub', value: 'github', },
+    { label: 'GitLab', value: 'gitlab', },
+    { label: 'Bitbucket', value: 'bitbucket', },
+  ]
 }>
+
 <TabItem value="github">
 
 ```js title="app.js" {8-9,15}
@@ -73,9 +74,9 @@ async function run() {
 run();
 ```
 
-  </TabItem>
+</TabItem>
 
-  <TabItem value="gitlab">
+<TabItem value="gitlab">
 
 ```js title="app.js" {8-9,15}
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
@@ -98,9 +99,9 @@ async function run() {
 run();
 ```
 
-  </TabItem>
+</TabItem>
 
-  <TabItem value="bitbucket">
+<TabItem value="bitbucket">
 
 ```js title="app.js" {8-9,15}
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
@@ -123,7 +124,8 @@ async function run() {
 run();
 ```
 
-  </TabItem>
+</TabItem>
+
 </Tabs>
 
 :::note
