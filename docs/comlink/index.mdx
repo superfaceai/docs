@@ -27,19 +27,26 @@ To learn how to use the Comlink language with Superface and our tools and servic
     </div>
   </div>
 
-  <div class="col col--4">
-    <div class="card shadow">
-      <div class="card__body">
-        <h3>Comlink Map</h3>
-        <p>
-          Describe implementation details for fulfilling a business capability from a Comlink Profile
-        </p>
-      </div>
-      <div class="card__footer">
-        <a target="_blank" href="/docs/comlink/reference/map/" class="button button--primary button--block">Comlink Map</a>
-      </div>
+<div class="col col--4">
+  <div class="card shadow">
+    <div class="card__body">
+      <h3>Comlink Map</h3>
+      <p>
+        Describe implementation details for fulfilling a business capability
+        from a Comlink Profile
+      </p>
+    </div>
+    <div class="card__footer">
+      <a
+        target="_blank"
+        href="/docs/comlink/reference/map/"
+        class="button button--primary button--block"
+      >
+        Comlink Map
+      </a>
     </div>
   </div>
+</div>
 
   <div class="col col--4">
     <div class="card shadow">
@@ -56,7 +63,7 @@ To learn how to use the Comlink language with Superface and our tools and servic
   </div>
 </div>
 
-<br/>
+<br />
 
 If you're a tooling author, please refer to our [formal language specifications](./specifications.mdx).
 
@@ -64,8 +71,8 @@ If you're a tooling author, please refer to our [formal language specifications]
 
 It creates challenges for developers when API description formats mix together design-time and run-time details.
 
-* **Every API needs its own OpenAPI file to describe the implementation**. This is one of the biggest struggles developers have when they're integrating with APIs. Since the semantics and implementation are mixed together, developers have to write separate integrations for each API they use even when those APIs provide the same capabilities. This takes time and money to build, maintain, and evolve these integrations—time and money that could be spent elsewhere.
-* **Nothing can change at runtime**. Since the semantics and implementation details are mixed together, we can't react to any changes while our software is running. Any implementation change requires redeployment.
+- **Every API needs its own OpenAPI file to describe the implementation**. This is one of the biggest struggles developers have when they're integrating with APIs. Since the semantics and implementation are mixed together, developers have to write separate integrations for each API they use even when those APIs provide the same capabilities. This takes time and money to build, maintain, and evolve these integrations—time and money that could be spent elsewhere.
+- **Nothing can change at runtime**. Since the semantics and implementation details are mixed together, we can't react to any changes while our software is running. Any implementation change requires redeployment.
 
 Comlink addresses these problems by separating the design-time and run-time descriptions by providing Comlink Profile for describing business capabilities and Comlink Map for implementation details and how to map API providers and their services to business capabilities.
 
@@ -126,7 +133,7 @@ provider = "postmark"
 map SendEmail {
   http POST "/email" {
     security "server_token"
-    
+
     request "application/json" {
       body {
         From = input.from
@@ -136,7 +143,7 @@ map SendEmail {
         HtmlBody = input.html
       }
     }
-    
+
     response 200 "application/json" {
       map result {
         messageId = body.MessageID

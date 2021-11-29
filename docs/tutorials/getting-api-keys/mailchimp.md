@@ -19,25 +19,25 @@
 
 1. Once you're in, head to Automations → Transactional Email
 
-    ![mandrill-transaction-email.png](/img/tutorials/getting-api-keys/mandrill-transaction-email.png)
+   ![mandrill-transaction-email.png](/img/tutorials/getting-api-keys/mandrill-transaction-email.png)
 
-2.  Select "Try Our Demo" to jump to Mandrill
+2. Select "Try Our Demo" to jump to Mandrill
 
-    ![mandrill-try-demo.png](/img/tutorials/getting-api-keys/mandrill-try-demo.png)
+   ![mandrill-try-demo.png](/img/tutorials/getting-api-keys/mandrill-try-demo.png)
 
 ## Domain verification
 
-1. Next add and verify a sending domain. You will need to add TXT records for [DKIM](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail) and [SPF](https://en.wikipedia.org/wiki/Sender_Policy_Framework) to your DNS. The easiest way is to follow the [domain verification guide](https://mailchimp.com/developer/transactional/docs/authentication-delivery/#add-a-sending-domain). 
+1. Next add and verify a sending domain. You will need to add TXT records for [DKIM](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail) and [SPF](https://en.wikipedia.org/wiki/Sender_Policy_Framework) to your DNS. The easiest way is to follow the [domain verification guide](https://mailchimp.com/developer/transactional/docs/authentication-delivery/#add-a-sending-domain).
 
-    ![mandrill-domain.png](/img/tutorials/getting-api-keys/mandrill-domain.png)
+   ![mandrill-domain.png](/img/tutorials/getting-api-keys/mandrill-domain.png)
 
-    ![mandrill-domain-settings.png](/img/tutorials/getting-api-keys/mandrill-domain-settings.png)
+   ![mandrill-domain-settings.png](/img/tutorials/getting-api-keys/mandrill-domain-settings.png)
 
 ## Adding new API Key
 
 1. Go to Settings and select Add API Key
 
-    ![mandrill-key.png](/img/tutorials/getting-api-keys/mandrill-key.png)
+   ![mandrill-key.png](/img/tutorials/getting-api-keys/mandrill-key.png)
 
 ## Using Mailchimp with Superface
 

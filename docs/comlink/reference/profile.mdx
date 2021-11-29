@@ -55,9 +55,9 @@ The use-case is a task that needs to be done to support a business need. Use-cas
 
 You can define a safety level for a use-case. This safety level follows the use-case name and is optional. By default it is `safe`. The safety level can be:
 
-* `safe` (default) - The use-case doesn't result in server-side changes, so the client can retry the use-case when there's a failure
-* `unsafe` - The use-case may result in a change on the service, so any attempt to retry a use-case may result in unintended changes
-* `idempotent` - The client can execute the use-case multiple times while the server will only process it once, so clients may safely retry failures
+- `safe` (default) - The use-case doesn't result in server-side changes, so the client can retry the use-case when there's a failure
+- `unsafe` - The use-case may result in a change on the service, so any attempt to retry a use-case may result in unintended changes
+- `idempotent` - The client can execute the use-case multiple times while the server will only process it once, so clients may safely retry failures
 
 This is informational for the tooling to know how it should handle retrying failures. For more information, see [Understanding Idempotency and Safety in API Design](https://nordicapis.com/understanding-idempotency-and-safety-in-api-design/).
 
@@ -125,10 +125,10 @@ usecase ShipmentInfo safe {
 
 Some notes about this example and its fields.
 
-* The `estimatedDeliveryDate` field is untyped
-* The `events` field is an array of objects with `timestamp` and `statusText` 
-* Fields marked with an exclamation mark are required as in `trackingNumber! string`
-* Field types marked with an exclamation mark are non-null as in `carrier string!`
+- The `estimatedDeliveryDate` field is untyped
+- The `events` field is an array of objects with `timestamp` and `statusText`
+- Fields marked with an exclamation mark are required as in `trackingNumber! string`
+- Field types marked with an exclamation mark are non-null as in `carrier string!`
 
 ### Result
 
@@ -168,7 +168,7 @@ The use-case can define an optional error which will be returned when the use-ca
 
 #### Example
 
-This example 
+This example
 
 ```hcl title="Error example" {21-24}
 # ...
@@ -227,9 +227,9 @@ Field definitions describe the name, specification, and whether or not the field
 
 The defaults for a field definition are:
 
-* Fields are optional by default. Add a `!` to the field name to make it required.
-* Field specifications are of type `string` by default.
-* Field specifications are nullable by default. Add a `!` to the field specification to make it non-nullable.
+- Fields are optional by default. Add a `!` to the field name to make it required.
+- Field specifications are of type `string` by default.
+- Field specifications are nullable by default. Add a `!` to the field specification to make it non-nullable.
 
 :::warning
 
@@ -333,9 +333,9 @@ model WeatherData WeatherHistory | WeatherInformation
 
 Comlink has support for primitives that can be used as field specifications.
 
-* `string`
-* `boolean`
-* `number`
+- `string`
+- `boolean`
+- `number`
 
 ## Additional Resources
 

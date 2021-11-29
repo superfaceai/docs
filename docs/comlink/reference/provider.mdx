@@ -33,7 +33,6 @@ This is the root of the Provider Definition file.
     }
   ]
 }
-
 ```
 
 ## Service
@@ -151,121 +150,121 @@ properties:
   services:
     type: array
     items:
-      $ref: "#/definitions/Service"
+      $ref: '#/definitions/Service'
     minItems: 1
   securitySchemes:
     type: array
     items:
-      $ref: "#/definitions/SecurityScheme"
+      $ref: '#/definitions/SecurityScheme'
   defaultService:
     description: ServiceIdentifier must correspond to existing Service `id` from services.
-    $ref: "#/definitions/ServiceIdentifier"
+    $ref: '#/definitions/ServiceIdentifier'
 required:
-- name
-- services
-- defaultService
+  - name
+  - services
+  - defaultService
 definitions:
   Service:
     type: object
     properties:
       id:
-        $ref: "#/definitions/ServiceIdentifier"
+        $ref: '#/definitions/ServiceIdentifier'
       baseUrl:
         type: string
         examples:
-        - https://swapi.dev/api
+          - https://swapi.dev/api
     required:
-    - id
-    - baseUrl
+      - id
+      - baseUrl
   ServiceIdentifier:
-    $ref: "#/definitions/Identifier"
+    $ref: '#/definitions/Identifier'
   Identifier:
     type: string
-    pattern: "[_A-Za-z][A-Za-z]*"
+    pattern: '[_A-Za-z][A-Za-z]*'
     examples:
-    - swapidev
+      - swapidev
   SecurityScheme:
     oneOf:
-    - $ref: "#/definitions/ApiKeyHeaderSecurity"
-    - $ref: "#/definitions/ApiKeyQueryParamSecurity"
-    - $ref: "#/definitions/BasicAuthSecurity"
-    - $ref: "#/definitions/BearerTokenSecurity"
+      - $ref: '#/definitions/ApiKeyHeaderSecurity'
+      - $ref: '#/definitions/ApiKeyQueryParamSecurity'
+      - $ref: '#/definitions/BasicAuthSecurity'
+      - $ref: '#/definitions/BearerTokenSecurity'
   SecurityIdentifier:
-    $ref: "#/definitions/Identifier"
+    $ref: '#/definitions/Identifier'
   ApiKeyHeaderSecurity:
     type: object
     properties:
       id:
-        $ref: "#/definitions/Identifier"
+        $ref: '#/definitions/Identifier'
       type:
         type: string
         enum:
-        - apiKey
+          - apiKey
       in:
         type: string
         enum:
-        - header
+          - header
       name:
         type: string
         description: Name of header
         examples:
-        - X-API-Key
+          - X-API-Key
     required:
-    - id
-    - type
-    - in
-    - name
+      - id
+      - type
+      - in
+      - name
   ApiKeyQueryParamSecurity:
     type: object
     properties:
       id:
-        $ref: "#/definitions/SecurityIdentifier"
+        $ref: '#/definitions/SecurityIdentifier'
       type:
         type: string
         enum:
-        - apiKey
+          - apiKey
       in:
         type: string
         enum:
-        - query
+          - query
       name:
         type: string
         description: Name of query parameter
     required:
-    - id
-    - type
-    - in
-    - name
+      - id
+      - type
+      - in
+      - name
   BasicAuthSecurity:
     type: object
     properties:
       id:
-        $ref: "#/definitions/SecurityIdentifier"
+        $ref: '#/definitions/SecurityIdentifier'
       type:
         type: string
         enum:
-        - http
+          - http
       scheme:
         type: string
         enum:
-        - basic
+          - basic
     required:
-    - id
-    - type
-    - scheme
+      - id
+      - type
+      - scheme
   BearerTokenSecurity:
     type: object
     properties:
       id:
-        $ref: "#/definitions/SecurityIdentifier"
+        $ref: '#/definitions/SecurityIdentifier'
       type:
         type: string
         enum:
-        - http
+          - http
       scheme:
         type: string
         enum:
-        - bearer
+          - bearer
       bearerFormat:
         description: |
           A hint to the client to identify how the bearer token is formatted.
@@ -273,9 +272,9 @@ definitions:
           information is primarily for documentation purposes.
         type: string
         examples:
-        - JWT
+          - JWT
     required:
-    - id
-    - type
-    - scheme
+      - id
+      - type
+      - scheme
 ```
