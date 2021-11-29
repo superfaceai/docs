@@ -16,11 +16,8 @@ This guide assumes you have set up a Node.js project with Superface and OneSDK. 
 
 Profile's name must consist of lowercase letters, numbers, characters, dashes and underscores.
 
-Valid
-: `my_profile`, `myprofile123`, `my-profile`
-
-Invalid
-: `my profile`, `my+profile`, `MyProfile`
+- Valid: `my_profile`, `myprofile123`, `my-profile`
+- Invalid: `my profile`, `my+profile`, `MyProfile`
 
 While single profile file can contain multiple use-cases, we generally recommend to keep single use-case per profile. So the profile can be named after the use-case, for example:
 
@@ -151,14 +148,9 @@ If you prefer learning by example, you can check the source Comlink profile for 
 
 The use-case can be marked as `safe`, `unsafe` or `idempotent`. If the safety is not specified, the use-case is treated as `unsafe` by default.
 
-`safe`
-: The use-case doesn't change anything or doesn't perform any action. Generally reading operations can be considered safe, for example retrieving information about shipment or geocoding a postal address.
-
-`unsafe`
-: The use-case changes the world state and its retry may result in unintended side effects. For example, sending an email, or placing an order is unsafe: executing these use-cases repeatedly results in sending multiple emails or placing multiple orders.
-
-`idempotent`
-: The use-case can be executed multiple times without changing the result. For example updating an article with the same data multiple times results in the same article.
+- `safe`: The use-case doesn't change anything or doesn't perform any action. Generally reading operations can be considered safe, for example retrieving information about shipment or geocoding a postal address.
+- `unsafe`: The use-case changes the world state and its retry may result in unintended side effects. For example, sending an email, or placing an order is unsafe: executing these use-cases repeatedly results in sending multiple emails or placing multiple orders.
+- `idempotent`: The use-case can be executed multiple times without changing the result. For example updating an article with the same data multiple times results in the same article.
 
 :::info HTTP Methods
 
@@ -344,14 +336,15 @@ The types can be either _scalar_ or _collections_. Scalar types are primitive va
 
 Comlink supports the following collections:
 
-List
-: Corresponds to Array in JavaScript or List in Python.
-: Uses square brackets, e.g. `[string]` defines a list of strings.
+- List
 
-Object
-: Acts as a dictionary with strings for keys.
-: Corresponds to Object in JavaScript or Dictionary in Python.
-: Uses curly brackets, e.g. `{myField number}` defines an object with single field of type number.
+  - Corresponds to Array in JavaScript or List in Python.
+  - Uses square brackets, e.g. `[string]` defines a list of strings.
+
+- Object
+  - Acts as a dictionary with strings for keys.
+  - Corresponds to Object in JavaScript or Dictionary in Python.
+  - Uses curly brackets, e.g. `{myField number}` defines an object with single field of type number.
 
 Objects are commonly used to define inputs, results, and errors:
 
