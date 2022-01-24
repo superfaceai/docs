@@ -338,6 +338,13 @@ Basic Auth uses provided username and password and sends them base64 encoded in 
 - `username`: string containing username
 - `password`: string containing password
 
+#### Digest Auth
+
+Digest Auth uses provided username and password to handle digest flow as per [RFC 7616](https://datatracker.ietf.org/doc/html/rfc7616). Obtained credentials are cached inside `SuperfaceClient` instance and reused if possible.
+
+- `username`: string containing username
+- `password`: string containing password
+
 #### Bearer Token
 
 Bearer Token uses provided token and sends it in Authorization header as per [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750)
