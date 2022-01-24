@@ -115,6 +115,28 @@ This security scheme refers to HTTP Basic Authentication as described in [RFC 72
 }
 ```
 
+#### Digest Auth
+
+This security scheme refers to HTTP Digest Authentication as described in [RFC 7616](https://datatracker.ietf.org/doc/html/rfc7616).
+
+- `id` (string) - Unique ID for security scheme
+- `type`: "http" (string)
+- `scheme`: "digest" (string)
+- `statusCode` (number, optional) - HTTP status code that should be returned from initial call (containing challenge header). Default value is `401`.
+- `challengeHeader` (string, optional) - Case insensitive name of header containing challenge from the server. Default value is `www-authenticate`.
+- `authorizationHeader` (string, optional) - Case insensitive name of header containing authorization. Default value is `Authorization`.
+
+```js example
+{
+  "id": "my-digest-auth",
+  "type": "http",
+  "scheme": "digest",
+  "statusCode": 401,
+  "challengeHeader": "www-authenticate",
+  "authorizationHeader": "Authorization"
+}
+```
+
 #### Bearer Token
 
 - `id` (string) - Unique ID for security scheme
