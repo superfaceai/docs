@@ -224,7 +224,7 @@ _e.g. `https://api.example.com/?accessKey=<apikey>`_
 
 ### Digest Auth {#digest-auth}
 
-_`Authorization: Digest <credentials>` in headers_
+_e.g. `Authorization: Digest <credentials>` in headers_
 
 Use the following scheme with an arbitrary ID which can be referenced later from the mapping.
 
