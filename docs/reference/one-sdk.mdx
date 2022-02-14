@@ -1,0 +1,136 @@
+---
+slug: '/reference/one-sdk'
+---
+
+# OneSDK for Node.js Reference
+
+OneSDK is a universal API client for Node.js. This page describes OneSDK public API and configuration options.
+
+## Important links
+
+- [OneSDK on GitHub](https://github.com/superfaceai/one-sdk-js) for reporting issues
+- [OneSDK on npm](https://www.npmjs.com/package/@superfaceai/one-sdk)
+- [Getting Started](/getting-started) tutorial
+
+## Installation
+
+OneSDK is available as Node package under the name `@superfaceai/one-sdk`. For installation in a Node.js run:
+
+```shell
+npm install @superfaceai/one-sdk
+```
+
+## Usage
+
+### Configuration
+
+OneSDK requires a configuration file, by default located in `superface/super.json` path. You can create this file using the [Superface CLI](https://github.com/superfaceai/cli) by installing a profile and configuring a provider:
+
+```shell
+npx @superfaceai/cli install <profileName>
+npx @superfaceai/cli configure <providerName> -p <profileName>
+```
+
+// TODO: tip where I can find them?
+
+### Initializing the OneSDK client
+
+OneSDK package exports `SuperfaceClient` constructor to initialize an SDK client:
+
+```typescript
+import { SuperfaceClient } from '@superface/one-sdk';
+
+const client = new SuperfaceClient();
+```
+
+### Performing a use-case
+
+With client initialized you can perform the use-cases in installed profiles.
+
+
+
+Make sure a profile is installed by running `superface install <profileName>[@<profileVersion>]` in the project directory, then load the profile:
+
+```typescript
+const profile = await client.getProfile('<profileName>');
+```
+
+Next, make sure at least one provider is configured in super.json or select one manually. You can configure providers in super.json by running `superface configure <providerName>` and you can add additional or overriding configuration by calling `.configure` on the Provider object:
+
+```typescript
+const provider = await client.getProvider('<providerName>');
+// provider.configure(...)
+```
+
+Then, obtain a use case and perform it with selected provider:
+
+```typescript
+const result = await profile.getUsecase('<usecaseName>').perform(
+  {
+    inputField: 1,
+    anotherInputField: 'hello',
+  },
+  // optional, if provider is missing selects first configured provider from super.json
+  { provider }
+);
+```
+
+### Handling the results from `perform`
+
+The `perform` method will take your inputs and additional information and perform the use case asynchronously. This method always returns a Result type that is either `Ok` or `Err`. This follows the [neverthrow](https://github.com/supermacro/neverthrow) approach. The SDK provides multiple ways to work with result.
+
+#### Conditionals
+
+You can use conditionals to check if the result was OK or if it errored. Use `isOk()` or `isErr()`to check type of result.
+
+```typescript
+if (result.isErr()) {
+  // Result is error, error.toString() returns human readable description of what went wrong
+  console.log(result.error.toString());
+} else {
+  // Result is ok and you can accees value here
+  console.log(result.value);
+}
+```
+
+#### Matching a value or error
+
+The Result type also provides a `match` method to use functions to use the values or errors. The `match` method takes two functions, the first of which is for handling the `Ok` result and the the second for handling the `Err` result. The example above using `isOk` and `isErr` can be written using `match` like below.
+
+```typescript
+result.match(
+  value => console.log(value),
+  error => console.log(error.toString())
+);
+```
+
+#### Unsafely unwrapping the result
+
+Lastly, you can just use `unwrap`, which is less safe because it will throw an error.
+
+```typescript
+try {
+  // Possible error is thrown here and it contains human readable description of what went wrong :)
+  const value = result.unwrap();
+  // You can accees value here
+  console.log(value);
+} catch (e) {
+  console.log(e);
+}
+```
+
+## Configuration
+
+The Superface OneSDK is configurable through various environment variables:
+
+- `SUPERFACE_SDK_TOKEN` - your auth token to integrate your running instance with Superface services
+- `SUPERFACE_API_URL` - URL of the Superface services, you probably don't need to change this; default is https://superface.ai
+- `SUPERFACE_PATH` - path to your super.json file; default is `./superface/super.json`
+- `SUPERFACE_METRIC_DEBOUNCE_TIME_MIN` and `SUPERFACE_METRIC_DEBOUNCE_TIME_MAX` - to rate limit metric reporting, OneSDK will send aggregated metrics after at least `MIN` milliseconds and at most `MAX` milliseconds; default is 1000 for min and 60000 for max
+- `SUPERFACE_DISABLE_METRIC_REPORTING` - set this variable to disable metric reporting; enabled by default
+
+### Working with results from `perform`
+
+## Configuration
+
+### Environment variables
