@@ -61,9 +61,9 @@ Perform returns a [result object](#result-object).
 
 ### Selecting a provider (`getProvider`) {#get-provider}
 
-By default, OneSDK picks the first configured provider according to the [`priority` array](/reference/superjson#profilesettings) in `super.json` configuration.
+By default, OneSDK picks the first configured provider or the first provider according to profile's [`priority` array](/reference/superjson#profilesettings) in `super.json` configuration.
 
-You can get a specific provider with `getProvider` method on SDK client and passing it to the perform:
+You can choose a specific provider for `perform`. Use the `getProvider` method to obtain provider's configuration and pass it into `perform`:
 
 ```typescript
 const provider = await client.getProvider('<providerName>');
@@ -75,11 +75,11 @@ const result = await profile.getUseCase('<usecaseName>').perform(
 );
 ```
 
-You can read more in [using multiple providers](../guides/using-multiple-providers) guide.
+Read more in [using multiple providers](../guides/using-multiple-providers) guide.
 
 ### Handling the result (`Result` type) {#result-object}
 
-The `perform` method always returns a `Result` type that is either `Ok` or `Err`. This follows the [NeverThrow](https://github.com/supermacro/neverthrow) approach. You can handle the Result in different ways.
+The `perform` method always returns a `Result` type that is either `Ok` or `Err`. This follows the [NeverThrow](https://github.com/supermacro/neverthrow) approach. The `Result` type provides multiple approaches for handling the success and error conditions:
 
 #### Conditionals
 
@@ -130,3 +130,4 @@ The Superface OneSDK is configurable through various environment variables:
 - `SUPERFACE_API_URL` - URL of the Superface services, useful for SDK development; default is `https://superface.ai`
 - `SUPERFACE_METRIC_DEBOUNCE_TIME_MIN` and `SUPERFACE_METRIC_DEBOUNCE_TIME_MAX` - to rate limit metric reporting, OneSDK will send aggregated metrics after at least `MIN` milliseconds and at most `MAX` milliseconds; default is 1000 for `MIN` and 60000 for `MAX`
 - `SUPERFACE_DISABLE_METRIC_REPORTING` - set this variable to any value to disable metrics reporting; enabled by default
+- `DEBUG` - configures the [debugging output](https://github.com/debug-js/debug); disabled by default, to observe all debug messages relevant to OneSDK set this variable to `superface*`
