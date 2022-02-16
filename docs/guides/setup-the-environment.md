@@ -49,7 +49,7 @@ It will create `superface` folder with the below structure
 - `types` - folder with generated types
 - `super.json` - superface configuration file
 
-And as last step install [OneSDK](/reference/one-sdk-js).
+And as last step install [OneSDK](/reference/one-sdk).
 
 ```shell
 npm install --save @superfaceai/one-sdk
