@@ -13,11 +13,6 @@ module.exports = {
     'guides/add-new-provider',
   ],
   guidesSidebar: [
-    // {
-    //   type: 'doc',
-    //   id: 'guides-intro',
-    //   label: 'Overview'
-    // },
     'getting-started',
     'integrations-monitoring',
     'guides/api-keys',
@@ -29,7 +24,6 @@ module.exports = {
       items: [
         { type: 'doc', id: 'guides/how-to-create', label: 'Overview' },
         'guides/setup-the-environment',
-        // 'guides/create-new-profile', Uncomment this once the page si ready
         'guides/create-new-capability',
         'guides/add-new-provider',
         'guides/map-capability-to-provider',
