@@ -5,6 +5,10 @@
  - provide next/previous navigation
 
  Create as many sidebars as you want.
+
+ Note:
+ When a doc page is mentioned in multiple sidebars, the latter will take precedence
+ and will render in the docs.
  */
 
 module.exports = {
