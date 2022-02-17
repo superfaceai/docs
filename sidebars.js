@@ -8,6 +8,10 @@
  */
 
 module.exports = {
+  providerAvailabilitySidebar: [
+    'guides/find-provider-by-name',
+    'guides/add-new-provider',
+  ],
   guidesSidebar: [
     // {
     //   type: 'doc',
@@ -34,10 +38,6 @@ module.exports = {
         'guides/publishing',
       ],
     },
-  ],
-  providerAvailabilitySidebar: [
-    'guides/find-provider-by-name',
-    'guides/add-new-provider',
   ],
   comlinkReferenceSidebar: [
     {
