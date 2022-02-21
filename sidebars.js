@@ -5,15 +5,18 @@
  - provide next/previous navigation
 
  Create as many sidebars as you want.
+
+ Note:
+ When a doc page is mentioned in multiple sidebars, the latter will take precedence
+ and will render in the docs.
  */
 
 module.exports = {
+  providerAvailabilitySidebar: [
+    'guides/find-provider-by-name',
+    'guides/add-new-provider',
+  ],
   guidesSidebar: [
-    // {
-    //   type: 'doc',
-    //   id: 'guides-intro',
-    //   label: 'Overview'
-    // },
     'getting-started',
     'integrations-monitoring',
     'guides/api-keys',
@@ -25,7 +28,6 @@ module.exports = {
       items: [
         { type: 'doc', id: 'guides/how-to-create', label: 'Overview' },
         'guides/setup-the-environment',
-        // 'guides/create-new-profile', Uncomment this once the page si ready
         'guides/create-new-capability',
         'guides/add-new-provider',
         'guides/map-capability-to-provider',
@@ -34,10 +36,6 @@ module.exports = {
         'guides/publishing',
       ],
     },
-  ],
-  providerAvailabilitySidebar: [
-    'guides/find-provider-by-name',
-    'guides/add-new-provider',
   ],
   comlinkReferenceSidebar: [
     {
