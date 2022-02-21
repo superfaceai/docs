@@ -31,7 +31,7 @@ Depending on your needs, you can skip some parts of the guide to focus on your p
 
 > I want to launch a spaceship but there is no capability for that in your catalog!
 
-Adding a new capability is covered by the guide. Start with [Setup the development environment](setup-the-environment.md) and then follow the next chapters. Once the capability works for you, consider publishing it into the catalog so other users can use it in their projects and map it to other providers.
+Adding a new capability is covered by the guide. Start with [Setup the development environment](../tour/setup-the-environment.md) and then follow the next chapters. Once the capability works for you, consider publishing it into the catalog so other users can use it in their projects and map it to other providers.
 
 ### I Want to Add a New Provider for the Existing Capability
 
@@ -39,9 +39,9 @@ Adding a new capability is covered by the guide. Start with [Setup the developme
 
 Ideally there is already a capability in the catalog which covers your need, but it cannot be performed with your preferred provider.
 
-1. [Setup the development environment](setup-the-environment.md)
-2. [Add a new provider](add-new-provider.md) if the provider doesn't exist yet (it may be used by another capability)
-3. [Map capability to a provider](map-capability-to-provider.md)
+1. [Setup the development environment](../tour/setup-the-environment.md)
+2. [Add a new provider](../tour/add-new-provider.md) if the provider doesn't exist yet (it may be used by another capability)
+3. [Map capability to a provider](../tour/map-capability-to-provider.md)
 
 ### I Have an Issue With an Existing Capability
 

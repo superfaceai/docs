@@ -1,0 +1,1 @@
+# Use offline without Registry

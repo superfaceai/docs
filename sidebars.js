@@ -12,6 +12,71 @@
  */
 
 module.exports = {
+  defaultSidebar: [
+    {
+      type: 'category',
+      label: 'Getting started',
+      items: [
+        { type: 'doc', id: 'index', label: 'Welcome' },
+        { type: 'doc', id: 'quickstart', label: 'Quickstart' },
+        {
+          type: 'category',
+          label: 'A tour of Superface',
+          collapsed: false,
+          link: { type: 'doc', id: 'introduction' },
+          items: [
+            'how_it_works',
+            { type: 'doc', id: 'tour/setup-the-environment' },
+            {
+              type: 'doc',
+              id: 'tour/create-new-capability',
+              label: 'Write new use-case',
+            },
+            {
+              type: 'doc',
+              id: 'tour/map-capability-to-provider',
+              label: 'Write new integration',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      collapsed: true,
+      items: ['guides/using-multiple-providers', 'guides/offline-use'],
+    },
+    {
+      type: 'category',
+      label: 'References',
+      collapsed: false,
+      items: [
+        {
+          type: 'category',
+          label: 'Language',
+          link: { type: 'doc', id: 'comlink/index' },
+          items: [
+            'comlink/reference/profile',
+            'comlink/reference/map',
+            'comlink/reference/provider',
+          ],
+        },
+        {
+          type: 'doc',
+          label: 'OneSDK for Node.js',
+          id: 'reference/one-sdk',
+        },
+        {
+          type: 'doc',
+          label: 'super.json',
+          id: 'reference/superjson',
+        },
+      ],
+    },
+  ],
+
+  /*
   providerAvailabilitySidebar: [
     'guides/find-provider-by-name',
     'guides/add-new-provider',
@@ -49,4 +114,5 @@ module.exports = {
       ],
     },
   ],
+  */
 };
