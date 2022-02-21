@@ -18,10 +18,10 @@ Mapping happens between _a specific version of Profile_ and some _Provider_. Cho
 The easiest way to then bootstrap a new Map document is using [Superface CLI](/reference/cli).
 
 ```shell
-superface create --map --profileId <profile-name@version> --providerName <provider-name>
+superface create --map --profileId <profile-name> --providerName <provider-name>
 ```
 
-_Replace the `<profile-name@version>` and `<provider-name>` in the command with the actual profile and provider you wish to create new Map for._
+_Replace the `<profile-name>` and `<provider-name>` in the command with the actual profile and provider you wish to create new Map for._
 
 Running the above command creates a new Comlink file and links the new map in your local `super.json` configuration file. The new empty map will look something like this:
 
