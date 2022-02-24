@@ -1,7 +1,7 @@
 # Google Maps
 
 1. You will need a project with a billing account and the Geocoding API enabled. Start by heading to the [Google Maps section](https://console.cloud.google.com/project/_/google/maps-apis/credentials) of the Google Cloud Console.
-2. Next, go to Credentials section and create a new project 
+2. Next, go to Credentials section and create a new project.
     
     ![google-create-project.png](/img/tutorials/getting-api-keys/google-create-project.png)
     
@@ -19,7 +19,7 @@
     
     ![google-restrict-key.jpg](/img/tutorials/getting-api-keys/google-restrict-key.jpg)
     
-6. If this is you first Google Cloud project, claim your 300$ in credit offered by the banner at the top of the page. You will need to do this to be able to use the API as Google goes not offer any free quota. You will be asked for a valid credit card to perform a free verification. After that, you will have 90 days to use the credit.
+6. If this is your first Google Cloud project, claim your $300 in credit offered by the banner at the top of the page. You will need to do this to be able to use the API as Google goes not offer any free quota. You will be asked for a valid credit card to perform a free verification. After that, you will have 90 days to use the credit.
     
     ![google-free-credit.png](/img/tutorials/getting-api-keys/google-free-credit.png)
     

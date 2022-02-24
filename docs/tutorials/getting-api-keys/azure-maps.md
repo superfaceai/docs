@@ -7,7 +7,7 @@
     
     ![azure-create-new-resource.png](/img/tutorials/getting-api-keys/azure-create-new-resource.png)
     
-3. Search for and select Azure Maps from the available services
+3. Search for and select Azure Maps from the available services.
     
     ![azure-select-maps.png](/img/tutorials/getting-api-keys/azure-select-maps.png)
     

@@ -5,7 +5,7 @@
     
     ![here-generate-app.png](/img/tutorials/getting-api-keys/here-generate-app.png)
     
-3. Create an API key for the app
+3. Create an API key for the app.
     
     ![here-create-api-key.png](/img/tutorials/getting-api-keys/here-create-api-key.png)
     
