@@ -404,7 +404,7 @@ You can use `--updateSnapshot` flag when modifying tests or when the expected re
 
 ## Examples
 
-- [Integration test for expected result data format](https://github.com/superfaceai/station/blob/main/capabilities/communication/send-message/maps/slack.test.ts)
-- [Integration test for expected output for given input](https://github.com/superfaceai/station/blob/main/capabilities/address/clean-address/maps/smartystreets.test.ts)
+- [Integration test for expected result data format](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/communication/send-message/maps/send-message.ts)
+- [Integration test for expected output for given input](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/address/clean-address/maps/clean-address.ts)
 
 > If you wish to use your new capability in another Node.js application, please refer to [the following guide](./run-capability.md).
