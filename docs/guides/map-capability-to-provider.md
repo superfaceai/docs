@@ -378,7 +378,7 @@ _The above map expects the use case to fail in some scenarios when the user prov
 
 _Note: the `return` keyword serves the purpose of early return, as you might recognize from other programming languages. Without `return`, the execution would continue to the `map error` without any condition at the end, and that would overwrite the error returned from the response handler._
 
-_See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Conditions) for more about conditions._
+_See [Comlink specification](https://superface.ai/docs/comlink/map#sec-Conditions) for more about conditions._
 
 ## Using functions, conditions, iterations and more {#advanced}
 
@@ -388,11 +388,11 @@ For more complicated maps, you'll find a need for the general programming concep
 
 :::tip
 
-Comlink supports everything you might expect from a powerful scripting language. We recommend to explore the language by consulting [Comlink Map reference](https://superface.ai/docs/comlink/map) or [the examples below](#examples).
+Comlink supports everything you might expect from a powerful scripting language. We recommend to explore the language by consulting [Comlink Map reference](../comlink/reference/map.mdx) or [the examples below](#examples).
 
 :::
 
 ## Examples {#examples}
 
-- [Map with reusable operations, iterations & expressions](https://github.com/superfaceai/station/blob/main/capabilities/delivery-tracking/shipment-info/maps/dhl.suma)
-- [Map with multiple error response mappings](https://github.com/superfaceai/station/blob/main/capabilities/communication/send-email/maps/postmark.suma)
+- [Map with reusable operations, iterations & expressions](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/delivery-tracking/shipment-info/maps/dhl.suma)
+- [Map with multiple error response mappings](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/communication/send-email/maps/postmark.suma)
