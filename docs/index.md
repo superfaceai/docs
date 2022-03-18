@@ -4,19 +4,19 @@
 
 💸 Developing integrations over and over is expensive. Use integrations developed by others as you use NPM packages or Crates.
 
-💥 Ready for more? Use advanced features like provider failover and Monitoring.
-
 🔐 You data are safe, Superface isn't acting like proxy.
-
-🧐 Superface is a language and a protocol for abstracting integrations to application use-cases. It allows use-case discovery and distribution of integration code at runtime.
 
 🎓 This approach gives you a framework to decouple lifecycle of your application and integrations it uses.
 
+💥 Ready for more? Use advanced features like provider failover and Monitoring.
+
+🧐 Superface is a language and a protocol for abstracting integrations to application use-cases. It allows use-case discovery and distribution of integration code at runtime.
+
 ## Fast track ⏱️
 
-Easiest way to start with existing use-case. Lets say, you want show what weather is in Prague.
+Easiest way to start is with [OneSDK](https://github.com/superfaceai/one-sdk-js) for Node.js and with existing use-case. Lets say, you want see what repositories Superface has on GitHub.
 
-Install [Node.js](https://nodejs.org/en/download/) and create new project
+Install [Node.js](https://nodejs.org/en/download/) and create new project:
 
 ```shell
 mkdir my_project
@@ -24,10 +24,10 @@ cd my_project
 npm init -y
 ```
 
-Install [OneSDK](https://github.com/superfaceai/one-sdk-js) and configure with [Current Weather in city](https://superface.ai/weather/current-city).
+Install [OneSDK](https://github.com/superfaceai/one-sdk-js) and configure with [VCS User Repositories](https://superface.ai/vcs/user-repos) profile:
 
 ```shell
-npx @superfaceai/cli install weather/current-city --providers wttr-in
+npx @superfaceai/cli install vcs/user-repos --providers github
 ```
 
 Create and open `index.js` file, and paste in:
@@ -39,12 +39,11 @@ const sdk = new SuperfaceClient();
 
 async function run() {
   // Load the installed profile
-  const profile = await sdk.getProfile('weather/current-city');
+  const profile = await sdk.getProfile('vcs/user-repos');
 
   // Use the profile
-  const result = await profile.getUseCase('GetCurrentWeatherInCity').perform({
-    city: 'Prague, Czech Republic',
-    units: 'C',
+  const result = await profile.getUseCase('UserRepos').perform({
+    user: 'superfaceai',
   });
 
   return result.unwrap();
@@ -53,8 +52,15 @@ async function run() {
 run();
 ```
 
-And run it
+Run it:
 
 ```shell
 node index.js
 ```
+
+:::tip
+
+Check [OneSDK repository](https://github.com/superfaceai/one-sdk-js) to learn more about implementation.
+
+Or read [getting started](./getting-started.mdx) for more detailed step by step guide.
+:::
