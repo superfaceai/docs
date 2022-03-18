@@ -17,6 +17,7 @@ module.exports = {
     'guides/add-new-provider',
   ],
   guidesSidebar: [
+    'introduction',
     'getting-started',
     'integrations-monitoring',
     'guides/api-keys',

@@ -12,21 +12,6 @@ You don't need an account at superface.ai to follow this guide.
 
 :::
 
-## How Superface works
-
-Unlike every other API client, absolutely **no API information is hard-coded in your App or the SDK**.
-
-The instructions how to make a call are downloaded during your App runtime and resolved by OneSDK to make a **direct HTTP call** to the API. The calls go straight from your App to the provider's API and are **never proxied through Superface**. This lets you change the instructions at runtime without updating or redeploying your App. You can even change providers while it’s running.
-
-<figure>
-  <HowItWorksDiagram />
-  <figcaption>
-    During the app development you install a capability and OneSDK. In the
-    runtime the instructions for calling the API are downloaded from the
-    Superface registry and the API is called directly from your app.
-  </figcaption>
-</figure>
-
 ## Superface in 3 minutes
 
 The following steps will guide you how to quickly get started with Superface and OneSDK.
