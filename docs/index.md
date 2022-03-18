@@ -14,7 +14,7 @@
 
 ## Fast track ⏱️
 
-Easiest way to start with existing use-case. Lets say, you want show what wheater is in New York.
+Easiest way to start with existing use-case. Lets say, you want show what weather is in Prague.
 
 Install [Node.js](https://nodejs.org/en/download/) and create new project
 
