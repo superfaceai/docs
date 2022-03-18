@@ -11,23 +11,17 @@
  and will render in the docs.
  */
 
-module.exports = {
-  providerAvailabilitySidebar: [
-    'guides/find-provider-by-name',
-    'guides/add-new-provider',
-  ],
-  guidesSidebar: [
-    'introduction',
-    'getting-started',
-    'integrations-monitoring',
-    'guides/api-keys',
-    'guides/using-multiple-providers',
+const guides = {
+  type: 'category',
+  label: 'Guides',
+  collapsed: false,
+  items: [
     {
       type: 'category',
       label: 'How to create a capability',
+      link: { type: 'doc', id: 'guides/how-to-create' },
       collapsed: true,
       items: [
-        { type: 'doc', id: 'guides/how-to-create', label: 'Overview' },
         'guides/setup-the-environment',
         'guides/create-new-capability',
         'guides/add-new-provider',
@@ -37,17 +31,41 @@ module.exports = {
         'guides/publishing',
       ],
     },
-  ],
-  comlinkReferenceSidebar: [
     {
       type: 'category',
-      label: 'Comlink References',
-      collapsed: false,
+      label: 'Working with providers',
+      collapsed: true,
       items: [
-        { type: 'doc', id: 'comlink/reference/profile', label: 'Profile' },
-        { type: 'doc', id: 'comlink/reference/map', label: 'Map' },
-        { type: 'doc', id: 'comlink/reference/provider', label: 'Provider' },
+        'guides/find-provider-by-name',
+        'guides/add-new-provider',
+        'guides/using-multiple-providers',
       ],
     },
+    'guides/api-keys',
+    'guides/integrations-monitoring',
+  ],
+};
+
+const comlink = {
+  type: 'category',
+  label: 'Comlink',
+  link: { type: 'doc', id: 'comlink/index' },
+  collapsed: true,
+  items: [
+    { type: 'doc', id: 'comlink/reference/profile', label: 'Profile' },
+    { type: 'doc', id: 'comlink/reference/map', label: 'Map' },
+    { type: 'doc', id: 'comlink/reference/provider', label: 'Provider' },
+    { type: 'doc', id: 'comlink/specifications', label: 'Specifications' },
+  ],
+};
+
+module.exports = {
+  mainSidebar: [
+    'index',
+    'how-superface-works',
+    'getting-started',
+
+    guides,
+    comlink,
   ],
 };

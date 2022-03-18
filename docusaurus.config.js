@@ -35,20 +35,14 @@ module.exports = {
       style: 'dark',
       items: [
         {
-          type: 'doc',
-          docId: 'getting-started',
+          to: '/',
           position: 'left',
-          label: 'Guides',
+          label: 'Docs',
         },
         {
           to: 'reference',
           position: 'left',
           label: 'Reference',
-        },
-        {
-          to: 'comlink',
-          position: 'left',
-          label: 'Comlink',
         },
         {
           to: '/dashboard',
