@@ -1,3 +1,8 @@
+---
+slug: /
+id: introduction
+---
+
 # Introduction
 
 ⚡️ Superface will help you to quickly use and manage integrations, so you can focus on your application.

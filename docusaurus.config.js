@@ -35,12 +35,14 @@ module.exports = {
       style: 'dark',
       items: [
         {
-          to: '/',
+          type: 'doc',
+          docId: 'introduction',
           position: 'left',
           label: 'Docs',
         },
         {
-          to: 'reference',
+          type: 'doc',
+          docId: 'reference/index',
           position: 'left',
           label: 'Reference',
         },

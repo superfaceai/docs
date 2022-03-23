@@ -46,26 +46,28 @@ const guides = {
   ],
 };
 
-const comlink = {
-  type: 'category',
-  label: 'Comlink',
-  link: { type: 'doc', id: 'comlink/index' },
-  collapsed: true,
-  items: [
-    { type: 'doc', id: 'comlink/reference/profile', label: 'Profile' },
-    { type: 'doc', id: 'comlink/reference/map', label: 'Map' },
-    { type: 'doc', id: 'comlink/reference/provider', label: 'Provider' },
-    { type: 'doc', id: 'comlink/specifications', label: 'Specifications' },
-  ],
-};
-
 module.exports = {
   mainSidebar: [
-    'index',
+    'introduction',
     'how-superface-works',
     'getting-started',
-
     guides,
-    comlink,
+  ],
+  referenceSidebar: [
+    'reference/index',
+    'reference/one-sdk',
+    'reference/superjson',
+    {
+      type: 'category',
+      label: 'Comlink',
+      link: { type: 'doc', id: 'comlink/index' },
+      collapsed: true,
+      items: [
+        { type: 'doc', id: 'comlink/reference/profile', label: 'Profile' },
+        { type: 'doc', id: 'comlink/reference/map', label: 'Map' },
+        { type: 'doc', id: 'comlink/reference/provider', label: 'Provider' },
+        { type: 'doc', id: 'comlink/specifications', label: 'Specifications' },
+      ],
+    },
   ],
 };
