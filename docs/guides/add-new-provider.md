@@ -250,11 +250,7 @@ Use the following scheme with an arbitrary ID which can be referenced later from
 
 _Replace the security scheme `id` value in the example with your own ID._
 
-#### Optional parameters:
-- `statusCode` HTTP status code that should be returned from initial call (containing challenge header). Default value is `401`.
-- `challengeHeader` Case insensitive name of header containing challenge from the server. Default value is `www-authenticate`.
-- `authorizationHeader` Case insensitive name of header containing authorization. Default value is `Authorization`.
-
+There are some optional parameters, information about them can be found in [reference](../comlink/reference/provider.mdx).
 
 
 ## Examples
