@@ -99,7 +99,7 @@ usecase SendMessage unsafe {
 Message Status
 Retrieve status of a sent SMS message
 """
-usecase RetrieveMessageStatus safe { 
+usecase RetrieveMessageStatus safe {
   // use case body
 }
 
@@ -132,7 +132,7 @@ provider = "twilio"
 map SendMessage {
   http POST "/2010-04-01/Accounts/{parameters.accountSid}/Messages.json" {
     security "basic"
-    
+
     request "application/x-www-form-urlencoded" {
       body {
         To = input.to,
@@ -155,6 +155,50 @@ map RetrieveMessageStatus {
 ```
 
 ## Provider
+
+_Provider_ or _integration provider_ defines a set of base URLs (services), security schemes, and [integration parameters](#integration-parameter). This information is used for reusability between maps and as a security measure. Maps cannot send requests outside of services defined and cannot read values passed to the authentication scheme.
+
+:::info Provider vs. company
+
+From Superface perspective, single provider doesn't have to correspond to a single company. Large companies, like Google, have multiple unrelated APIs, each with its own provider, e.g. `google-apis-maps` or `google-apis-computer-vision`. On the other hand, your provider can specify services from unrelated companies if you need to use these services in a single map.
+
+:::
+
+Provider definition is a JSON file adhering to the [Comlink Provider schema](#comlink). The provider is _configured_ by the Superface CLI for particular profiles, which enables the respective maps to be used by [OneSDK](#onesdk) in the runtime. Provider is identified by its name, for example: `twilio`.
+
+:::caution Provider name limitations
+
+Name of the provider cannot contain numbers to avoid typosquatting attacks. If you are publishing a provider into the registry, its name must start with `unverified-` prefix, e.g. `unverified-twilio`
+
+:::
+
+Example of the `twilio` provider:
+
+```hcl title="twilio.provider.json"
+{
+  "name": "twilio",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://api.twilio.com"
+    }
+  ],
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "basic",
+      "type": "http",
+      "scheme": "basic"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "accountSid",
+      "description": "Account security identifier"
+    }
+  ]
+}
+```
 
 ## Registry
 
