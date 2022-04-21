@@ -3,13 +3,7 @@ slug: '/reference/glossary'
 displayed_sidebar: referenceSidebar
 ---
 
-profile
-map
-provider
-registry
-use-case
-OneSDK
-Comlink
+# Glossary
 
 ## Use case
 
