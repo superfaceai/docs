@@ -5,7 +5,7 @@ displayed_sidebar: referenceSidebar
 
 # Glossary
 
-## Use case
+## Use case {#use-case}
 
 _Use case_ or _integration use case_ describes what the business needs from a specific integration. Technically the use case defines an interface between the application and the integration provider, schema for input and output (result) data, possible error conditions, and documentation. It is part of the [profile](#profile).
 
@@ -66,7 +66,7 @@ usecase SendMessage unsafe {
 }
 ```
 
-## Profile
+## Profile {#profile}
 
 _Profile_ contains one or more [use cases](#use-case) along with the version and a general documentation for the group of use cases. It is identified by a name with an optional scope separated with a slash, for example: `communication/send-sms`. Optionally, the profile can be scoped to a specific version, for example: `communication/send-sms@2.0.1`. Profiles are versioned with [Semantic Versioning](https://semver.org/) to facilitate for breaking changes.
 
@@ -109,11 +109,11 @@ field deliveryStatus enum {
 }
 ```
 
-## Map
+## Map {#map}
 
 _Map_ defines a [provider](#provider)-specific logic to fulfill the use case: what API endpoints need to be called, how to format requests and responses, and how an authentication is performed.
 
-Maps are fetched by [OneSDK](#onesdk) in the runtime (i.e. when the particular profile is used with the particular provider for the first time) and can be also updated in the runtime (e.g. to fix handle a breaking changes in the provider's API).
+Maps are fetched by [OneSDK](#one-sdk) in the runtime (i.e. when the particular profile is used with the particular provider for the first time) and can be also updated in the runtime (e.g. to fix handle a breaking changes in the provider's API).
 
 Map file has an extension `.suma` and it is written in the [Comlink Map language](#comlink). It specifies the name of the provider and the profile, along with its major and minor version. For each use case defined in the respective profile, there is a corresponding `map` directive inside the map file.
 
@@ -148,7 +148,7 @@ map RetrieveMessageStatus {
 }
 ```
 
-## Provider
+## Provider {#provider}
 
 _Provider_ or _integration provider_ defines a set of base URLs (services), security schemes, and [integration parameters](#integration-parameter). This information is used for reusability between maps and as a security measure. Maps cannot send requests outside of services defined and cannot read values passed to the authentication scheme.
 
@@ -158,7 +158,7 @@ From Superface perspective, single provider doesn't have to correspond to a sing
 
 :::
 
-Provider definition is a JSON file adhering to the [Comlink Provider schema](#comlink). The provider is _configured_ by the Superface CLI for particular profiles, which enables the respective maps to be used by [OneSDK](#onesdk) in the runtime. Provider is identified by its name, for example: `twilio`.
+Provider definition is a JSON file adhering to the [Comlink Provider schema](#comlink). The provider is _configured_ by the Superface CLI for particular profiles, which enables the respective maps to be used by [OneSDK](#one-sdk) in the runtime. Provider is identified by its name, for example: `twilio`.
 
 :::caution Provider name limitations
 
@@ -194,12 +194,12 @@ Example of the `twilio` provider:
 }
 ```
 
-## Registry
+## Registry {#registry}
 
-## Integration parameter
+## Integration parameter {#integration-parameter}
 
-## OneSDK
+## OneSDK {#one-sdk}
 
-## super.json
+## super.json {#super-json}
 
-## Comlink
+## Comlink {#comlink}
