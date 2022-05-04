@@ -47,8 +47,8 @@ module.exports = {
           label: 'Reference',
         },
         {
-          to: '/dashboard',
-          label: 'Go to Dashboard',
+          to: '/',
+          label: 'Go to App',
           position: 'right',
         },
         {
