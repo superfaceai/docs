@@ -47,8 +47,8 @@ module.exports = {
           label: 'Reference',
         },
         {
-          to: '/',
-          label: 'Go to App',
+          href: '/catalog',
+          label: 'Catalog',
           position: 'right',
         },
         {
