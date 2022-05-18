@@ -10,4 +10,4 @@ title: Verification
 
 ## Can I verify my use case?
 
-Definetly! Please contact us at [support@superface.ai](mailto:support@superface.ai) and we will get back to you as soon as possible.
+Definitely! Please contact us at [support@superface.ai](mailto:support@superface.ai) and we will get back to you as soon as possible.
