@@ -52,6 +52,7 @@ module.exports = {
     'how-superface-works',
     'getting-started',
     guides,
+    'verification'
   ],
   referenceSidebar: [
     'reference/index',
