@@ -184,6 +184,12 @@ Common uses for integration parameters include:
 
 ## OneSDK {#one-sdk}
 
+_OneSDK_ is a reference implementation of the universal API client for Node.js. It is the primary way of using Superface integrations. It can update and execute [Comlink](#comlink) files, automatically switch providers, and report integrations health via built-in [monitoring](../guides/integrations-monitoring.mdx).
+
+For more details, see [OneSDK reference](./one-sdk.mdx) and its [GitHub repostiory](https://github.com/superfaceai/one-sdk-js).
+
 ## super.json {#super-json}
+
+
 
 ## Comlink {#comlink}
