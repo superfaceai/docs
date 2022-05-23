@@ -52,7 +52,7 @@ module.exports = {
     'how-superface-works',
     'getting-started',
     guides,
-    'verification'
+    'verification',
   ],
   referenceSidebar: [
     'reference/index',
@@ -70,5 +70,6 @@ module.exports = {
         { type: 'doc', id: 'comlink/specifications', label: 'Specifications' },
       ],
     },
+    'reference/glossary',
   ],
 };
