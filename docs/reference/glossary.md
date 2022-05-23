@@ -34,35 +34,6 @@ usecase SendMessage unsafe {
     "Identifier of Message"
     messageId string
   }
-
-  error {
-    title! string
-    detail string
-  }
-
-  example Successful {
-    input {
-      to = '+12127290149',
-      from = '+4915207955279',
-      text = 'Your order is ready to be picked up!',
-    }
-
-    result {
-      messageId = '150000003351F9D7',
-    }
-  }
-
-  example Failed {
-    input {
-      to = '+12127290149',
-      from = '',
-      text = 'Your order is ready to be picked up!',
-    }
-
-    error {
-      title = "Missing 'from' number",
-    }
-  }
 }
 ```
 
