@@ -171,7 +171,6 @@ _Registry_ is a web service for distribution and discovery of profiles, maps, an
 
 The public registry is available at [superface.ai](https://superface.ai/catalog). Integrations available in the public catalog are maintained and published from the [Station GitHub repository](https://github.com/superfaceai/station).
 
-
 ## Integration parameter {#integration-parameter}
 
 _Integration parameters_ are provider-specific values, which can be used in maps and provider definitions. Parameter's value can be specified either through an environment variable, via [super.json file](#super-json), or in runtime within the [`perform` method](./one-sdk.mdx#perform).
@@ -190,6 +189,12 @@ For more details, see [OneSDK reference](./one-sdk.mdx) and its [GitHub repostio
 
 ## super.json {#super-json}
 
+_super.json_ is the main configuration file used by [OneSDK](#one-sdk) to load profiles, maps, and provider files. By default it is located in `superface/super.json`. It is managed with [Superface CLI](https://github.com/superfaceai/cli).
 
+For more details about file's content, see [super.json reference](./superjson.mdx).
 
 ## Comlink {#comlink}
+
+_Comlink_ is a domain-specific language for declarative description of API integrations. It consists of three parts: [Profile](#profile), [Map](#map), and [Provider definition](#provider). Integrations written with Comlink are consumed by [OneSDK](#one-sdk).
+
+For more details see [Comlink reference](../comlink/).
