@@ -133,13 +133,13 @@ Provider definition is a JSON file adhering to the [Comlink Provider schema](#co
 
 :::caution Provider name limitations
 
-Name of the provider cannot contain numbers to avoid typosquatting attacks. If you are publishing a provider into the registry, its name must start with `unverified-` prefix, e.g. `unverified-twilio`
+Name of the provider cannot contain numbers to avoid typosquatting attacks. If you are publishing a provider into the registry, its name must start with `unverified-` prefix, e.g. `unverified-twilio`. See [Verification](../verification.mdx) for further details.
 
 :::
 
 Example of the `twilio` provider:
 
-```hcl title="twilio.provider.json"
+```json title="twilio.provider.json"
 {
   "name": "twilio",
   "services": [
@@ -167,7 +167,20 @@ Example of the `twilio` provider:
 
 ## Registry {#registry}
 
+_Registry_ is a web service for distribution and discovery of profiles, maps, and providers. The service accepts [Comlink](#comlink) files for publishing and generates Abstract Syntax Tree (AST) for runtime consumption by [OneSDK](#one-sdk).
+
+The public registry is available at [superface.ai](https://superface.ai/catalog). Integrations available in the public catalog are maintained and published from the [Station GitHub repository](https://github.com/superfaceai/station).
+
+
 ## Integration parameter {#integration-parameter}
+
+_Integration parameters_ are provider-specific values, which can be used in maps and provider definitions. Parameter's value can be specified either through an environment variable, via [super.json file](#super-json), or in runtime within the [`perform` method](./one-sdk.mdx#perform).
+
+Common uses for integration parameters include:
+
+- specifying alternate URL or regional domain for the provider's service (e.g. [IBM Cloud Speech to Text provider](https://github.com/superfaceai/station/blob/31c145aa618555c9084f80423c7094acbd43e02e/providers/ibm-cloud-speech-to-text.json#L6))
+- passing additional values required by the provider which cannot be covered by profile's input values (e.g. [Mailgun DOMAIN parameter](https://github.com/superfaceai/station/blob/31c145aa618555c9084f80423c7094acbd43e02e/providers/mailgun.json#L18-L21))
+- passing user's OAuth2 Access Tokens in the runtime (e.g. [Twitter accessToken parameter](https://github.com/superfaceai/station/blob/31c145aa618555c9084f80423c7094acbd43e02e/providers/twitter.json#L10-L13))
 
 ## OneSDK {#one-sdk}
 
