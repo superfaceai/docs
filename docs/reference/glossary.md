@@ -165,12 +165,6 @@ Example of the `twilio` provider:
 }
 ```
 
-## Registry {#registry}
-
-_Registry_ is a web service for distribution and discovery of profiles, maps, and providers. The service accepts [Comlink](#comlink) files for publishing and generates Abstract Syntax Tree (AST) for runtime consumption by [OneSDK](#one-sdk).
-
-The public registry is available at [superface.ai](https://superface.ai/catalog). Integrations available in the public catalog are maintained and published from the [Station GitHub repository](https://github.com/superfaceai/station).
-
 ## Integration parameter {#integration-parameter}
 
 _Integration parameters_ are provider-specific values, which can be used in maps and provider definitions. Parameter's value can be specified either through an environment variable, via [super.json file](#super-json), or in runtime within the [`perform` method](./one-sdk.mdx#perform).
@@ -181,15 +175,21 @@ Common uses for integration parameters include:
 - passing additional values required by the provider which cannot be covered by profile's input values (e.g. [Mailgun DOMAIN parameter](https://github.com/superfaceai/station/blob/31c145aa618555c9084f80423c7094acbd43e02e/providers/mailgun.json#L18-L21))
 - passing user's OAuth2 Access Tokens in the runtime (e.g. [Twitter accessToken parameter](https://github.com/superfaceai/station/blob/31c145aa618555c9084f80423c7094acbd43e02e/providers/twitter.json#L10-L13))
 
+## Registry {#registry}
+
+_Registry_ is a web service for distribution and discovery of profiles, maps, and providers. The service accepts [Comlink](#comlink) files for publishing and generates Abstract Syntax Tree (AST) for runtime consumption by [OneSDK](#one-sdk).
+
+The public registry is available at [superface.ai](https://superface.ai/catalog). Integrations available in the public catalog are maintained and published from the [Station GitHub repository](https://github.com/superfaceai/station).
+
 ## OneSDK {#one-sdk}
 
-_OneSDK_ is a reference implementation of the universal API client for Node.js. It is the primary way of using Superface integrations. It can update and execute [Comlink](#comlink) files, automatically switch providers, and report integrations health via built-in [monitoring](../guides/integrations-monitoring.mdx).
+_OneSDK_ is a universal API client for Node.js. It is the primary way of using Superface integrations. It can update and execute [Comlink](#comlink) files, automatically switch providers, and report integrations health via built-in [monitoring](../guides/integrations-monitoring.mdx).
 
 For more details, see [OneSDK reference](./one-sdk.mdx) and its [GitHub repostiory](https://github.com/superfaceai/one-sdk-js).
 
 ## super.json {#super-json}
 
-_super.json_ is the main configuration file used by [OneSDK](#one-sdk) to load profiles, maps, and provider files. By default it is located in `superface/super.json`. It is managed with [Superface CLI](https://github.com/superfaceai/cli).
+_super.json_ is the configuration file used by [OneSDK](#one-sdk) to load profiles, maps, and provider files. By default it is located in `superface/super.json`. It is managed with [Superface CLI](https://github.com/superfaceai/cli).
 
 For more details about file's content, see [super.json reference](./superjson.mdx).
 
