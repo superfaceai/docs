@@ -7,7 +7,7 @@ displayed_sidebar: referenceSidebar
 
 ## Use case {#use-case}
 
-_Use case_ or _integration use case_ describes what the business needs from a specific integration. Technically the use case defines an interface between the application and the integration provider, schema for input and output (result) data, possible error conditions, and documentation. It is part of the [profile](#profile).
+_Use case_ (or _integration use case_) describes what the business needs from a specific integration. Technically, the _use case_ defines an interface between the application and the integration provider, the schema of input and output (result) data, possible error conditions, and relevant documentation. It is a part of the [profile](#profile).
 
 For example, the [Send SMS Message](https://superface.ai/communication/send-sms@2.0) (`SendMessage`) use case expects recipient's phone number, sender's phone number, and the text message contents. It will return a message ID as the result.
 
