@@ -20,7 +20,7 @@ Send single text message
 """
 usecase SendMessage unsafe {
   input {
-    "Recepient of the message"
+    "Recipient of the message"
     to string
 
     "Sender of the message"
@@ -48,7 +48,7 @@ Profile is written with the [Comlink Profile language](#comlink), for example:
 ```hcl title="communication/send-sms.supr"
 """
 Send SMS Message
-Send a single SMS message or retieve its status.
+Send a single SMS message or retrieve its status.
 """
 
 name = "communication/send-sms"
