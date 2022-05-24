@@ -39,9 +39,9 @@ usecase SendMessage unsafe {
 
 ## Profile {#profile}
 
-_Profile_ contains one or more [use cases](#use-case) along with the version and a general documentation for the group of use cases. It is identified by a name with an optional scope separated with a slash, for example: `communication/send-sms`. Optionally, the profile can be scoped to a specific version, for example: `communication/send-sms@2.0.1`. Profiles are versioned with [Semantic Versioning](https://semver.org/) to facilitate for breaking changes.
+A _profile_ contains one or more [use cases](#use-case), along with the version and general documentation for that group of use cases. It is identified by a name, with an optional scope separated by a slash, for example: `communication/send-sms`. Optionally, the profile can be scoped to a specific version, for example: `communication/send-sms@2.0.1`. Profiles are versioned with [Semantic Versioning](https://semver.org/) to indicate breaking changes.
 
-Profile's file has an extension `.supr` and it is _installed_ with the Superface CLI, forming a static part of the integration.
+Profile's file has an extension `.supr` and it is _installed_ with the Superface CLI. It should be committed to a version control system and kept with the application's code.
 
 Profiles are written using the [Comlink Profile language](#comlink), for example:
 
