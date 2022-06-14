@@ -98,3 +98,23 @@ jobs:
           status: ${{ job.status }}
           deployment_id: ${{ steps.production_deployment.outputs.deployment_id }}
           env_url: ${{ steps.vercel_production.outputs.preview-url }}
+
+  index_production:
+    needs: deploy_production
+    name: Index production to Algolia
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo ::set-output name=CONFIG::$(cat .github/algolia/config.json | jq -r tostring)
+        name: Get Scraper config
+        id: config
+      - uses: addnab/docker-run-action@v3
+        name: Scrape and Index docs
+        with:
+          image: algolia/docsearch-scraper
+          options: -e API_KEY -e APPLICATION_ID -e CONFIG
+          run: pipenv run python -m src.index
+        env:
+          API_KEY: ${{ secrets.ALGOLIA_ADMIN_API_KEY }}
+          APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
+          CONFIG: ${{ steps.config.outputs.CONFIG }}

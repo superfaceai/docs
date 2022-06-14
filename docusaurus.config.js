@@ -88,10 +88,18 @@ module.exports = {
         href: 'https://superface.ai/',
       },
     },
+
     prism: {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
       additionalLanguages: ['hcl'],
+    },
+
+    algolia: {
+      appId: 'RQ4GPZIHBP',
+      apiKey: '6efca96741656c108c8746f7f2aa3da1',
+      indexName: 'production',
+      contextualSearch: false,
     },
   },
 
