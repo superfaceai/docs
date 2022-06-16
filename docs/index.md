@@ -19,17 +19,18 @@ id: introduction
 
 ## Fast track ⏱️
 
-The easiest way to start is with [OneSDK](https://github.com/superfaceai/one-sdk-js) for Node.js and with an existing use-case. Let's say, you want to see what repositories Superface has on GitHub.
+The easiest way to start is with [OneSDK](https://github.com/superfaceai/one-sdk-js) for Node.js and with an existing [use-case](./reference//glossary.md#use-case). Let's say, you want to see what repositories Superface has on GitHub.
 
-Install [Node.js](https://nodejs.org/en/download/) and create a new project:
+Install [Node.js](https://nodejs.org/en/download/) and create a new project with [OneSDK](https://github.com/superfaceai/one-sdk-js):
 
 ```shell
 mkdir my_project
 cd my_project
 npm init -y
+npm install --save @superfaceai/one-sdk
 ```
 
-Install [OneSDK](https://github.com/superfaceai/one-sdk-js) and configure [VCS User Repositories](https://superface.ai/vcs/user-repos) profile:
+Install `vcs/user-repos` [profile](./reference/glossary#profile) and configure `GitHub` as a [provider](./reference/glossary#provider):
 
 ```shell
 npx @superfaceai/cli install vcs/user-repos --providers github
