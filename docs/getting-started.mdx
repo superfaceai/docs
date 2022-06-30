@@ -2,7 +2,7 @@ import HowItWorksDiagram from '../assets/getting-started-how-superface-works.svg
 
 # Getting started
 
-Superface is all about you, the consumer of API capabilities. To get started, first pick a capability and its provider, install it to your App and use Superface OneSDK to make the call.
+Superface is all about you, the consumer of API capabilities. To get started, first pick a capability and its provider, and use Superface OneSDK to make the call.
 
 :::info
 
@@ -30,6 +30,11 @@ Decide what capability you would like to use in your App. A capability is descri
 
 In this guide we will use the capability **List user repositories of a VCS** like GitHub or GitLab. Its ID is `vcs/user-repos`.
 
+:::note Capability catalog
+You can search for other capabilities and providers in [Superface catalog](https://superface.ai/catalog).
+
+:::
+
 :::note Capability details
 
 To see a detailed description of the capability, check the [`vcs/user-repos` profile page](https://superface.ai/vcs/user-repos).
@@ -39,6 +44,14 @@ To see a detailed description of the capability, check the [`vcs/user-repos` pro
 ### Pick a provider
 
 The next step is to **pick a provider you would like to use**. In this guide we will use the `github`.
+
+:::note Provider authentication
+In many cases you also need to set up provider credentials. Since we
+are using the unauthenticated GitHub API we can skip it for now.
+
+To learn how to handle API credentials, see [Setting provider API keys](guides/api-keys.md).
+
+:::
 
 :::note Additional providers
 
@@ -53,30 +66,6 @@ In your App directory, install the OneSDK library:
 ```shell
 npm install @superfaceai/one-sdk
 ```
-
-### Install the capability
-
-Next, add the `vcs/user-repos` capability to your App using the Superface CLI:
-
-```shell
-npx @superfaceai/cli install vcs/user-repos
-```
-
-### Configure the provider
-
-The next step is to configure the provider. In our case we configure `github` for capability profile `vcs/user-repos`:
-
-```shell
-npx @superfaceai/cli configure github --profile vcs/user-repos
-```
-
-:::note Provider authentication
-In many cases you also need to set up provider credentials. Since we
-are using the unauthenticated GitHub API we can skip it for now.
-
-To learn how to handle API credentials, see [Setting provider API keys](guides/api-keys.md).
-
-:::
 
 ### Code
 
@@ -95,7 +84,8 @@ async function main() {
   // Invoke the capability use case
   const result = await profile
     .getUseCase('UserRepos')
-    .perform({
+    .perform(
+      provider: 'github', {
       user: 'superfaceai',
     });
 
@@ -113,9 +103,14 @@ main();
 
 <!-- prettier-ignore-end -->
 
+:::note Profile ID and provider name parameters
+Note that we passed previously picked profile ID as parameter to `getProfile` function and provider name as parameter to `perform` function.
+
+:::
+
 ### Run
 
-With the capability installed, provider configured, and OneSDK, it is the time to execute your App:
+Now it is the time to execute your App:
 
 ```shell
 node index.js
@@ -221,7 +216,7 @@ Set the DEBUG environment variable to `superface*` to see everything what is goi
 
 ### Understand runtime integration
 
-During the App runtime OneSDK downloaded a Comlink map from Superface servers. The Comlink map instructs the OneSDK how to make the direct call to GitHub API to perform the capability.
+During the App runtime OneSDK downloaded a Comlink profile and map from Superface servers. The Comlink map instructs the OneSDK how to make the direct call to GitHub API to perform the capability.
 
 You can always check the Comlink map at profile's detail page for the given provider by clicking the "raw" link. For example here's the [latest map for `vcs/user-repos` and `github`](https://superface.ai/raw/vcs/user-repos.github@2.0.suma).
 
