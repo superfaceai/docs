@@ -32,8 +32,8 @@ const { SuperfaceClient } = require('@superfaceai/one-sdk');
 const sdk = new SuperfaceClient();
 
 async function run() {
-  // Load the installed profile
-  const profile = await sdk.getProfile('communication/send-email');
+  // Load the capability profile
+  const profile = await sdk.getProfile('communication/send-email@2.1.0');
 
   // Get provider and configure SendGrid token
   const provider = client.getProvider(
@@ -70,8 +70,8 @@ const { SuperfaceClient } = require('@superfaceai/one-sdk');
 const sdk = new SuperfaceClient();
 
 async function run() {
-  // Load the installed profile
-  const profile = await sdk.getProfile('communication/send-email');
+  // Load the capability profile
+  const profile = await sdk.getProfile('communication/send-email@2.1.0');
 
   // Use the profile.
   // Note that we pass provider name and provider API key as perform options.
