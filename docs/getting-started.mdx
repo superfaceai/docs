@@ -27,6 +27,11 @@ You can search for other capabilities in [Superface catalog](https://superface.a
 
 :::
 
+:::note Capability profile version
+Best practice is to pin your application to the latest version of the capability profile. By pinning the version you will get consistent output without breaking changes once new major version of the profile is published to Superface registry.
+
+:::
+
 :::note Capability details
 
 To see a detailed description of the capability, check the [`vcs/user-repos` profile page](https://superface.ai/vcs/user-repos).
@@ -71,7 +76,7 @@ const sdk = new SuperfaceClient();
 
 async function main() {
   // Load the capability profile
-  const profile = await sdk.getProfile('vcs/user-repos');
+  const profile = await sdk.getProfile('vcs/user-repos@2.0.1');
 
   // Invoke the capability use case
   const result = await profile
@@ -96,7 +101,7 @@ main();
 <!-- prettier-ignore-end -->
 
 :::note Profile ID and provider name parameters
-Note that we passed previously picked profile ID as parameter to `getProfile` function and provider name as parameter to `perform` function.
+Note that we passed previously picked profile ID `vcs/user-repos@2` along with `2.0.1` version as parameter to `getProfile` function and provider name as parameter to `perform` function.
 
 :::
 
