@@ -2,7 +2,7 @@ import HowItWorksDiagram from '../assets/getting-started-how-superface-works.svg
 
 # Getting started
 
-Superface is all about you, the consumer of API capabilities. To get started, first pick a capability and its provider, and use Superface OneSDK to make the call.
+Superface is all about you, the consumer of API capabilities. To get started, first pick a use case and its provider, and use Superface OneSDK to make the call.
 
 ## Superface in 3 minutes
 
@@ -16,43 +16,23 @@ This guide assumes you have [Node.js](https://nodejs.dev/) version 14 or newer i
 
 <div class="count-steps-h3">
 
-### Pick a capability
+### Pick a use case
 
-Decide what capability you would like to use in your App. A capability is described by its profile with unique ID.
+Pick a use case you would like to use in your App from [Superface catalog](https://superface.ai/catalog). Each use case is identified by profile ID and use case name where profile is collection of use cases.
 
-In this guide we will use the capability **List user repositories of a VCS** like GitHub or GitLab. Its ID is `vcs/user-repos`.
+In this guide we will use the use case **VCS User Repositories** which retrives GitHub, GitLab or Bitbucket repositories of specified user. Its profile ID is `vcs/user-repos` and use case name is `UserRepos`.
 
-:::note Capability catalog
-You can search for other capabilities in [Superface catalog](https://superface.ai/catalog).
-
-:::
-
-:::note Capability profile version
-Best practice is to pin your application to the latest version of the capability profile. By pinning the version you will get consistent output without breaking changes once new major version of the profile is published to Superface registry.
-
-:::
-
-:::note Capability details
-
-To see a detailed description of the capability, check the [`vcs/user-repos` profile page](https://superface.ai/vcs/user-repos).
-
-:::
+To see a detailed description of the use case, check the [`vcs/user-repos` profile page](https://superface.ai/vcs/user-repos).
 
 ### Pick a provider
 
-The next step is to **pick a provider you would like to use**. In this guide we will use the `github`.
+The next step is to **pick a provider you would like to use**. In this guide we will use the `github`. You can find the list of supported use case providers at [`vcs/user-repos` profile page](https://superface.ai/vcs/user-repos).
 
 :::note Provider authentication
 In many cases you also need to set up provider credentials. Since we
 are using the unauthenticated GitHub API we can skip it for now.
 
 To learn how to handle API credentials, see [Setting provider API keys](guides/api-keys.md).
-
-:::
-
-:::note Additional providers
-
-Find the list of supported capability providers at [`vcs/user-repos` profile page](https://superface.ai/vcs/user-repos).
 
 :::
 
@@ -75,15 +55,18 @@ const { SuperfaceClient } = require('@superfaceai/one-sdk');
 const sdk = new SuperfaceClient();
 
 async function main() {
-  // Load the capability profile
+  // Load the profile identified by profile ID and optional profile version
   const profile = await sdk.getProfile('vcs/user-repos@2.0.1');
 
-  // Invoke the capability use case
-  const result = await profile
-    .getUseCase('UserRepos')
-    .perform(
-      provider: 'github', {
-      user: 'superfaceai',
+  // Load use case, pass use case name as argument
+  const useCase = profile.getUseCase('UserRepos');
+
+  // Invoke the use case, pass user in perform input parameter and provider name in perform options
+  const result = await useCase
+    .perform({
+      user: 'superfaceai', //use case input, in our case GitHub user name
+    }, {
+      provider: 'github' //provider name
     });
 
   // Handle the result
@@ -100,8 +83,13 @@ main();
 
 <!-- prettier-ignore-end -->
 
-:::note Profile ID and provider name parameters
-Note that we passed previously picked profile ID `vcs/user-repos@2` along with `2.0.1` version as parameter to `getProfile` function and provider name as parameter to `perform` function.
+:::note Profile ID, use case name and provider name parameters
+Note that we passed previously picked profile ID `vcs/user-repos` as parameter to `getProfile` function, use case name as parameter to `getUseCase` function and provider name as parameter to `perform` function.
+
+:::
+
+:::note Profile version
+Best practice is to pin your application to the latest version of the profile. By pinning the version you will get consistent output without breaking changes once new major version of the profile is published to Superface registry.
 
 :::
 
