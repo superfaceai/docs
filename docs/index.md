@@ -30,32 +30,33 @@ npm init -y
 npm install --save @superfaceai/one-sdk
 ```
 
-Install `vcs/user-repos` [profile](./reference/glossary#profile) and configure `GitHub` as a [provider](./reference/glossary#provider):
-
-```shell
-npx @superfaceai/cli install vcs/user-repos --providers github
-```
-
 Create `index.js` file, and insert the following code:
 
 ```js
-const { SuperfaceClient } = require('@superfaceai/one-sdk');
-
+const { SuperfaceClient } = require("@superfaceai/one-sdk");
 const sdk = new SuperfaceClient();
 
-async function run() {
-  // Load the installed profile
-  const profile = await sdk.getProfile('vcs/user-repos');
+async function main() {
+  const profile = await sdk.getProfile("vcs/user-repos@2.0.1");
 
-  // Use the profile
-  const result = await profile.getUseCase('UserRepos').perform({
-    user: 'superfaceai',
-  });
+  const useCase = profile.getUseCase("UserRepos");
 
-  return result.unwrap();
+  const result = await useCase.perform(
+    { user: "superfaceai" },
+    { provider: "github" }
+  );
+
+  // Handle the result
+  try {
+    const data = result.unwrap();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-run();
+main();
+
 ```
 
 Run it:
