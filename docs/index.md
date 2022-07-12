@@ -7,7 +7,7 @@ id: introduction
 
 ⚡️ Superface will help you quickly use and manage integrations, so that you can focus on developing your application.
 
-💸 Developing integrations over and over is expensive. Use integrations developed by others, just as you'd use npm packages or crates.
+💸 Developing integrations over and over is expensive. Use integrations developed by others the same way you'd use npm packages or crates.
 
 🔐 You data is safe, Superface isn't a proxy nor a middle-man.
 
