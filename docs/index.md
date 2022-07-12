@@ -5,21 +5,21 @@ id: introduction
 
 # Introduction
 
-⚡️ Superface will help you to quickly use and manage integrations, so you can focus on your application.
+⚡️ Superface will help you quickly use and manage integrations, so that you can focus on developing your application.
 
-💸 Developing integrations over and over is expensive. Use integrations developed by others as you'd use npm packages or crates.
+💸 Developing integrations over and over is expensive. Use integrations developed by others, just as you'd use npm packages or crates.
 
-🔐 You data is safe, Superface isn't proxy.
+🔐 You data is safe, Superface isn't a proxy nor a middle-man.
 
-🎓 This approach gives you a framework to decouple the lifecycle of your application and integrations it uses.
+🎓 This approach gives you a framework to decouple the lifecycle of your application and the integrations it uses.
 
-💥 Ready for more? Use advanced features like provider failover and monitoring.
+💥 Ready for more? Use advanced features like [provider failover](./guides/using-multiple-providers.mdx#failover) and [monitoring](./guides/integrations-monitoring.mdx).
 
-🧐 Superface is a language and a protocol for abstracting integrations to application use-cases. It allows use-case discovery and distribution of integration code at runtime.
+🧐 Superface is a language and a protocol for abstracting integrations as application use-cases. It allows use-case discovery and distribution of integration code at runtime.
 
 ## Fast track ⏱️
 
-The easiest way to start is with [OneSDK](https://github.com/superfaceai/one-sdk-js) for Node.js and with an existing [use-case](./reference//glossary.md#use-case). Let's say, you want to see what repositories Superface has on GitHub.
+The easiest way to start is with [OneSDK](https://github.com/superfaceai/one-sdk-js) for Node.js and with an existing [use case](./reference//glossary.md#usecase). Let's say you want to see what repositories Superface has on GitHub.
 
 Install [Node.js](https://nodejs.org/en/download/) and create a new project with [OneSDK](https://github.com/superfaceai/one-sdk-js):
 
@@ -68,5 +68,5 @@ node index.js
 
 Check out [how Superface works](./how-superface-works.mdx) or to learn more about what goes on under the hood.
 
-Or read [getting started](./getting-started.mdx) for more detailed step by step guide.
+Or read [getting started](./getting-started.mdx) for a more detailed step-by-step guide.
 :::
