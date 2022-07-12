@@ -103,7 +103,7 @@ The ProfileSettings object contains either `file` or `version` property, analogo
 
 - `priority`: an array of strings containing provider names in desired order for failover. If omitted, it is constructed from the order of providers in this file that have `providerFailover` set to `true`
 - `providers`: an array of [ProfileProviderSettings](#profileprovidersettings) objects or URI strings, used for configuring providers for the profile. Not to be confused with top-level Providers record
-- `defaults`: a record of defaults for the use-case, key is use-case name, value is [UsecaseDefaults](#usecasedefaults) object
+- `defaults`: a record of defaults for the use case, key is use case name, value is [UsecaseDefaults](#usecasedefaults) object
 
 ```json {3-17} title="superface/super.json"
 {
@@ -129,10 +129,10 @@ The ProfileSettings object contains either `file` or `version` property, analogo
 
 ### UsecaseDefaults
 
-UsecaseDefaults specifies default values for a use-case for all providers. The key is use-case's name and the value is an object with following optional properties:
+UsecaseDefaults specifies default values for a use case for all providers. The key is use case's name and the value is an object with following optional properties:
 
-- `input`: an object providing default values according to use-case's input
-- `providerFailover`: a boolean specific whether provider failover should be allowed for the use-case. Defaults to `false`
+- `input`: an object providing default values according to use case's input
+- `providerFailover`: a boolean specific whether provider failover should be allowed for the use case. Defaults to `false`
 
 ```json {5-10} title="superface/super.json"
 {
@@ -155,7 +155,7 @@ UsecaseDefaults specifies default values for a use-case for all providers. The k
 
 ProfileProviderSettings object defines profile-specific configuration of providers. The provider definition can be either a file path (in `file` property), or a specific variant and revision (with `mapVariant` and `mapRevision`). It can also contain the optional property `defaults`:
 
-- `defaults`: a record of defaults per use-case, key is use-case name and value is a [ProfileProviderDefaults](#profileproviderdefaults) object
+- `defaults`: a record of defaults per use case, key is use case name and value is a [ProfileProviderDefaults](#profileproviderdefaults) object
 
 ```json {5-11} title="superface/super.json"
 {
@@ -200,7 +200,7 @@ ProfileProviderSettings object defines profile-specific configuration of provide
 
 ProfileProviderDefaults is an object with following optional properties:
 
-- `input`: an object providing default values according to the use-case's input
+- `input`: an object providing default values according to the use case's input
 - `retryPolicy`: a [RetryPolicy](#retrypolicy) object
 
 ```json {7-14} title="superface/super.json"
@@ -228,7 +228,7 @@ ProfileProviderDefaults is an object with following optional properties:
 
 ### RetryPolicy
 
-RetryPolicy is used for setting up retry policy for a provider and use-case. There are currently two types of retry policy, `none` or `circuit-breaker`. When using `none`, no retry is attempted. When using `circuit-breaker`, several attempts are made with back-off. Following properties are used to configure the policy (all optional except kind). When using default values, `none` or `circuit-breaker` string can be used as shorthand instead of the object.
+RetryPolicy is used for setting up retry policy for a provider and use case. There are currently two types of retry policy, `none` or `circuit-breaker`. When using `none`, no retry is attempted. When using `circuit-breaker`, several attempts are made with back-off. Following properties are used to configure the policy (all optional except kind). When using default values, `none` or `circuit-breaker` string can be used as shorthand instead of the object.
 
 - `kind`: `none` or `circuit-breaker`
 - `maxContiguousRetries`: maximum number of retry attempts, positive integer, default 5

@@ -5,7 +5,7 @@ displayed_sidebar: referenceSidebar
 
 # Glossary
 
-## Use case {#use-case}
+## Use case {#usecase}
 
 _Use case_ (or _integration use case_) describes what the business needs from a specific integration. Technically, the _use case_ defines an interface between the application and the integration provider, the schema of input and output (result) data, possible error conditions, and relevant documentation. It is a part of the [profile](#profile).
 
@@ -39,7 +39,7 @@ usecase SendMessage unsafe {
 
 ## Profile {#profile}
 
-A _profile_ contains one or more [use cases](#use-case), along with the version and general documentation for that group of use cases. It is identified by a name, with an optional scope separated by a slash, for example: `communication/send-sms`. Optionally, the profile can be scoped to a specific version, for example: `communication/send-sms@2.0.1`. Profiles are versioned with [Semantic Versioning](https://semver.org/) to indicate breaking changes.
+A _profile_ contains one or more [use cases](#usecase), along with the version and general documentation for that group of use cases. It is identified by a name, with an optional scope separated by a slash, for example: `communication/send-sms`. Optionally, the profile can be scoped to a specific version, for example: `communication/send-sms@2.0.1`. Profiles are versioned with [Semantic Versioning](https://semver.org/) to indicate breaking changes.
 
 Profile's file has an extension `.supr` and it is _installed_ with the Superface CLI. It should be committed to a version control system and kept with the application's code.
 

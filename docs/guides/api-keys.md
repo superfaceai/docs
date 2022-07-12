@@ -43,7 +43,7 @@ async function run() {
 		}
 	});
 
-  // Use the profile and perform the use-case.
+  // Use the profile and perform the use case.
   // Note that we pass provider as perform option.
   const result = await profile
     .getUseCase('SendEmail')
