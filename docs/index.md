@@ -33,18 +33,23 @@ npm install --save @superfaceai/one-sdk
 Create `index.js` file, and insert the following code:
 
 ```js
-const { SuperfaceClient } = require("@superfaceai/one-sdk");
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
 const sdk = new SuperfaceClient();
 
 async function main() {
-  const profile = await sdk.getProfile("vcs/user-repos@2.0.1");
+  // Load the profile identified by profile ID and optional profile version
+  const profile = await sdk.getProfile('vcs/user-repos@2.0.1');
 
-  const useCase = profile.getUseCase("UserRepos");
+  // Load use case, pass use case name as argument
+  const useCase = profile.getUseCase('UserRepos');
 
-  const result = await useCase.perform(
-    { user: "superfaceai" },
-    { provider: "github" }
-  );
+  // Invoke the use case, pass user in perform input parameter and provider name in perform options
+  const result = await useCase
+    .perform({
+      user: 'superfaceai', // use case input, in our case GitHub user name
+    }, {
+      provider: 'github' // provider name
+    });
 
   // Handle the result
   try {
@@ -56,7 +61,6 @@ async function main() {
 }
 
 main();
-
 ```
 
 Run it:
