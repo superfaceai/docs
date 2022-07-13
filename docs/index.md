@@ -67,7 +67,7 @@ node index.js
 
 :::tip
 
-Check out [how Superface works](./how-superface-works.mdx) or to learn more about what goes on under the hood.
+Check out [how Superface works](./how-superface-works.mdx) to learn more about what goes on under the hood.
 
 Or read [getting started](./getting-started.mdx) for a more detailed step-by-step guide.
 :::
