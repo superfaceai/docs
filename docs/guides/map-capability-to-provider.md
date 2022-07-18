@@ -41,7 +41,7 @@ Every profile defines one or more _use cases_. You need to map the use case inte
 
 ### Reading use case inputs {#input-object}
 
-Use cases usually define & expect some _inputs_ from the user. These inputs are [defined in profile in the dedicated field](https://superface.ai/docs/comlink/profile#sec-Use-case).
+Use cases usually define & expect some _inputs_ from the user. These inputs are [defined in profile in the dedicated field](https://superface.ai/docs/comlink/profile#sec-use case).
 
 You can access these inputs via `input` object which is available _inside use case mapping_.
 
@@ -219,7 +219,7 @@ _See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Response
 
 ### Map use case result {#map-result}
 
-Typically, use cases expect some [_result_](https://superface.ai/docs/comlink/profile#sec-Use-case) to be returned after they are performed. For some, it may be a simple confirmation of the success _(e.g. SMS was sent, here's in ID)_. For others, the result may be the sole reason you care about the use case _(e.g. Found this address for given coordinates)_.
+Typically, use cases expect some [_result_](https://superface.ai/docs/comlink/profile#sec-use case) to be returned after they are performed. For some, it may be a simple confirmation of the success _(e.g. SMS was sent, here's in ID)_. For others, the result may be the sole reason you care about the use case _(e.g. Found this address for given coordinates)_.
 
 Map the use case result from the provider's HTTP response using `map result` statement. Note that you must resolve to the same _result_ interface as defined in the profile document.
 
@@ -253,7 +253,7 @@ _The above definition maps the 2 expected result fields. One from the response's
 
 ### Map errors {#map-error}
 
-In addition to the result, use cases sometimes also expect a specific [_error_](https://superface.ai/docs/comlink/profile#sec-Use-case) interface to be returned from the perform if it fails.
+In addition to the result, use cases sometimes also expect a specific [_error_](https://superface.ai/docs/comlink/profile#sec-use case) interface to be returned from the perform if it fails.
 
 This is very useful as you can map the provider specific API errors (that usually use a technical language) to nicer and more helpful errors that use the language of the use case domain. If the profile defines _error_ expectation, you should strongly consider mapping the possible errors since this dramatically improves the usability of the capability.
 
