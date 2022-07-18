@@ -15,7 +15,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16.x'
-
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
@@ -39,7 +38,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           env: ${{ env.GITHUB_HEAD_REF_SLUG_URL }}
           ref: ${{ github.head_ref }}
-
+      - uses: actions/setup-node@v3
+        name: Setup Node.js
+        with:
+          node-version: lts/*
       - uses: amondnet/vercel-action@v20
         name: Deploy to Vercel
         id: vercel_preview
@@ -76,7 +78,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           auto_inactive: true
           env: Production
-
+      - uses: actions/setup-node@v3
+        name: Setup Node.js
+        with:
+          node-version: lts/*
       - uses: amondnet/vercel-action@v20
         name: Deploy to Vercel
         id: vercel_production
