@@ -18,16 +18,16 @@ const guides = {
   items: [
     {
       type: 'category',
-      label: 'How to create a capability',
+      label: 'How to integrate new API',
       link: { type: 'doc', id: 'guides/how-to-create' },
       collapsed: true,
       items: [
         'guides/setup-the-environment',
-        'guides/create-new-capability',
+        'guides/create-new-use-case',
         'guides/add-new-provider',
-        'guides/map-capability-to-provider',
-        'guides/run-capability',
-        'guides/test-capability',
+        'guides/map-use-case-to-provider',
+        'guides/run-use-case',
+        'guides/test-use-case',
         'guides/publishing',
       ],
     },
