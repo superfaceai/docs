@@ -237,7 +237,7 @@ _e.g. `https://api.example.com/?accessKey=<apikey>`_
 
 ## Integration parameters
 
-Define list of integration parameters specific for the service provider. Examples of integration paramters can be the region where is API deployed, API instance ID.
+Define list of integration parameters specific for the service provider. Examples of integration parameters: region where is API deployed or API instance ID.
 
 ```json title="<provider-name>.provider.json" {10-16}
 {
