@@ -48,7 +48,7 @@ Ideally there is already a use case in the catalog which covers your need, but i
 
 1. [Setup the development environment](setup-the-environment.md)
 2. [Add a new provider](add-new-provider.md) if the provider doesn't exist yet (it may be used by another use case)
-3. [Map capability to a provider](map-capability-to-provider.md)
+3. [Map use case to a provider](map-use-case-to-provider.md)
 
 ### I Have an Issue With an Existing Use Case
 
