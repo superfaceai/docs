@@ -1,20 +1,20 @@
-# Run Capability
+# Run use case
 
-This guide describes how a capability can be used in any production Node.js application.
+This guide describes how a use case can be used in any production Node.js application.
 
 ## Prerequisites
 
 - Existing Node.js [project set up](./setup-the-environment.md)
-- Existing [profile](./create-new-capability)
+- Existing [profile](./create-new-use-case)
 - Existing [provider definition](./add-new-provider.md)
-- Existing [map between the profile & the provider](./map-capability-to-provider.md)
+- Existing [map between the profile & the provider](./map-use-case-to-provider.md)
 
 <!--
 TODO: offline/fork/transfering to local setup guide
 
-## Import capability to the project
+## Import profile with use cases to the project
 
-The capability needs to be first imported to your application. Depending on your previous steps, you may have created the capability in an isolated project. In that case, you will need to copy the files over to your production application.
+The use case needs to be first imported to your application. Depending on your previous steps, you may have created the use case in an isolated project. In that case, you will need to copy the files over to your production application.
 
 :::info
 It is recommended (although not necessary) to place the files onto the same relative paths.
@@ -230,7 +230,7 @@ node app.js
 ```
 
 :::tip Offline Use
-To use capability without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
+To use use case without the use of Superface [remote registry](https://superface.ai/catalog). You have to import profiles with use cases into project and ensure `super.json` has valid paths to your profiles.
 
 <!-- TODO: link to offline use guide -->
 

@@ -1,11 +1,11 @@
-# Test Capability
+# Test use case
 
 ### Prerequisites
 
 - Existing Node.js [project set up](./setup-the-environment.md)
 - Existing local profile
 - Existing [provider definition](./add-new-provider.md)
-- Existing local [map between profile & the provider](./map-capability-to-provider.md)
+- Existing local [map between profile & the provider](./map-use-case-to-provider.md)
 
 ## Test the provider map
 
@@ -29,7 +29,7 @@ npm install --save-dev jest nock
 
 ### Write a test for the provider map
 
-Use OneSDK like in [Run Capability](./run-capability#write-node.js-app) and test out result coming from perform.
+Use OneSDK like in [Run Capability](./run-use-case#write-node.js-app) and test out result coming from perform.
 
 ```javascript title="profile.provider.test.js"
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
@@ -59,7 +59,7 @@ describe('scope/profile-name/provider', () => {
 :::caution
 This test example will hit live APIs.
 
-If your capabilities require authorization, you can load keys from enviroment variables as described in [Run Capability](./run-capability#set-environment-variables)
+If your capabilities require authorization, you can load keys from enviroment variables as described in [Run Capability](./run-use-case#set-environment-variables)
 
 If you want to reduce amount of calls to live APIs, see section about [recording traffic](#recording-traffic).
 :::
@@ -407,4 +407,4 @@ You can use `--updateSnapshot` flag when modifying tests or when the expected re
 - [Integration test for expected result data format](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/communication/send-message/maps/send-message.ts)
 - [Integration test for expected output for given input](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/address/clean-address/maps/clean-address.ts)
 
-> If you wish to use your new capability in another Node.js application, please refer to [the following guide](./run-capability.md).
+> If you wish to use your new use case in another Node.js application, please refer to [the following guide](./run-use-case.md).

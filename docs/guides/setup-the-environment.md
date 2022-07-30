@@ -6,18 +6,24 @@ This document guides you through the installation and basic configuration of com
 
 To install and use Superface CLI, you will need to have installed:
 
-- [Node.js](https://nodejs.dev/learn/how-to-install-nodejs)
+- [Node.js](https://nodejs.dev/learn/how-to-install-nodejs) version 12 or higher
 - NPM
 
 ## Install the CLI
 
-The Superface CLI is Node.js application. Note that it requires Node.js 12 or higher.
+The Superface CLI is Node.js application.
 
 ```shell
 npm install --global @superfaceai/cli
 ```
 
 ## Create a new project
+
+:::note
+
+If you have OpenAPI specification of the API you want to integrate you can use [Interactive designer](./interactive-designer) to bootstrap the project.
+
+:::
 
 Start with creating a new directory for the project
 
