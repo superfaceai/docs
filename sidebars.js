@@ -29,6 +29,7 @@ const guides = {
         'guides/run-use-case',
         'guides/test-use-case',
         'guides/publishing',
+        'guides/interactive-designer',
       ],
     },
     {
