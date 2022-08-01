@@ -57,7 +57,7 @@ const { SuperfaceClient } = require('@superfaceai/one-sdk');
 const sdk = new SuperfaceClient();
 
 async function main() {
-  // Load the profile identified by profile ID and optional profile version
+  // Load the profile identified by profile ID and version
   const profile = await sdk.getProfile('vcs/user-repos@2.0.1');
 
   // Load use case, pass use case name as argument
