@@ -42,13 +42,13 @@ import { SuperfaceClient } from '@superface/one-sdk';
 const client = new SuperfaceClient();
 ```
 
-### Performing a use-case (`getProfile`, `getUsecase`, `perform`) {#perform}
+### Performing a use case (`getProfile`, `getUsecase`, `perform`) {#perform}
 
-With client initialized you can perform the use-cases in installed profiles using the following series of methods:
+With client initialized you can perform the use cases in installed profiles using the following series of methods:
 
 1. `getProfile('<profileName>')` returns an instance of Profile from the SDK client instance,
-2. `getUsecase('<usecaseName>')` returns a use-case from Profile,
-3. `perform(input, [options])` executes the use-case with provided input data and optional `options` argument.
+2. `getUsecase('<usecaseName>')` returns a use case from Profile,
+3. `perform(input, [options])` executes the use case with provided input data and optional `options` argument.
 
 ```typescript
 const profile = await client.getProfile('<profileName>');

@@ -5,7 +5,7 @@ displayed_sidebar: referenceSidebar
 
 # Comlink Profile Reference
 
-Comlink Profile is a format for describing business capabilities as use-cases apart from implementation details.
+Comlink Profile is a format for describing business capabilities as use cases apart from implementation details.
 
 ## Profile details
 
@@ -48,29 +48,29 @@ Send Email
 # ...
 ```
 
-## Use-cases
+## Use Cases
 
-The use-case is a task that needs to be done to support a business need. Use-cases have inputs and outputs similar to functions in code. They provide a higher-level abstraction that can separate the business need from the implementation as defined in a Comlink Map.
+The use case is a task that needs to be done to support a business need. Use cases have inputs and outputs similar to functions in code. They provide a higher-level abstraction that can separate the business need from the implementation as defined in a Comlink Map.
 
 ### Safety
 
-You can define a safety level for a use-case. This safety level follows the use-case name and is optional. By default it is `safe`. The safety level can be:
+You can define a safety level for a use case. This safety level follows the use case name and is optional. By default it is `safe`. The safety level can be:
 
-- `safe` (default) - The use-case doesn't result in server-side changes, so the client can retry the use-case when there's a failure
-- `unsafe` - The use-case may result in a change on the service, so any attempt to retry a use-case may result in unintended changes
-- `idempotent` - The client can execute the use-case multiple times while the server will only process it once, so clients may safely retry failures
+- `safe` (default) - The use case doesn't result in server-side changes, so the client can retry the use case when there's a failure
+- `unsafe` - The use case may result in a change on the service, so any attempt to retry a use case may result in unintended changes
+- `idempotent` - The client can execute the use case multiple times while the server will only process it once, so clients may safely retry failures
 
 This is informational for the tooling to know how it should handle retrying failures. For more information, see [Understanding Idempotency and Safety in API Design](https://nordicapis.com/understanding-idempotency-and-safety-in-api-design/).
 
 ### Description
 
-Use-cases can have descriptions similar to a Profile Description. It can be either single double-quotes or three double-quotes and goes directly before the use-case declaration. Both single quotes and triple double-quotes descriptions can contain both title and a body of the description. The single double-quote variant has the title on the same line as quote.
+Use cases can have descriptions similar to a Profile Description. It can be either single double-quotes or three double-quotes and goes directly before the use case declaration. Both single quotes and triple double-quotes descriptions can contain both title and a body of the description. The single double-quote variant has the title on the same line as quote.
 
 #### Example
 
 This example shows a title of "Retrieve Shipment Status" and a description of "Get the current shipment status" using triple double-quotes.
 
-```hcl title="Use-case triple double-quote description"
+```hcl title="Use case triple double-quote description"
 """
 Retrieve Shipment Status
 Get the current shipment status.
@@ -82,7 +82,7 @@ usecase ShipmentInfo safe {
 
 Here is the same example with single double-quotes.
 
-```hcl title="Use-case sing double-quote description"
+```hcl title="Use case sing double-quote description"
 "Retrieve Shipment Status
 Get the current shipment status."
 usecase ShipmentInfo safe {
@@ -92,7 +92,7 @@ usecase ShipmentInfo safe {
 
 ### Inputs
 
-The `inputs` define the inputs needed to perform the use-case. The `inputs` MUST be defined as an Object Model.
+The `inputs` define the inputs needed to perform the use case. The `inputs` MUST be defined as an Object Model.
 
 #### Example
 
@@ -165,7 +165,7 @@ usecase ShipmentInfo safe {
 
 ### Error
 
-The use-case can define an optional error which will be returned when the use-case execution fails.
+The use case can define an optional error which will be returned when the use case execution fails.
 
 #### Example
 
@@ -205,7 +205,7 @@ Any `input`, `result`, or `error` can use models directly or reference a named m
 
 ### Named models
 
-This shows a Named Model example. This model can be referenced in other models and in the use-case `inputs`, `result`, and `error`.
+This shows a Named Model example. This model can be referenced in other models and in the use case `inputs`, `result`, and `error`.
 
 ```hcl title="Named model"
 model WeatherInformation {

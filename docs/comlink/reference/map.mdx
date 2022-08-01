@@ -5,7 +5,7 @@ displayed_sidebar: referenceSidebar
 
 # Comlink Map Reference
 
-Comlink Map is a format for describing how an API provider's services map to the use-cases in a [Comlink Profile](./profile.mdx).
+Comlink Map is a format for describing how an API provider's services map to the use cases in a [Comlink Profile](./profile.mdx).
 
 ## Map Details
 
@@ -28,13 +28,13 @@ map RetrieveMessageStatus {
 }
 ```
 
-## Use-Case Maps
+## Use Case Maps
 
-Map to a use-case using the `map <use-case-name>` statement. Use-cases may define and expect inputs from the user. These inputs are [defined in the profile](./profile.mdx#inputs). A Use-Case Map can have multiple [HTTP Calls](#http-call) defined within it.
+Map to a use case using the `map <use case-name>` statement. Use cases may define and expect inputs from the user. These inputs are [defined in the profile](./profile.mdx#inputs). A use case Map can have multiple [HTTP Calls](#http-call) defined within it.
 
 ## HTTP Call
 
-The HTTP Call uses `http` and defines the information needed to make a call and map the inputs, result, and error to the profile use-cases.
+The HTTP Call uses `http` and defines the information needed to make a call and map the inputs, result, and error to the profile use cases.
 
 - HTTP Method - Comlink supports all widely-support [HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
 - URI Template - URI template as defined by [RFC6570](https://datatracker.ietf.org/doc/html/rfc6570)
@@ -169,7 +169,7 @@ http POST "/users" {
 
 ## HTTP Response
 
-An HTTP Response describes the responses for a transaction that map the response to the profile's result or error. An HTTP Transaction can have multiple responses based on HTTP status codes and content types. This allows for handling many different types of responses and mapping them into the use-case's `result` and `error` definitions.
+An HTTP Response describes the responses for a transaction that map the response to the profile's result or error. An HTTP Transaction can have multiple responses based on HTTP status codes and content types. This allows for handling many different types of responses and mapping them into the use case's `result` and `error` definitions.
 
 A response has a:
 
@@ -180,7 +180,7 @@ A response has a:
 
 ### Response variables
 
-The following variables are available in a response block. These can be used to map response data to use-case results or errors. They can also be used to conditionally map to results or errors.
+The following variables are available in a response block. These can be used to map response data to use case results or errors. They can also be used to conditionally map to results or errors.
 
 - `statusCode` (number): HTTP response status code
 - `headers` (object): HTTP response headers
@@ -205,11 +205,11 @@ map UseCaseName {
 }
 ```
 
-### Map a Use-Case Result
+### Map a Use Case Result
 
-You can map to a use-case [result](./profile.mdx#result) using a `map result` statement. You must resolve the same `result` as defined in the use-case.
+You can map to a use case [result](./profile.mdx#result) using a `map result` statement. You must resolve the same `result` as defined in the use case.
 
-```hcl title="Mapping to a use-case result" {11-14}
+```hcl title="Mapping to a use case result" {11-14}
 profile = "<profile-name>@<version>"
 provider = "<provider-name>"
 
@@ -231,9 +231,9 @@ map UseCaseName {
 
 The above definition maps the two expected result fields. One from the response's body and the other is from the headers, which is then transformed with a Comlink expression.
 
-### Map to a Use-Case Error
+### Map to a Use Case Error
 
-You can also map a response to a use-case [error](./profile.mdx#error) using the `map error` statement. Like when mapping to a `result`, you must resolve the same `error` as defined in the use-case.
+You can also map a response to a use case [error](./profile.mdx#error) using the `map error` statement. Like when mapping to a `result`, you must resolve the same `error` as defined in the use case.
 
 ```hcl title="<profile-name>.<provider-name>.suma" {12-17}
 profile = "<profile-name>@<version>"
@@ -261,7 +261,7 @@ This maps to the two expected error fields when the server responds with status 
 
 :::note
 
-`map error` Comlink statement and can happen from anywhere inside the use-case mapping, not only from an inside of the response handler.
+`map error` Comlink statement and can happen from anywhere inside the use case mapping, not only from an inside of the response handler.
 
 :::
 
