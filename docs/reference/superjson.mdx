@@ -5,13 +5,9 @@ displayed_sidebar: referenceSidebar
 
 # super.json
 
-`super.json` is the main Superface configuration file, located by default in the `superface` folder under your project root. It specifies which profiles, maps, and providers are used, and their configuration (e.g. API credentials).
+`super.json` is the main Superface configuration file, located by default in the `superface` folder under your project root, but it can also be passed as the `superJson` property during [SDK initialization](one-sdk.mdx#configuration). It specifies which profiles, maps, and providers are used, and their configuration (e.g. API credentials).
 
-It is not required (in most cases) in order to use Superface, but you may still find it useful as your project grows in size and complexity, as it provides a central location for configuring details concerning your API integrations.
-
-The two situations in which `super.json` is required are:
-  - Using locally stored profiles, maps and providers; e.g. (yet) unpublished integrations, or integrations with APIs internal to your organization. 
-  - Configuring [provider failover](../guides/using-multiple-providers.mdx#failover).
+It is not required (in most cases) in order to use Superface, but you may still find it useful as your project grows in size and complexity, or you wish to use more advanced features. See [Advanced Usage](../advanced-usage.mdx) for more details.
 
 ## Anatomy
 
