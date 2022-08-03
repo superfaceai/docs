@@ -132,3 +132,23 @@ The Superface OneSDK is configurable through various environment variables:
 - `SUPERFACE_METRIC_DEBOUNCE_TIME_MIN` and `SUPERFACE_METRIC_DEBOUNCE_TIME_MAX` - to rate limit metric reporting, OneSDK will send aggregated metrics after at least `MIN` milliseconds and at most `MAX` milliseconds; default is 1000 for `MIN` and 60000 for `MAX`
 - `SUPERFACE_DISABLE_METRIC_REPORTING` - set this variable to any value to disable metrics reporting; enabled by default
 - `DEBUG` - configures the [debugging output](https://github.com/debug-js/debug); disabled by default, to observe all debug messages relevant to OneSDK set this variable to `superface*`
+
+These can also be passed as configuration parameters during SDK initialization:
+
+```javascript
+const sdk = SuperfaceClient({
+  // Authenticates with Superface services to enable integration monitoring
+  // (Equivalent of `SUPERFACE_SDK_TOKEN`)
+  superfaceToken: "string",
+  // Disables remote metric reporting, enabled by default
+  // (Equivalent of `SUPERFACE_DISABLE_METRIC_REPORTING`)
+  disableMetricReporting: false,
+  // Configures debugging output, disabled by default
+  // (Equivalent of `DEBUG`)
+  debug: "", 
+  // For cache setup (only disable for now) 
+  cache: true,
+  // Path to `super.json` or SuperJson object, or undefined
+  superJson: undefined,
+})
+```
