@@ -18,11 +18,11 @@ This guide assumes you have [Node.js](https://nodejs.dev/) version 14 or newer i
 
 ### Pick a use case
 
-Pick a use case you would like to use in your App from [Superface catalog](https://superface.ai/catalog). Each use case is identified by profile ID and use case name. Profiles are the files where use cases live.
+**Pick a use case you would like to use** in your app from the [Superface catalog](https://superface.ai/catalog). Each use case is identified by a name, and an ID of its profile. Profiles are collections of related use cases.
 
 If your use case or provider is missing, you can create the integration yourself by following [How to Create a Capability](guides/how-to-create.md) guide or [let us know](support) and we'll add it to the catalog.
 
-In this guide we will use the use case **Get User Repositories** which retrives GitHub, GitLab or Bitbucket repositories of specified user. Its profile ID is `vcs/user-repos` and use case name is `UserRepos`.
+In this guide, we will use the use case [**Get User Repositories**](https://superface.ai/vcs/user-repos) which retrieves GitHub, GitLab or Bitbucket repositories of a specified user. Its profile ID is `vcs/user-repos` and use case name is `UserRepos`.
 
 To see a detailed description of the use case, check the [`vcs/user-repos` profile page](https://superface.ai/vcs/user-repos).
 
@@ -32,7 +32,7 @@ The next step is to **pick a provider you would like to use**. In this guide we 
 
 :::note Provider authentication
 In many cases you also need to set up provider credentials. Since we
-are using the unauthenticated GitHub API we can skip it for now.
+are using the unauthenticated GitHub API, we can skip that for now.
 
 To learn how to handle API credentials, see [Setting provider API keys](guides/api-keys.md).
 
@@ -40,7 +40,7 @@ To learn how to handle API credentials, see [Setting provider API keys](guides/a
 
 ### Install OneSDK
 
-In your App directory, install the OneSDK library:
+In your app directory, install the OneSDK library:
 
 ```shell
 npm install @superfaceai/one-sdk
@@ -48,7 +48,7 @@ npm install @superfaceai/one-sdk
 
 ### Code
 
-Finally, use OneSDK in your App. Create the `index.js` file with the following JavaScript code:
+Finally, use OneSDK in your app. Create the `index.js` file with the following JavaScript code:
 
 <!-- prettier-ignore-start -->
 
@@ -66,18 +66,13 @@ async function main() {
   // Invoke the use case, pass user in perform input parameter and provider name in perform options
   const result = await useCase
     .perform({
-      user: 'superfaceai', //use case input, in our case GitHub user name
+      user: 'superfaceai', // use case input, in our case GitHub user name
     }, {
-      provider: 'github' //provider name
+      provider: 'github' // provider name
     });
 
-  // Handle the result
-  try {
-    const data = result.unwrap();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
+  // Print the result
+  console.log(result.unwrap());
 }
 
 main();
@@ -86,18 +81,19 @@ main();
 <!-- prettier-ignore-end -->
 
 :::note Profile ID, use case name and provider name parameters
-Note that we passed previously picked profile ID `vcs/user-repos` as parameter to `getProfile` function, use case name as parameter to `getUseCase` function and provider name as parameter to `perform` function.
+Note that we passed the previously picked profile ID `vcs/user-repos` as a parameter to the `getProfile()` function, use case name as a parameter to the `getUseCase()` function of the profile object, and provider name as parameter to the `perform()` function.
 
 :::
 
+<!-->
 :::note Profile version
 Best practice is to pin your application to the latest version of the profile. By pinning the version you will get consistent output without breaking changes once new major version of the profile is published to Superface registry.
-
 :::
+<-->
 
 ### Run
 
-Now it is the time to execute your App:
+It's time to run your app!
 
 ```shell
 node index.js
@@ -227,11 +223,11 @@ Set the DEBUG environment variable to `superface*` to see everything what is goi
 
 ### Understand runtime integration
 
-During the App runtime, OneSDK downloads a Comlink map from Superface servers. The Comlink map instructs the OneSDK how to make the direct call to GitHub API to perform the capability.
+During the app runtime, OneSDK downloads a Comlink map from Superface servers. The Comlink map instructs the OneSDK how to make the call to GitHub API in order to perform the capability.
 
-OneSDK optionally downloads the Comlink profile, which contains use-case definition.  You can either, instruct OneSDK to download the profile in runtime or download the profile at design time using Superface CLI and store it along with your source code.
+OneSDK optionally downloads the Comlink profile, which contains the definition of the use case.  You can either instruct OneSDK to download the profile at runtime, or download the profile at design time using Superface CLI, and store it alongside your source code.
 
-You can always check the Comlink map at profile's detail page for the given provider by clicking the "raw" link. For example here's the [latest map for `vcs/user-repos` and `github`](https://superface.ai/raw/vcs/user-repos.github@2.0.suma).
+You can always check the Comlink map at the profile's detail page for a given provider by clicking the "raw" link. For example here's the [latest map for `vcs/user-repos` and `github`](https://superface.ai/raw/vcs/user-repos.github@2.0.suma).
 
 </div>
 
