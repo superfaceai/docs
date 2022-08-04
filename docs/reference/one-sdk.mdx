@@ -130,7 +130,7 @@ These can also be passed as configuration parameters during SDK initialization:
 const sdk = SuperfaceClient({
   // Authenticates with Superface services to enable integration monitoring
   // (Equivalent of `SUPERFACE_SDK_TOKEN`)
-  superfaceToken: "string",
+  superfaceToken: "<your sdk token>",
   // Disables remote metric reporting, enabled by default
   // (Equivalent of `SUPERFACE_DISABLE_METRIC_REPORTING`)
   disableMetricReporting: false,
@@ -139,7 +139,7 @@ const sdk = SuperfaceClient({
   debug: "", 
   // For cache setup (only disable for now) 
   cache: true,
-  // Path to `super.json` or SuperJson object, or undefined
+  //SuperJson object, or undefined (attempts to load `superface/super.json`)
   superJson: undefined,
 })
 ```

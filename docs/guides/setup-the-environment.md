@@ -1,6 +1,6 @@
 # How to setup local environment
 
-This document guides you through the installation and basic configuration of components needed to create own capability. So you can publish it or use it locally in your application.
+This document guides you through the installation and basic configuration of components **needed to create own capability**. So you can publish it or use it locally in your application.
 
 ## Prerequisites
 
