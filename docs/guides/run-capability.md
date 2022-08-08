@@ -229,12 +229,14 @@ Now run the application to perform the use case and check the results:
 node app.js
 ```
 
+<!-- 
 :::tip Offline Use
 To use capability without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
 
-<!-- TODO: link to offline use guide -->
+TODO: link to offline use guide
 
 :::
+-->
 
 ### Observe and debug API calls
 
