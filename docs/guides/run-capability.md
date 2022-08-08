@@ -229,6 +229,10 @@ Now run the application to perform the use case and check the results:
 node app.js
 ```
 
+:::caution
+If you have changed the maps or profiles in the meantime, don't forget to `compile` them using the [Superface CLI](https://github.com/superfaceai/cli)!
+:::
+
 <!-- 
 :::tip Offline Use
 To use capability without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
