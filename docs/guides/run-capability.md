@@ -1,10 +1,10 @@
 # Run Capability
 
-This guide describes how a capability can be used in any production Node.js application.
+This guide describes how a previously created capability can be used in any production Node.js application.
 
 ## Prerequisites
 
-- Existing Node.js [project set up](./setup-the-environment.md)
+- Existing Node.js [project set up](./setup-the-environment.md) with `super.json`
 - Existing [profile](./create-new-capability)
 - Existing [provider definition](./add-new-provider.md)
 - Existing [map between the profile & the provider](./map-capability-to-provider.md)
