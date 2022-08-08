@@ -240,7 +240,7 @@ TODO: link to offline use guide
 
 ### Observe and debug API calls
 
-OneSDK uses the [debug package](https://github.com/visionmedia/debug) which is useful for observing the behavior of the SDK and debugging. To use it, set environment variable to `DEBUG="superface*"` before running the application:
+OneSDK uses [`debug`](https://github.com/visionmedia/debug), which is useful for observing the behavior of the SDK and troubleshooting. To use it, set environment variable to `DEBUG="superface*"` before running the application:
 
 ```shell
 DEBUG="superface*" node app.js
