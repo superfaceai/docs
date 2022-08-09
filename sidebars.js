@@ -51,6 +51,7 @@ module.exports = {
     'introduction',
     'how-superface-works',
     'getting-started',
+    'advanced-usage',
     guides,
     'verification',
   ],
