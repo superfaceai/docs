@@ -1,15 +1,17 @@
 # Configuring the SDK
+
 OneSDK can be used in one of two ways:
 
-* Without configuration: You pass the most essential configuration directly as a function parameter in code. This is ideal for small projects and for trying Superface out.
+- Without configuration: You pass the most essential configuration directly as a function parameter in code. This is ideal for small projects and for trying Superface out.
 
-* With configuration: You configure Superface through a central configuration file or object. This is ideal for larger projects, or when you need advanced features.
+- With configuration: You configure Superface through a central configuration file or object. This is ideal for larger projects, or when you need advanced features.
 
 As your project grows in size and complexity, you may find it useful to have a central location for configuring details concerning your API integrations.
 
 There are also some features that cannot be used with the simple "config-less" approach (as in [Getting Started](./getting-started.mdx)), namely:
-  - Using [locally stored profiles, maps and providers](#local); e.g. (yet) unpublished integrations, or integrations with APIs internal to your organization. 
-  - Configuring [provider failover](./guides/using-multiple-providers.mdx#failover).
+
+- Using [locally stored profiles, maps and providers](#local); e.g. (yet) unpublished integrations, or integrations with APIs internal to your organization.
+- Configuring [provider failover](./guides/using-multiple-providers.mdx#failover).
 
 For these cases, there's Superface configuration.
 
@@ -61,10 +63,10 @@ CLI may instruct you about setting up API keys if the provider needs them.
 
 ### Conclusion
 
-You should have a `superface/super.json` file now, ready to be tweaked further. 
+You should have a `superface/super.json` file now, ready to be tweaked further.
 For more info regarding Superface configuration, see [`super.json` reference](reference/superjson.mdx).
 
- This also means you no longer have to keep and pass profile versions in code:
+This also means you no longer have to keep and pass profile versions in code:
 
 ```js
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
@@ -91,14 +93,14 @@ In some deployment scenarios and environments, it may be inconvenient to rely on
 ```javascript
 // Custom config loading logic
 const superJson = fetchFromMyDatabase('super.json');
-const sdk = new SuperfaceClient({superJson});
+const sdk = new SuperfaceClient({ superJson });
 ```
 
 Misconfigured bundlers may also pose problems, by not including the `super.json` in the resulting output. One solution is to explicitly include the `super.json` in your code, like so:
 
 ```javascript
 // https://www.typescriptlang.org/tsconfig#resolveJsonModule
-import superJson from "../superface/super.json";
+import superJson from '../superface/super.json';
 
-const sdk = new SuperfaceClient({superJson});
+const sdk = new SuperfaceClient({ superJson });
 ```
