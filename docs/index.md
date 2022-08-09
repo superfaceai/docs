@@ -7,7 +7,7 @@ id: introduction
 
 ⚡️ Superface will help you quickly use and manage integrations, so that you can focus on developing your application.
 
-💸 Developing integrations over and over is expensive. Use integrations developed by others the same way you'd use npm packages or crates.
+💸 Developing integrations over and over is expensive. Use integrations developed by others, just as you'd use npm packages or crates.
 
 🔐 You data is safe, Superface isn't a proxy nor a middle-man.
 
@@ -15,7 +15,7 @@ id: introduction
 
 💥 Ready for more? Use advanced features like [provider failover](./guides/using-multiple-providers.mdx#failover) and [monitoring](./guides/integrations-monitoring.mdx).
 
-🧐 Superface is a language and a protocol for abstracting integrations as application use-cases. It allows use-case discovery and distribution of integration code at runtime.
+🧐 Superface is a language and a protocol for abstracting integrations as application use cases. It allows use case discovery and distribution of integration code at runtime.
 
 ## Fast track ⏱️
 
@@ -75,4 +75,5 @@ Check out [how Superface works](./how-superface-works.mdx) to learn more about w
 
 Or read [getting started](./getting-started.mdx) for a more detailed step-by-step guide.
 
+Or read [getting started](./getting-started.mdx) for a more detailed step-by-step guide.
 :::
