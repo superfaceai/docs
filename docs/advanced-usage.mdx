@@ -96,7 +96,7 @@ const superJson = fetchFromMyDatabase('super.json');
 const sdk = new SuperfaceClient({ superJson });
 ```
 
-Misconfigured bundlers may also pose problems, by not including the `super.json` in the resulting output. One solution is to explicitly include the `super.json` in your code, like so:
+Misconfigured bundlers may also pose problems by not including the `super.json` in the resulting output. One possible solution is to explicitly include the `super.json` in your code, like so:
 
 ```javascript
 // https://www.typescriptlang.org/tsconfig#resolveJsonModule
