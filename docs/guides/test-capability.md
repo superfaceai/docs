@@ -416,7 +416,7 @@ To be added -->
 
 When your tests are ready, compile them with the [Superface CLI](https://github.com/superfaceai/cli):
 
-```sh
+```shell
 superface compile
 # or, if you don't have the CLI installed
 npx @superfaceai/cli compile
@@ -430,7 +430,7 @@ This step needs to be done on every change of the Comlink maps and profiles.
 
 Then run them with Jest CLI:
 
-```sh
+```shell
 npx jest
 ```
 
