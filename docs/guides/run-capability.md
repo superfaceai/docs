@@ -17,7 +17,9 @@ TODO: offline/fork/transfering to local setup guide
 The capability needs to be first imported to your application. Depending on your previous steps, you may have created the capability in an isolated project. In that case, you will need to copy the files over to your production application.
 
 :::info
+
 It is recommended (although not necessary) to place the files onto the same relative paths.
+
 :::
 
 ### Comlink files
@@ -218,7 +220,9 @@ main();
 _Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use._
 
 :::info
+
 For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js).
+
 :::
 
 ## Run the app
@@ -230,11 +234,14 @@ node app.js
 ```
 
 :::caution
+
 If you have changed the maps or profiles in the meantime, don't forget to `compile` them using the [Superface CLI](https://github.com/superfaceai/cli)!
+
 :::
 
 <!-- 
 :::tip Offline Use
+
 To use capability without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
 
 TODO: link to offline use guide
@@ -262,6 +269,10 @@ Using the `superface:http*` context will output full HTTP requests and responses
 
 :::
 
-<!-- :::note Other debug contexts
+<!--
+:::note Other debug contexts
+
 There are mutiple parts of Superface, which implemented this package and created debug context, you can find more about these contexts in [OneSDK repository](https://github.com/superfaceai/one-sdk-js#usage) or [Parser repository](https://github.com/superfaceai/parser) on Github.
-::: -->
+
+:::
+-->

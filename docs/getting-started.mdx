@@ -31,6 +31,7 @@ To see a detailed description of the use case, check the [`vcs/user-repos` profi
 The next step is to **pick a provider you would like to use**. In this guide we will use the `github`. You can find the list of supported use case providers at [`vcs/user-repos` profile page](https://superface.ai/vcs/user-repos).
 
 :::note Provider authentication
+
 In many cases you also need to set up provider credentials. Since we
 are using the unauthenticated GitHub API, we can skip that for now.
 
@@ -81,13 +82,16 @@ main();
 <!-- prettier-ignore-end -->
 
 :::note Profile ID, use case name and provider name parameters
+
 Note that we passed the previously picked profile ID `vcs/user-repos` as a parameter to the `getProfile()` function, use case name as a parameter to the `getUseCase()` function of the profile object, and provider name as parameter to the `perform()` function.
 
 :::
 
 <!--
 :::note Profile version
+
 Best practice is to pin your application to the latest version of the profile. By pinning the version you will get consistent output without breaking changes once new major version of the profile is published to Superface registry.
+
 :::
 -->
 
@@ -216,7 +220,9 @@ DEBUG="superface:http*" node index.js
 ```
 
 :::caution
+
 This can print out potentially sensitive information.
+
 :::
 
 Set the DEBUG environment variable to `superface*` to see everything what is going in under the hood.
