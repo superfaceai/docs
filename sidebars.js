@@ -16,6 +16,7 @@ const guides = {
   label: 'Guides',
   collapsed: false,
   items: [
+    'guides/migration-v2',
     {
       type: 'category',
       label: 'How to create a capability',
