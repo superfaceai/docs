@@ -16,7 +16,6 @@ const guides = {
   label: 'Guides',
   collapsed: false,
   items: [
-    'guides/migration-v2',
     {
       type: 'category',
       label: 'How to create a capability',
@@ -55,6 +54,18 @@ module.exports = {
     'advanced-usage',
     guides,
     'verification',
+    {
+      type: 'category',
+      label: 'Upgrade guides',
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'upgrade/one-sdk-v2',
+          label: 'OneSDK v2.0',
+        },
+      ],
+    },
   ],
   referenceSidebar: [
     'reference/index',
