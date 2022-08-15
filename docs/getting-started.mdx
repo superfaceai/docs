@@ -2,11 +2,11 @@ import HowItWorksDiagram from '../assets/getting-started-how-superface-works.svg
 
 # Getting started
 
-Superface is all about providing you the best way to consume digital capabilities provided by APIs. This guide shows you how to Pick a use case and its provider from our Catalog, and use Superface OneSDK to make the API call.
+Superface is all about providing you the best way to consume digital capabilities provided by APIs. This guide shows you how to pick a use case and its provider from our Catalog, and use Superface OneSDK to make the API call.
 
 ## Superface in 3 minutes
 
-The following steps will help you to get started with Superface and OneSDK.
+The following steps will help you get started with Superface and OneSDK.
 
 :::info Prerequisites
 
@@ -163,15 +163,15 @@ This can print out potentially sensitive information, like API keys and access t
 
 :::
 
-Set the `DEBUG` environment variable to `superface*` to see everything what is going in under the hood.
+Set the `DEBUG` environment variable to `superface*` to see everything that is going in under the hood.
 
 ```shell
 DEBUG="superface*" node index.js
 ```
 
-### Understand the runtime integration
+### Understanding runtime integration
 
-During the app runtime, OneSDK downloads a Comlink map from Superface servers. The Comlink map instructs the OneSDK how to make the call to GitHub API in order to perform the capability.
+During the runtime of the application, OneSDK downloads a Comlink map from Superface servers. The Comlink map instructs the OneSDK how to make the call to GitHub API in order to perform the capability.
 
 OneSDK also downloads the Comlink profile, which contains the definition of the use case for runtime. You can also provide local maps and profiles stored alongside your source code.
 
