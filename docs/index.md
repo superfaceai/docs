@@ -75,5 +75,4 @@ Check out [how Superface works](./how-superface-works.mdx) to learn more about w
 
 Or read [getting started](./getting-started.mdx) for a more detailed step-by-step guide.
 
-Or read [getting started](./getting-started.mdx) for a more detailed step-by-step guide.
 :::
