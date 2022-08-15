@@ -34,8 +34,10 @@ Occasionally it makes sense to put multiple use-cases into a single profile file
 -->
 
 :::tip Scoped profiles
+
 Profile name can contain scope for grouping profiles together.
 To scope a profile, add `scope-name/` before profile name, for example: `communication/send-email`.
+
 :::
 
 ### Bootstrap With CLI
@@ -49,6 +51,7 @@ superface create --profile --profileId <use_case_name>
 Where `<use_case_name>` is the name of use-case you wish to create.
 
 :::tip CLI Help
+
 Use the `--help` flag for more options and examples:
 
 ```shell

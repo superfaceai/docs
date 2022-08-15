@@ -51,8 +51,21 @@ module.exports = {
     'introduction',
     'how-superface-works',
     'getting-started',
+    'advanced-usage',
     guides,
     'verification',
+    {
+      type: 'category',
+      label: 'Upgrade guides',
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'upgrade/one-sdk-v2',
+          label: 'OneSDK v2.0',
+        },
+      ],
+    },
   ],
   referenceSidebar: [
     'reference/index',
