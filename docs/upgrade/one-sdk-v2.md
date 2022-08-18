@@ -114,6 +114,4 @@ You can safely remove the following folders, as they're no longer required by On
 
 Only the `super.json` file remains in the `superface` folder.
 
-<!-- FIXME: Add link to the 2.0.0 changelog entry -->
-
-[changelog]: https://github.com/superfaceai/one-sdk-js/blob/dev/CHANGELOG.md
+[changelog]: https://github.com/superfaceai/one-sdk-js/blob/v2.0.0/CHANGELOG.md#200---2022-08-15
