@@ -28,7 +28,7 @@ Let's unpack this:
   - For each of these providers there is a separate `.suma` file which maps the profile to the respective provider.
 - **Provider** is a JSON file describing a set of host URLs, security schemes and integration parameters that fulfill use cases. One provider can be shared among multiple use cases and profiles.
 
-![Comlink key concepts.](../../assets/comlink-key-concepts.png)
+![Comlink key concepts.](../../assets/comlink-key-concepts.svg)
 
 ## What is Your Goal?
 
