@@ -17,7 +17,9 @@ TODO: offline/fork/transfering to local setup guide
 The use case needs to be first imported to your application. Depending on your previous steps, you may have created the use case in an isolated project. In that case, you will need to copy the files over to your production application.
 
 :::info
+
 It is recommended (although not necessary) to place the files onto the same relative paths.
+
 :::
 
 ### Comlink files
@@ -218,7 +220,9 @@ main();
 _Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method with the use case details you actually want to use._
 
 :::info
+
 For details on SuperfaceClient API, please consult [OneSDK reference](/reference/one-sdk-js).
+
 :::
 
 ## Run the app
@@ -229,16 +233,24 @@ Now run the application to perform the use case and check the results:
 node app.js
 ```
 
-:::tip Offline Use
-To use use case without the use of Superface [remote registry](https://superface.ai/catalog). You have to import profiles with use cases into project and ensure `super.json` has valid paths to your profiles.
+:::caution
 
-<!-- TODO: link to offline use guide -->
+If you have changed the maps or profiles in the meantime, don't forget to `compile` them using the [Superface CLI](https://github.com/superfaceai/cli)!
 
 :::
 
+<!-- 
+:::tip Offline Use
+To use use case without the use of Superface [remote registry](https://superface.ai/catalog). You have to import profiles with use cases into project and ensure `super.json` has valid paths to your profiles.
+
+TODO: link to offline use guide
+
+:::
+-->
+
 ### Observe and debug API calls
 
-OneSDK uses the [debug package](https://github.com/visionmedia/debug) which is useful for observing the behavior of the SDK and debugging. To use it, set environment variable to `DEBUG="superface*"` before running the application:
+OneSDK uses [`debug`](https://github.com/visionmedia/debug), which is useful for observing the behavior of the SDK and troubleshooting. To use it, set environment variable to `DEBUG="superface*"` before running the application:
 
 ```shell
 DEBUG="superface*" node app.js
@@ -256,6 +268,10 @@ Using the `superface:http*` context will output full HTTP requests and responses
 
 :::
 
-<!-- :::note Other debug contexts
+<!--
+:::note Other debug contexts
+
 There are mutiple parts of Superface, which implemented this package and created debug context, you can find more about these contexts in [OneSDK repository](https://github.com/superfaceai/one-sdk-js#usage) or [Parser repository](https://github.com/superfaceai/parser) on Github.
-::: -->
+
+:::
+-->

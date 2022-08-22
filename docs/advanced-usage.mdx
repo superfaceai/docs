@@ -1,0 +1,106 @@
+# Configuring the SDK
+
+OneSDK can be used in one of two ways:
+
+- Without configuration: You pass the most essential configuration directly as a function parameter in code. This is ideal for small projects and for trying Superface out.
+
+- With configuration: You configure Superface through a central configuration file or object. This is ideal for larger projects, or when you need advanced features.
+
+As your project grows in size and complexity, you may find it useful to have a central location for configuring details concerning your API integrations.
+
+There are also some features that cannot be used with the simple "config-less" approach (as in [Getting Started](./getting-started.mdx)), namely:
+
+- Using locally stored profiles, maps and providers; e.g. (yet) unpublished integrations, or integrations with APIs internal to your organization.
+- Configuring [provider failover](./guides/using-multiple-providers.mdx#failover).
+
+For these cases, there's Superface configuration.
+
+This configuration can be passed as a `super.json` file (located by default in the `superface` folder under your project root) or as a [full object](#superjson-elsewhere).
+
+```javascript
+// If it exists, `super.json` is loaded from `superface/super.json` under project root
+const sdk = new SuperfaceClient();
+```
+
+For more info on SDK client initialization, see [OneSDK Reference](reference/one-sdk.mdx#configuration). For more info on `super.json` and Superface configuration, see [`super.json` reference](reference/superjson.mdx).
+
+## Getting started with `super.json`
+
+First, install the [Superface CLI](https://github.com/superfaceai/cli).
+
+```shell
+# if using yarn
+yarn global add @superfaceai/cli
+# otherwise
+npm install --global @superfaceai/cli
+```
+
+Or you can use NPX directly with Superface CLI commands:
+
+```shell
+npx @superfaceai/cli [command]
+```
+
+### Installing profiles
+
+Installing a profile fixes its version in the `super.json` config file. In the project directory, run:
+
+```shell
+npx @superfaceai/cli install <profileName>
+```
+
+The CLI creates a configuration file in `superface/super.json`.
+
+### Configuring providers
+
+Next, you configure a provider for the use case:
+
+```shell
+npx @superfaceai/cli configure <providerName> -p <profileName>
+```
+
+CLI may instruct you about setting up API keys if the provider needs them.
+
+### Conclusion
+
+You should have a `superface/super.json` file now, ready to be tweaked further.
+For more info regarding Superface configuration, see [`super.json` reference](reference/superjson.mdx).
+
+This also means you no longer have to keep and pass profile versions in code:
+
+```js
+const { SuperfaceClient } = require('@superfaceai/one-sdk');
+
+const sdk = new SuperfaceClient();
+
+async function run() {
+  const profile = await sdk.getProfile('<profileName>');
+
+  const result = await profile.getUseCase('<usecaseName>').perform({
+    // Input parameters
+  });
+
+  console.log(result.unwrap());
+}
+
+run();
+```
+
+## Loading `super.json` from elsewhere {#superjson-elsewhere}
+
+In some deployment scenarios and environments, it may be inconvenient to rely on the filesystem. For these reasons, it is also possible to load `super.json` in a custom manner:
+
+```javascript
+// Custom config loading logic
+const superJson = fetchFromMyDatabase('super.json');
+const sdk = new SuperfaceClient({ superJson });
+```
+
+Misconfigured bundlers may also pose problems by not including the `super.json` in the resulting output. One possible solution is to explicitly include the `super.json` in your code, like so:
+
+```javascript
+// https://www.typescriptlang.org/tsconfig#resolveJsonModule
+import superJson from '../superface/super.json';
+
+const sdk = new SuperfaceClient({ superJson });
+```
