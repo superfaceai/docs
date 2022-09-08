@@ -32,7 +32,7 @@ superface publish profile|map|provider --profileId <profile-id> --provider <prov
 
 `<profile-id>` corresponds to the profile ID including the scope (e.g. `communication/send-sms`), it can be a published profile. `<provider-name>` is a provider name as specified either in the local `.provider.json` file or already published provider.
 
-Use the `--dryRun` option to preview the publishing. This is also useful for checking for possible errors and issues in the profile, map or provider (e.g. syntax errors or incompatibility between the map and the profile). For example:
+Use the `--dryRun` option to preview the publishing. This is also useful for checking for possible errors and issues in the profile, map, or provider (e.g. syntax errors or incompatibility between the map and the profile). For example:
 
 ```shell
 superface publish profile --profileId my-profile --provider google-apis --dryRun

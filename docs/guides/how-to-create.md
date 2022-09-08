@@ -1,18 +1,18 @@
 # How to integrate new API: Overview
 
-This guide walks you through the process of creating new API integration. You will learn how to setup the development environment, author the integration in Comlink language, integrate the API in your application and run it in production.
+This guide walks you through the process of creating a new API integration. You will learn how to setup the development environment, author the integration in Comlink language, integrate the API in your application, and run it in the production.
 
 :::info
 
-Before diving into the process of authoring the integration in Comlink language you should check [Superface Catalog](https://superface.ai/catalog) and search through existing use cases. If your use case already exists in [Superface Catalog](https://superface.ai/catalog) follow the [Getting started](/getting-started) guide.
+Before diving into the process of authoring the integration in Comlink language you should check [Superface Catalog](https://superface.ai/catalog) and search through existing use cases. If your use case already exists in [Superface Catalog](https://superface.ai/catalog) follow the [Getting started](../getting-started.mdx) guide.
 
 :::
 
-Superface created new domain-specific language _Comlink_ for abstracting API integrations. _Comlink_ language is designed to help developers create reusable platform agnostic API integrations.
+Superface created new domain-specific language called _Comlink_ for abstracting API integrations. Comlink language is designed to help developers create reusable, platform-agnostic API integrations.
 
-_Comlink_ language documents the integration for humans and describes the integration by structured metadata which is used by machines to perform the API calls and understand API responses.
+Comlink language documents the integration for humans and describes the integration for machines to perform the API calls and understand API responses.
 
-## Understand the Superface Terms
+## Understand the Superface terms
 
 First let's cover the terms you will deal with throughout this guide. The _Comlink_ language key concepts are _Profile_, _Use Case_, _Map_, and _Provider_.
 

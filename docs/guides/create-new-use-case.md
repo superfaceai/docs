@@ -1,8 +1,8 @@
 # Create a new use case
 
-Use case specifies input and result parameters and error behavior of the API integration. Use case inputs and result should not contain any provider specific parameters and provider implementation details like authentication credentials.
+Use case specifies input and result parameters, and error behavior of the API integration. Use case inputs and result should not contain any provider specific parameters and provider implementation details like authentication credentials.
 
-Use cases are defined through a [Comlink profile](https://superface.ai/docs/comlink/profile). A profile is a set of use cases that serve the same business need. The Comlink profile is a file with `.supr` extension.
+Use cases are defined through a [Comlink profile](../comlink/reference/profile.mdx). A profile is a set of use cases that serve the same business need. The Comlink profile is a file with `.supr` extension.
 
 This guide will walk you through the process of defining a new use case within a Comlink profile. You will use the Superface CLI to bootstrap a new profile and learn the syntax.
 

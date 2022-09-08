@@ -1,6 +1,6 @@
 # Run use case
 
-This guide describes how a use case can be used in any production Node.js application.
+This guide describes how to start using a locally developed use case in a production Node.js application.
 
 ## Prerequisites
 
