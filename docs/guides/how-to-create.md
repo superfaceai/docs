@@ -30,17 +30,17 @@ Let's unpack this:
 
 ![Comlink key concepts.](../../assets/comlink-key-concepts.svg)
 
-## What is Your Goal?
+## What is your goal?
 
 Depending on your needs, you can skip some parts of the guide to focus on your particular goal.
 
-### I Need a Completely New Use Case
+### I need a completely new use case
 
 > I want to launch a spaceship but there is no use case for that in your catalog!
 
 Adding a new use case is covered by the guide. Start with [Setup the development environment](setup-the-environment.md) and then follow the next chapters. Once the use case works for you, consider publishing it into the catalog so other users can use it in their projects and map it to other providers.
 
-### I Want to Add a New Provider for the Existing Use Case
+### I want to add a new provider for the existing use case
 
 > I want to send emails with my favorite provider, but it's not in your catalog!
 
@@ -50,7 +50,7 @@ Ideally there is already a use case in the catalog which covers your need, but i
 2. [Add a new provider](add-new-provider.md) if the provider doesn't exist yet (it may be used by another use case)
 3. [Map use case to a provider](map-use-case-to-provider.md)
 
-### I Have an Issue With an Existing Use Case
+### I have an issue with an existing use case
 
 > I have tried a use case from the catalog, but it doesn't work!
 
