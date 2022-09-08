@@ -1,11 +1,11 @@
 # Add a new provider
 
-_Provider_ definition is a simple JSON description of a remote service running on the Internet. It declares:
+[_Provider_](../reference/glossary.md#provider) definition is a simple JSON description of a remote service running on the Internet. It declares:
 
 - the service provider name
 - where to find its servers
 - how to authenticate against those servers
-- list of integration parameters specific for the service provider
+- list of [integration parameters](../reference/glossary.md#integration-parameter) specific for the service provider
 
 This definition is later used by _Map_ documents that create a request/response mapping between a specific use case and the provider's servers.
 
