@@ -18,15 +18,10 @@ First let's cover the terms you will deal with throughout this guide. The _Comli
 
 Let's unpack this:
 
-- **Use Case** represents a functionality that serves a business need. For example: send email, geocode a postal address, or track a package. Use case describes its expected input and result data. Use cases are listed in _Profile_ files with `.supr` extension. For example:
-  - the [Send SMS profile](https://superface.ai/communication/send-sms@1.0.1) profile contains two use cases: _Send SMS message_ and _Retrieve Message Status_.
-  - the [Geocoding profile](https://superface.ai/address/geocoding@3.0.1) profile contains two use cases: _Geocode address_ and _Reverse geocode_.
-  - the [Shipment information profile](https://superface.ai/delivery-tracking/shipment-info@1.0.1) profile contains a single use case: _Retrieve Shipment Status_.
-- **Profile** is collection of _use cases_ that serves common cause. Profiles are files with extension `.supr`.
-- **Map** connects the _Use Case_ to a _Provider_. It contains the provider-specific logic to fulfill the use case: what API endpoints need to be called, how to format requests and responses, and how an authentication is performed. Map is a file with `.suma` extension.
-  - For example the [Send Email](https://superface.ai/communication/send-email) use cases can be fulfilled by many providers, e.g. Mailchimp, SendGrid, Postmark, and others.
-  - For each of these providers there is a separate `.suma` file which maps the profile to the respective provider.
-- **Provider** is a JSON file describing a set of host URLs, security schemes and integration parameters that fulfill use cases. One provider can be shared among multiple use cases and profiles.
+- [Profile](../reference/glossary.md#profile) is collection of _use cases_ that serves common cause. Profiles are files with `.supr` extension.
+- [Use Case](../reference/glossary.md#use-case) represents a functionality that serves a business need.
+- [Map](../reference/glossary.md#map) connects the _Use Case_ to a _Provider_. Maps are files with `.suma` extension.
+- [Provider](../reference/glossary.md#provider) is a JSON file describing a set of host URLs, security schemes and integration parameters that fulfill use cases.
 
 ![Comlink key concepts.](../../assets/comlink-key-concepts.svg)
 
