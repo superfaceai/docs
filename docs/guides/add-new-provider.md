@@ -100,7 +100,7 @@ _Replace the `baseUrl` value in the example with the actual base URL of the prov
 
 Some providers' APIs span across more URLs, or have different API versions hosted on different base URLs. In those cases, you should define multiple services.
 
-You can use integration parameters in service base URL. This is for example useful when providers have the same service deployed in multiple regions and region is part of the base url: `https://{SERVER}.mixpanel.com`. Integration parameter has to be enclosed in curly brackets and it has to be defined in the list of parameters.
+You can use integration parameters in the service's base URL. This is for example useful when providers have the same service deployed in multiple regions and the region is part of the base URL: `https://{SERVER}.mixpanel.com`. Integration parameter has to be enclosed in curly brackets and it has to be defined in the list of parameters.
 
 ### Choose the default service {#default-service}
 
