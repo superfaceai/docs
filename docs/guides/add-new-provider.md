@@ -1,6 +1,6 @@
 # Add a new provider
 
-[_Provider_](../reference/glossary.md#provider) definition is a simple JSON description of a remote service running on the Internet. It declares:
+[Provider](../reference/glossary.md#provider) definition is a simple JSON description of a remote service running on the Internet. It declares:
 
 - the service provider name
 - where to find its servers
