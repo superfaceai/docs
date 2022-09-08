@@ -27,3 +27,7 @@ Select `Use in App` option and push the use case to Superface registry.
 ## Download source files
 
 On the confirmation page download generated project with source files.
+
+---
+
+If you run into any issues with the designer and generating Comlink files, [reach out to us](../support) — we are happy to help!
