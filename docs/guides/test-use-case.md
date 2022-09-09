@@ -416,7 +416,7 @@ To be added -->
 
 Comlink profile and map files (.supr and .suma) needs to be compiled to their AST form (with .ast.json extension).
 
-If you did not add compilation to your `package.json` build process as recommended in [How to setup local environment guide](./setup-the-environment#recomended-add-compilation-to-build-process) run the following command to perform a one-off compilation:
+Run the following command to perform a one-off compilation:
 
 ```shell
 superface compile
