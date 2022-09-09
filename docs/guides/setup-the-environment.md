@@ -41,11 +41,7 @@ Now initialize Superface local folder structure in the project root.
 superface init
 ```
 
-It will create `superface` folder with the below structure
-
-- `super.json` - superface configuration file
-- `grid` - folder for storing capabilities and mappings
-- `types` - folder with generated types
+It will create `superface` folder with superface configuration file `super.json`.
 
 And as last step install [OneSDK](/reference/one-sdk).
 
