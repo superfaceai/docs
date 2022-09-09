@@ -40,7 +40,7 @@ superface publish profile --profileId my-profile --provider google-apis --dryRun
 
 ### Publish profile
 
-If you are publishing a new capability start by publishing a profile:
+If you are publishing a new API integration start by publishing a profile:
 
 ```shell
 superface publish profile --profileId my-profile --provider github
@@ -72,6 +72,6 @@ After successful publishing the CLI will ask you to switch to the remote profile
 ? Do you want to switch to remote profile instead of a locally linked one?: (Y/n)
 ```
 
-Answering `Y` will disable the use of local files. If you plan on further updating and publishing the capability from the current project, answer `N`.
+Answering `Y` will disable the use of local files. If you plan on further updating and publishing the API integration from the current project, answer `N`.
 
 <!-- TODO: Notes about versioning & updating -->
