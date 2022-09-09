@@ -412,23 +412,25 @@ To be added
 
 To be added -->
 
-## Running tests
+## Compile Comlink source files to AST
 
-When your tests are ready, compile them with the [Superface CLI](https://github.com/superfaceai/cli):
+Comlink profile and map files (.supr and .suma) needs to be compiled to their AST form (with .ast.json extension).
+
+If you did not add compilation to your `package.json` build process as recommended in [How to setup local environment guide](./setup-the-environment#recomended-add-compilation-to-build-process) run the following command to perform a one-off compilation:
 
 ```shell
 superface compile
 # or, if you don't have the CLI installed
-npx @superfaceai/cli compile
+npx @superfaceai/cli@latest compile
 ```
 
-:::caution
+This will generate `.ast.json` files next to the existing source files linked from `super.json` file.
 
-This step needs to be done on every change of the Comlink maps and profiles.
+The compilation is **necessary after every** change to local `.suma` and `.supr` files.
 
-:::
+## Running tests
 
-Then run them with Jest CLI:
+When your tests are ready, run them with Jest CLI:
 
 ```shell
 npx jest

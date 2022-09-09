@@ -49,6 +49,29 @@ And as last step install [OneSDK](/reference/one-sdk).
 npm install --save @superfaceai/one-sdk
 ```
 
+## (Recomended) Add compilation to your build process
+Comlink profile and map files (.supr and .suma) needs to be compiled to their AST form (with .ast.json extension).
+
+To prevent stale changes in source `.suma` and `.supr` files, add `@superfaceai/cli` package to your development dependencies and add the compilation step into your build process.
+
+First, install the CLI dev dependency:
+
+```shell
+npm i --save-dev @superfaceai/cli
+```
+
+Next, create [npm scripts](https://docs.npmjs.com/cli/v8/using-npm/scripts) in project's `package.json`.
+
+```json title="package.json"
+{
+  "scripts": {
+    "compile": "superface compile",
+    "prestart": "npm run compile",
+    "pretest": "npm run compile"
+  }
+}
+```
+
 ## (Optional) Install the Visual Studio Code extension
 
 You can install the Visual Code Code extension which will give you:

@@ -225,6 +225,28 @@ For details on SuperfaceClient API, please consult [OneSDK reference](/reference
 
 :::
 
+## Compile Comlink source files to AST
+
+Comlink profile and map files (.supr and .suma) needs to be compiled to their AST form (with .ast.json extension).
+
+If you did not add compilation to your `package.json` build process as recommended in [How to setup local environment guide](./setup-the-environment#recomended-add-compilation-to-build-process) run the following command to perform a one-off compilation:
+
+```shell
+superface compile
+# or, if you don't have the CLI installed
+npx @superfaceai/cli@latest compile
+```
+
+This will generate `.ast.json` files next to the existing source files linked from `super.json` file.
+
+:::caution
+
+The `.ast.json` files must be available in the runtime for OneSDK. It is recommended to commit the `.ast.json` files to version control.
+
+:::
+
+The compilation is **necessary after every** change to local `.suma` and `.supr` files.
+
 ## Run the app
 
 Now run the application to perform the use case and check the results:
@@ -233,11 +255,6 @@ Now run the application to perform the use case and check the results:
 node app.js
 ```
 
-:::caution
-
-If you have changed the maps or profiles in the meantime, don't forget to `compile` them using the [Superface CLI](https://github.com/superfaceai/cli)!
-
-:::
 
 <!-- 
 :::tip Offline Use
