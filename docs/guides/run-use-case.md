@@ -239,11 +239,15 @@ This will generate `.ast.json` files next to the existing source files linked fr
 
 :::caution
 
-The `.ast.json` files must be available in the runtime for OneSDK. We recommend to commit the `.ast.json` files to version control.
+The compilation is **necessary after every change** to local `.suma` and `.supr` files.
 
 :::
 
-The compilation is **necessary after every change** to local `.suma` and `.supr` files.
+:::caution
+
+The `.ast.json` files must be available in the runtime for OneSDK. We recommend to commit the `.ast.json` files to version control.
+
+:::
 
 ## Run the app
 
