@@ -232,8 +232,6 @@ Comlink profile and map files (.supr and .suma) needs to be compiled to their AS
 Run the following command to perform a one-off compilation:
 
 ```shell
-superface compile
-# or, if you don't have the CLI installed
 npx @superfaceai/cli@latest compile
 ```
 
@@ -241,11 +239,11 @@ This will generate `.ast.json` files next to the existing source files linked fr
 
 :::caution
 
-The `.ast.json` files must be available in the runtime for OneSDK. It is recommended to commit the `.ast.json` files to version control.
+The `.ast.json` files must be available in the runtime for OneSDK. We recommend to commit the `.ast.json` files to version control.
 
 :::
 
-The compilation is **necessary after every** change to local `.suma` and `.supr` files.
+The compilation is **necessary after every change** to local `.suma` and `.supr` files.
 
 ## Run the app
 

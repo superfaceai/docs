@@ -426,7 +426,7 @@ npx @superfaceai/cli@latest compile
 
 This will generate `.ast.json` files next to the existing source files linked from `super.json` file.
 
-The compilation is **necessary after every** change to local `.suma` and `.supr` files.
+The compilation is **necessary after every change** to local `.suma` and `.supr` files.
 
 ## Running tests
 
