@@ -6,7 +6,7 @@ The first way is to pass them in your application code as `security` option of `
 
 :::note Priority of setting provider API keys
 
-Be aware that highest priority of setting API keys has `perform` function, second `getProvider` function and lowest configuration priority has Superface CLI with environment variables. 
+Be aware that highest priority of setting API keys has `perform` function, second `getProvider` function and lowest configuration priority has Superface CLI with environment variables.
 
 :::
 
@@ -16,7 +16,7 @@ Every provider has different way of obtaining keys, usually you need to sign up 
 
 ## Configuring the provider in your application code
 
-Pass provider credentials in you application code as `security` option in `getProvider` or `perform` function. In following examples, we will configure API token of `sendgrid` provider for the [send-email](https://superface.ai/communication/send-email) capability.
+Pass provider credentials in you application code as `security` option in `getProvider` or `perform` function. In following examples, we will configure API token of `sendgrid` provider for the [send-email](https://superface.ai/communication/send-email) profile.
 
 :::note
 
@@ -32,16 +32,16 @@ const { SuperfaceClient } = require('@superfaceai/one-sdk');
 const sdk = new SuperfaceClient();
 
 async function run() {
-  // Load the capability profile
+  // Load the profile
   const profile = await sdk.getProfile('communication/send-email@2.1.0');
 
   // Get provider and configure SendGrid token
   const provider = client.getProvider(
-	'sendgrid', {
-		security: {
-			['bearer_token']: { token: '<your-token-from-sendgrid>' }
-		}
-	});
+    'sendgrid', {
+    security: {
+      bearer_token: { token: '<your-token-from-sendgrid>' }
+    }
+  });
 
   // Use the profile and perform the use-case.
   // Note that we pass provider as perform option.
@@ -70,7 +70,7 @@ const { SuperfaceClient } = require('@superfaceai/one-sdk');
 const sdk = new SuperfaceClient();
 
 async function run() {
-  // Load the capability profile
+  // Load the profile
   const profile = await sdk.getProfile('communication/send-email@2.1.0');
 
   // Use the profile.
@@ -85,8 +85,8 @@ async function run() {
     }, {
       provider: 'sendgrid',
       security: {
-			  ['bearer_token']: { token: '<your-token-from-sendgrid>' }
-		  }
+        bearer_token: { token: '<your-token-from-sendgrid>' }
+      }
     });
 
   return result.unwrap();
@@ -97,7 +97,7 @@ run();
 
 ## Configuring the provider using Superface CLI
 
-The Superface CLI configures the provider to read credentials from environment variable. For example, configure a new provider `sendgrid` for the [send-email](https://superface.ai/communication/send-email) capability:
+The Superface CLI configures the provider to read credentials from environment variable. For example, configure a new provider `sendgrid` for the [send-email](https://superface.ai/communication/send-email) profile:
 
 ```shell
 npx @superfaceai/cli configure sendgrid --profile=communication/send-email

@@ -1,20 +1,20 @@
-# Run Capability
+# Run use case
 
-This guide describes how a previously created capability can be used in any production Node.js application.
+This guide describes how to start using a locally developed use case in a production Node.js application.
 
 ## Prerequisites
 
-- Existing Node.js [project set up](./setup-the-environment.md) with `super.json`
-- Existing [profile](./create-new-capability)
+- Existing Node.js [project set up](./setup-the-environment.md)
+- Existing [profile](./create-new-use-case)
 - Existing [provider definition](./add-new-provider.md)
-- Existing [map between the profile & the provider](./map-capability-to-provider.md)
+- Existing [map between the profile & the provider](./map-use-case-to-provider.md)
 
 <!--
 TODO: offline/fork/transfering to local setup guide
 
-## Import capability to the project
+## Import profile with use cases to the project
 
-The capability needs to be first imported to your application. Depending on your previous steps, you may have created the capability in an isolated project. In that case, you will need to copy the files over to your production application.
+The use case needs to be first imported to your application. Depending on your previous steps, you may have created the use case in an isolated project. In that case, you will need to copy the files over to your production application.
 
 :::info
 
@@ -225,6 +225,30 @@ For details on SuperfaceClient API, please consult [OneSDK reference](/reference
 
 :::
 
+## Compile Comlink source files to AST
+
+Comlink profile and map files (.supr and .suma) needs to be compiled to their AST form (with .ast.json extension).
+
+Run the following command to perform a one-off compilation:
+
+```shell
+npx @superfaceai/cli@latest compile
+```
+
+This will generate `.ast.json` files next to the existing source files linked from `super.json` file.
+
+:::caution
+
+The compilation is **necessary after every change** to local `.suma` and `.supr` files.
+
+:::
+
+:::caution
+
+The `.ast.json` files must be available in the runtime for OneSDK. We recommend to commit the `.ast.json` files to version control.
+
+:::
+
 ## Run the app
 
 Now run the application to perform the use case and check the results:
@@ -233,16 +257,10 @@ Now run the application to perform the use case and check the results:
 node app.js
 ```
 
-:::caution
-
-If you have changed the maps or profiles in the meantime, don't forget to `compile` them using the [Superface CLI](https://github.com/superfaceai/cli)!
-
-:::
 
 <!-- 
 :::tip Offline Use
-
-To use capability without the use of Superface [remote registry](https://superface.ai/catalog). You have to import capabilities into project and ensure `super.json` has valid paths to your capabilities.
+To use use case without the use of Superface [remote registry](https://superface.ai/catalog). You have to import profiles with use cases into project and ensure `super.json` has valid paths to your profiles.
 
 TODO: link to offline use guide
 

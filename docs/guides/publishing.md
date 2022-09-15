@@ -1,6 +1,6 @@
-# Publishing capability
+# Publish to Superface catalog
 
-Once your capability is tested and works, consider publishing it to the Superface registry. This will simplify the reuse of profile, map, and/or provider in other projects. The published capabilities will be also usable by other developers.
+Once your API integration is tested and works, consider publishing it to the Superface catalog. This will simplify the reuse of profile, map, and/or provider in other projects. The published capabilities will be also usable by other developers.
 
 <!-- TODO: Note about private capabilities / registries -->
 
@@ -32,7 +32,7 @@ superface publish profile|map|provider --profileId <profile-id> --provider <prov
 
 `<profile-id>` corresponds to the profile ID including the scope (e.g. `communication/send-sms`), it can be a published profile. `<provider-name>` is a provider name as specified either in the local `.provider.json` file or already published provider.
 
-Use the `--dryRun` option to preview the publishing. This is also useful for checking the capability for possible errors and issues (e.g. syntax errors or incompatibility between the map and the profile). For example:
+Use the `--dryRun` option to preview the publishing. This is also useful for checking for possible errors and issues in the profile, map, or provider (e.g. syntax errors or incompatibility between the map and the profile). For example:
 
 ```shell
 superface publish profile --profileId my-profile --provider google-apis --dryRun
@@ -40,7 +40,7 @@ superface publish profile --profileId my-profile --provider google-apis --dryRun
 
 ### Publish profile
 
-If you are publishing a new capability start by publishing a profile:
+If you are publishing a new API integration start by publishing a profile:
 
 ```shell
 superface publish profile --profileId my-profile --provider github
@@ -64,14 +64,14 @@ When publishing a new map, both its provider and the mapped profile must be alre
 superface publish map --profileId communication/send-sms --providerName twilio
 ```
 
-## Switch to the published capability
+## Switch to the published profile
 
-After successful publishing the CLI will ask you to switch to the remote profile, map, or capability:
+After successful publishing the CLI will ask you to switch to the remote profile:
 
 ```
 ? Do you want to switch to remote profile instead of a locally linked one?: (Y/n)
 ```
 
-Answering `Y` will disable the use of local files. If you plan on further updating and publishing the capability from the current project, answer `N`.
+Answering `Y` will disable the use of local files. If you plan on further updating and publishing the API integration from the current project, answer `N`.
 
 <!-- TODO: Notes about versioning & updating -->
