@@ -419,8 +419,6 @@ Comlink profile and map files (.supr and .suma) needs to be compiled to their AS
 Run the following command to perform a one-off compilation:
 
 ```shell
-superface compile
-# or, if you don't have the CLI installed
 npx @superfaceai/cli@latest compile
 ```
 
