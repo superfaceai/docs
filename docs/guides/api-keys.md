@@ -39,7 +39,7 @@ async function run() {
   const provider = client.getProvider(
     'sendgrid', {
     security: {
-      ['bearer_token']: { token: '<your-token-from-sendgrid>' }
+      bearer_token: { token: '<your-token-from-sendgrid>' }
     }
   });
 
@@ -85,7 +85,7 @@ async function run() {
     }, {
       provider: 'sendgrid',
       security: {
-        ['bearer_token']: { token: '<your-token-from-sendgrid>' }
+        bearer_token: { token: '<your-token-from-sendgrid>' }
       }
     });
 
