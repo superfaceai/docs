@@ -45,7 +45,7 @@ To scope a profile, add `scope-name/` before profile name, for example: `communi
 You can use the [Superface CLI](https://github.com/superfaceai/cli) to set up an empty Comlink profile:
 
 ```shell
-superface create --profile --profileId <use_case_name>
+superface prepare:profile <use_case_name>
 ```
 
 Where `<use_case_name>` is the name of use case you wish to create.
@@ -55,7 +55,7 @@ Where `<use_case_name>` is the name of use case you wish to create.
 Use the `--help` flag for more options and examples:
 
 ```shell
-superface create --help
+superface prepare:profile --help
 ```
 
 :::
@@ -64,14 +64,64 @@ The CLI creates `use_case_name.supr` file in current directory and links to it f
 
 The new profile will look similarly to this:
 
-```hcl title=use_case_name.supr
-name = "use_case_name"
+```hcl
+"""
+Usecase Name
+TODO: What "Usecase Name" does
+"""
+name = "usecase-name"
 version = "1.0.0"
+// Comlink Profile specification: https://superface.ai/docs/comlink/profile
 
 """
-UseCaseName usecase
+Usecase Name
+TODO: What "Usecase Name" does
 """
-usecase UseCaseName {}
+usecase UsecaseName unsafe { // change safety to `safe`, `idempotent` or `unsafe`
+  input {
+    "Foo title"
+    field! string!
+  }
+
+  result {
+    outputField string
+  }
+
+  error DomainError
+
+  example Success {
+    input {
+      field = "example"
+    }
+    result {
+      outputField = "result"
+    }
+  }
+
+  example Fail {
+    input {
+      input = "error"
+    }
+    error {
+      title = "Not Found"
+      detail = "Entity not found"
+    }
+  }
+}
+
+model DomainError {
+  """
+  Title
+  A short, human-readable summary of the problem type.
+  """
+  title! string!
+
+  """
+  Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail string! 
+}
 ```
 
 ## Define the use case {#usecase}
@@ -80,58 +130,7 @@ With the Comlink profile ready, you can now define your business use case. The u
 
 ### Overview {#usecase-overview}
 
-Let's take a look at an example use case (based on the [Shipment information](https://superface.ai/delivery-tracking/shipment-info@1.0.1) profile):
-
-```hcl
-"""
-Retrieve Shipment Status
-Get the current shipment status.
-"""
-usecase ShipmentInfo safe {
-  input {
-    "Shipment tracking number
-    Identifier of shipment"
-    trackingNumber! string!
-
-    "Carrier
-    Shipment carrier identification to narrow down the results"
-    carrier string!
-  }
-
-  result {
-    "Carrier
-    Name of the carrier responsible for delivery"
-    carrier string!
-
-    "Status
-    Description of the current shipment status"
-    status! string
-
-    "Origin
-    A postal address with the origin of the shipment"
-    origin string
-
-    "Destination
-    A postal shipping address"
-    destination string
-
-    events! [{
-      timestamp! string
-      statusText! string
-    }]
-
-    "Estimated date and time of delivery"
-    estimatedDeliveryDate
-  }
-
-  error {
-    title! string
-    detail string
-  }
-}
-```
-
-At the outer level, the use case is documented with [descriptions](#descriptions) in triple quotes. The definition itself starts with `usecase` keyword, the use case is named `ShipmentInfo` and is marked as `safe`, so executing it shouldn't change anything (see below for [safety](#safety)).
+Let's take a look at prepared use case. At the outer level, the use case is documented with [descriptions](#descriptions) in triple quotes. The definition itself starts with `usecase` keyword, the use case is named `UsecaseName` and is marked as `unsafe`, so executing it may change something (see below for [safety](#safety)).
 
 The use case consists of three blocks:
 
@@ -139,7 +138,7 @@ The use case consists of three blocks:
 - [`result`](#result) with expected fields from successful execution,
 - [`error`](#error) describing the fields returned in case of execution error (e.g. due to failure on provider's end).
 
-All these blocks consist of fields. The fields are documented with a single double quote (which is equivalent to triple quote, see [descriptions](#descriptions)). Most fields have their type defined (i.e. `string`), but the typing is optional - `estimatedDeliveryDate` field is untyped. The `events` field is an array of objects with `timestamp` and `statusText` fields. See [Field Types](#field-types) for more information about possible types. Some fields are marked with exclamation mark as [required](#required-fields) (e.g. `trackingNumber! string`), and some are marked as [non-null](#non-null) fields (e.g. `carrier string!`).
+All these blocks consist of fields. The fields are documented with a single double quote (which is equivalent to triple quote, see [descriptions](#descriptions)). Most fields have their type defined (i.e. `string`), but the typing is optional. See [Field Types](#field-types) for more information about possible types. Some fields are marked with exclamation mark as [required](#required-fields) (e.g. `field! string`), and some are marked as [non-null](#non-null) fields (e.g. `detail string!`).
 
 :::tip
 
@@ -189,15 +188,15 @@ To execute the use case, you typically need to provide some input. For example t
 In Comlink profile, the use case's input is specified in the `input` block:
 
 ```hcl {2-5}
-usecase ShipmentInfo safe {
+usecase UsecaseName safe {
   input {
-    trackingNumber
-    carrier
+    "Foo title"
+    field! string!
   }
 }
 ```
 
-The above use case expects an object with two optional, untyped input fields: `trackingNumber` and `carrier`. You may want to mark the field as required or specify that `carrier` must be a string - see the [More About Fields](#fields) section for more information about these features.
+The above use case expects an object with one required, non-null input field: `field` with type `string`. See the [More About Fields](#fields) section for more information about these features.
 
 If the use case doesn't need any input, the `input` block can be omitted.
 
@@ -317,6 +316,10 @@ usecase ShipmentInfo safe {
 Both description formats are functionally equivalent so the choice is up to your preference. Our current practice is to use triple quotes for high-level descriptions (for the profile itself and use cases), and single quotes for individual fields. Single quotes are also convenient when you want a single-line description (i.e. just a title).
 
 :::
+
+### Add exmples {#examples}
+<!-- TODO -->
+
 
 ## More About Fields {#fields}
 
