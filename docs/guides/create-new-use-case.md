@@ -318,8 +318,7 @@ Both description formats are functionally equivalent so the choice is up to your
 :::
 
 ### Add exmples {#examples}
-<!-- TODO -->
-
+It is good practice to add examples showing possible input and outcome of use case. You should provide at least one example of success response and one example of error. Examples starts with keyword `example` followed by name of example. Name of example should specify type of example eg. `Success` or `Fail`. After name of example input values is defined followed by outcome (`result` or `error`). Structure of `input` and `result` or `error` is defined by rest of the use case.
 
 ## More About Fields {#fields}
 
