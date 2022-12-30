@@ -2,7 +2,7 @@
 
 The easiest way to check whether a provider exists is to search the registry API for its name.
 
-If the registry responds with status code 404, the provider doesn't exist and the name is available. Otherwise, it already exists and might be used in your new capability mappings.
+If the registry responds with status code 404, the provider doesn't exist and the name is available. Otherwise, it already exists and might be used in your new use case mappings.
 
 #### Using [cURL](https://curl.se)
 

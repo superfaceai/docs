@@ -1,30 +1,42 @@
 # Add a new provider
 
-_Provider_ definition is a simple JSON description of a remote service running on the Internet. It declares:
+[Provider](../reference/glossary.md#provider) definition is a simple JSON description of a remote service running on the Internet. It declares:
 
 - the service provider name
 - where to find its servers
 - how to authenticate against those servers
+- list of [integration parameters](../reference/glossary.md#integration-parameter) specific for the service provider
 
-This definition is later used by _Map_ documents that create a request/response mapping between a specific capability and the provider's servers.
+This definition is later used by _Map_ documents that create a request/response mapping between a specific use case and the provider's servers.
 
 #### Basic Example
 
 ```json
 {
-  "name": "twilio",
+  "name": "mixpanel",
   "services": [
     {
       "id": "default",
-      "baseUrl": "https://api.twilio.com"
+      "baseUrl": "https://{SERVER}.mixpanel.com"
     }
   ],
   "defaultService": "default",
   "securitySchemes": [
     {
-      "id": "basic",
+      "id": "service_account",
       "type": "http",
       "scheme": "basic"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "PROJECT_TOKEN",
+      "description": "Every Mixpanel project has a unique alphanumerical token for collecting data. A project's token is not a secret value. In front-end implementation, such as our javascript library, this token will be available to anyone visiting your page."
+    },
+    {
+      "name": "SERVER",
+      "description": "Choose between US (api) and EU (api-eu) server residency",
+      "default": "api"
     }
   ]
 }
@@ -34,7 +46,7 @@ This definition is later used by _Map_ documents that create a request/response 
 
 Please [check our registry for existing providers](./find-provider-by-name.md) before creating your own. Chances are the provider you're interested in was already defined by someone else.
 
-In that case you can skip this guide & simply [create a mapping for the capability using an existing provider](./map-capability-to-provider.md).
+In that case you can skip this guide & simply [create a mapping for the use case using an existing provider](./map-use-case-to-provider.md).
 
 :::
 
@@ -87,6 +99,8 @@ To be able to call the provider's web services, you need to first define them. E
 _Replace the `baseUrl` value in the example with the actual base URL of the provider's API. You can also use your own `id`._
 
 Some providers' APIs span across more URLs, or have different API versions hosted on different base URLs. In those cases, you should define multiple services.
+
+You can use integration parameters in the service's base URL. This is for example useful when providers have the same service deployed in multiple regions and the region is part of the base URL: `https://{SERVER}.mixpanel.com`. Integration parameter has to be enclosed in curly brackets and it has to be defined in the list of parameters.
 
 ### Choose the default service {#default-service}
 
@@ -252,6 +266,30 @@ _Replace the security scheme `id` value in the example with your own ID._
 
 There are some optional parameters, information about them can be found in [reference](../comlink/reference/provider.mdx).
 
+
+## Integration parameters
+
+[Integration parameter](../reference/glossary.md#integration-parameter) can be, for example, region where the API is deployed or an API instance ID.
+
+```json title="<provider-name>.provider.json" {10-16}
+{
+  "name": "<provider-name>",
+  "services": [
+    {
+      "id": "api",
+      "baseUrl": "https://api.{SERVER}.example.com"
+    }
+  ],
+  "defaultService": "api",
+  "parameters": [
+    {
+      "name": "SERVER",
+      "description": "Choose between US (us) and EU (eu) server residency",
+      "default": "api"
+    }
+  ]
+}
+```
 
 ## Examples
 

@@ -1,6 +1,6 @@
-# Map capability to a provider
+# Map use case to a provider
 
-_Map_ is a [Comlink](../comlink/index.mdx) document that defines how a specific capability is fulfilled by a provider. It creates a mapping between the abstract profile and the concrete HTTP requests necessary to integrate with the provider.
+_Map_ is a [Comlink](../comlink/index.mdx) document that defines how a specific use case is fulfilled by a provider. It creates a mapping between the abstract use case and the concrete HTTP requests necessary to integrate with the provider.
 
 ## Setup
 
@@ -8,7 +8,7 @@ This guide assumes you have a project set up with Superface installed. If you ne
 
 ### Prerequisites
 
-- Existing profile
+- Existing profile with [use case definition](./create-new-use-case.md)
 - Existing [provider definition](./add-new-provider.md)
 
 ## Create new Map document
@@ -18,10 +18,10 @@ Mapping happens between _a specific version of Profile_ and some _Provider_. Cho
 The easiest way to then bootstrap a new Map document is using [Superface CLI](/reference/cli).
 
 ```shell
-superface create --map --profileId <profile-name@version> --providerName <provider-name>
+superface create --map --profileId <profile-name> --providerName <provider-name>
 ```
 
-_Replace the `<profile-name@version>` and `<provider-name>` in the command with the actual profile and provider you wish to create new Map for._
+_Replace the `<profile-name>` and `<provider-name>` in the command with the actual profile and provider you wish to create new Map for._
 
 Running the above command creates a new Comlink file and links the new map in your local `super.json` configuration file. The new empty map will look something like this:
 
@@ -247,7 +247,7 @@ _The above definition maps the 2 expected result fields. One from the response's
 
 :::note
 
-`map result` is a regular Comlink statement; and as such can theoretically happen from anywhere inside the use case mapping, not necessarily from an inside of the response handler. An example of this would be a capability that doesn't need to call a remote server. However this is _very rare_ and the results are usually mapped from the HTTP responses so the example shows the most common place where the result mapping happens.
+`map result` is a regular Comlink statement; and as such can theoretically happen from anywhere inside the use case mapping, not necessarily from an inside of the response handler. An example of this would be a use case that doesn't need to call a remote server. However this is _very rare_ and the results are usually mapped from the HTTP responses so the example shows the most common place where the result mapping happens.
 
 :::
 
@@ -255,7 +255,7 @@ _The above definition maps the 2 expected result fields. One from the response's
 
 In addition to the result, use cases sometimes also expect a specific [_error_](https://superface.ai/docs/comlink/profile#sec-Use-case) interface to be returned from the perform if it fails.
 
-This is very useful as you can map the provider specific API errors (that usually use a technical language) to nicer and more helpful errors that use the language of the use case domain. If the profile defines _error_ expectation, you should strongly consider mapping the possible errors since this dramatically improves the usability of the capability.
+This is very useful as you can map the provider specific API errors (that usually use a technical language) to nicer and more helpful errors that use the language of the use case domain. If the profile defines _error_ expectation, you should strongly consider mapping the possible errors since this dramatically improves the usability of the use case.
 
 Map all the possible use case errors from the provider's HTTP responses using `map error` statement. Note that you must resolve to the same _error_ interface as defined in the profile document.
 
@@ -378,7 +378,7 @@ _The above map expects the use case to fail in some scenarios when the user prov
 
 _Note: the `return` keyword serves the purpose of early return, as you might recognize from other programming languages. Without `return`, the execution would continue to the `map error` without any condition at the end, and that would overwrite the error returned from the response handler._
 
-_See [Comlink reference](https://superface.ai/docs/comlink/map#sec-Conditions) for more about conditions._
+_See [Comlink specification](https://superface.ai/docs/comlink/map#sec-Conditions) for more about conditions._
 
 ## Using functions, conditions, iterations and more {#advanced}
 
@@ -388,11 +388,11 @@ For more complicated maps, you'll find a need for the general programming concep
 
 :::tip
 
-Comlink supports everything you might expect from a powerful scripting language. We recommend to explore the language by consulting [Comlink Map reference](https://superface.ai/docs/comlink/map) or [the examples below](#examples).
+Comlink supports everything you might expect from a powerful scripting language. We recommend to explore the language by consulting [Comlink Map reference](../comlink/reference/map.mdx) or [the examples below](#examples).
 
 :::
 
 ## Examples {#examples}
 
-- [Map with reusable operations, iterations & expressions](https://github.com/superfaceai/station/blob/main/capabilities/delivery-tracking/shipment-info/maps/dhl.suma)
-- [Map with multiple error response mappings](https://github.com/superfaceai/station/blob/main/capabilities/communication/send-email/maps/postmark.suma)
+- [Map with reusable operations, iterations & expressions](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/delivery-tracking/shipment-info/maps/dhl.suma)
+- [Map with multiple error response mappings](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/communication/send-email/maps/postmark.suma)

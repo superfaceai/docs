@@ -1,0 +1,16 @@
+{
+  "index_name": "production",
+  "start_urls": ["https://superface.ai/docs/"],
+  "selectors": {
+    "lvl0": {
+      "selector": "article h1",
+      "global": true
+    },
+    "lvl1": "article h2",
+    "lvl2": "article h3",
+    "lvl3": "article h4",
+    "lvl4": "article h5",
+    "lvl5": "article h6",
+    "text": "article p, article li"
+  }
+}

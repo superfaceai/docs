@@ -5,6 +5,22 @@
       "source": "/",
       "destination": "/docs",
       "permanent": false
+    },
+    {
+      "source": "/docs/guides/create-new-capability.md",
+      "destination": "/docs/guides/create-new-use-case.md"
+    },
+    {
+      "source": "/docs/guides/map-capability-to-provider.md",
+      "destination": "/docs/guides/map-use-case-to-provider.md"
+    },
+    {
+      "source": "/docs/guides/run-capability.md",
+      "destination": "/docs/guides/run-use-case.md"
+    },
+    {
+      "source": "/docs/guides/test-capability.md",
+      "destination": "/docs/guides/test-use-case.md"
     }
   ]
 }

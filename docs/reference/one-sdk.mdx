@@ -1,0 +1,228 @@
+---
+slug: '/reference/one-sdk'
+displayed_sidebar: referenceSidebar
+---
+
+# OneSDK for Node.js
+
+OneSDK is a universal API client for Node.js. This page describes OneSDK public API and configuration options.
+
+## Important links
+
+- [OneSDK on GitHub](https://github.com/superfaceai/one-sdk-js) for development and reporting issues
+- [OneSDK on npm](https://www.npmjs.com/package/@superfaceai/one-sdk)
+- [Getting Started](/getting-started) tutorial
+
+## Installation
+
+OneSDK is available as Node package under the name `@superfaceai/one-sdk`. For installation in a Node.js environment, run:
+
+```shell
+npm install @superfaceai/one-sdk
+# Or, if you're using yarn
+yarn add @superfaceai/one-sdk
+```
+
+## Usage
+
+### Initializing the OneSDK client
+
+OneSDK package exports `SuperfaceClient` constructor to initialize an SDK client:
+
+```typescript
+import { SuperfaceClient } from '@superface/one-sdk';
+
+const client = new SuperfaceClient();
+```
+
+### Performing a use-case (`getProfile`, `getUsecase`, `perform`) {#perform}
+
+With client initialized, you can perform the use cases in installed profiles using the following series of methods:
+
+1. `getProfile('<profileName>@<[version]>')` returns an instance of a profile,
+2. `getUsecase('<usecaseName>')` returns a use-case from a profile,
+3. `perform(input, [options])` performs the use-case with provided input data and an optional `options` argument.
+
+```typescript
+const profile = await client.getProfile('<profileName>@<[version]>');
+const result = await profile.getUsecase('<usecaseName>').perform({
+  inputField: 1,
+  anotherInputField: 'hello',
+  // ...inputs...
+}, {
+  provider: 'acme',
+  // ...options...
+});
+```
+
+Perform returns a [result object](#result-object).
+
+
+#### Perform options
+
+There is a number of options that can modify the behavior of a `perform()`.
+
+`provider` You can specify which provider will a given perform be fulfilled with. This option takes either a configured `Provider` object, or a string identifying the provider (if the provider is present in configuration). See [Selecting a provider](#get-provider) for more details.
+
+`variant`: In some cases, there may exist multiple maps for the same profile/provider combination. These are called *variants* of a map. This option allows you to specify which *variant* of the map to use.
+
+<!-- `revision`: found literally zero info on this -->
+
+`parameters`: _Integration parameters_ are provider-specific values which can be used in maps and provider definitions; see the [glossary](../reference/glossary.md#integration-parameter) for more information on integration parameters, and what they are used for.
+
+`security`: _Security values_ are used for authenticating to a given provider. Their format depends on the provider and can include, for example, a static API key or a user/password combination. You can find the required format on the profile page in the Superface Catalog.
+
+
+```javascript
+// For example:
+const result = await profile
+  .getUseCase('myUseCase')
+  .perform({/* input */}, {
+    provider: 'MyProvider'
+    variant: 'a-specific-variant',
+    parameters: {flavour: 'sweet'}
+    security: {
+      token: '2ab96390c7dbe3439de74d0c9b0b1767'
+    },
+  });
+```
+
+### Getting a profile {#get-profile}
+
+When OneSDK is used without configuration (`super.json`), the string passed to `getProfile()` **must** contain its full version, otherwise an error is thrown. This is to prevent unexpected behavior and possible breaking of your application when a profile definition is updated in the Superface Catalog.
+
+```javascript
+const profile = await client.getProfile('fooProfile@1.0.0');
+```
+
+When OneSDK is used with configuration, the version can be omitted in the `getProfile()` call, as the version is already specified in the configuration file/object.
+
+```javascript
+const profile = await client.getProfile('fooProfile');
+```
+
+For more information on configuration, see [Configuring the SDK](../advanced-usage.mdx).
+
+### Selecting a provider (`getProvider`) {#get-provider}
+
+By default, OneSDK picks the first configured provider, or the first provider according to profile's [`priority` array](/reference/superjson#profilesettings) as specified in configuration.
+
+You can also override this behavior and choose a specific provider for a `perform`. Use the `getProvider` method to obtain a provider object, and pass it to `perform()`.
+
+:::note
+
+Read more in the [using multiple providers](../guides/using-multiple-providers) guide.
+
+:::
+
+```typescript
+const provider = await client.getProvider('<providerName>');
+const result = await profile.getUseCase('<usecaseName>').perform(
+  {
+    // Input parameters
+  },
+  { provider }
+);
+```
+
+You can also use the `getProvider()` function to configure a provider's security values and integration parameters, avoiding the need to specify them in each `perform()` call.
+
+```javascript
+const provider = client.getProvider({
+	providerName: string,
+	options: {
+		security: {
+      // Provider specific security values in format:
+      '<securityValueId>': {
+        // Security values as described on profile page
+      }
+    }
+    // Integration parameters in format:
+		parameters: {
+      '<integrationParameterId>': '<integrationParameterValue>'
+    }
+	}
+});
+
+const result = await profile.getUseCase('<usecaseName>').perform(
+  {
+    // Input parameters
+  },
+  { provider }
+);
+```
+
+### Handling the result (`Result` type) {#result-object}
+
+The `perform` method always returns a `Result` type that is either `Ok` or `Err`. This follows the [NeverThrow](https://github.com/supermacro/neverthrow) approach. The `Result` type provides multiple approaches for handling the success and error conditions:
+
+#### Conditionals
+
+Use `isOk()` or `isErr()`to check type of result in conditionals.
+
+```typescript
+if (result.isErr()) {
+  // Result is error, error.toString() returns human readable description of what went wrong
+  console.log(result.error.toString());
+} else {
+  // Result is ok and you can access the result data through value
+  console.log(result.value);
+}
+```
+
+#### Matching a value or error
+
+The `Result` provides a `match` method which accepts two functions. The first function handles the `Ok` result and the the second one handles the `Err` result. The conditionals example above can be rewritten using `match` like this:
+
+```typescript
+result.match(
+  value => console.log(value),
+  error => console.log(error.toString())
+);
+```
+
+#### Unsafely unwrapping the result
+
+Lastly, you can just use `unwrap` method which will either return a result value, or throw an error.
+
+```typescript
+try {
+  // Possible error is thrown here and it contains human readable description of what went wrong :)
+  const value = result.unwrap();
+  // You can access value here
+  console.log(value);
+} catch (e) {
+  console.log(e);
+}
+```
+
+## Configuration
+
+The Superface OneSDK is configurable through various environment variables:
+
+- `SUPERFACE_SDK_TOKEN` - auth token to enable [integrations monitoring](../guides/integrations-monitoring)
+- `SUPERFACE_PATH` - path to the `super.json` configuration file; default is `./superface/super.json` (relative to current working directory)
+- `SUPERFACE_API_URL` - URL of the Superface services, useful for SDK development; default is `https://superface.ai`
+- `SUPERFACE_METRIC_DEBOUNCE_TIME_MIN` and `SUPERFACE_METRIC_DEBOUNCE_TIME_MAX` - to rate limit metric reporting, OneSDK will send aggregated metrics after at least `MIN` milliseconds and at most `MAX` milliseconds; default is 1000 for `MIN` and 60000 for `MAX`
+- `SUPERFACE_DISABLE_METRIC_REPORTING` - set this variable to any value to disable metrics reporting; enabled by default
+- `DEBUG` - configures the [debugging output](https://github.com/debug-js/debug); disabled by default, to observe all debug messages relevant to OneSDK set this variable to `superface*`
+
+These can also be passed as configuration parameters during SDK initialization:
+
+```javascript
+const sdk = SuperfaceClient({
+  // Authenticates with Superface services to enable integration monitoring
+  // (Equivalent of `SUPERFACE_SDK_TOKEN`)
+  superfaceToken: '<your sdk token>',
+  // Disables remote metric reporting, enabled by default
+  // (Equivalent of `SUPERFACE_DISABLE_METRIC_REPORTING`)
+  disableMetricReporting: false,
+  // Configures debugging output, disabled by default
+  // (Equivalent of `DEBUG`)
+  debug: '',
+  // For cache setup (only disable for now)
+  cache: true,
+  //SuperJson object, or undefined (attempts to load `superface/super.json`)
+  superJson: undefined,
+});
+```

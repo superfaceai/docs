@@ -1,11 +1,11 @@
-# Test Capability
+# Test use case
 
 ### Prerequisites
 
 - Existing Node.js [project set up](./setup-the-environment.md)
 - Existing local profile
 - Existing [provider definition](./add-new-provider.md)
-- Existing local [map between profile & the provider](./map-capability-to-provider.md)
+- Existing local [map between profile & the provider](./map-use-case-to-provider.md)
 
 ## Test the provider map
 
@@ -15,7 +15,7 @@ You can use OneSDK in your tests to perform the use cases through the provider's
 
 :::info super.json
 
-To know more about profiles, maps and their configurations in `super.json`, check out our documentation about **[Comlink](/comlink)**
+To know more about profiles, maps and their configurations in `super.json`, check out our documentation about /s **[Comlink](/comlink)**
 
 :::
 
@@ -29,7 +29,7 @@ npm install --save-dev jest nock
 
 ### Write a test for the provider map
 
-Use OneSDK like in [Run Capability](./run-capability#write-node.js-app) and test out result coming from perform.
+Use OneSDK like in [Run Capability](./run-use-case#write-node.js-app) and test out result coming from perform.
 
 ```javascript title="profile.provider.test.js"
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
@@ -57,11 +57,13 @@ describe('scope/profile-name/provider', () => {
 ```
 
 :::caution
+
 This test example will hit live APIs.
 
-If your capabilities require authorization, you can load keys from enviroment variables as described in [Run Capability](./run-capability#set-environment-variables)
+If your capabilities require authorization, you can load keys from enviroment variables as described in [Run Capability](./run-use-case#set-environment-variables)
 
 If you want to reduce amount of calls to live APIs, see section about [recording traffic](#recording-traffic).
+
 :::
 
 ### Asserting results
@@ -101,6 +103,7 @@ describe('scope/profile-name/provider', () => {
 ```
 
 :::caution
+
 If `result.isErr()` is true and you call `result.unwrap()`, it will throw an error.
 
 For this situation you can use the [`toThrow` matcher](https://jestjs.io/docs/expect#tothrowerror):
@@ -145,6 +148,7 @@ describe('scope/profile-name/provider', () => {
 ```
 
 :::caution
+
 If `result.isErr()` is true, `result.unwrap()` will throw an error.
 
 To capture snapshot of error, you can use [`toThrowErrorMatchingSnapshot` matcher](https://jestjs.io/docs/expect#tothrowerrormatchingsnapshothint):
@@ -162,8 +166,12 @@ expect(() => {
 Commented out for now, will investigate more about error format.
 
 :::caution
+
 Be aware that `result.error` might contain timestamp and you have to omit it before storing snapshot of it.
-::: -->
+
+:::
+
+-->
 
 ### Recording traffic
 
@@ -242,9 +250,11 @@ describe('scope/profile-name/provider', () => {
 ```
 
 :::info
+
 Some implementations of `TestConfig` class might change in future.
 
 check out `@superfaceai/testing-lib` [on Github](https://github.com/superfaceai/testing-lib)
+
 :::
 
 ### Setting up your Superface configuration {#setup-superface-config}
@@ -278,7 +288,9 @@ testConfig.setup({
 ```
 
 :::info mutation of Configuration
+
 Setting up Superface configuration can be done in constructor of `TestConfig`, in method `setup` or in method `test`. Note that configuration is mutated in each one, so when configuration gets changed in `setup` or `test` it will stay that way until you change it again.
+
 :::
 
 ### Testing your configuration
@@ -306,8 +318,10 @@ await expect(testConfig.run(input)).resolves.toMatchSnapshot();
 ```
 
 :::info
+
 In the example above, we're using jest matcher `.toMatchSnapshot()` because in method `run()` error timestamps are already omitted.
-:::info
+
+:::
 
 ### Recording
 
@@ -332,7 +346,9 @@ const testConfig = new TestConfig(
 ```
 
 :::info
+
 To record with `nock.back` support and playback system, you have to set up `nock.back.fixtures` with `setupNockBack()`, to record with `nock.recorder.rec()` you only have to enter your configuration as second parameter when constructing `TestConfig`.
+
 :::
 
 #### `nock.recorder.rec()` recording
@@ -356,7 +372,9 @@ await testConfig.endRecording();
 ```
 
 :::caution
+
 You can also set up `nockConfig` in `endRecording()` method, but `hideHeaders` option have to be set up in `record` or `TestConfig` constructor.
+
 :::
 
 #### `nock.back` recording
@@ -366,7 +384,9 @@ You can also set up `nockConfig` in `endRecording()` method, but `hideHeaders` o
 - `endNockRecording()` ends recording - this also calls `nock.restore()`
 
 :::info
+
 Currently this approach does not support updating fixtures or hiding headers.
+
 :::
 
 ```javascript
@@ -392,11 +412,29 @@ To be added
 
 To be added -->
 
+## Compile Comlink source files to AST
+
+Comlink profile and map files (.supr and .suma) needs to be compiled to their AST form (with .ast.json extension).
+
+Run the following command to perform a one-off compilation:
+
+```shell
+npx @superfaceai/cli@latest compile
+```
+
+This will generate `.ast.json` files next to the existing source files linked from `super.json` file.
+
+:::caution
+
+The compilation is **necessary after every change** to local `.suma` and `.supr` files.
+
+:::
+
 ## Running tests
 
-When your tests are ready run them with Jest CLI:
+When your tests are ready, run them with Jest CLI:
 
-```shel
+```shell
 npx jest
 ```
 
@@ -404,7 +442,7 @@ You can use `--updateSnapshot` flag when modifying tests or when the expected re
 
 ## Examples
 
-- [Integration test for expected result data format](https://github.com/superfaceai/station/blob/main/capabilities/communication/send-message/maps/slack.test.ts)
-- [Integration test for expected output for given input](https://github.com/superfaceai/station/blob/main/capabilities/address/clean-address/maps/smartystreets.test.ts)
+- [Integration test for expected result data format](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/communication/send-message/maps/send-message.ts)
+- [Integration test for expected output for given input](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/address/clean-address/maps/clean-address.ts)
 
-> If you wish to use your new capability in another Node.js application, please refer to [the following guide](./run-capability.md).
+> If you wish to use your new use case in another Node.js application, please refer to [the following guide](./run-use-case.md).

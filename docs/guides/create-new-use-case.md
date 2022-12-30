@@ -1,10 +1,10 @@
-# Create a new capability
+# Create a new use case
 
-Capability is an application functionality to serve business needs. It consists of one or more use-cases targeted at particular business scenarios that the capability is designed to solve.
+Use case specifies input and result parameters, and error behavior of the API integration. Use case inputs and result should not contain any provider specific parameters and provider implementation details like authentication credentials.
 
-Use-cases are defined through a [Comlink profile](https://superface.ai/docs/comlink/profile). The Comlink profile is a file with `.supr` extension. It specifies the abstract business behavior of the use-case: its input and result parameters, error behavior and data types.
+Use cases are defined through a [Comlink profile](../comlink/reference/profile.mdx). A profile is a set of use cases that serve the same business need. The Comlink profile is a file with `.supr` extension.
 
-This guide will walk you through the process of defining a new capability with a Comlink profile. You will use the Superface CLI to bootstrap a new profile and learn the syntax.
+This guide will walk you through the process of defining a new use case within a Comlink profile. You will use the Superface CLI to bootstrap a new profile and learn the syntax.
 
 ## Setup
 
@@ -19,7 +19,7 @@ Profile's name must consist of lowercase letters, numbers, characters, dashes an
 - Valid: `my_profile`, `myprofile123`, `my-profile`
 - Invalid: `my profile`, `my+profile`, `MyProfile`
 
-While single profile file can contain multiple use-cases, we generally recommend to keep single use-case per profile. So the profile can be named after the use-case, for example:
+While single profile file can contain multiple use cases, we generally recommend to keep single use case per profile. So the profile can be named after the use case, for example:
 
 - Get weather: `get-weather`
 - Make payment: `make-payment`
@@ -28,14 +28,16 @@ While single profile file can contain multiple use-cases, we generally recommend
 <!--
 :::info
 
-Occasionally it makes sense to put multiple use-cases into a single profile file. For example, the [communication/send-email](https://superface.ai/communication/send-email) defines two use-cases
+Occasionally it makes sense to put multiple use cases into a single profile file. For example, the [communication/send-email](https://superface.ai/communication/send-email) defines two use cases
 
 :::
 -->
 
 :::tip Scoped profiles
+
 Profile name can contain scope for grouping profiles together.
 To scope a profile, add `scope-name/` before profile name, for example: `communication/send-email`.
+
 :::
 
 ### Bootstrap With CLI
@@ -46,9 +48,10 @@ You can use the [Superface CLI](https://github.com/superfaceai/cli) to set up an
 superface create --profile --profileId <use_case_name>
 ```
 
-Where `<use_case_name>` is the name of use-case you wish to create.
+Where `<use_case_name>` is the name of use case you wish to create.
 
 :::tip CLI Help
+
 Use the `--help` flag for more options and examples:
 
 ```shell
@@ -71,13 +74,13 @@ UseCaseName usecase
 usecase UseCaseName {}
 ```
 
-## Define the Use-Case {#usecase}
+## Define the use case {#usecase}
 
-With the Comlink profile ready, you can now define your business use-case. The use-case is a task that needs to be done. You can think of it as a function with specified input and output parameters. The use-case can also specify its safety.
+With the Comlink profile ready, you can now define your business use case. The use case is a task that needs to be done. You can think of it as a function with specified input and output parameters. The use case can also specify its safety.
 
 ### Overview {#usecase-overview}
 
-Let's take a look at an example use-case (based on the [Shipment information](https://superface.ai/delivery-tracking/shipment-info@1.0.1) capability):
+Let's take a look at an example use case (based on the [Shipment information](https://superface.ai/delivery-tracking/shipment-info@1.0.1) profile):
 
 ```hcl
 """
@@ -128,11 +131,11 @@ usecase ShipmentInfo safe {
 }
 ```
 
-At the outer level, the use case is documented with [descriptions](#descriptions) in triple quotes. The definition itself starts with `usecase` keyword, the use-case is named `ShipmentInfo` and is marked as `safe`, so executing it shouldn't change anything (see below for [safety](#safety)).
+At the outer level, the use case is documented with [descriptions](#descriptions) in triple quotes. The definition itself starts with `usecase` keyword, the use case is named `ShipmentInfo` and is marked as `safe`, so executing it shouldn't change anything (see below for [safety](#safety)).
 
-The use-case consists of three blocks:
+The use case consists of three blocks:
 
-- [`input`](#input) with fields required for use-case's execution,
+- [`input`](#input) with fields required for use case's execution,
 - [`result`](#result) with expected fields from successful execution,
 - [`error`](#error) describing the fields returned in case of execution error (e.g. due to failure on provider's end).
 
@@ -140,17 +143,17 @@ All these blocks consist of fields. The fields are documented with a single doub
 
 :::tip
 
-If you prefer learning by example, you can check the source Comlink profile for all the published capabilities [in the catalog](https://superface.ai/catalog). Choose a capability and click "raw" to see the code.
+If you prefer learning by example, you can check the source Comlink profile for all the published use cases [in the catalog](https://superface.ai/catalog). Choose a use case and click "raw" to see the code.
 
 :::
 
-### Specify Safety of the Use-Case {#safety}
+### Specify Safety of the Use Case {#safety}
 
-The use-case can be marked as `safe`, `unsafe` or `idempotent`. If the safety is not specified, the use-case is treated as `unsafe` by default.
+The use case can be marked as `safe`, `unsafe` or `idempotent`. If the safety is not specified, the use case is treated as `unsafe` by default.
 
-- `safe`: The use-case doesn't change anything or doesn't perform any action. Generally reading operations can be considered safe, for example retrieving information about shipment or geocoding a postal address.
-- `unsafe`: The use-case changes the world state and its retry may result in unintended side effects. For example, sending an email, or placing an order is unsafe: executing these use-cases repeatedly results in sending multiple emails or placing multiple orders.
-- `idempotent`: The use-case can be executed multiple times without changing the result. For example updating an article with the same data multiple times results in the same article.
+- `safe`: The use case doesn't change anything or doesn't perform any action. Generally reading operations can be considered safe, for example retrieving information about shipment or geocoding a postal address.
+- `unsafe`: The use case changes the world state and its retry may result in unintended side effects. For example, sending an email, or placing an order is unsafe: executing these use cases repeatedly results in sending multiple emails or placing multiple orders.
+- `idempotent`: The use case can be executed multiple times without changing the result. For example updating an article with the same data multiple times results in the same article.
 
 :::info HTTP Methods
 
@@ -164,7 +167,7 @@ For more information see [Understanding Idempotency and Safety in API Design](ht
 
 :::
 
-The safety is defined after the use-case's name:
+The safety is defined after the use case's name:
 
 ```hcl
 usecase ShipmentInfo safe {}
@@ -173,17 +176,17 @@ usecase SendMessage unsafe {}
 
 usecase UpdateProfile idempotent {}
 
-// if safety is not specified, the use-case is considered unsafe
+// if safety is not specified, the use case is considered unsafe
 usecase SendEmail {}
 ```
 
-While the safety information is optional, it can be used by OneSDK to treat the use-case in particular manner. For example, the SDK can attempt to automatically repeat a failed request if the use-case is `safe`.
+While the safety information is optional, it can be used by OneSDK to treat the use case in particular manner. For example, the SDK can attempt to automatically repeat a failed request if the use case is `safe`.
 
 ### Define Input Fields {#input}
 
-To execute the use-case, you typically need to provide some input. For example to send a text message, you need at least a recipient's phone number and the message's contents.
+To execute the use case, you typically need to provide some input. For example to send a text message, you need at least a recipient's phone number and the message's contents.
 
-In Comlink profile, the use-case's input is specified in the `input` block:
+In Comlink profile, the use case's input is specified in the `input` block:
 
 ```hcl {2-5}
 usecase ShipmentInfo safe {
@@ -194,13 +197,13 @@ usecase ShipmentInfo safe {
 }
 ```
 
-The above use-case expects an object with two optional, untyped input fields: `trackingNumber` and `carrier`. You may want to mark the field as required or specify that `carrier` must be a string - see the [More About Fields](#fields) section for more information about these features.
+The above use case expects an object with two optional, untyped input fields: `trackingNumber` and `carrier`. You may want to mark the field as required or specify that `carrier` must be a string - see the [More About Fields](#fields) section for more information about these features.
 
-If the use-case doesn't need any input, the `input` block can be omitted.
+If the use case doesn't need any input, the `input` block can be omitted.
 
 ### Define Result Fields {#result}
 
-Similar to defining the input, use-case can describe its output (called result). Our Shipment info use-case returns a result object with multiple fields:
+Similar to defining the input, use case can describe its output (called result). Our Shipment info use case returns a result object with multiple fields:
 
 ```hcl {3-15}
 usecase ShipmentInfo safe {
@@ -242,7 +245,7 @@ usecase ShipmentInfoStatus {
 
 ### Define Error {#error}
 
-The use-case can define optional error fields. These will be returned when the use-case execution fails:
+The use case can define optional error fields. These will be returned when the use case execution fails:
 
 ```hcl
 usecase ShipmentInfo safe {
@@ -256,7 +259,7 @@ usecase ShipmentInfo safe {
 
 ### Add Human-Readable Descriptions {#descriptions}
 
-The use-case will be consumed by computers, but humans will be the ones integrating the use-case into their code. Use-cases and definitions in the profile can be preceded by descriptions. A description consists of title and body surrounded either by a single double quote `"`, or three double quotes `"""` (triple quotes).
+The use case will be consumed by computers, but humans will be the ones integrating the use case into their code. Use cases and definitions in the profile can be preceded by descriptions. A description consists of title and body surrounded either by a single double quote `"`, or three double quotes `"""` (triple quotes).
 
 The first description in the profile should explain the overall purpose of the use case. Its title also specifies a human readable name of the profile:
 
@@ -311,17 +314,17 @@ usecase ShipmentInfo safe {
 
 :::note Single Quote vs. Triple Quote
 
-Both description formats are functionally equivalent so the choice is up to your preference. Our current practice is to use triple quotes for high-level descriptions (for the profile itself and use-cases), and single quotes for individual fields. Single quotes are also convenient when you want a single-line description (i.e. just a title).
+Both description formats are functionally equivalent so the choice is up to your preference. Our current practice is to use triple quotes for high-level descriptions (for the profile itself and use cases), and single quotes for individual fields. Single quotes are also convenient when you want a single-line description (i.e. just a title).
 
 :::
 
 ## More About Fields {#fields}
 
-In previous steps we have used fields to define contents of input, result and error in the use-case. Fields can be defined as required and non-nullable, and can specify some particular type.
+In previous steps we have used fields to define contents of input, result and error in the use case. Fields can be defined as required and non-nullable, and can specify some particular type.
 
 ### Field Types {#field-types}
 
-If possible, define the types of fields your use-case accepts or provides in result. The example Shipment Information use-case expects the tracking number and carrier identification as strings:
+If possible, define the types of fields your use case accepts or provides in result. The example Shipment Information use case expects the tracking number and carrier identification as strings:
 
 ```hcl
 usecase ShipmentInfo safe {
@@ -360,7 +363,7 @@ usecase UseCaseName {
 }
 ```
 
-Lists can also contain objects, for example the following use-case provides a result with a list of objects with fields `timestamp` and `statusText`:
+Lists can also contain objects, for example the following use case provides a result with a list of objects with fields `timestamp` and `statusText`:
 
 ```hcl
 usecase ShipmentInfoEvents {
@@ -373,7 +376,7 @@ usecase ShipmentInfoEvents {
 
 ### Required Fields
 
-By default, all fields are optional. Add `!` after the field name to mark it as required. This is especially useful for specifying use-case's input to avoid executing the use-case unless all required fields are provided:
+By default, all fields are optional. Add `!` after the field name to mark it as required. This is especially useful for specifying use case's input to avoid executing the use case unless all required fields are provided:
 
 ```hcl
 usecase ShipmentInfo safe {
@@ -408,7 +411,7 @@ Note that marking the field as non-nullable doesn't make it required. To make th
 
 :::
 
-In the above use-case the `trackingNumber` field is both required, and non-nullable:
+In the above use case the `trackingNumber` field is both required, and non-nullable:
 
 ```hcl
 usecase UseCaseName {

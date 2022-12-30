@@ -36,23 +36,19 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          docId: 'getting-started',
+          docId: 'introduction',
           position: 'left',
-          label: 'Guides',
+          label: 'Docs',
         },
         {
-          to: 'reference',
+          type: 'doc',
+          docId: 'reference/index',
           position: 'left',
           label: 'Reference',
         },
         {
-          to: 'comlink',
-          position: 'left',
-          label: 'Comlink',
-        },
-        {
-          to: '/dashboard',
-          label: 'Go to Dashboard',
+          href: '/catalog',
+          label: 'Catalog',
           position: 'right',
         },
         {
@@ -92,10 +88,18 @@ module.exports = {
         href: 'https://superface.ai/',
       },
     },
+
     prism: {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
       additionalLanguages: ['hcl'],
+    },
+
+    algolia: {
+      appId: 'RQ4GPZIHBP',
+      apiKey: '6efca96741656c108c8746f7f2aa3da1',
+      indexName: 'production',
+      contextualSearch: false,
     },
   },
 

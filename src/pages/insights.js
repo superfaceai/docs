@@ -4,7 +4,7 @@ import Head from '@docusaurus/Head';
 export default () => (
   <Head>
     <script type="text/javascript">
-      window.location.replace('/dashboard');
+      window.location.replace('/insights');
     </script>
   </Head>
 );
