@@ -65,7 +65,6 @@ map UsecaseName { // UseCaseName will be different based on the actual use case 
         title = "", // required string
         detail = "", // optional string
       }
-    
     }
   }
 }
@@ -79,7 +78,7 @@ Every profile defines one or more _use cases_. You need to map the use case inte
 
 Use cases usually define & expect some _inputs_ from the user. These inputs are [defined in profile in the dedicated field](https://superface.ai/docs/comlink/profile#sec-Use-case).
 
-You can access these inputs via `input` object which is available _inside use case mapping_.  If you used CLI to bootstrap the map, it will have commented inputs (eq. `// input.field - required string`) with description for every profile use case.
+You can access these inputs via `input` object which is available _inside use case mapping_.  If you used CLI to bootstrap the map, prepared map lists all inputs (eq. `// input.field - required string`) defined by use case. Each input is paired with description containing information about field type, if it is required and can be null.
 
 <details>
   <summary>Example</summary>

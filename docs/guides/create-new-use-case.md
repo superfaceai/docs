@@ -62,7 +62,7 @@ superface prepare:profile --help
 
 The CLI creates `use_case_name.supr` file in current directory and links to it from the `superface/super.json`.
 
-The new profile will look similarly to this:
+The new profile will contain some example contetn and it will look similarly to this:
 
 ```hcl
 """
@@ -318,7 +318,7 @@ Both description formats are functionally equivalent so the choice is up to your
 :::
 
 ### Add exmples {#examples}
-It is good practice to add examples showing possible input and outcome of use case. You should provide at least one example of success response and one example of error. Examples starts with keyword `example` followed by name of example. Name of example should specify type of example eg. `Success` or `Fail`. After name of example input values is defined followed by outcome (`result` or `error`). Structure of `input` and `result` or `error` is defined by rest of the use case.
+It is good practice to add examples showing possible input and outcome of use case. You should provide at least one example of success response and one example of error. Examples starts with keyword `example` followed by name of example. Name of example should specify type of example eg. `Success` or `Fail`. After name input values are defined followed by outcome (`result` or `error`). Structure of `input` and `result` or `error` is defined by rest of the use case.
 
 ## More About Fields {#fields}
 
