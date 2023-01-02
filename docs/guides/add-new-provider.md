@@ -134,6 +134,7 @@ Define the expected form of authentication using _security schemes_. The actual 
 - [Basic Auth](#basic-auth)
 - [Bearer Token](#bearer-token)
 - [API key in header or query](#api-key)
+- [Digest Auth](#digest-auth)
 
 ### Basic Auth {#basic-auth}
 
@@ -234,6 +235,37 @@ _e.g. `https://api.example.com/?accessKey=<apikey>`_
 
 - `in` must be set to `query`
 - `name` is the query param name that holds the API key (e.g. `accessKey`)
+
+### Digest Auth {#digest-auth}
+
+_e.g. `Authorization: Digest <credentials>` in headers_
+
+Use the following scheme with an arbitrary ID which can be referenced later from the mapping.
+
+```json title="<provider-name>.provider.json" {10-16}
+{
+  "name": "<provider-name>",
+  "services": [
+    {
+      "id": "api",
+      "baseUrl": "https://api.example.com"
+    }
+  ],
+  "defaultService": "api",
+  "securitySchemes": [
+    {
+      "id": "<scheme-id>",
+      "type": "http",
+      "scheme": "digest"
+    }
+  ]
+}
+```
+
+_Replace the security scheme `id` value in the example with your own ID._
+
+There are some optional parameters, information about them can be found in [reference](../comlink/reference/provider.mdx).
+
 
 ## Integration parameters
 
