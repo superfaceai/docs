@@ -81,6 +81,7 @@ module.exports = {
         { type: 'doc', id: 'comlink/reference/profile', label: 'Profile' },
         { type: 'doc', id: 'comlink/reference/map', label: 'Map' },
         { type: 'doc', id: 'comlink/reference/provider', label: 'Provider' },
+        { type: 'doc', id: 'comlink/reference/binary_data', label: 'Binary Data' },
         { type: 'doc', id: 'comlink/specifications', label: 'Specifications' },
       ],
     },
