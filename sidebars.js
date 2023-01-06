@@ -30,6 +30,7 @@ const guides = {
         'guides/test-use-case',
         'guides/publishing',
         'guides/interactive-designer',
+        'guides/profile-maker'
       ],
     },
     {
