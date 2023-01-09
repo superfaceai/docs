@@ -346,6 +346,161 @@ http POST "/users" {
 }
 ```
 
+## Operation
+An operation is a block of code that performs a specific task and returns a value.
+
+Operations are useful for:
+- writing code that's reused multiple times
+- abstracting away more complex mapping operations
+- breaking up a large Comlink Maps into smaller, manageable pieces.
+
+Operations can also make HTTP calls.
+
+For example, the operation for converting temperature from Celsius to Fahrenheit looks like this:
+
+```hcl title="Simple operation"
+operation CelsiusToFahrenheit {
+  tempInCelsius = args.temperature
+  tempInFahrenheit = (tempInCelsius * 1.8) + 32
+  
+  return tempInFahrenheit
+}
+```
+
+The operation expects `temperature` keyword argument, calculates the Fahrenheit temperature and returns it.
+
+The caller then uses the operation in the following way:
+
+```hcl title="Calling operation" {4-6}
+map HomeTemperature {
+  // ...
+  
+  feelsLikeF = call CelsiusToFahrenheit(
+    temperature = body.feels_like
+  )
+}
+```
+
+The caller invokes the operation and passes value from `body.feels_like` as a `temperature` keyword argument. The returned value is assigned to `feelsLikeF` variable.
+
+### Defining operation
+Operations can be defined at top level of Comlink Map using the following syntax:
+
+```hcl
+operation FulfilOrder { ... }
+```
+
+Within the operation, you can
+- set intermediate variables
+- call other operations
+- make HTTP calls.
+
+#### Accessing arguments
+
+All arguments are passed to the operation by name (also known as _keyword arguments_). Arguments are passed to the operation _by the caller_.
+
+Parameters are _not_ part of operation declaration as you might know from other programming languages. Instead, you can access the arguments via `args` context variable inside the operation body. The `args` variable is a *key-value dictionary* containing all available arguments.
+
+```hcl title="Accessing arguments" {2}
+operation FulfilOrder {
+  cityDestination = args.order.address.city
+  
+  // ...
+}
+```
+
+This operation expects `order` keyword argument. The passed value is expected to be a key-value dictionary with `address` object.
+
+#### Return & Fail
+Once the operation is done, it can `return` the result value.
+
+Operation can also `return` early or `fail` fast if a condition is met.
+
+```hcl title="Return & Fail"
+operation FulfilOrder {
+  fail if (!args.order.isPaid) {
+    reason = "Cannot fulfill order that's unpaid"
+  }
+  
+  return if (args.order.isFulfilled) {
+    fulfilledOrder = args.order
+  }
+  
+  // ...
+  
+  return {
+    fulfilledOrder = { ... }
+  }
+}
+```
+
+This operation expects `order` keyword argument. It will fail immediately if the order is still in unpaid state. Then, if the order was already fulfilled, it will bypass the subsequent code and early-returns the order itself, making the operation idempotent.
+
+### Calling operation
+```hcl
+call OperationName(argument1=value, argument2=value, ...)
+```
+
+#### Calling in-place
+The most common use of operation is calling it in-place. The operation is called, and in case of success the operation result value is returned by the call.
+
+Operation can be called in-place only when the returned value is assigned a variable (the operation call is on the right-hand side).
+
+```hcl title="In-place operation call" {5}
+map MakeFulfillment {
+  // ...
+  orderData = { ... }
+  
+  fulfilledOrder = call FulfilOrder(order = orderData)
+  
+  // ...
+}
+```
+
+The code above calls `FulfilOrder` operation and stores the result in `fulfilledOrder` variable. The `orderData` is passed as the value for `order` keyword argument.
+
+There is no try-catch mechanism when calling the operation in-place. If the operation runs into `fail` branch, the call fails silently and an empty value (e.g. `undefined`) is assigned as the result of the call.
+
+If the operation has `fail` branch and you need to handle the failure gracefully, use the operation [call with handler](#calling-with-handler).
+
+#### Calling with handler
+Operation can also be called with outcome handler. The operation is called, and the the call outcome is handled inside an explicit code block.
+
+This is useful if the called operation has `fail` branch which needs to be handled gracefully.
+
+The outcome can be accessed via `outcome` context variable inside the handler block:
+- `outcome.data` — the result value returned by `return`
+- `outcome.error` — the error value returned by `fail`
+
+```hcl title="Operation call with handler" {5-14}
+map MakeFulfillment {
+  // ...
+  orderData = { ... }
+  
+  call FulfilOrder(order = orderData) {
+    map error if (outcome.error) {
+      title = "Fulfilment Failed"
+      detail = outcome.error.reason
+    }
+
+    fulfilledOrder = outcome.data.fulfilledOrder
+		
+    // ...
+  }
+}
+```
+The code above calls `FulfilOrder` operation. If the operation errors with `fail`, the `MakeFulfillment` use case is mapped to an expected error including some details. Otherwise, the returned value is assigned to `fulfilledOrder` variable.
+
+Operation call with handler cannot be used inside HTTP response handler directly. It can only be used:
+- inside `map <use-case-name>` block; or
+- inside another operation.
+
+### Operation caveats
+1. Operation can be [called in-place](#calling-in-place) only when the returned value is assigned a variable (the operation call is on the right-hand side).
+2. When the operation [called in-place](#calling-in-place) runs into `fail`, the failure is silent and an empty value (e.g. `undefined`) will be assigned as the result of the call.
+3. Operation [call with handler](#calling-with-handler) cannot be used inside HTTP response handler directly.
+
+
 ## Specification
 
 There are more features of the Comlink Map. Please refer to the [specifications](../specifications.mdx) for more information.
