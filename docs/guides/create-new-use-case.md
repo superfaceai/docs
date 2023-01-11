@@ -62,7 +62,7 @@ superface prepare:profile --help
 
 The CLI creates `use_case_name.supr` file in current directory and links to it from the `superface/super.json`.
 
-The new profile will contain some example contetn and it will look similarly to this:
+The newly created profile will contain some example content, and it will look like this:
 
 ```hcl
 """
@@ -126,11 +126,11 @@ model DomainError {
 
 ## Define the use case {#usecase}
 
-With the Comlink profile ready, you can now define your business use case. The use case is a task that needs to be done. You can think of it as a function with specified input and output parameters. The use case can also specify its safety.
+With the Comlink profile ready, you can now define your business use case. A "use case" is a task that needs to be done. You can think of it as a function with specified input and output parameters. The use case can also specify its [safety](#safety).
 
 ### Overview {#usecase-overview}
 
-Let's take a look at prepared use case. At the outer level, the use case is documented with [descriptions](#descriptions) in triple quotes. The definition itself starts with `usecase` keyword, the use case is named `UsecaseName` and is marked as `unsafe`, so executing it may change something (see below for [safety](#safety)).
+Let's take a look at the prepared use case. At the outer level, the use case is documented with [descriptions](#descriptions) in triple quotes. The definition itself starts with the `usecase` keyword, the use case itself is named `UsecaseName` and is marked as `unsafe`, which means that executing it may modify something (see below for more info on [safety](#safety)).
 
 The use case consists of three blocks:
 
@@ -318,7 +318,7 @@ Both description formats are functionally equivalent so the choice is up to your
 :::
 
 ### Add exmples {#examples}
-It is good practice to add examples showing possible input and outcome of use case. You should provide at least one example of success response and one example of error. Examples starts with keyword `example` followed by name of example. Name of example should specify type of example eg. `Success` or `Fail`. After name input values are defined followed by outcome (`result` or `error`). Structure of `input` and `result` or `error` is defined by rest of the use case.
+It is good practice to add examples showing possible inputs and outcome of the use case. You should provide at least one example of a success response, and one example of an error. Examples start with the `example` keyword, followed by the name of the example. The name of an example  should specify its type, eg. `Success` or `Fail`. Inside the `example` block, input values are defined, followed by the outcome (`result` or `error`). Structure of `input` and `result` or `error` is defined by the rest of the use case.
 
 ## More About Fields {#fields}
 

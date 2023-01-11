@@ -78,7 +78,7 @@ Every profile defines one or more _use cases_. You need to map the use case inte
 
 Use cases usually define & expect some _inputs_ from the user. These inputs are [defined in profile in the dedicated field](https://superface.ai/docs/comlink/profile#sec-Use-case).
 
-You can access these inputs via `input` object which is available _inside use case mapping_.  If you used CLI to bootstrap the map, prepared map lists all inputs (eq. `// input.field - required string`) defined by use case. Each input is paired with description containing information about field type, if it is required and can be null.
+You can access these inputs via the `input` object which is available _inside a map_.  If you used the CLI to bootstrap the map, the resulting map lists all inputs (eq. `// input.field - required string`) defined by the use case. Each input is paired with its description, containing information about its type, if it is required, and if it can be null.
 
 <details>
   <summary>Example</summary>
@@ -120,7 +120,7 @@ map GetWeather {
 
 ### Make HTTP request {#http-request}
 
-Prepared map contains numbered comments guiding you through mapping the use case. Start with specifying the HTTP method and URL path. Provider's default service base URL is provided in comment for your convinience. See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Call) for specifying a different service.
+The resulting map contains numbered comments guiding you through mapping of the use case. Start with specifying the HTTP method, and the URL. The provider's default service base URL is provided in the surrounding comments for your convenience. See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Call) for specifying a different service.
 
 All widely known HTTP methods are supported. The path is a simple _string_, but can be templated. _E.g. if you need to request resource whose ID was provided in the input, you might want to use something like `/endpoint/api/{ input.field }`._
 
@@ -135,11 +135,11 @@ map UseCaseName {
 }
 ```
 
-_The above definition makes `POST` HTTP call to [the provider's default service](./add-new-provider.md#default-service) on path `/api/messages`.<br />_
+_The above definition makes a `POST` HTTP call to [the provider's default service](./add-new-provider.md#default-service) on path `/api/messages`.<br />_
 
 ### Authenticate the request (optional) {#authentication}
 
-To authenticate the request, simply reference the _security scheme ID_ you want to use for the specific request in `security` definition. Security schemes are defined in Provider JSON documents and prepared map already lists possible security schemes. If provider does not require any type of authentication you can use `scurity none`.
+To authenticate the request, simply reference the _security scheme ID_ you want to use for the specific request. Security schemes are defined in Provider JSON documents, and the prepared map already lists the available security schemes. If the provider does not require any type of authentication, you can use `security none`.
 
 ```hcl title="<profile-name>.<provider-name>.suma" {6}
 profile = "<profile-name>@<version>"
@@ -157,7 +157,7 @@ _Replace `scheme-id` with one of the schemes defined for the provider you're map
 
 ### Pass data to request
 
-You can pass any data to the request by adding `request` block. Inside, you can pass data to _headers, query or body_ by specifiying `headers`, `query` or `body` blocks, respectively. Prepared map by CLI already contains these keyword so you just need to pass data, probably using `input`. 
+You can pass any data to the request by adding a `request` block. Inside, you can pass data to _headers, query or body_ by specifying `headers`, `query` or `body` blocks, respectively. The map prepared by CLI already contains these blocks, so you just need to pass the data, likely using the `input` object. 
 
 When passing data in _body_, it's a best practice to also define the request content type.
 
