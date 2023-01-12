@@ -463,7 +463,7 @@ There is no try-catch mechanism when calling the operation in-place. If the oper
 
 If the operation has a `fail` branch and you need to handle the failure gracefully, use the operation [call with a handler](#calling-with-handler).
 
-#### Calling with handler
+#### Calling with a handler
 Operation can also be called with an outcome handler. The operation is called, and the call outcome is handled inside an explicit code block.
 
 This is useful if the called operation has a `fail` branch which needs to be handled gracefully.
@@ -498,7 +498,7 @@ Operation call with handler cannot be used inside HTTP response handler directly
 ### Operation caveats
 1. Operation can be [called in-place](#calling-in-place) only when the returned value is assigned a variable (the operation call is on the right-hand side).
 2. When the operation [called in-place](#calling-in-place) runs into a `fail` branch, the failure is silent and an empty value (e.g. `undefined`) is returned.
-3. Operation [call with handler](#calling-with-handler) cannot be used inside an HTTP response handler directly.
+3. Operation [call with handler](#calling-with-a-handler) cannot be used inside an HTTP response handler directly.
 
 
 ## Specification
