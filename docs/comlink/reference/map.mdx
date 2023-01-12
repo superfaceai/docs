@@ -489,7 +489,7 @@ map MakeFulfillment {
   }
 }
 ```
-The code above calls `FulfilOrder` operation. If the operation errors out with `fail`, the `MakeFulfillment` use case is mapped to an expected error including its details. Otherwise, the returned value is assigned to the `fulfilledOrder` variable.
+The code above calls `FulfillOrder` operation. If the operation errors out with `fail`, the `MakeFulfillment` use case is mapped to an expected error including its details. Otherwise, the returned value is assigned to the `fulfilledOrder` variable.
 
 Operation call with handler cannot be used inside HTTP response handler directly. It can only be used:
 - inside `map <use-case-name>` block; or
