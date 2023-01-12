@@ -459,9 +459,9 @@ map MakeFulfillment {
 
 The code above calls the `FulfillOrder` operation, and stores the result in the `fulfilledOrder` variable. The `orderData` variable is passed as the value of the `order` keyword argument.
 
-There is no try-catch mechanism when calling the operation in-place. If the operation ends up in a `fail` branch, the call fails silently, and an empty value (e.g. `undefined`) is assigned to the result of the call.
+There is no try-catch mechanism when calling the operation in-place. If the operation ends up in a `fail` branch, the call fails silently, and an empty value (e.g. `undefined`) is returned.
 
-If the operation has a `fail` branch and you need to handle the failure gracefully, use the operation [call with a handler](#calling-with-handler).
+If the operation has a `fail` branch and you need to handle the failure gracefully, use the operation [call with a handler](#calling-with-a-handler).
 
 #### Calling with a handler
 Operation can also be called with an outcome handler. The operation is called, and the call outcome is handled inside an explicit code block.
