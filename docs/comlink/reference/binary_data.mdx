@@ -5,11 +5,11 @@ displayed_sidebar: referenceSidebar
 
 # Binary Data
 
-Use `BinaryData` class in OneSDK to upload content by streaming bytes.
+Use the `BinaryData` class in OneSDK to upload content by streaming bytes.
 
 :::info
 
-To use this feature, you will need OneSDK for NodeJS in version `2.2.0` or higher.
+To use this feature, you will need OneSDK for NodeJS at version `2.2.0` or higher.
 
 :::
 
@@ -25,15 +25,15 @@ export interface IBinaryData {
 }
 ```
 
-If `BinaryData` instance is used as body or value in `FormData`, the content is streamed. This allows you to upload and work with big files.
+If a `BinaryData` instance is used as the body or value in `FormData`, the content is streamed. This allows you to upload and work with large files.
 
-Currently `BinaryData` can't be used as result of the use-case. If it is used as result an `UnexpectedError` is returned instead. If the content represented by `BinaryData` should be returned, calling `getAllData()` will read stream into `Buffer`, which is valid use-case result and is returned. Later streamed results support will be added for situation when the content is too big to load into memory.
+Currently, `BinaryData` can't be used in the result of a use case. If it is present, an `UnexpectedError` is returned instead. You can use the `getAllData()` function to read and return the contents as a `Buffer`, which is valid to use in a use case result. Later, support for streamed results will be added for situations when the content is too big to load into memory.
 
 ## Comlink Map examples
 
-In this section you will find example uses of `BinaryData` in Comlink maps.
+In this section, you will find example uses of `BinaryData` in Comlink maps.
 
-### Send file in body
+### Sending a file as the body of a POST request
 ```
 map SendFile {
   http POST "/resource" {
@@ -48,7 +48,7 @@ map SendFile {
 }
 ```
 
-### Send multiple files as FormData field alongside other fields
+### Sending multiple files as FormData fields, alongside other fields
 ```
 map SendFile {
   http POST "/resource" {
@@ -67,7 +67,7 @@ map SendFile {
 }
 ```
 
-### Upload file by chunks
+### Uploading a file in chunks
 ```
 profile = "example@1.0"
 provider = "localhost"
@@ -95,7 +95,9 @@ operation Upload {
 }
 ```
 
-### Read first bytes of file and then send it in body
+### Reading from a file, then sending it as the body of a request
+
+This serves as a workaround for MIME type detection.
 ```
 map SendFile {
   firstTen = input.file.peek(10)
@@ -117,7 +119,7 @@ map SendFile {
 }
 ```
 
-### Update BinaryData from Comlink Map
+### Updating BinaryData from a Comlink Map
 ```
 map Example {
   tmp = (input.file.name = input.filename)
@@ -160,9 +162,9 @@ const result = await profile.getUseCase('Example').perform({
 
 ### 1. Asynchronous operations on BinaryData
 
-Current limitation for use in Comlink Map is that `peek`, `read` and `getAllData` methods are asynchronous. So, they can't be directly chained with function on [Buffer](https://nodejs.org/dist/latest-v18.x/docs/api/buffer.html#class-buffer). Most likely `toString()`.
+A current limitation of `BinaryData` use in Comlink Maps is that the `peek`, `read` and `getAllData` methods are all asynchronous. This means that they can't be directly chained with methods on [Buffer](https://nodejs.org/dist/latest-v18.x/docs/api/buffer.html#class-buffer), such as `toString()`.
 
-To overcome this limitation, It must be first [set into variable](https://spec.superface.dev/latest/map-spec.html#sec-Set-Variables), so the interpreter resolves the Promise:
+To overcome this limitation, `BinaryData` must first be [assigned to a variable](https://spec.superface.dev/latest/map-spec.html#sec-Set-Variables), so that the interpreter resolves the Promise:
 ```
 map Example {
   firstBytes = input.binary.peek(10)
@@ -179,7 +181,7 @@ map Example {
 
 ### 2. Opaque data type
 
-In profile, the type must be omitted for now. Later,  [new Primitive](https://spec.superface.dev/latest/profile-spec.html#sec-Primitive-types) representing binary data will be added to Comlink Profile.
+In a Comlink profile, the type must be omitted for now. Later, a new [Primitive type](https://spec.superface.dev/latest/profile-spec.html#sec-Primitive-types) representing binary data will be added.
 
 ```
 name = "example"
@@ -192,9 +194,9 @@ usecase Example {
 }
 ```
 
-### 3. Assigning to temp variable when altering BinaryData
+### 3. Assigning to temporary variables when altering BinaryData
 
-Comlink maps right now doesn't support Script expression as statement. The only workaround for now is to use variable assignement.
+Comlink maps right now don't support using Script expressions as statements. The only workaround for now is to use variable assignment.
 
 ```
 tmp = (input.file.name = input.filename)
