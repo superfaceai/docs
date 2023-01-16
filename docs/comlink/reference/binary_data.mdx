@@ -5,13 +5,16 @@ displayed_sidebar: referenceSidebar
 
 # Binary Data
 
+Use `BinaryData` class in OneSDK to upload content by streaming bytes.
+
 :::info
 
 To use this feature, you will need OneSDK for NodeJS in version `2.2.0` or higher.
 
 :::
 
-To use binary data to upload content OneSDK has `BinaryData` class.
+
+The following interface is available in OneSDK, as well as in [Comlink Map's Script](https://superface.ai/docs/comlink/map#sec-Script):
 
 ```ts
 export interface IBinaryData {
@@ -22,7 +25,7 @@ export interface IBinaryData {
 }
 ```
 
-If `BinaryData` instance gets to be used as body or value in `FormData`, the content is streamed. This allows you to upload and work with big files.
+If `BinaryData` instance is used as body or value in `FormData`, the content is streamed. This allows you to upload and work with big files.
 
 Currently `BinaryData` can't be used as result of the use-case. If it is used as result an `UnexpectedError` is returned instead. If the content represented by `BinaryData` should be returned, calling `getAllData()` will read stream into `Buffer`, which is valid use-case result and is returned. Later streamed results support will be added for situation when the content is too big to load into memory.
 
@@ -176,7 +179,7 @@ map Example {
 
 ### 2. Opaque data type
 
-In profile, the type must be omitted for now. Later[new Primitive](https://spec.superface.dev/latest/profile-spec.html#sec-Primitive-types) representing binary data will be added to Comlink Profile.
+In profile, the type must be omitted for now. Later,  [new Primitive](https://spec.superface.dev/latest/profile-spec.html#sec-Primitive-types) representing binary data will be added to Comlink Profile.
 
 ```
 name = "example"
@@ -191,7 +194,7 @@ usecase Example {
 
 ### 3. Assigning to temp variable when altering BinaryData
 
-Comlink maps right now doesn't support Script expression as statement. Onlt workaround for now is to use variable assignement.
+Comlink maps right now doesn't support Script expression as statement. The only workaround for now is to use variable assignement.
 
 ```
 tmp = (input.file.name = input.filename)
