@@ -27,7 +27,7 @@ export interface IBinaryData {
 
 If a `BinaryData` instance is used as the body or value in `FormData`, the content is streamed. This allows you to upload and work with large files.
 
-Currently, `BinaryData` can't be used in the result of a use case. If it is present, an `UnexpectedError` is returned instead. You can use the `getAllData()` function to read and return the contents as a `Buffer`, which is valid to use in a use case result. Later, support for streamed results will be added for situations when the content is too big to load into memory.
+Currently, `BinaryData` can't be used in the result of a use case. If it is present, an `UnexpectedError` is returned instead. You can use the `getAllData()` function to read and return the contents as a `Buffer`, which is valid to use in a use case result. [Later](https://github.com/superfaceai/one-sdk-js/issues/325), support for streamed results will be added for situations when the content is too big to load into memory.
 
 ## Comlink Map examples
 
@@ -164,7 +164,7 @@ const result = await profile.getUseCase('Example').perform({
 
 A current limitation of `BinaryData` use in Comlink Maps is that the `peek`, `read` and `getAllData` methods are all asynchronous. This means that they can't be directly chained with methods on [Buffer](https://nodejs.org/dist/latest-v18.x/docs/api/buffer.html#class-buffer), such as `toString()`.
 
-To overcome this limitation, `BinaryData` must first be [assigned to a variable](https://spec.superface.dev/latest/map-spec.html#sec-Set-Variables), so that the interpreter resolves the Promise:
+To overcome this limitation, `BinaryData` must first be [assigned to a variable](https://superface.ai/docs/comlink/map#sec-Set-Variables), so that the interpreter resolves the Promise:
 ```
 map Example {
   firstBytes = input.binary.peek(10)
@@ -181,7 +181,7 @@ map Example {
 
 ### 2. Opaque data type
 
-In a Comlink profile, the type must be omitted for now. Later, a new [Primitive type](https://spec.superface.dev/latest/profile-spec.html#sec-Primitive-types) representing binary data will be added.
+In a Comlink profile, the type must be omitted for now. [Later](https://github.com/superfaceai/one-sdk-js/issues/325), a new [Primitive type](https://superface.ai/docs/comlink/profile#sec-Primitive-types) representing binary data will be added.
 
 ```
 name = "example"
