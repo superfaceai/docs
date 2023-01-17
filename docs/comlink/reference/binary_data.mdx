@@ -1,0 +1,203 @@
+---
+slug: /comlink/reference/map/binary_data
+displayed_sidebar: referenceSidebar
+---
+
+# Binary Data
+
+Use the `BinaryData` class in OneSDK to upload content by streaming bytes.
+
+:::info
+
+To use this feature, you will need OneSDK for NodeJS at version `2.2.0` or higher.
+
+:::
+
+
+The following interface is available in OneSDK, as well as in [Comlink Map's Script](https://superface.ai/docs/comlink/map#sec-Script):
+
+```ts
+export interface IBinaryData {
+  peek(size?: number): Promise<Buffer | undefined>;
+  getAllData(): Promise<Buffer>;
+  chunkBy(chunkSize: number): AsyncIterable<Buffer>;
+  toStream(): Readable;
+}
+```
+
+If a `BinaryData` instance is used as the body or value in `FormData`, the content is streamed. This allows you to upload and work with large files.
+
+Currently, `BinaryData` can't be used in the result of a use case. If it is present, an `UnexpectedError` is returned instead. You can use the `getAllData()` function to read and return the contents as a `Buffer`, which is valid to use in a use case result. [Later](https://github.com/superfaceai/one-sdk-js/issues/325), support for streamed results will be added for situations when the content is too big to load into memory.
+
+## Comlink Map examples
+
+In this section, you will find example uses of `BinaryData` in Comlink maps.
+
+### Sending a file as the body of a POST request
+```
+map SendFile {
+  http POST "/resource" {
+    request "application/octet-stream" {
+      body = input.file
+    }
+
+    response 200 "text/plain" {
+      map result body
+    }
+  }
+}
+```
+
+### Sending multiple files as FormData fields, alongside other fields
+```
+map SendFile {
+  http POST "/resource" {
+    request "multipart/form-data" {
+      body {
+        field = input.field
+        file1 = input.file1
+        file2 = input.file2
+      }
+    }
+
+    response 200 "text/plain" {
+      map result body
+    }
+  }
+}
+```
+
+### Uploading a file in chunks
+```
+profile = "example@1.0"
+provider = "localhost"
+
+map ChunkedUpload {
+  uploadResults = call foreach(chunk of input.file.chunkBy(10)) Upload(chunk = chunk)
+
+  return map result uploadResults
+}
+
+operation Upload {
+  http POST "/upload/{args.uploadId}" {
+    request "application/octet-stream" {
+      body = args.chunk
+    }
+
+    response 200 "text/plain" {
+      return true
+    }
+
+    response 500 "text/plain" {
+      return false
+    }
+  }
+}
+```
+
+### Reading from a file, then sending it as the body of a request
+
+This serves as a workaround for MIME type detection.
+```
+map SendFile {
+  firstTen = input.file.peek(10)
+
+  contentType = firstTen.toString('ascii').toLowerCase().includes('pdf') ? 'application/pdf' : 'application/octet-stream'
+
+  http POST "/resource" {
+    request {
+      headers {
+        'content-type' = contentType
+      }
+      
+      body = input.file
+
+    response 200 "text/plain" {
+      map result body
+    }
+  }
+}
+```
+
+### Updating BinaryData from a Comlink Map
+```
+map Example {
+  tmp = (input.file.name = input.filename)
+  tmp = (input.file.mimetype = input.mimetype)
+  
+  http POST "/" {
+    request "multipart/form-data" {
+      body = {
+        file: input.file
+      }
+    }
+  
+    response 200 {
+      map result body
+    }
+  }
+}
+```
+
+## OneSDK use example
+
+```typescript
+import { SuperfaceClient, BinaryData } from '@superfaceai/one-sdk';
+
+const client = new SuperfaceClient();
+const profile = await client.getProfile('example');
+
+// for files
+const result = await profile.getUseCase('Example').perform({
+  binary: BinaryData.fromPath(pathToFile, { mimetype: 'text/plain', filename: 'example.txt' });
+
+// or for Readable streams
+const stream = getReadableStream();
+const result = await profile.getUseCase('Example').perform({
+  binary: BinaryData.fromStream(stream);
+});
+```
+
+## Limitations
+
+### 1. Asynchronous operations on BinaryData
+
+A current limitation of `BinaryData` use in Comlink Maps is that the `peek`, `read` and `getAllData` methods are all asynchronous. This means that they can't be directly chained with methods on [Buffer](https://nodejs.org/dist/latest-v18.x/docs/api/buffer.html#class-buffer), such as `toString()`.
+
+To overcome this limitation, `BinaryData` must first be [assigned to a variable](https://superface.ai/docs/comlink/map#sec-Set-Variables), so that the interpreter resolves the Promise:
+```
+map Example {
+  firstBytes = input.binary.peek(10)
+  data = input.binary.read(10)
+  remainingData = input.binary.getAllData()
+
+  map result {
+    firstBytes = firstBytes
+    data = data
+   remainingData = remainingData
+  }
+}
+```
+
+### 2. Opaque data type
+
+In a Comlink profile, the type must be omitted for now. [Later](https://github.com/superfaceai/one-sdk-js/issues/325), a new [Primitive type](https://superface.ai/docs/comlink/profile#sec-Primitive-types) representing binary data will be added.
+
+```
+name = "example"
+version = "1.0.0"
+
+usecase Example {
+  input {
+    binary
+  }
+}
+```
+
+### 3. Assigning to temporary variables when altering BinaryData
+
+Comlink maps right now don't support using Script expressions as statements. The only workaround for now is to use variable assignment.
+
+```
+tmp = (input.file.name = input.filename)
+```
