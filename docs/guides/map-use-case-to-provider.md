@@ -72,7 +72,7 @@ map UsecaseName { // UseCaseName will be different based on the actual use case 
 
 ## Map use cases
 
-Every profile defines one or more _use cases_. You need to map the use case interfaces to the concrete requests and results towards a provider. If you used CLI to bootstrap the map, it will have pre-defined mappings for every profile use case.
+Every profile defines one or more _use cases_. You need to map the use cases to concrete requests to be made to the provider API, and specify how to handle the responses. If you used the CLI to bootstrap the map, it will have pre-defined stub mappings for every profile use case.
 
 ### Reading use case inputs {#input-object}
 
