@@ -45,7 +45,7 @@ To scope a profile, add `scope-name/` before profile name, for example: `communi
 You can use the [Superface CLI](https://github.com/superfaceai/cli) to set up an empty Comlink profile:
 
 ```shell
-superface prepare:profile <use_case_name>
+superface create:profile <use_case_name>
 ```
 
 Where `<use_case_name>` is the name of use case you wish to create.
@@ -55,7 +55,7 @@ Where `<use_case_name>` is the name of use case you wish to create.
 Use the `--help` flag for more options and examples:
 
 ```shell
-superface prepare:profile --help
+superface create:profile --help
 ```
 
 :::
@@ -130,7 +130,7 @@ With the Comlink profile ready, you can now define your business use case. A "us
 
 ### Overview {#usecase-overview}
 
-Let's take a look at the prepared use case. At the outer level, the use case is documented with [descriptions](#descriptions) in triple quotes. The definition itself starts with the `usecase` keyword, the use case itself is named `UsecaseName` and is marked as `unsafe`, which means that executing it may modify something (see below for more info on [safety](#safety)).
+Let's take a look at the created use case. At the outer level, the use case is documented with [descriptions](#descriptions) in triple quotes. The definition itself starts with the `usecase` keyword, the use case itself is named `UsecaseName` and is marked as `unsafe`, which means that executing it may modify something (see below for more info on [safety](#safety)).
 
 The use case consists of three blocks:
 

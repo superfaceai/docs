@@ -18,7 +18,7 @@ Mapping happens between _a specific version of Profile_ and some _Provider_. Cho
 The easiest way to then bootstrap a new Map document is using [Superface CLI](/reference/cli).
 
 ```shell
-superface prepare:map <profile-name> <provider-name>
+superface create:map <profile-name> <provider-name>
 ```
 
 _Replace the `<profile-name>` and `<provider-name>` in the command with the actual profile and provider you wish to create new Map for._
@@ -139,7 +139,7 @@ _The above definition makes a `POST` HTTP call to [the provider's default servic
 
 ### Authenticate the request (optional) {#authentication}
 
-To authenticate the request, simply reference the _security scheme ID_ you want to use for the specific request. Security schemes are defined in Provider JSON documents, and the prepared map already lists the available security schemes. If the provider does not require any type of authentication, you can use `security none`.
+To authenticate the request, simply reference the _security scheme ID_ you want to use for the specific request. Security schemes are defined in Provider JSON documents, and the created map already lists the available security schemes. If the provider does not require any type of authentication, you can use `security none`.
 
 ```hcl title="<profile-name>.<provider-name>.suma" {6}
 profile = "<profile-name>@<version>"
@@ -157,7 +157,7 @@ _Replace `scheme-id` with one of the schemes defined for the provider you're map
 
 ### Pass data to request
 
-You can pass any data to the request by adding a `request` block. Inside, you can pass data to _headers, query or body_ by specifying `headers`, `query` or `body` blocks, respectively. The map prepared by CLI already contains these blocks, so you just need to pass the data, likely using the `input` object. 
+You can pass any data to the request by adding a `request` block. Inside, you can pass data to _headers, query or body_ by specifying `headers`, `query` or `body` blocks, respectively. The map created by CLI already contains these blocks, so you just need to pass the data, likely using the `input` object. 
 
 When passing data in _body_, it's a best practice to also define the request content type.
 
