@@ -18,32 +18,67 @@ Mapping happens between _a specific version of Profile_ and some _Provider_. Cho
 The easiest way to then bootstrap a new Map document is using [Superface CLI](/reference/cli).
 
 ```shell
-superface create --map --profileId <profile-name> --providerName <provider-name>
+superface create:map <profile-name> <provider-name>
 ```
 
 _Replace the `<profile-name>` and `<provider-name>` in the command with the actual profile and provider you wish to create new Map for._
 
-Running the above command creates a new Comlink file and links the new map in your local `super.json` configuration file. The new empty map will look something like this:
+Running the above command creates a new Comlink file and links the new map in your local `super.json` configuration file. The new map will look something like this:
 
 ```hcl title="<profile-name>.<provider-name>.suma"
 profile = "<profile-name>@<version>"
 provider = "<provider-name>"
+// Complete map specification: https://superface.ai/docs/comlink/reference/map
 
-"""
-Comment for the map to UseCaseName
-"""
-map UseCaseName {} // UseCaseName will be different based on the actual use case in the profile
+map UsecaseName { // UseCaseName will be different based on the actual use case in the profile
+  // Available input fields:
+  // `input.field` - required string
+  
+  // -----------------------
+
+  // 1) Change HTTP method and path to make an HTTP call
+  // provider base URL https://swapi.dev/api - base url will be different based on the actual url in provider.json
+  http POST "/endpoint/api/{ input.field }" {
+    // 2) Specify security scheme id from Provider JSON definition
+    security none
+  
+    // 3) Pass input values to the HTTP request
+    request {
+      query {
+        // param_name = input.fieldName
+      }
+      headers {}
+      body {}
+    }
+  
+    // 4) Map successful HTTP response to the result. The content type is optional
+    response 200 "application/json" {
+      return map result {
+        outputField = "", // optional nulllable string
+      }
+    
+    }
+  
+    // 5) Optionally map unsuccessful HTTP response to the use case error
+    response 500 {
+      return map error {
+        title = "", // required string
+        detail = "", // optional string
+      }
+    }
+  }
+}
 ```
 
 ## Map use cases
 
-Every profile defines one or more _use cases_. You need to map the use case interfaces to the concrete requests and results towards a provider. If you used CLI to bootstrap the map, it will have pre-defined empty mappings for every profile use case.
+Every profile defines one or more _use cases_. You need to map the use cases to concrete requests to be made to the provider API, and specify how to handle the responses. If you used the CLI to bootstrap the map, it will have pre-defined stub mappings for every profile use case.
 
 ### Reading use case inputs {#input-object}
 
 Use cases usually define & expect some _inputs_ from the user. These inputs are [defined in profile in the dedicated field](https://superface.ai/docs/comlink/profile#sec-Use-case).
 
-You can access these inputs via `input` object which is available _inside use case mapping_.
+You can access these inputs via the `input` object which is available _inside a map_.  If you used the CLI to bootstrap the map, the resulting map lists all inputs (eq. `// input.field - required string`) defined by the use case. Each input is paired with its description, containing information about its type, if it is required, and if it can be null.
 
 <details>
   <summary>Example</summary>
@@ -85,9 +120,9 @@ map GetWeather {
 
 ### Make HTTP request {#http-request}
 
-Define the first request by specifying the `http` block with HTTP method and URL path.
+The resulting map contains numbered comments guiding you through mapping of the use case. Start with specifying the HTTP method, and the URL. The provider's default service base URL is provided in the surrounding comments for your convenience. See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Call) for specifying a different service.
 
-All widely known HTTP methods are supported. The path is a simple _string_, but can be templated. _E.g. if you need to request resource whose ID was provided in the input, you might want to use something like `/resources/{input.id}`._
+All widely known HTTP methods are supported. The path is a simple _string_, but can be templated. _E.g. if you need to request resource whose ID was provided in the input, you might want to use something like `/endpoint/api/{ input.field }`._
 
 ```hcl title="<profile-name>.<provider-name>.suma" {5-7}
 profile = "<profile-name>@<version>"
@@ -100,11 +135,11 @@ map UseCaseName {
 }
 ```
 
-_The above definition makes `POST` HTTP call to [the provider's default service](./add-new-provider.md#default-service) on path `/api/messages`.<br />See [Comlink reference](https://superface.ai/docs/comlink/map#sec-HTTP-Call) for specifying a different service & other `http` block features._
+_The above definition makes a `POST` HTTP call to [the provider's default service](./add-new-provider.md#default-service) on path `/api/messages`.<br />_
 
 ### Authenticate the request (optional) {#authentication}
 
-To authenticate the request, simply reference the _security scheme ID_ you want to use for the specific request in `security` definition. Security schemes are defined in Provider JSON documents.
+To authenticate the request, simply reference the _security scheme ID_ you want to use for the specific request. Security schemes are defined in Provider JSON documents, and the created map already lists the available security schemes. If the provider does not require any type of authentication, you can use `security none`.
 
 ```hcl title="<profile-name>.<provider-name>.suma" {6}
 profile = "<profile-name>@<version>"
@@ -122,7 +157,7 @@ _Replace `scheme-id` with one of the schemes defined for the provider you're map
 
 ### Pass data to request
 
-You can pass any data to the request by adding `request` block. Inside, you can pass data to _headers, query or body_ by specifiying `headers`, `query` or `body` blocks, respectively.
+You can pass any data to the request by adding a `request` block. Inside, you can pass data to _headers, query or body_ by specifying `headers`, `query` or `body` blocks, respectively. The map created by CLI already contains these blocks, so you just need to pass the data, likely using the `input` object. 
 
 When passing data in _body_, it's a best practice to also define the request content type.
 

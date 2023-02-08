@@ -65,12 +65,19 @@ Provider name serves primarily for identification. We recommend it to be as shor
 The easiest way to bootstrap a new provider is using [Superface CLI](/reference/cli).
 
 ```shell
-superface create --provider --providerName <provider-name>
+superface create:provider <provider-name>
 ```
 
 _Replace the `<provider-name>` in the command with the actual name you wish to use._
 
-Running the above command creates a new JSON file at `<provider-name>.provider.json` and links the provider in the local `super.json` configuration file.
+Running the above command interactively guides you through the creation of a new provider JSON file at `<provider-name>.provider.json`, and links the provider in the local [`super.json` configuration file](/docs/advanced-usage).
+
+First, you will be asked to enter the base URL of the [default service](#default-service). More [services](#services) can be added later. Next, you will select security scheme used for [authentication](#authentication). Then you can enter [Integration parameters](../reference/glossary.md#integration-parameter). Each integration parameter consists of a name and an optional default value.
+
+You will end up with a functional provider definition that can be used to [create a mapping for the use case](./map-use-case-to-provider.md).
+
+If you need more than one service, you can check the section ["configure the services"](#services) and add a new service to `<provider-name>.provider.json`. Similarly, you can add more then one security scheme as described in [authentication](#authentication). 
+
 
 ```json title="<provider-name>.provider.json"
 {
