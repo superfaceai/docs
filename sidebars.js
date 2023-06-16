@@ -47,6 +47,42 @@ const guides = {
   ],
 };
 
+const classicGuides = {
+  type: 'category',
+  label: 'Guides',
+  collapsed: false,
+  items: [
+    {
+      type: 'category',
+      label: 'How to integrate new API',
+      link: { type: 'doc', id: 'classic/guides/how-to-create' },
+      collapsed: true,
+      items: [
+        'classic/guides/setup-the-environment',
+        'classic/guides/create-new-use-case',
+        'classic/guides/add-new-provider',
+        'classic/guides/map-use-case-to-provider',
+        'classic/guides/run-use-case',
+        'classic/guides/test-use-case',
+        'classic/guides/publishing',
+        'classic/guides/interactive-designer',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Working with providers',
+      collapsed: true,
+      items: [
+        'classic/guides/find-provider-by-name',
+        'classic/guides/add-new-provider',
+        'classic/guides/using-multiple-providers',
+      ],
+    },
+    'classic/guides/api-keys',
+    'classic/guides/integrations-monitoring',
+  ],
+};
+
 module.exports = {
   mainSidebar: [
     'introduction',
@@ -87,4 +123,24 @@ module.exports = {
     },
     'reference/glossary',
   ],
+  classicSidebar: [
+    'classic/index',
+    'classic/how-superface-works',
+    'classic/getting-started',
+    'classic/advanced-usage',
+    classicGuides,
+    'classic/verification',
+    {
+      type: 'category',
+      label: 'Upgrade guides',
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'classic/upgrade/one-sdk-v2',
+          label: 'OneSDK v2.0',
+        },
+      ],
+    }
+  ]
 };

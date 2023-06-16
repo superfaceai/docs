@@ -47,6 +47,11 @@ module.exports = {
           label: 'Reference',
         },
         {
+          href: '/classic',
+          label: 'Classic Docs',
+          position: 'right',
+        },
+        {
           href: '/catalog',
           label: 'Catalog',
           position: 'right',
