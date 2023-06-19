@@ -86,11 +86,25 @@ const classicGuides = {
 module.exports = {
   mainSidebar: [
     'introduction',
+    {
+      type: 'category',
+      label: 'Getting started',
+      collapsed: false,
+      items: [
+        'introduction/quick-start'
+      ]
+    },
     'how-superface-works',
-    'getting-started',
     'advanced-usage',
     guides,
-    'verification',
+    {
+      type: 'category',
+      label: 'API Examples',
+      collapsed: false,
+      items: [
+        'api-examples/notion'
+      ]
+    },
     {
       type: 'category',
       label: 'Upgrade guides',
