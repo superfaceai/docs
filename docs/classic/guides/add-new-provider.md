@@ -62,7 +62,7 @@ Provider name serves primarily for identification. We recommend it to be as shor
 
 ### Bootstrap via CLI
 
-The easiest way to bootstrap a new provider is using [Superface CLI](../reference/cli).
+The easiest way to bootstrap a new provider is using [Superface CLI](https://github.com/superfaceai/cli#readme).
 
 ```shell
 superface create:provider <provider-name>

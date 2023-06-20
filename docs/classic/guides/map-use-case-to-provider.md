@@ -15,7 +15,7 @@ This guide assumes you have a project set up with Superface installed. If you ne
 
 Mapping happens between _a specific version of Profile_ and some _Provider_. Choose which profile version you want to fulfill by the provider.
 
-The easiest way to then bootstrap a new Map document is using [Superface CLI](../reference/cli).
+The easiest way to then bootstrap a new Map document is using [Superface CLI](https://github.com/superfaceai/cli#readme).
 
 ```shell
 superface create:map <profile-name> <provider-name>

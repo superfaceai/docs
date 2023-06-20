@@ -98,15 +98,17 @@ module.exports = {
     guides,
     {
       type: 'category',
-      label: 'API Examples',
+      label: 'Provider API Quick Starts',
       collapsed: false,
       items: [
-        'api-examples/notion'
+        'api-examples/notion',
+        'api-examples/slack',
+        'api-examples/resend'
       ]
     },
     {
       type: 'category',
-      label: 'Upgrade guides',
+      label: 'Migration Guides',
       collapsed: true,
       items: [
         {

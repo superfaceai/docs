@@ -30,4 +30,4 @@ On the confirmation page download generated project with source files.
 
 ---
 
-If you run into any issues with the designer and generating Comlink files, [reach out to us](../support) — we are happy to help!
+If you run into any issues with the designer and generating Comlink files, [reach out to us](../../support) — we are happy to help!

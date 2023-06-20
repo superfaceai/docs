@@ -221,7 +221,7 @@ _Replace `scope/profile-name`, `UseCaseName` and inputs for `.perform` method wi
 
 :::info
 
-For details on SuperfaceClient API, please consult [OneSDK reference](../reference/one-sdk-js).
+For details on SuperfaceClient API, please consult [OneSDK reference](https://github.com/superfaceai/one-sdk-js#readme).
 
 :::
 
