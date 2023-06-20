@@ -27,9 +27,7 @@ const guides = {
         'guides/add-new-provider',
         'guides/map-use-case-to-provider',
         'guides/run-use-case',
-        'guides/test-use-case',
-        'guides/publishing',
-        'guides/interactive-designer',
+        'guides/test-use-case'
       ],
     },
     {
@@ -86,11 +84,18 @@ const classicGuides = {
 module.exports = {
   mainSidebar: [
     'introduction',
+    'how-superface-works',
     {
       type: 'category',
       label: 'Getting started',
       collapsed: false,
       items: [
+        {
+          type: 'doc',
+          id: 'introduction/getting-started',
+          label: 'Superface in 3 minutes'
+        }
+        ,
         'introduction/quick-start',
         'introduction/quick-start-sdk'
       ]
