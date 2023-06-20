@@ -91,11 +91,10 @@ module.exports = {
       label: 'Getting started',
       collapsed: false,
       items: [
-        'introduction/quick-start'
+        'introduction/quick-start',
+        'introduction/quick-start-sdk'
       ]
     },
-    'how-superface-works',
-    'advanced-usage',
     guides,
     {
       type: 'category',
