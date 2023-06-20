@@ -11,7 +11,7 @@ OneSDK is a universal API client for Node.js. This page describes OneSDK public 
 
 - [OneSDK on GitHub](https://github.com/superfaceai/one-sdk-js) for development and reporting issues
 - [OneSDK on npm](https://www.npmjs.com/package/@superfaceai/one-sdk)
-- [Getting Started](/getting-started) tutorial
+- [Getting Started](../introduction/quick-start-sdk.mdx) tutorial
 
 ## Installation
 
@@ -45,18 +45,20 @@ With client initialized, you can perform the use cases in installed profiles usi
 
 ```typescript
 const profile = await client.getProfile('<profileName>@<[version]>');
-const result = await profile.getUsecase('<usecaseName>').perform({
-  inputField: 1,
-  anotherInputField: 'hello',
-  // ...inputs...
-}, {
-  provider: 'acme',
-  // ...options...
-});
+const result = await profile.getUsecase('<usecaseName>').perform(
+  {
+    inputField: 1,
+    anotherInputField: 'hello',
+    // ...inputs...
+  },
+  {
+    provider: 'acme',
+    // ...options...
+  }
+);
 ```
 
 Perform returns a [result object](#result-object).
-
 
 #### Perform options
 
@@ -64,14 +66,13 @@ There is a number of options that can modify the behavior of a `perform()`.
 
 `provider` You can specify which provider will a given perform be fulfilled with. This option takes either a configured `Provider` object, or a string identifying the provider (if the provider is present in configuration). See [Selecting a provider](#get-provider) for more details.
 
-`variant`: In some cases, there may exist multiple maps for the same profile/provider combination. These are called *variants* of a map. This option allows you to specify which *variant* of the map to use.
+`variant`: In some cases, there may exist multiple maps for the same profile/provider combination. These are called _variants_ of a map. This option allows you to specify which _variant_ of the map to use.
 
 <!-- `revision`: found literally zero info on this -->
 
 `parameters`: _Integration parameters_ are provider-specific values which can be used in maps and provider definitions; see the [glossary](../reference/glossary.md#integration-parameter) for more information on integration parameters, and what they are used for.
 
 `security`: _Security values_ are used for authenticating to a given provider. Their format depends on the provider and can include, for example, a static API key or a user/password combination. You can find the required format on the profile page in the Superface Catalog.
-
 
 ```javascript
 // For example:

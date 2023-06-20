@@ -197,4 +197,4 @@ For more details about the file's content, see [super.json reference](reference/
 
 _Comlink_ is a domain-specific language for declarative description of API integrations. It consists of three parts: [Profile](#profile), [Map](#map), and [Provider definition](#provider). Integrations written with Comlink are consumed by [OneSDK](#one-sdk).
 
-For more details see [Comlink reference](../comlink/).
+For more details see [Comlink reference](../../comlink/).
