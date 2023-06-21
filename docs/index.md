@@ -32,7 +32,7 @@ Superface is the AI for APIs. It makes creating API integrations faster, and mor
   <div className="col col--6">
     <div className="card shadow">
       <div className="card__body">
-        <h3>🎓 Decoupled worflow.</h3>
+        <h3>🎓 Decoupled workflow.</h3>
         <p>This approach gives you a framework to decouple the lifecycle of your application and the integrations it uses.
         </p>
       </div>
