@@ -25,19 +25,10 @@ const guides = {
         'guides/setup-the-environment',
         'guides/create-new-use-case',
         'guides/add-new-provider',
+        'guides/using-multiple-providers',
         'guides/map-use-case-to-provider',
         'guides/run-use-case',
         'guides/test-use-case'
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Working with providers',
-      collapsed: true,
-      items: [
-        'guides/find-provider-by-name',
-        'guides/add-new-provider',
-        'guides/using-multiple-providers',
       ],
     },
     'guides/api-keys',
@@ -104,11 +95,20 @@ module.exports = {
     {
       type: 'category',
       label: 'Provider API Quick Starts',
-      collapsed: false,
+      collapsed: true,
       items: [
         'api-examples/notion',
         'api-examples/slack',
         'api-examples/resend'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Examples',
+      collapsed: true,
+      items: [
+        'examples/nodejs',
+        'examples/cloudflare-workers'
       ]
     },
     {
@@ -123,6 +123,11 @@ module.exports = {
         },
       ],
     },
+    {
+      type: 'doc',
+      id: 'support',
+      label: 'Help & Support'
+    }
   ],
   referenceSidebar: [
     'reference/index',

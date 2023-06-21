@@ -1,10 +1,10 @@
 # Slack
 
-In this example, we will show you how you can get started working with the [Notion API](https://developers.notion.com) and produce a working use case that allows you to list all of the users in your Notion workspace.
+In this example, we will show you how you can get started working with the [Slack API](https://developers.notion.com) to produce a working use case that allows you to list all of the users in your Slack workspace. Here we are using an endpoint from Slack's [Web API](https://api.slack.com/web) that requires a more minimal level of authentication.
 
 :::info Before you start
 
-You'll need to get an API token for a _Notion Internal Integration_ that is valid for the workspace you want to access. Find out how to set that up in the [Notion Authorization documentation](https://developers.notion.com/docs/authorization#making-api-requests-with-an-internal-integration).
+You'll need a Slack API token that is valid for the workspace you want to access. Find out how to set that up in their [Getting a token](https://api.slack.com/tutorials/tracks/getting-a-token) guide.
 
 :::
 
@@ -15,27 +15,27 @@ You'll need to get an API token for a _Notion Internal Integration_ that is vali
 Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
 
 ```shell
-$ brew install superface
+brew install superface
 ```
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
 
 ```shell
-$ superface auth
+superface auth
 ```
 
 ### Prepare the documentation
 
-Notion's documentation is hosted by Readme.io, which is a format that Superface can accept without any additional changes so you can copy and paste the URL for the `GET users` endpoint.
+The Slack documentation is available in OAS format. You can find the Open API Specs for their APIs on the [Slack GitHub](https://github.com/slackapi/slack-api-specs/tree/master/web-api). Here we are using the OAS for their [Web API](https://api.slack.com/web).
 
 ```shell
-$ superface prepare https://developers.notion.com/reference/get-users
+superface prepare https://raw.githubusercontent.com/slackapi/slack-api-specs/master/web-api/slack_web_openapi_v2.json
 ```
 
 Once the documentation has been indexed, you can create a profile for the use case you want to achieve.
 
 ```shell
-$ superface profile notion "list all users"
+superface profile slack-web "list all users"
 ```
 
 ### Create code for your project
@@ -43,21 +43,23 @@ $ superface profile notion "list all users"
 To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider.
 
 ```shell
-$ superface map notion
+superface map slack-web
 ```
 
 ### Test it
 
 :::note Don't forget your authentication
 
-Superface expects an authorization token for Notion. You can add this as `NOTION_TOKEN` in your environment. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
+Superface expects an authorization token for Notion. You can add this as `SLACK_TOKEN` in your environment. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
 
 :::
 
 The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command.
 
 ```shell
-$ superface execute superface/<scope>.<profile-name>.<provider-name>.mjs
+superface execute superface/<scope>.<profile-name>.<provider-name>.mjs
 ```
+
+If everything is successful you will see a JSON response listing the users in your workspace.
 
 </div>

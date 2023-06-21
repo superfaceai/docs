@@ -1,10 +1,10 @@
 # Resend
 
-In this example, we will show you how you can get started working with the [Notion API](https://developers.notion.com) and produce a working use case that allows you to list all of the users in your Notion workspace.
+In this example, we will show you how you can get started working with the [Resend](https://resend.com/) email API to produce a working use case that allows you to send an email from an application.
 
 :::info Before you start
 
-You'll need to get an API token for a _Notion Internal Integration_ that is valid for the workspace you want to access. Find out how to set that up in the [Notion Authorization documentation](https://developers.notion.com/docs/authorization#making-api-requests-with-an-internal-integration).
+You'll need a Resend API token. Find out how to set that up in the [Resend documentation](https://resend.com/docs/introduction).
 
 :::
 
@@ -15,49 +15,71 @@ You'll need to get an API token for a _Notion Internal Integration_ that is vali
 Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
 
 ```shell
-$ brew install superface
+brew install superface
 ```
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
 
 ```shell
-$ superface auth
+superface auth
 ```
 
 ### Prepare the documentation
 
-Notion's documentation is hosted by Readme.io, which is a format that Superface can accept without any additional changes so you can copy and paste the URL for the `GET users` endpoint.
+Resend have an [OAS version](https://raw.githubusercontent.com/resendlabs/resend-openapi/main/resend.yaml) of their API, but their [API Reference](https://resend.com/docs/api-reference/introduction) can also be used without any additional changes so you can copy and paste the URL for the `send email` endpoint.
 
 ```shell
-$ superface prepare https://developers.notion.com/reference/get-users
+superface prepare https://resend.com/docs/api-reference/emails/send-email
 ```
 
 Once the documentation has been indexed, you can create a profile for the use case you want to achieve.
 
 ```shell
-$ superface profile notion "list all users"
+superface profile resend "send an email"
 ```
 
 ### Create code for your project
 
-To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider.
+To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider and a use case profile you want to work with.
 
 ```shell
-$ superface map notion
+superface map resend email-communication.email-sending
+```
+
+### Set up your inputs
+
+In order to send an email correctly, you will need to modify the boilerplate code from the Resend documentation so it contains a real email address. From the `superface` folder, open `email-communication.email-sending.resend.mjs` and modify the object that starts on line 12. Be sure to enter your own email address as the value for `to`.
+
+```js
+     {
+        to : 'youremail@yourdomain.com',
+        from : 'onboarding@resend.dev',
+        subject : 'Hello, World!',
+        html : '<p>Hello, World!</p>',
+        text : 'Hello, World!',
+      }
 ```
 
 ### Test it
 
 :::note Don't forget your authentication
 
-Superface expects an authorization token for Notion. You can add this as `NOTION_TOKEN` in your environment. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
+Superface expects an authorization token for Resend. You can add this as `RESEND_TOKEN` in your environment or `.env` file. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
 
 :::
 
 The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command.
 
 ```shell
-$ superface execute superface/<scope>.<profile-name>.<provider-name>.mjs
+superface execute superface/email-communication.email-sending.resend.mjs
+```
+
+If everything is successful you should see output similar to the response below:
+
+```bash
+RESULT: {
+  "id": "9d5c7482-d197-406f-b8f9-9a4c0cb7d5f9"
+}
 ```
 
 </div>
