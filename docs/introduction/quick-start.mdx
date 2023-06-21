@@ -61,4 +61,21 @@ To learn how to handle API credentials, see [Setting provider API keys](../guide
 
 :::
 
+### What files are created?
+
+After running all the above commands, you will find a folder named `superface` in your current working directory, with the following structure:
+
+```shell
+superface/
+  <provider>.provider.json
+  <scope>.<use-case>.profile
+  <scope>.<use-case>.<provider>.map.js
+  <scope>.<use-case>.<provider>.mjs
+  context/
+    <provider>.index.json
+    <provider>.docs.txt
+```
+
+These files are used by OneSDK to enabled your application to communicate with the provider you are working with. `<provider>`, `<scope>`, and `<use-case>` will be replaced with real values based on the provider and use case you specified.
+
 </div>
