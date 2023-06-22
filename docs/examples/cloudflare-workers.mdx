@@ -141,6 +141,10 @@ If you run into any deployment issues, please consult the [Cloudflare Worker Get
 
 </div>
 
+:::caution Cloudflare Free Tier Limitation
+The fully compiled WASM version of OneSDK currently hits the 1MB limit of the Cloudflare Workers free tier. When combined with other code, you may need to upgrade your account in order to work with Superface at this time.
+:::
+
 ## Demo: Shopify, Superface & Cloudflare Workers
 
 In order to best illustrate how Superface can be used in context, take a look at our [Cloudflare Workers, Shopify & Superface](https://github.com/superfaceai/demo-cloudflare-shopify/tree/main) demo application on GitHub.

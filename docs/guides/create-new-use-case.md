@@ -1,4 +1,4 @@
-# Create a new use case
+# Create a new use case/Comlink
 
 A _use case_ specifies the inputs, result parameters, and error behavior of the API integration. Use case inputs and results should not contain any provider specific parameters and provider implementation details like authentication credentials.
 

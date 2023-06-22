@@ -73,12 +73,12 @@ It's time to run your app! Because the Superface OneSDK is built with WASM, it r
 node --experimental-wasi-unstable-preview1 index.mjs
 ```
 
-### Check the HTTP communication
+### Debugging
 
-Set the environment variable `DEBUG` to `superface:http*` to see API calls from OneSDK to GitHub API:
+Set the environment variable `DEBUG` to `superface:http*` to see API calls from OneSDK to the API you are connecting to:
 
 ```shell
-DEBUG="superface:http*" node index.mjs
+DEBUG="superface:http*" node --experimental-wasi-unstable-preview1 index.mjs
 ```
 
 :::caution
@@ -90,7 +90,7 @@ This can print out potentially sensitive information, like API keys and access t
 Set the `DEBUG` environment variable to `superface*` to see everything that is going in under the hood.
 
 ```shell
-DEBUG="superface*" node index.mjs
+DEBUG="superface*" node --experimental-wasi-unstable-preview1 index.mjs
 ```
 
 </div>

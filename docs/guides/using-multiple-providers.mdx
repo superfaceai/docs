@@ -8,67 +8,51 @@ Consuming a single use case from multiple providers is at heart of Superface.
 
 This guide will walk you through the process of configuring these providers the
 way you need them to work. You'll need a Node.js app with OneSDK and a use case set up.
-We recommend you to read through the [Getting&nbsp;started](../introduction/quick-start.mdx) first if you haven’t done so.
 
-There are currently 2 different ways you might want to switch between the providers:
+We recommend you to read through the [Getting&nbsp;started](../introduction/getting-startedmdx) first if you haven’t done so.
 
-- [Choose the specific provider for each perform](#manual): fulfill the use case by the chosen provider
-- [Setup automatic failover](#failover): switch to another provider when the primary fails
+### Example
 
-## Manual provider selection {#manual}
+Let's say your app sends emails and you want to support multiple different providers. The profile you would use would be the same for each provider, `email-communication/email-sending`
 
-In integration scenarios where you need to fulfill the use case by
-the specific provider (e.g. because the user content is saved on their servers),
-you can manually choose which provider you want to use.
-
-The provider choice is bound to a single perform. This means you can choose
-different providers for different `perform` calls.
-
-It works by passing the chosen provider configuration to `perform` method
-on the use case. You can fetch the provider configuration in runtime using
-`getProvider` method exposed from OneSDK.
-
-### Example {#manual-example}
-
-Let's say your app lists user repositories and you want to support multiple
-version control systems. You'd use [`vcs/user-repos`](https://superface.ai/vcs/user-repos)
-and will configure all supported VCS providers.
-
-```shell title="cd your-app/"
-npx @superfaceai/cli configure github --profile=vcs/user-repos
-npx @superfaceai/cli configure gitlab --profile=vcs/user-repos
-npx @superfaceai/cli configure bitbucket --profile=vcs/user-repos
-```
-
-Then, switching between the 3 configured providers would look like this:
+In your app, switching between providers requires that you have an object set up for each provider you want to use. In the example below, we'll show the setup for Resend, and also for Mailgun.
 
 <Tabs
-  defaultValue="github"
+  defaultValue="resend"
   values={[
-    { label: 'GitHub', value: 'github', },
-    { label: 'GitLab', value: 'gitlab', },
-    { label: 'Bitbucket', value: 'bitbucket', },
+    { label: 'Resend', value: 'resend', },
+    { label: 'Mailgun', value: 'mailgun', }
   ]
 }>
 
-<TabItem value="github">
+<TabItem value="resend">
 
-```js title="app.js" {8-9,15}
-const { SuperfaceClient } = require('@superfaceai/one-sdk');
+```js title="app.js" {1-12,19,23}
+const inputs = {
+  from: 'welcome@superface.ai',
+  to: 'hello@superface.ai',
+  subject: 'Hello, World',
+  text: 'Hello, World from Resend!',
+};
 
-const sdk = new SuperfaceClient();
+const provider = {
+  provider: 'resend',
+  parameters: {},
+  security: { bearer_token: { token: env.RESEND_TOKEN } },
+};
+
+const { OneClient } = require('@superfaceai/one-sdk');
+
+const client = new OneClient();
 
 async function run() {
-  const profile = await sdk.getProfile('vcs/user-repos');
-
-  // Load the specific provider for this perform
-  const provider = await sdk.getProvider('github');
+  const profile = await client.getProfile('email-communication/email-sending');
 
   const result = await profile
-    .getUseCase('UserRepos')
-    .perform({ user: 'superfaceai' }, { provider });
+    .getUseCase('SendEmail')
+    .perform(inputs, provider);
 
-  return result.unwrap();
+  console.log(result.unwrap());
 }
 
 run();
@@ -76,47 +60,36 @@ run();
 
 </TabItem>
 
-<TabItem value="gitlab">
+<TabItem value="mailgun">
 
-```js title="app.js" {8-9,15}
-const { SuperfaceClient } = require('@superfaceai/one-sdk');
+```js title="app.js" {1-12,19,23}
+const inputs = {
+  from: 'welcome@superface.ai',
+  to: 'hello@superface.ai',
+  subject: 'Hello, World',
+  text: 'Hello, World from MailGun',
+};
 
-const sdk = new SuperfaceClient();
+const provider = {
+  provider: 'mailgun',
+  parameters: { DOMAIN: env.MAILGUN_DOMAIN },
+  security: {
+    basic: { username: env.MAILGUN_USERNAME, password: env.MAILGUN_PASSWORD },
+  },
+};
+const { OneClient } = require('@superfaceai/one-sdk');
+
+const client = new OneClient();
 
 async function run() {
-  const profile = await sdk.getProfile('vcs/user-repos');
+  const profile = await client.getProfile('email-communication/email-sending');
 
   // Load the specific provider for this perform
-  const provider = await sdk.getProvider('gitlab');
+  const provider = await sdk.getProvider('mailgun');
 
   const result = await profile
     .getUseCase('UserRepos')
-    .perform({ user: 'superfaceai' }, { provider });
-
-  return result.unwrap();
-}
-
-run();
-```
-
-</TabItem>
-
-<TabItem value="bitbucket">
-
-```js title="app.js" {8-9,15}
-const { SuperfaceClient } = require('@superfaceai/one-sdk');
-
-const sdk = new SuperfaceClient();
-
-async function run() {
-  const profile = await sdk.getProfile('vcs/user-repos');
-
-  // Load the specific provider for this perform
-  const provider = await sdk.getProvider('bitbucket');
-
-  const result = await profile
-    .getUseCase('UserRepos')
-    .perform({ user: 'superfaceai' }, { provider });
+    .perform(inputs, provider);
 
   return result.unwrap();
 }
@@ -127,178 +100,12 @@ run();
 </TabItem>
 
 </Tabs>
+As you can see there is very little difference between these two code examples. In fact, the Superface specific code stays exactly the same. That's because it is the values that we pass to the `.peform` function that matter.
 
-:::note
-
-If there's only one provider configured for the profile, that provider is
-automatically used and you don't have to explicitly choose the provider in the code.
-
-:::
-
-## Automatic failover {#failover}
-
-When using provider failover, OneSDK will **automatically switch to another
-provider in the case of failure**.
-
-This will give you a maximum out-of-the-box resiliency useful for integration
-scenarios where you don't care so much about which provider fulfills the use case
-but you need it to happen reliably (e.g. in commodity use cases like sending emails, SMS, etc).
-
-### Enabling failover {#enabling-failover}
-
-The failover has to be configured for each use case separately by enabling
-`providerFailover` option in the use case defaults.
-
-For example, if you want to send SMS messages reliably, you'll use the
-`SendMessage` use case from [`communication/send-sms`](https://superface.ai/communication/send-sms)
-and have two or three providers configured.
-
-Then, the configuration of the failover for `SendMessage` use case would look like this:
-
-```json title="superface/super.json" {5-9}
-{
-  "profiles": {
-    "communication/send-sms": {
-      "version": "1.0.1",
-      "defaults": {
-        "SendMessage": {
-          "providerFailover": true
-        }
-      },
-      "priority": [
-        // ...
-      ],
-      "providers": {
-        // ...
-      }
-    }
-  },
-  "providers": {
-    // ...
-  }
-}
+```js
+const result = await profile.getUseCase('UserRepos').perform(inputs, provider);
 ```
 
-For more information about the use case defaults, please see
-[super.json reference](/reference/superjson#usecasedefaults).
+When using a single provider, you can populate `.perform` directly. However, when using multiple providers it is recommended to separate the expected params into variables and define them elsewhere. Above, we do that with variables named `inputs` and `provider`.
 
-### Specifying failover order {#failover-priority}
-
-By default, OneSDK uses the first provider that was added to the application
-as primary, with failover to other providers in order they were added to the app.
-You can specify your preferred order in which OneSDK should use and fail over
-between the providers.
-
-For example, you're using [`communication/send-sms`](https://superface.ai/communication/send-sms)
-to send SMS reliably and have 3 providers configured (e.g. `tyntec`, `plivo` and `twilio`).
-
-You want to primarily use `twilio`. If that fails, you prefer `plivo` and if
-the secondary fails as well, you want to switch to `tyntec`.
-The configuration of the provider priority for this case would look like this:
-
-```json title="superface/super.json" {10-14}
-{
-  "profiles": {
-    "communication/send-sms": {
-      "version": "1.0.1",
-      "defaults": {
-        "SendMessage": {
-          "providerFailover": true
-        }
-      },
-      "priority": ["twilio", "plivo", "tyntec"],
-      "providers": {
-        // ...
-      }
-    }
-  },
-  "providers": {
-    // ...
-  }
-}
-```
-
-### Retry on failure {#retry-policy}
-
-By default, OneSDK attempts to perform the use case with each provider **exactly once**.
-
-OneSDK also ships with a configurable
-[circuit breaker](https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern)
-retry policy. The retry policy has to be configured for each provider by setting
-`retryPolicy` option in the use case defaults for provider.
-
-For example, enabling the circuit breaker retry policy for `twilio` when
-performing `SendMessage` use case (from [`communication/send-sms`](https://superface.ai/communication/send-sms))
-would look like the snippet below.
-
-The default circuit breaker policy makes 5 retries using an exponential backoff
-and times out after 30 seconds. For full retry configuration, please see
-[super.json reference](/reference/superjson#retrypolicy).
-
-```json title="superface/super.json" {13-18}
-{
-  "profiles": {
-    "communication/send-sms": {
-      "version": "1.0.1",
-      "defaults": {
-        // ...
-      },
-      "priority": [
-        // ...
-      ],
-      "providers": {
-        "twilio": {
-          "defaults": {
-            "SendMessage": {
-              "retryPolicy": "circuit-breaker"
-              // ...
-            }
-          }
-        }
-      }
-    }
-  },
-  "providers": {
-    // ...
-  }
-}
-```
-
-### Failover in code {#failover-code}
-
-When using automatic failover, your code doesn't need to specify anything
-about the providers. The priority of providers, their behavior and failover
-is configured solely in your local `super.json` file.
-
-For example, using [`communication/send-sms`](https://superface.ai/communication/send-sms)
-to send SMS reliably with multiple providers configured using automatic failover,
-your application code for performing `SendMessage` would look like this
-(note that there's no provider-specific information included):
-
-```js title="app.js"
-const { SuperfaceClient } = require('@superfaceai/one-sdk');
-
-const sdk = new SuperfaceClient();
-
-async function run() {
-  // Load the installed profile
-  const profile = await sdk.getProfile('communication/send-sms');
-
-  // Use the profile
-  const result = await profile.getUseCase('SendMessage').perform({
-    to: '+123456789',
-    from: '+987654321',
-    text: 'Really important message!',
-  });
-
-  return result.unwrap();
-}
-
-run();
-```
-
-:::caution
-
-Automatic failover cannot be combined with [manual provider selection](#manual).
-
-:::
+You can define your own logic for deciding which provider to use, safe in the knowledge that Superface has all of the API communication taken care of regardless of which service you use at that moment.
