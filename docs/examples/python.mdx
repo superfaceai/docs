@@ -1,0 +1,47 @@
+# Python
+
+In this example, we will go over the steps required to implement Superface into your Python application development workflow.
+
+:::info Have you created Comlinks?
+
+This guide assumes that you have already
+installed and run the Superface CLI to generate the Comlinks for the API
+integration you want to work with. If not, please [start
+here](../introduction/quick-start-sdk.mdx).
+
+:::
+
+<div class="count-steps-h3">
+
+### Install OneSDK
+
+```shell
+pip install...
+```
+
+Finally, create a new file called `main.py`, or open whichever file you want to include your integration code in.
+
+### (Optional) Move your Comlinks
+
+If you created your Comlinks with the Superface CLI in a different folder, please move them to a `superface` folder at the root of your application. The following files are expected by OneSDK.
+
+```text
+.
+└── superface/ - directory with all the Comlinks in project root
+    ├── <profileScope>.<profileName>.profile - profile file
+    ├── <providerName>.provider.json - provider file
+    ├── <profileScope>.<profileName>.<providerName>.map.js - map file
+    └── ... - repeat for all the Comlinks
+```
+
+### Add the OneSDK function
+
+...
+
+### Run the code
+
+```shell
+python main.py
+```
+
+</div>

@@ -18,7 +18,7 @@ const guides = {
   items: [
     {
       type: 'category',
-      label: 'How to integrate new API',
+      label: 'Integrate a new API',
       link: { type: 'doc', id: 'guides/how-to-create' },
       collapsed: true,
       items: [
@@ -32,7 +32,7 @@ const guides = {
       ],
     },
     'guides/api-keys',
-    'guides/integrations-monitoring',
+    //'guides/integrations-monitoring',
   ],
 };
 
@@ -75,7 +75,6 @@ const classicGuides = {
 module.exports = {
   mainSidebar: [
     'introduction',
-    'how-superface-works',
     {
       type: 'category',
       label: 'Getting started',
@@ -97,31 +96,21 @@ module.exports = {
       label: 'Provider API Quick Starts',
       collapsed: true,
       items: [
+        'api-examples/mailgun',
         'api-examples/notion',
-        'api-examples/slack',
-        'api-examples/resend'
+        'api-examples/resend',
+        'api-examples/slack'
       ]
     },
     {
       type: 'category',
-      label: 'Examples',
+      label: 'Code Examples',
       collapsed: true,
       items: [
         'examples/nodejs',
-        'examples/cloudflare-workers'
+        'examples/cloudflare-workers',
+        'examples/python'
       ]
-    },
-    {
-      type: 'category',
-      label: 'Migration Guides',
-      collapsed: true,
-      items: [
-        {
-          type: 'doc',
-          id: 'upgrade/one-sdk-v2',
-          label: 'OneSDK v2.0',
-        },
-      ],
     },
     {
       type: 'doc',

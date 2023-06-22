@@ -1,65 +1,146 @@
 # Cloudflare Workers
 
-In this example, we will show you how you can get started working with the [Notion API](https://developers.notion.com) and produce a working use case that allows you to list all of the users in your Notion workspace.
+In this example, we will outline the implementation differences required to use OneSDK with Cloudflare Workers.
 
-:::info Before you start
+The main difference compared to the Node.js implementation is the need to use a virtual filesystem to load the Comlink files. This is needed due to the deployment process for Cloudflare Workers, where they expect that all files will be bundled together.
 
-You'll need to get an API token for a _Notion Internal Integration_ that is valid for the workspace you want to access. Find out how to set that up in the [Notion Authorization documentation](https://developers.notion.com/docs/authorization#making-api-requests-with-an-internal-integration).
+:::info Have you created Comlinks?
+
+This guide assumes that you have already
+installed and run the Superface CLI to generate the Comlinks for the API
+integration you want to work with. If not, please [start
+here](../introduction/quick-start-sdk.mdx).
 
 :::
 
 <div class="count-steps-h3">
 
-### Install & Authorize Superface
+### Create a new Cloudflare Worker project
 
-Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
-
-```shell
-brew install superface
-```
-
-If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
+Cloudflare has created a CLI that allows for easy setup of Worker projects. You can run this without the need to install anything via NPX.
 
 ```shell
-superface auth
+npx wrangler dev
 ```
 
-### Prepare the documentation
+### Install OneSDK
 
-Notion's documentation is hosted by Readme.io, which is a format that Superface can accept without any additional changes so you can copy and paste the URL for the `GET users` endpoint.
+We've created a specific library for working with Cloudflare Workers as part of OneSDK, so installing it will give you everything you need out of the box.
 
 ```shell
-superface prepare https://developers.notion.com/reference/get-users
+npm i @superfaceai/one-sdk@alpha
 ```
 
-Once the documentation has been indexed, you can create a profile for the use case you want to achieve.
+Wrangler will have created a worker file at `src/worker.js`, you can open this and replace the code with the code from the next steps.
+
+### (Optional) Move your Comlinks
+
+If you created your Comlinks with the Superface CLI in a different folder, please move them to a `superface` folder at the root of your application where your Worker file lives. The following files are expected by OneSDK.
+
+```text
+.
+└── superface/ - directory with all the Comlinks in project root
+    ├── <profileScope>.<profileName>.profile - profile file
+    ├── <providerName>.provider.json - provider file
+    ├── <profileScope>.<profileName>.<providerName>.map.js - map file
+    └── ... - repeat for all the Comlinks
+```
+
+### Create the Worker
+
+Unlike a standard Node.js implementation, Cloudflare Workers must explicitly import every file that will be used in order to ensure everything is available at the time the code is run.
+
+As such the imports are different, as outlined here:
+
+```js
+import {
+  OneClient,
+  PerformError,
+  UnexpectedError,
+} from '@superfaceai/one-sdk/cloudflare';
+
+import profileFile from '../superface/[scope.]<name>.profile';
+import mapFile from '../superface/[scope.]<name>.<providerName>.map.js';
+import providerFile from '../superface/<providerName>.provider.json';
+```
+
+Next, we will define the function for the Worker itself. Note the `preopens` option that is used in the `OneClient` instatiation.
+
+The full outline and explaination of the different elements of a Cloudflare Worker can be found in their [Getting Started](https://developers.cloudflare.com/workers/get-started/guide/) guide.
+
+```js {10-14}
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    const client = new OneClient({
+      env: {
+        SF_LOG: 'info' // use `debug` or `trace` for development debugging
+      },
+      // preopens describes the virtual filesystem whith the OneClient file convention mapped to assets
+      preopens: {
+        'superface/[scope.]<name>.profile': new Uint8Array(profileFile),
+        'superface/[scope.]<name>.<providerName>.map.js': new Uint8Array(mapFile),
+        'superface/<providerName>.provider.json': new Uint8Array(providerFile)
+      }
+    });
+```
+
+From this point the OneSDK code for working with Comlinks is the same as the Node.js implementation
+
+```js
+    const profile = await client.getProfile('<profileName>');  // profile id as defined in *.profile
+    const usecase = profile.getUseCase('<usecaseName>'); // use case name as defined in the profile
+    const result = usecase.perform(
+      // Input parameters as defined in profile:
+      '<key>': '<value>'
+      // provider configuration
+      {
+        provider: '<providerName>', // provider name as defined in *.provider.json
+        parameters: {
+          // Provider specific integration parameters:
+          '<integrationParameterName>': '<integrationParameterValue>'
+        },
+        security: {
+          // Provider specific security values:
+          '<securityValueId>': {
+            // Security values as described in provider or on profile page
+          }
+        }
+      }
+    );
+```
+
+Finally, we've included helpers for wrangling the results into formats that keep Cloudflare happy and you can see these in use below.
+
+```js
+    try {
+      // result as defined in the profile
+      const ok = await result;
+      return new Response(`Result: ${JSON.stringify(ok, null, 2)}`);
+    } catch (error) {
+      if (error instanceof PerformError) {
+        // error as defined in the profile
+        return new Response(`Error: ${JSON.stringify(error.errorResult, null, 2)}`, { status: 400 });
+      } else {
+        // exception - should not be part of a normal flow
+        return new Response(`${error.name}\n${error.message}`, { status: 500 });
+      }
+    }
+  }
+}
+```
+
+All combined, you can then deploy the Worker via Wrangler.
 
 ```shell
-superface profile notion-api "list all users"
+npx wrangler deploy
 ```
 
-### Create code for your project
-
-To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider.
-
-```shell
-superface map notion-api
-```
-
-### Test it
-
-:::note Don't forget your authentication
-
-Superface expects an authorization token for Notion. You can add this as `NOTION_TOKEN` in your environment. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
-
-:::
-
-The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command.
-
-```shell
-superface execute superface/<scope>.<profile-name>.<provider-name>.mjs
-```
-
-If successful, you will see a JSON response listing the users in your workspace.
+If you run into any deployment issues, please consult the [Cloudflare Worker Getting Started guide](https://developers.cloudflare.com/workers/get-started/guide).
 
 </div>
+
+## Demo: Shopify, Superface & Cloudflare Workers
+
+In order to best illustrate how Superface can be used in context, take a look at our [Cloudflare Workers, Shopify & Superface](https://github.com/superfaceai/demo-cloudflare-shopify/tree/main) demo application on GitHub.

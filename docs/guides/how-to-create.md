@@ -1,8 +1,8 @@
-# How to integrate new API: Overview
+# Integrate a new API: Overview
 
-This guide walks you through the process of creating a new API integration. You will learn how to setup the development environment, use the CLI to generate Comlinks for providers and use cases, integrate the API in your application, and run it in the production.
+This guide walks you through the process of creating a new API integration. You will learn how to setup the development environment, use the CLI to generate Comlinks for providers and use cases, integrate the API in your application, and run it in production.
 
-Superface created new domain-specific language called _Comlink_ for abstracting API integrations. Comlink language is designed to help developers create reusable, platform-agnostic API integrations.
+Superface has created new domain-specific language called _Comlink_ for abstracting API integrations. The Comlink language is designed to help developers create reusable, platform-agnostic API integrations.
 
 Comlink language documents the integration for humans and describes the integration for machines to perform the API calls and understand API responses.
 
