@@ -28,6 +28,7 @@ const guides = {
         'guides/using-multiple-providers',
         'guides/map-use-case-to-provider',
         'guides/run-use-case',
+        'guides/debugging-onesdk',
         'guides/test-use-case'
       ],
     },
