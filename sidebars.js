@@ -25,8 +25,9 @@ const guides = {
         'guides/setup-the-environment',
         //'guides/create-new-use-case',
         //'guides/add-new-provider',
+        'guides/editing-provider-files',
         'guides/using-multiple-providers',
-        'guides/map-use-case-to-provider',
+        //'guides/map-use-case-to-provider',
         'guides/run-use-case',
         'guides/debugging-onesdk',
         'guides/test-use-case'
@@ -84,7 +85,7 @@ module.exports = {
         {
           type: 'doc',
           id: 'introduction/getting-started',
-          label: 'Superface in 3 minutes'
+          label: 'Superface in 5 minutes'
         }
         ,
         'introduction/quick-start',

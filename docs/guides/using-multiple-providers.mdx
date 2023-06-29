@@ -84,11 +84,8 @@ const client = new OneClient();
 async function run() {
   const profile = await client.getProfile('email-communication/email-sending');
 
-  // Load the specific provider for this perform
-  const provider = await sdk.getProvider('mailgun');
-
   const result = await profile
-    .getUseCase('UserRepos')
+    .getUseCase('SendEmail')
     .perform(inputs, provider);
 
   return result.unwrap();
@@ -103,7 +100,7 @@ run();
 As you can see there is very little difference between these two code examples. In fact, the Superface specific code stays exactly the same. That's because it is the values that we pass to the `.peform` function that matter.
 
 ```js
-const result = await profile.getUseCase('UserRepos').perform(inputs, provider);
+const result = await profile.getUseCase('SendEmail').perform(inputs, provider);
 ```
 
 When using a single provider, you can populate `.perform` directly. However, when using multiple providers it is recommended to separate the expected params into variables and define them elsewhere. Above, we do that with variables named `inputs` and `provider`.

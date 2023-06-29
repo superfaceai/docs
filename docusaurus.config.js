@@ -21,7 +21,7 @@ module.exports = {
       src: '/docs/crisp.js',
       'crisp-website-id': process.env.CRISP_WEBSITE_ID || '',
       defer: true,
-    },
+    }
   ],
 
   themeConfig: {

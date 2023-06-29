@@ -2,8 +2,6 @@
 
 Superface is all about providing you the best way to consume digital capabilities provided by APIs. This guide shows you how to pick a use case and its provider from our Catalog, and use Superface OneSDK to make the API call.
 
-## Superface in 3 minutes
-
 The following steps will help you get started with Superface and OneSDK.
 
 :::info Prerequisites
@@ -55,7 +53,7 @@ The CLI is used to create Comlinks. They handle use case definition, and the map
 Start by indexing and preparing the documentation for the provider you want to use:
 
 ```shell
-superface prepare <URL for provider documentation>
+superface new <URL for provider documentation>
 ```
 
 Next, create the profile for the use case you want to achieve, for example _"list all users"_:
@@ -137,14 +135,6 @@ async function main() {
 main();
 ```
 
-<!--
-:::note Profile version
-
-Best practice is to pin your application to the latest version of the profile. By pinning the version you will get consistent output without breaking changes once new major version of the profile is published to Superface registry.
-
-:::
--->
-
 ### Run
 
 It's time to run your app! Because the Superface OneSDK is built with WASM, it requires that you pass the `--experimental-wasi-unstable-preview1` flag.
@@ -155,10 +145,10 @@ node --experimental-wasi-unstable-preview1 index.mjs
 
 ### Check the HTTP communication
 
-Set the environment variable `DEBUG` to `superface:http*` to see API calls from OneSDK to GitHub API:
+Set the environment variable `ONESDK_LOG` to `debug` to see API calls from OneSDK to the API of your chosen provider:
 
 ```shell
-DEBUG="superface:http*" node index.mjs
+ONESDK_LOG="debug" node --experimental-wasi-unstable-preview1 index.mjs
 ```
 
 :::caution
@@ -166,12 +156,6 @@ DEBUG="superface:http*" node index.mjs
 This can print out potentially sensitive information, like API keys and access tokens.
 
 :::
-
-Set the `DEBUG` environment variable to `superface*` to see everything that is going in under the hood.
-
-```shell
-DEBUG="superface*" node index.mjs
-```
 
 <!--### Understanding runtime integration
 
