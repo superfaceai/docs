@@ -4,7 +4,7 @@ This document guides you through the installation and basic configuration of com
 
 ## Prerequisites
 
-To install and use Superface CLI, you will need to have installed [Node.js](https://nodejs.dev/learn/how-to-install-nodejs) version 14 or higher, and `npm`.
+To install and use Superface CLI, you will need to have installed [Node.js](https://nodejs.dev/learn/how-to-install-nodejs) >= version 18.0.0, and `npm`.
 
 ## Install the CLI
 

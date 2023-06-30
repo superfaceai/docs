@@ -53,13 +53,13 @@ The CLI is used to create Comlinks. They handle use case definition, and the map
 Start by indexing and preparing the documentation for the provider you want to use:
 
 ```shell
-superface new <URL for provider documentation>
+superface prepare <URL for provider documentation>
 ```
 
 Next, create the profile for the use case you want to achieve, for example _"list all users"_:
 
 ```shell
-superface profile <provider-name> "your use case"
+superface new <provider-name> "your use case"
 ```
 
 After this step completes, you can use the profile that was created and turn it into a map that you can use in your application.
