@@ -47,7 +47,7 @@ module.exports = {
         },
         {
           type: 'doc',
-          docId: 'reference/index',
+          docId: 'classic/reference/index',
           position: 'right',
           label: 'Classic Reference',
         },
