@@ -41,15 +41,15 @@ module.exports = {
           label: 'Docs',
         },
         {
-          type: 'doc',
-          docId: 'reference/index',
-          position: 'left',
-          label: 'Reference',
-        },
-        {
           href: '/classic',
           label: 'Classic Docs',
           position: 'right',
+        },
+        {
+          type: 'doc',
+          docId: 'reference/index',
+          position: 'right',
+          label: 'Classic Reference',
         },
         {
           href: '/catalog',

@@ -42,7 +42,7 @@ To upgrade your project to OneSDK v2.0, you will need to compile the source `.su
 You can run the following command to perform a one-off compilation:
 
 ```shell
-npx @superfaceai/cli@latest compile
+npx @superfaceai/cli@3 compile
 ```
 
 This will generate `.ast.json` files next to the existing source files linked from `super.json` file.
@@ -61,12 +61,12 @@ The `.ast.json` files must be available in the runtime for OneSDK. It is recomme
 
 ### Add compilation to your build process
 
-To prevent stale changes in source `.suma` and `.supr` files, add `@superfaceai/cli` package to your development dependencies and add the compilation step into your build process.
+To prevent stale changes in source `.suma` and `.supr` files, add `@superfaceai/cli@3` package to your development dependencies and add the compilation step into your build process.
 
 First, install the CLI dev dependency:
 
 ```shell
-npm i --save-dev @superfaceai/cli@2
+npm i --save-dev @superfaceai/cli@3
 ```
 
 Next, create [npm scripts](https://docs.npmjs.com/cli/v8/using-npm/scripts) in project's `package.json`.

@@ -30,15 +30,15 @@ First, install the [Superface CLI](https://github.com/superfaceai/cli).
 
 ```shell
 # if using yarn
-yarn global add @superfaceai/cli
+yarn global add @superfaceai/cli@3
 # otherwise
-npm install --global @superfaceai/cli
+npm install --global @superfaceai/cli@3
 ```
 
 Or you can use NPX directly with Superface CLI commands:
 
 ```shell
-npx @superfaceai/cli [command]
+npx @superfaceai/cli@3 [command]
 ```
 
 ### Installing profiles
@@ -46,7 +46,7 @@ npx @superfaceai/cli [command]
 Installing a profile fixes its version in the `super.json` config file. In the project directory, run:
 
 ```shell
-npx @superfaceai/cli install <profileName>
+npx @superfaceai/cli@3 install <profileName>
 ```
 
 The CLI creates a configuration file in `superface/super.json`.
@@ -56,7 +56,7 @@ The CLI creates a configuration file in `superface/super.json`.
 Next, you configure a provider for the use case:
 
 ```shell
-npx @superfaceai/cli configure <providerName> -p <profileName>
+npx @superfaceai/cli@3 configure <providerName> -p <profileName>
 ```
 
 CLI may instruct you about setting up API keys if the provider needs them.

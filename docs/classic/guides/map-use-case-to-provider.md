@@ -8,7 +8,7 @@ This guide assumes you have a project set up with Superface installed. If you ne
 
 ### Prerequisites
 
-- Existing profile with [use case definition](guides/create-new-use-case.md)
+- Existing profile with [use case definition](./create-new-use-case.md)
 - Existing [provider definition](./add-new-provider.md)
 
 ## Create new Map document
@@ -135,7 +135,7 @@ map UseCaseName {
 }
 ```
 
-_The above definition makes a `POST` HTTP call to [the provider's default service](guides/add-new-provider.md#default-service) on path `/api/messages`.<br />_
+_The above definition makes a `POST` HTTP call to [the provider's default service](./add-new-provider.md#default-service) on path `/api/messages`.<br />_
 
 ### Authenticate the request (optional) {#authentication}
 

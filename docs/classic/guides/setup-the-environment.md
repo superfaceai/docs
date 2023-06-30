@@ -11,7 +11,7 @@ To install and use Superface CLI, you will need to have installed [Node.js](http
 The Superface CLI is a Node.js application. It provides all the tooling needed to author and manage your integrations with Superface.
 
 ```shell
-npm install --global @superfaceai/cli
+npm install --global @superfaceai/cli@3
 ```
 
 ## Create a new project
@@ -43,10 +43,10 @@ superface init
 
 It will create `superface` folder with superface configuration file `super.json`.
 
-And as last step install [OneSDK](/reference/one-sdk).
+And as last step install [OneSDK](../reference/one-sdk).
 
 ```shell
-npm install --save @superfaceai/one-sdk
+npm install --save @superfaceai/one-sdk@2
 ```
 
 ## (Optional) Install the Visual Studio Code extension

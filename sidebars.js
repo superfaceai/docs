@@ -23,18 +23,14 @@ const guides = {
       collapsed: true,
       items: [
         'guides/setup-the-environment',
-        //'guides/create-new-use-case',
-        //'guides/add-new-provider',
         'guides/editing-provider-files',
         'guides/using-multiple-providers',
-        //'guides/map-use-case-to-provider',
         'guides/run-use-case',
         'guides/debugging-onesdk',
         'guides/test-use-case'
       ],
     },
     'guides/api-keys',
-    //'guides/integrations-monitoring',
   ],
 };
 

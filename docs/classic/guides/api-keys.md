@@ -101,7 +101,7 @@ run();
 The Superface CLI configures the provider to read credentials from environment variable. For example, configure a new provider `sendgrid` for the [send-email](https://superface.ai/communication/send-email) profile:
 
 ```shell
-npx @superfaceai/cli configure sendgrid --profile=communication/send-email
+npx @superfaceai/cli@3 configure sendgrid --profile=communication/send-email
 ```
 
 This will create a new entry in the `super.json` file:

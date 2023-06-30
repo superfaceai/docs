@@ -71,7 +71,7 @@ _Search in top-level `providers` object for the actual provider you want to conf
 
 ### Configure using CLI {#cli-configuration}
 
-The easiest way to bootstrap the provider's security configuration is using [Superface CLI](/reference/cli).
+The easiest way to bootstrap the provider's security configuration is using [Superface CLI](../reference/cli).
 
 ```shell
 superface configure <provider-name> -p <profile-name> --localProvider <path-to.provider.json> --localMap <path-to-provider-map.suma> -f

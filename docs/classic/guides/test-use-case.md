@@ -419,7 +419,7 @@ Comlink profile and map files (.supr and .suma) needs to be compiled to their AS
 Run the following command to perform a one-off compilation:
 
 ```shell
-npx @superfaceai/cli@latest compile
+npx @superfaceai/cli@3 compile
 ```
 
 This will generate `.ast.json` files next to the existing source files linked from `super.json` file.
@@ -445,4 +445,4 @@ You can use `--updateSnapshot` flag when modifying tests or when the expected re
 - [Integration test for expected result data format](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/communication/send-message/maps/send-message.ts)
 - [Integration test for expected output for given input](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/address/clean-address/maps/clean-address.ts)
 
-> If you wish to use your new use case in another Node.js application, please refer to [the following guide](guides/run-use-case.md).
+> If you wish to use your new use case in another Node.js application, please refer to [the following guide](./run-use-case.md).

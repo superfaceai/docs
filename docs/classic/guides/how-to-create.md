@@ -33,7 +33,7 @@ Depending on your needs, you can skip some parts of the guide to focus on your p
 
 > I want to launch a spaceship but there is no use case for that in your catalog!
 
-Adding a new use case is covered by the guide. Start with [Setup the development environment](/guides/setup-the-environment.md) and then follow the next chapters. Once the use case works for you, consider publishing it into the catalog so other users can use it in their projects and map it to other providers.
+Adding a new use case is covered by the guide. Start with [Setup the development environment](./setup-the-environment.md) and then follow the next chapters. Once the use case works for you, consider publishing it into the catalog so other users can use it in their projects and map it to other providers.
 
 ### I want to add a new provider for the existing use case
 

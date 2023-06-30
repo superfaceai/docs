@@ -270,7 +270,7 @@ Use the following scheme with an arbitrary ID which can be referenced later from
 
 _Replace the security scheme `id` value in the example with your own ID._
 
-There are some optional parameters, information about them can be found in [reference](../../comlink/reference/provider.mdx).
+There are some optional parameters, information about them can be found in the [Comlink reference](../../comlink/reference/provider.mdx).
 
 ## Integration parameters
 
