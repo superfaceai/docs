@@ -94,7 +94,7 @@ module.exports = {
       label: 'Provider API Quick Starts',
       collapsed: true,
       items: [
-        'api-examples/mailgun',
+        //'api-examples/mailgun',
         'api-examples/notion',
         'api-examples/resend',
         'api-examples/slack'
