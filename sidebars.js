@@ -114,6 +114,11 @@ module.exports = {
       type: 'doc',
       id: 'support',
       label: 'Help & Support'
+    },
+    {
+      type: 'doc',
+      id: 'reference/glossary',
+      label: 'Glossary'
     }
   ],
   referenceSidebar: [
@@ -134,6 +139,25 @@ module.exports = {
       ],
     },
     'reference/glossary',
+  ],
+  classicReferenceSidebar: [
+    'classic/reference/index',
+    'classic/reference/one-sdk',
+    'classic/reference/superjson',
+    {
+      type: 'category',
+      label: 'Comlink',
+      link: { type: 'doc', id: 'comlink/index' },
+      collapsed: true,
+      items: [
+        { type: 'doc', id: 'comlink/reference/profile', label: 'Profile' },
+        { type: 'doc', id: 'comlink/reference/map', label: 'Map' },
+        { type: 'doc', id: 'comlink/reference/provider', label: 'Provider' },
+        { type: 'doc', id: 'comlink/reference/binary_data', label: 'Binary Data' },
+        { type: 'doc', id: 'comlink/specifications', label: 'Specifications' },
+      ],
+    },
+    'classic/reference/glossary',
   ],
   classicSidebar: [
     'classic/index',

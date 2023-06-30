@@ -1,6 +1,6 @@
 ---
 slug: '/classic/reference/glossary'
-displayed_sidebar: referenceSidebar
+displayed_sidebar: classicReferenceSidebar
 ---
 
 # Glossary
