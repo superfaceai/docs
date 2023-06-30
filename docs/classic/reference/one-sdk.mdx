@@ -70,7 +70,7 @@ There is a number of options that can modify the behavior of a `perform()`.
 
 <!-- `revision`: found literally zero info on this -->
 
-`parameters`: _Integration parameters_ are provider-specific values which can be used in maps and provider definitions; see the [glossary](reference/glossary.md#integration-parameter) for more information on integration parameters, and what they are used for.
+`parameters`: _Integration parameters_ are provider-specific values which can be used in maps and provider definitions; see the [glossary](./glossary.md#integration-parameter) for more information on integration parameters, and what they are used for.
 
 `security`: _Security values_ are used for authenticating to a given provider. Their format depends on the provider and can include, for example, a static API key or a user/password combination. You can find the required format on the profile page in the Superface Catalog.
 
@@ -106,7 +106,7 @@ For more information on configuration, see [Configuring the SDK](../../advanced-
 
 ### Selecting a provider (`getProvider`) {#get-provider}
 
-By default, OneSDK picks the first configured provider, or the first provider according to profile's [`priority` array](/reference/superjson#profilesettings) as specified in configuration.
+By default, OneSDK picks the first configured provider, or the first provider according to profile's [`priority` array](./superjson#profilesettings) as specified in configuration.
 
 You can also override this behavior and choose a specific provider for a `perform`. Use the `getProvider` method to obtain a provider object, and pass it to `perform()`.
 
