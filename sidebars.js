@@ -117,6 +117,11 @@ module.exports = {
     },
     {
       type: 'doc',
+      id: 'feedback',
+      label: 'Feedback'
+    },
+    {
+      type: 'doc',
       id: 'reference/glossary',
       label: 'Glossary'
     }
