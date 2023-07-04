@@ -96,6 +96,7 @@ module.exports = {
       items: [
         //'api-examples/mailgun',
         'api-examples/notion',
+        'api-examples/pipedrive',
         'api-examples/resend',
         'api-examples/slack'
       ]
