@@ -54,13 +54,9 @@ Superface expects an authorization token for Notion. You can add this as `PIPEDR
 
 :::
 
-The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command which accepts commands in this format.
+The resulting code from the previous step is added to the `superface` folder in your project.
 
-```shell
-superface execute superface/<scope>.<profile-name>.<provider-name>.mjs
-```
-
-However, before you run it, it is best to check that the API query being made has the correct values and isn't trying to work with boilerplate values from the documentation. In Pipedrive's case, there is a small change to make in `superface/contacts-management.get-persons.pipedrive.mjs` so that it matches the code below.
+However, before you run it, it is best to check that the API query being made has the correct values and isn't trying to work with boilerplate values from the documentation as these may fail. For this use case, there is a small change to make in `superface/contacts-management.get-persons.pipedrive.mjs` so that it matches the code below.
 
 ```js title="contacts-management.get-persons.pipedrive.mjs" {2:5}
 const result = await profile.getUseCase('ListContacts').perform(
@@ -75,6 +71,12 @@ const result = await profile.getUseCase('ListContacts').perform(
     security: { apiKey: { apikey: process.env.PIPEDRIVE_API_KEY } },
   }
 );
+```
+
+To test it you can use the `execute` command which accepts commands in this format.
+
+```shell
+superface execute superface/<scope>.<profile-name>.<provider-name>.mjs
 ```
 
 The exact command for this particular example is as follows:
