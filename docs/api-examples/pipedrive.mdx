@@ -1,0 +1,88 @@
+# Pipedrive
+
+In this example, we will show you how you can get started working with the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1) and produce a working use case that allows you to list all of the contacts in your Pipedrive CRM.
+
+:::info Before you start
+
+You'll need to get an API token that is valid for the CRM you want to access. Find out how to set that up in the [Pipedrive Authorization documentation](https://pipedrive.readme.io/docs/core-api-concepts-authentication).
+
+:::
+
+<div class="count-steps-h3">
+
+### Install & Authorize Superface
+
+Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+
+```shell
+brew install superface
+```
+
+If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
+
+```shell
+superface login
+```
+
+### Prepare the documentation
+
+Pipedrive's documentation is available as an [Open API 3 specification document](https://developers.pipedrive.com/docs/api/v1/openapi.yaml) that is regularly maintained. Use this for a complete index of their API capabilities.
+
+```shell
+superface prepare https://developers.pipedrive.com/docs/api/v1/openapi.yaml
+```
+
+Once the documentation has been indexed, you can create a profile for the use case you want to achieve.
+
+```shell
+superface new pipedrive "list all contacts"
+```
+
+### Create code for your project
+
+To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider and the usecase. The CLI will also tell you exactly what this command needs to look like.
+
+```shell
+superface map pipedrive contacts-management.get-persons
+```
+
+### Test it
+
+:::note Don't forget your authentication
+
+Superface expects an authorization token for Notion. You can add this as `PIPEDRIVE_API_KEY` in your environment. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
+
+:::
+
+The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command which accepts commands in this format.
+
+```shell
+superface execute superface/<scope>.<profile-name>.<provider-name>.mjs
+```
+
+However, before you run it, it is best to check that the API query being made has the correct values and isn't trying to work with boilerplate values from the documentation. In Pipedrive's case, there is a small change to make in `superface/contacts-management.get-persons.pipedrive.mjs` so that it matches the code below.
+
+```js title="contacts-management.get-persons.pipedrive.mjs" {2:5}
+const result = await profile.getUseCase('ListContacts').perform(
+  {
+    start: 0,
+    limit: 100,
+    sort: 'name ASC',
+  },
+  {
+    provider: 'pipedrive',
+    parameters: {},
+    security: { apiKey: { apikey: process.env.PIPEDRIVE_API_KEY } },
+  }
+);
+```
+
+The exact command for this particular example is as follows:
+
+```shell
+superface execute superface/contacts-management.get-persons.pipedrive.mjs
+```
+
+If successful, you will see a JSON response listing the contacts in your CRM workspace.
+
+</div>
