@@ -40,12 +40,9 @@ If you created your Comlinks with the Superface CLI in a different folder, pleas
 from superfaceai.one_sdk import OneClient
 
 client = OneClient(
-    env = {
-        "ONESDK_LOG": "trace",
-        "ONESDK_CONFIG_CACHE_DURATION": "10"
-    },
     assets_path = "./superface",
-    superface_api_url = "https://superface.dev"
+    superface_api_url = "https://superface.dev",
+    token = "sfs_x"
 )
 
 profile = client.get_profile("wasm-sdk/example")
@@ -58,7 +55,7 @@ try:
         security = { "basic_auth": { "username": "username", "password": "password" } }
     )
     print(f"RESULT: {r}")
-except e:
+except Exception as e:
     print(f"ERROR: {e}")
 ```
 
