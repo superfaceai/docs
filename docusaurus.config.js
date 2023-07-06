@@ -38,23 +38,18 @@ module.exports = {
           type: 'doc',
           docId: 'introduction',
           position: 'left',
-          label: 'Docs',
-        },
-        {
-          href: '/classic',
-          label: 'Classic Docs',
-          position: 'right',
+          label: 'Documentation',
         },
         {
           type: 'doc',
-          docId: 'classic/reference/index',
-          position: 'right',
-          label: 'Classic Reference',
+          docId: 'feedback',
+          position: 'left',
+          label: 'Feedback',
         },
         {
-          href: '/catalog',
-          label: 'Catalog',
+          href: 'https://superface.ai',
           position: 'right',
+          label: 'Try Superface for free'
         },
         {
           href: 'https://github.com/superfaceai/docs',
@@ -72,6 +67,14 @@ module.exports = {
         {
           title: `© ${new Date().getFullYear()} Superface s.r.o.`,
           items: [
+            {
+              href: '/classic',
+              label: 'Classic Docs',
+            },
+            {
+              href: '/classic/reference/index',
+              label: 'Classic Reference',
+            },
             {
               label: 'Support',
               href: '/support',
