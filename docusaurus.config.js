@@ -68,10 +68,14 @@ module.exports = {
           title: `© ${new Date().getFullYear()} Superface s.r.o.`,
           items: [
             {
+              type: 'doc',
+              docId: 'classic',
               href: '/classic',
               label: 'Classic Docs',
             },
             {
+              type: 'doc',
+              docId: 'classic/reference/index',
               href: '/classic/reference/index',
               label: 'Classic Reference',
             },
