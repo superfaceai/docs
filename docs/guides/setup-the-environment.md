@@ -11,7 +11,7 @@ To install and use Superface CLI, you will need to have installed [Node.js](http
 The Superface CLI is a Node.js application. It provides all the tooling needed to author and manage your integrations with Superface.
 
 ```shell
-brew install superface
+brew install superface/cli/superface
 ```
 
 <!-- ```shell
