@@ -5,7 +5,7 @@ In this example, we will go over the steps required to implement Superface into 
 :::info Have you created Comlinks?
 
 This guide assumes that you have already
-installed and run the Superface CLI to generate the Comlinks for the API
+installed and run the [Superface CLI](../introduction/quick-start.mdx) to generate the Comlinks for the API
 integration you want to work with. If not, please [start
 here](../introduction/quick-start.mdx).
 
@@ -16,7 +16,7 @@ here](../introduction/quick-start.mdx).
 ### Install OneSDK
 
 ```shell
-pip install...
+pip install one-sdk
 ```
 
 Finally, create a new file called `main.py`, or open whichever file you want to include your integration code in.
@@ -37,26 +37,38 @@ If you created your Comlinks with the Superface CLI in a different folder, pleas
 ### Add the OneSDK function
 
 ```python title="main.py"
-from superfaceai.one_sdk import OneClient
+import os
 
-client = OneClient(
-    assets_path = "./superface",
-    superface_api_url = "https://superface.dev",
-    token = "sfs_x"
-)
+from one_sdk import OneClient
 
-profile = client.get_profile("wasm-sdk/example")
-use_case = profile.get_usecase("Example")
+client = OneClient()
+
+profile = client.get_profile("<profileName>")
+use_case = profile.get_usecase("<usecaseName>")
 try:
     r = use_case.perform(
-        { "id": 1 },
-        provider = "localhost",
-        parameters = { "PARAM": "parameter_value" },
-        security = { "basic_auth": { "username": "username", "password": "password" } }
+        {
+            # Input parameters as defined in profile:
+            '<key>': '<value>'
+        },
+        provider = "<providerName>",
+        # Provider specific integration parameters:
+        parameters = {
+            '<integrationParameterName>': '<integrationParameterValue>'
+        },
+        security = {
+            # Provider specific security values:
+            '<securityValueId>': {
+                # Security values as described in provider or on profile page
+            }
+        }
     )
     print(f"RESULT: {r}")
 except Exception as e:
     print(f"ERROR: {e}")
+    raise
+finally:
+    client.send_metrics_to_superface()
 ```
 
 ### Run the code
