@@ -43,7 +43,7 @@ superface new <provider-name> "your use case"
 To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider and the use case profile you want to use.
 
 ```shell
-superface map <scope>.<profile-name>
+superface map <scope>/<profile-name>
 ```
 
 ### Test it
@@ -77,5 +77,13 @@ superface/
 ```
 
 These files are used by OneSDK to enabled your application to communicate with the provider you are working with. `<provider>`, `<scope>`, and `<use-case>` will be replaced with real values based on the provider and use case you specified.
+
+### Additional commands
+
+`superface whoami` shows the current logged in user.
+
+`superface logout` logs out the current user.
+
+For information on each CLI command you can run `superface --help` at any time.
 
 </div>

@@ -10,7 +10,7 @@ Here's how you get it up and running in your project.
 
 :::info Before you start Superface
 
-OneSDK requires [Node.js](https://nodejs.dev/) version 18 or newer to be installed.
+OneSDK requires [Node.js](https://nodejs.dev/) version 18.0.0 or newer to be installed.
 
 :::
 In your app directory, install the OneSDK library:
@@ -34,7 +34,9 @@ async function main() {
   });
 
   // Assign our CLI generated profile so it matches
-  // the 'name' in the .profile file
+  // the 'name' in the .profile file.
+  // Example: email-communication/email-sending
+
   const profile = await client.getProfile('<profileName>');
 
   const result = await profile
