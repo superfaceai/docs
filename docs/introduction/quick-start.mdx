@@ -1,6 +1,6 @@
 # Quick Start (CLI)
 
-Superface is all about providing you the best way to consume digital capabilities provided by APIs. This guide shows you how to get set up and use the Superface CLI to work with an API prodiver, as well as how to use the generated files in your project with the OneSDK.
+Superface is all about providing you the best way to consume digital capabilities provided by APIs. This guide shows you how to get set up and use the Superface CLI to work with an API provider, as well as how to use the generated files in your project with the OneSDK.
 
 :::info Before you start
 
@@ -18,7 +18,7 @@ Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) f
 brew install superfaceai/cli/superface
 ```
 
-If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
+If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI via your browser.
 
 ```shell
 superface login
@@ -26,7 +26,7 @@ superface login
 
 ### Prepare your use case
 
-Superface accept Open API Specification format documentation, either from local files or remote URLs. You can also use the URL of any documentation hosted by [Readme.io](https://readme.io).
+Superface accepts Open API Specification format documentation, either from local files or remote URLs as well as the URL of any documentation hosted by [Readme.io](https://readme.io).
 
 ```shell
 superface prepare <url or path to local file>
@@ -43,7 +43,7 @@ superface new <provider-name> "your use case"
 To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider and the use case profile you want to use.
 
 ```shell
-superface map <scope>/<profile-name>
+superface map <scope>/<use-case>
 ```
 
 ### Test it
@@ -51,7 +51,7 @@ superface map <scope>/<profile-name>
 The resulting code is added to the `superface` folder in your project. To test it you can use the `execute` command.
 
 ```shell
-$ superface execute superface/<scope>.<profile-name>.<provider-name>.mjs
+superface execute <provider> <scope>/<use-case>
 ```
 
 :::note Provider authentication

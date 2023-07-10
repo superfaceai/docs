@@ -43,7 +43,7 @@ superface new resend "send an email"
 To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider and a use case profile you want to work with.
 
 ```shell
-superface map resend email-communication.email-sending
+superface map resend email-communication/email-sending
 ```
 
 ### Set up your inputs
@@ -64,14 +64,14 @@ In order to send an email correctly, you will need to modify the boilerplate cod
 
 :::note Don't forget your authentication
 
-Superface expects an authorization token for Resend. You can add this as `RESEND_TOKEN` in your environment or `.env` file. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
+Superface expects an authorization token for Resend. You can add this as `RESEND_TOKEN` in your environment or create an `.env` file in the `superface` folder that the CLI created. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
 
 :::
 
 The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command.
 
 ```shell
-superface execute superface/email-communication.email-sending.resend.mjs
+superface execute resend email-communication/email-sending
 ```
 
 If everything is successful you should see output similar to the response below:
