@@ -50,5 +50,5 @@ Superface is the AI for APIs. It makes creating API integrations faster, and mor
 </div>
 
 :::caution Deprecation Notice
-We recently started deprecating the previous version of Superface CLI, OneSDK and our provider use case catalog. If you are looking for the documentation for these, check out our [Classic Docs](./classic) section.
+We recently started deprecating the previous version of Superface CLI (before 4.0.0), OneSDK (before 3.0.0, for Node.js only) and our provider use case catalog. If you are looking for the documentation for these, check out our [Classic Docs](./classic) section.
 :::
