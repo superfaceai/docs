@@ -16,7 +16,7 @@ here](../introduction/quick-start-sdk.mdx).
 ### Install OneSDK
 
 ```shell
-npm i @superfaceai/one-sdk@alpha
+npm i @superfaceai/one-sdk@beta
 ```
 
 Finally, create a new file called `index.mjs`, or open whichever file you want to include your integration code in.
@@ -44,30 +44,39 @@ However, if you have generated your Comlinks using the Superface CLI, you alread
 import { OneClient } from '@superfaceai/one-sdk';
 
 async function main() {
-  const client = new OneClient();
-  const profile = await client.getProfile('<profileName>');
-
-  const result = await profile.getUseCase('<usecaseName>').perform(
-    {
-      // Input parameters as defined in profile:
-      '<key>': '<value>',
-    },
-    {
-      provider: '<providerName>',
-      parameters: {
-        // Provider specific integration parameters:
-        '<integrationParameterName>': '<integrationParameterValue>',
-      },
-      security: {
-        // Provider specific security values:
-        '<securityValueId>': {
-          // Security values as described in provider or on profile page
-        },
-      },
-    }
+  const client = new OneClient(
+    token: '<your-superface-token>', // optional
+    assetsPath: '<path-to-superface-folder>' //default is ./superface
   );
+  const profile = await client.getProfile('<profileName>');
+  const useCase = profile.getUseCase('<usecaseName>');
 
-  console.log(result.unwrap());
+  try {
+    const result = await useCase.perform(
+      {
+        // Input parameters as defined in profile:
+        <key>: '<value>',
+      },
+      {
+        provider: '<providerName>',
+        parameters: {
+          // Provider specific integration parameters:
+          '<integrationParameterName>': '<integrationParameterValue>',
+        },
+        security: {
+          // Provider specific security values:
+          '<securityValueId>': {
+            // Security values as described in provider or on profile page
+          },
+        },
+      }
+    );
+    // output result on success
+    console.log("RESULT:", JSON.stringify(result, null, 2));
+  } catch(e) {
+    // output result on error
+    console.log("ERROR:", JSON.stringify(e, null, 2));
+  }
 }
 
 main();
@@ -75,7 +84,7 @@ main();
 
 ### Run the code
 
-Because OneSDK is built with WASM, and WASI support for Node.js is still experimental, to run your file you will need to pass an additional flag.
+Because OneSDK is built with Wasm, and WASI support for Node.js is still experimental, to run your file you will need to pass an additional flag.
 
 ```shell
 node --experimental-wasi-unstable-preview1 index.mjs
