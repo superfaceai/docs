@@ -1,6 +1,6 @@
 # Setting provider API keys
 
-Providers may require authentication details in order to use their APIs, typically API keys or tokens.
+Providers may require authentication details in order to use their APIs, typically API keys or bearer tokens.
 
 API keys are passed into your application code as part of the `security` option the OneSDK `perform` function.
 
@@ -16,13 +16,14 @@ A common practice is to store environment variables into `.env` file which is no
 RESEND_TOKEN=some.token.value
 ```
 
-Then in your Node.js application, load the variables from `.env` using the [dotenv](https://www.npmjs.com/package/dotenv) package. Alternatively if you use Docker Compose, the `.env` file is [read automatically](https://docs.docker.com/compose/environment-variables/).
+Then in your application, load the variables from `.env` using the [dotenv](https://www.npmjs.com/package/dotenv) package. Alternatively if you use Docker Compose, the `.env` file is [read automatically](https://docs.docker.com/compose/environment-variables/).
 
 ## Example of using .env in a Node.js application
 
-```javascript {14-17}
+```javascript {16-19}
 import { OneClient } from '@superfaceai/one-sdk';
-import 'dotenv/config';
+import { config } from 'dotenv';
+config();
 
 async function main() {
   // Set up the object that Resend expects
@@ -51,12 +52,12 @@ async function main() {
   // Assign our CLI generated profile so it matches
   // the 'name' in the .profile file
   const profile = await client.getProfile('email-communication/email-sending');
+  const useCase = await profile.getUseCase('SendEmail');
 
   // Run it, catch errors
   try {
-    const result = await profile
-      .getUseCase('SendEmail')
-      .perform(inputs, provider);
+    const result = await useCase.perform(inputs, provider);
+
     console.log(`Success: Email sent with ID ${result.value.id}`);
   } catch (e) {
     console.log(e);
