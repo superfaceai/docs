@@ -19,7 +19,7 @@ here](../introduction/quick-start.mdx).
 pip install one-sdk
 ```
 
-Finally, create a new file called `main.py`, or open whichever file you want to include your integration code in.
+Finally, create a new file called `__main__.py`, or open whichever file you want to include your integration code in.
 
 ### (Optional) Move your Comlinks
 
@@ -28,18 +28,18 @@ If you created your Comlinks with the Superface CLI in a different folder, pleas
 ```text
 .
 └── superface/ - directory with all the Comlinks in project root
-    ├── <profileScope>.<profileName>.profile - profile file
-    ├── <providerName>.provider.json - provider file
-    ├── <profileScope>.<profileName>.<providerName>.map.js - map file
-    └── ... - repeat for all the Comlinks
+    ├── <profileScope>.<profileName>.<providerName>.map.js
+    ├── <profileScope>.<profileName>.profile
+    ├── <providerName>.provider.json
+    └── ...repeat for all the Comlinks
 ```
 
 ### Add the OneSDK function
 
-```python title="main.py"
+```python title="__main__.py"
 import os
 
-from one_sdk import OneClient
+from one_sdk import OneClient, PerformError, UnexpectedError
 
 client = OneClient()
 
@@ -49,7 +49,7 @@ try:
     r = use_case.perform(
         {
             # Input parameters as defined in profile:
-            <key>: '<value>'
+            '<key>': '<value>'
         },
         provider = '<providerName>',
         # Provider specific integration parameters:
@@ -65,8 +65,12 @@ try:
     )
     print(f"RESULT: {r}")
 except Exception as e:
-    print(f"ERROR: {e}")
-    raise
+    if isinstance(e, PerformError):
+        print(f"ERROR RESULT: {e.error_result}")
+    elif isinstance(e, UnexpectedError):
+        print(f"ERROR:", e, file=sys.stderr)
+    else:
+        raise e
 finally:
     client.send_metrics_to_superface()
 ```
@@ -74,7 +78,7 @@ finally:
 ### Run the code
 
 ```shell
-python main.py
+python __main.py__
 ```
 
 </div>

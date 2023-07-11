@@ -1,8 +1,8 @@
 # Superface in 5 minutes
 
-Superface is all about providing you the best way to consume digital capabilities provided by APIs. This guide shows you how to pick a use case and its provider from our Catalog, and use Superface OneSDK to make the API call.
+Superface is all about providing you the best way to consume digital capabilities provided by APIs.
 
-The following steps will help you get started with Superface and OneSDK.
+This guide shows you how to pick a provider, generate Comlinks for the use case you want using the CLI, and use Superface OneSDK to run that use case.
 
 :::info Prerequisites
 
@@ -14,7 +14,9 @@ This guide assumes you have [Node.js](https://nodejs.dev/) version 18.0.0 or new
 
 ### Pick a use case
 
-This one is up to you. What do you want to achieve? A use case example would be _"Send an email and include click tracking"_, _"List all the users in a workspace"_, or _"Add users to a specific group"_.
+This one is up to you. What do you want to achieve?
+
+A use case example would be _"Send an email and include click tracking"_, _"List all the users in a workspace"_, or _"Add users to a specific group"_.
 
 Ultimately, your use case is up to you.
 
@@ -26,9 +28,7 @@ We've created some Quick Start guides for popular APIs such as [Notion](../api-e
 
 :::note Provider authentication
 
-In many cases you also need to set up provider credentials. Since we are using the unauthenticated GitHub API, we will skip that in this example.
-
-To learn how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
+In many cases you also need to set up provider credentials. The Superface CLI will inform you about what tokens to add to your development environment. Learn more about how to handle API credentials in [Setting provider API keys](../guides/api-keys.md).
 
 :::
 
@@ -40,7 +40,7 @@ Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) f
 brew install superfaceai/cli/superface
 ```
 
-If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
+If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI via your browser.
 
 ```shell
 superface login
@@ -48,9 +48,9 @@ superface login
 
 ### Create your Comlinks
 
-The CLI is used to create Comlinks. They handle use case definition, and the map thst is used to create the code you need for your app to talk to the provider you want to work with.
+The Superface CLI is used to create Comlinks. They handle use case definition, and the map that is used to create the code you need for your app to communicate correctly with the provider you want to work with.
 
-Start by indexing and preparing the documentation for the provider you want to use:
+Start by indexing the documentation for the provider you want to use using the `prepare` command:
 
 ```shell
 superface prepare <URL for provider documentation>

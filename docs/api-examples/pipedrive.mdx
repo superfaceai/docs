@@ -68,7 +68,7 @@ const result = await useCase.perform(
   {
     provider: 'pipedrive',
     parameters: {},
-    security: { apiKey: { api_token_: process.env.PIPEDRIVE_API_KEY } },
+    security: { apiKey: { api_token: process.env.PIPEDRIVE_API_KEY } },
   }
 );
 ```

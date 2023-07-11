@@ -1,6 +1,6 @@
 # Quick Start (CLI)
 
-Superface is all about providing you the best way to consume digital capabilities provided by APIs. This guide shows you how to get set up and use the Superface CLI to work with an API provider, as well as how to use the generated files in your project with the OneSDK.
+This guide shows you how to set up and use the Superface CLI to work with an API provider to generate the Comlinks required to work with OneSDK.
 
 :::info Before you start
 
@@ -29,8 +29,10 @@ superface login
 Superface accepts Open API Specification format documentation, either from local files or remote URLs as well as the URL of any documentation hosted by [Readme.io](https://readme.io).
 
 ```shell
-superface prepare <url or path to local file>
+superface prepare <url or path to local file> "<optional-provider-name>"
 ```
+
+The minimum requirement for `prepare` is the URL or path to local file, however if you want to control the naming of the provider, you can do so.
 
 Once the documentation has been indexed, you can create a profile for the use case you want to achieve.
 
@@ -40,10 +42,10 @@ superface new <provider-name> "your use case"
 
 ### Create code for your project
 
-To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider and the use case profile you want to use.
+To convert the profile into the use case map and boilerplate code, run the following command and include the name of the provider and the use case profile you want to use.
 
 ```shell
-superface map <scope>/<use-case>
+superface map <provider-name> <scope>/<use-case>
 ```
 
 ### Test it
@@ -56,8 +58,7 @@ superface execute <provider> <scope>/<use-case>
 
 :::note Provider authentication
 
-In many cases you also need to set up provider credentials.
-To learn how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
+In many cases you also need to set up provider credentials. The CLI will inform you of the name of the variable that should be added to your development environment. To learn how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
 
 :::
 
@@ -67,22 +68,21 @@ After running all the above commands, you will find a folder named `superface` i
 
 ```shell
 superface/
-  <provider>.provider.json
+  <provider-name>.provider.json
   <scope>.<use-case>.profile
-  <scope>.<use-case>.<provider>.map.js
-  <scope>.<use-case>.<provider>.mjs
-  context/
-    <provider>.index.json
-    <provider>.docs.txt
+  <scope>.<use-case>.<provider-name>.map.js
+  <scope>.<use-case>.<provider-name>.mjs
 ```
 
-These files are used by OneSDK to enabled your application to communicate with the provider you are working with. `<provider>`, `<scope>`, and `<use-case>` will be replaced with real values based on the provider and use case you specified.
+These files are used by OneSDK to enabled your application to communicate with the provider you are working with. `<provider-name>`, `<scope>`, and `<use-case>` will be replaced with real values based on the provider and use case you specified.
 
 ### Additional commands
 
 `superface whoami` shows the current logged in user.
 
 `superface logout` logs out the current user.
+
+If you find that the output from the CLI is too noisy, you can use the `--quiet` or `-q` flag along with your commands.
 
 For information on each CLI command you can run `superface --help` at any time.
 

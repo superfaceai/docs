@@ -43,7 +43,7 @@ superface new notion "list all users"
 To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider.
 
 ```shell
-superface map notion
+superface map notion notion-workspace/user-retrieval
 ```
 
 ### Test it
@@ -57,7 +57,7 @@ Superface expects an authorization token for Notion. You can add this as `NOTION
 The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command.
 
 ```shell
-superface execute superface/<scope>.<profile-name>.<provider-name>.mjs
+superface execute notion notion-workspace/user-retrieval
 ```
 
 If successful, you will see a JSON response listing the users in your workspace.
