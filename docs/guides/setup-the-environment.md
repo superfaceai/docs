@@ -36,7 +36,7 @@ npm init
 Finally, you can install [OneSDK](/reference/one-sdk).
 
 ```shell
-npm i @superfaceai/one-sdk@alpha
+npm i @superfaceai/one-sdk@beta
 ```
 
 ## (Optional) Visual Studio Code extension
