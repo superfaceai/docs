@@ -1,6 +1,6 @@
 # Pipedrive
 
-In this example, we will show you how you can get started working with the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1) and produce a working use case that allows you to list all of the contacts in your Pipedrive CRM.
+In this example, we will show you how you can get started working with the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1) and produce a working use case that allows you to list all of the Organizations in your Pipedrive CRM.
 
 :::info Before you start
 
@@ -29,54 +29,47 @@ superface login
 Pipedrive's documentation is available as an [Open API 3 specification document](https://developers.pipedrive.com/docs/api/v1/openapi.yaml) that is regularly maintained. Use this for a complete index of their API capabilities.
 
 ```shell
-superface prepare https://developers.pipedrive.com/docs/api/v1/openapi.yaml
+superface prepare https://developers.pipedrive.com/docs/api/v1/openapi.yaml pipedrive
 ```
 
 Once the documentation has been indexed, you can create a profile for the use case you want to achieve.
 
 ```shell
-superface new pipedrive-api-v-one "list all contacts"
+superface new pipedrive "list all organizations"
 ```
 
-### Create code for your project
+A file called `organizations-management.get-organizations.profile` will be created in the `superface` folder as a result of. This is a Comlink file that decribes the input and output expectations that the API expects to achieve this use case.
 
-To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider and the usecase. The CLI will also tell you exactly what this command needs to look like.
+### Turn the Comlink into code
+
+To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
 
 ```shell
-superface map pipedrive-api-v-one contacts/list-persons
+superface map pipedrive organizations-management/get-organizations
+```
+
+### Add your API key
+
+If you don't already have your Pipedrive API key in your environment, you can add it to your `.env` file as `PIPEDRIVE_API_KEY=<your-pipedrive-api-key>"`.
+
+### Set up your inputs
+
+In order to list the organizations correctly, you will need to modify the boilerplate code from the Pipedrive documentation so it contains a real request object. From the `superface` folder, open `organizations-management.get-organizations.pipedrive.mjs` and modify the object that starts on line 23.
+
+```js title="organizations-management.get-organizations.pipedrive.mjs"
+{
+  start: 0,
+  limit: 10,
+  sort : 'name ASC',
+}
 ```
 
 ### Test it
 
-:::note Don't forget your authentication
-
-Superface expects an authorization token for Notion. You can add this as `PIPEDRIVE_API_KEY` in your environment. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
-
-:::
-
-The resulting code from the previous step is added to the `superface` folder in your project.
-
-However, before you run it, it is best to check that the API query being made has the correct values and isn't trying to work with boilerplate values from the documentation as these may fail. For this use case, there is a small change to make in `superface/contacts.list-persons.pipedrive-api-v-one.mjs` so that it matches the code below.
-
-```js title="contacts.list-persons.pipedrive-api-v-one.mjs" {2:5}
-const result = await useCase.perform(
-  {
-    start: 0,
-    limit: 100,
-    sort: 'name ASC',
-  },
-  {
-    provider: 'pipedrive',
-    parameters: {},
-    security: { apiKey: { api_token: process.env.PIPEDRIVE_API_KEY } },
-  }
-);
-```
-
 To test it you can use the `execute` command.
 
 ```shell
-superface execute pipedrive-api-v-one contacts/list-persons
+superface execute pipedrive organizations-management/get-organizations
 ```
 
 If successful, you will see a JSON response listing the contacts in your CRM workspace.
