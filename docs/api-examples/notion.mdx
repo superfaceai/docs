@@ -4,7 +4,9 @@ In this example, we will show you how you can get started working with the [Noti
 
 :::info Before you start
 
-You'll need to get an API token for a _Notion Internal Integration_ that is valid for the workspace you want to access. Find out how to set that up in the [Notion Authorization documentation](https://developers.notion.com/docs/authorization#making-api-requests-with-an-internal-integration).
+You will need to get an API token for a _Notion Internal Integration_ that is valid for the workspace you want to access. Find out how to set that up in the [Notion Authorization documentation](https://developers.notion.com/docs/authorization#making-api-requests-with-an-internal-integration).
+
+Please ensure that the capabilities for your Notion Internal Integration include the User Capability "Read user information without an email address".
 
 :::
 
@@ -32,7 +34,30 @@ Notion's documentation is hosted by Readme.io, which is a format that Superface 
 superface prepare https://developers.notion.com/reference/get-users
 ```
 
-Once the documentation has been indexed, you can create a profile for the use case you want to achieve.
+Once the documentation has been indexed, you will need to edit the `pagerduty.provider.json` that has been created to ensure that the correct API endpoint and security policy are used. The exact provider definition you need to use is below:
+
+```json title="notion.provider.json"
+{
+  "name": "notion",
+  "defaultService": "default",
+  "parameters": [],
+  "services": [
+    {
+      "baseUrl": "https://api.notion.com",
+      "id": "default"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "type": "http",
+      "scheme": "bearer",
+      "id": "bearerAuth"
+    }
+  ]
+}
+```
+
+### Define your use case
 
 ```shell
 superface new notion "list all users"
@@ -43,21 +68,30 @@ superface new notion "list all users"
 To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider.
 
 ```shell
-superface map notion notion-workspace/user-retrieval
+superface map notion notion-workspace/user-listing
+```
+
+### Add your API key
+
+If you don't already have your Notion API key in your environment, you can add it to your `.env` file as `NOTION_TOKEN=<your-notion-api-key>`.
+
+### Set up your inputs
+
+In order to list the users correctly, you will need to modify the boilerplate code from the Notion documentation so it contains a real request object. From the `superface` folder, open `notion-workspace.user-listing.notion.mjs` and modify the object that starts on line 23.
+
+```js title="notion-workspace.user-listing.notion.mjs"
+{
+    notionVersion : '2022-06-28',
+    page_size: 10,
+}
 ```
 
 ### Test it
 
-:::note Don't forget your authentication
-
-Superface expects an authorization token for Notion. You can add this as `NOTION_TOKEN` in your environment. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
-
-:::
-
-The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command.
+To test it you can use the `execute` command.
 
 ```shell
-superface execute notion notion-workspace/user-retrieval
+superface execute notion notion-workspace/user-listing
 ```
 
 If successful, you will see a JSON response listing the users in your workspace.
