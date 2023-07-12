@@ -31,6 +31,7 @@ import { OneClient } from '@superfaceai/one-sdk';
 async function main() {
   const client = new OneClient({
     assetsPath: './superface',
+    // token: <your-superface-token>
   });
 
   // Assign our CLI generated profile so it matches
@@ -83,10 +84,10 @@ node --experimental-wasi-unstable-preview1 index.mjs
 
 ### Debugging
 
-Set the environment variable `ONESDK_LOG` to `debug` to see API calls from OneSDK to the API you are connecting to:
+Set the environment variable `ONESDK_LOG` to `trace` to see API calls from OneSDK to the API you are connecting to:
 
 ```shell
-ONESDK_LOG="debug" node --experimental-wasi-unstable-preview1 index.mjs
+ONESDK_LOG="trace" node --experimental-wasi-unstable-preview1 index.mjs
 ```
 
 :::caution
