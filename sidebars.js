@@ -95,7 +95,9 @@ module.exports = {
       collapsed: true,
       items: [
         //'api-examples/mailgun',
+        'api-examples/infobip',
         'api-examples/notion',
+        'api-examples/pagerduty',
         'api-examples/pipedrive',
         'api-examples/resend',
         'api-examples/slack'
