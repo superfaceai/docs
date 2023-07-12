@@ -34,7 +34,7 @@ Notion's documentation is hosted by Readme.io, which is a format that Superface 
 superface prepare https://developers.notion.com/reference/get-users
 ```
 
-Once the documentation has been indexed, you will need to edit the `pagerduty.provider.json` that has been created to ensure that the correct API endpoint and security policy are used. The exact provider definition you need to use is below:
+Once the documentation has been indexed, you will need to edit the `notion.provider.json` that has been created to ensure that the correct API endpoint and security policy are used. The exact provider definition you need to use is below:
 
 ```json title="notion.provider.json"
 {
@@ -65,7 +65,7 @@ superface new notion "list all users"
 
 ### Turn the Comlink into code
 
-To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider.
+To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
 
 ```shell
 superface map notion notion-workspace/user-listing
