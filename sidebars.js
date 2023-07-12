@@ -25,7 +25,7 @@ const guides = {
         'guides/setup-the-environment',
         'guides/editing-provider-files',
         'guides/using-multiple-providers',
-        'guides/run-use-case',
+        //'guides/run-use-case',
         'guides/debugging-onesdk',
         'guides/test-use-case'
       ],
