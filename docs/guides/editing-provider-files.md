@@ -68,6 +68,8 @@ The Security Scheme may be one of the following:
 
 - [API Key Header](#api-key-header)
 - [API Key Query Parameter](#api-key-query-parameter)
+- [API Key URL Path](#api-key-url-path)
+- [API Key Body](#api-key-body)
 - [Basic Auth](#basic-auth)
 - [Bearer Token](#bearer-token)
 
@@ -112,6 +114,70 @@ For this security scheme, the client should add the API key into a specified que
 ```
 
 In this example, the `name` refers to the query parameter to use for this security scheme.
+
+#### API Key URL Path
+
+For this security scheme, the client should replace `{PLACEHOLDER_NAME}` in URL with the API key.
+
+The placeholder can be defined in provider definition or in the map.
+
+It is recommended to use `[A-Z0-9_]` for the name of the placeholder.
+
+- `id` (string) - Unique ID for security scheme
+- `type`: "apikey" (string)
+- `in`: "path" (string)
+- `name` (string) - Placeholder name
+
+```js example
+{
+  "id": "my-api-key-url-path",
+  "type": "apikey",
+  "in": "path",
+  "name": "PATH_SECRET",
+}
+```
+
+For example if placeholder is defined in service's base url `https://example.com/{PATH_SECRET}`, then it will become `https://example.com/actual_api_key`.
+
+Similarly you can defined placeholder in Comlink map:
+
+```javascript
+const url = `${services.default}/{PATH_SECRET}`;
+const response = std.unstable.fetch(url).response();
+// ...
+```
+
+#### API Key Body
+
+For this security scheme, the client should add the API key into the request body.
+
+- `id` (string) - Unique ID for security scheme
+- `type`: "apikey" (string)
+- `in`: "body" (string)
+- `name`: (string) - Selector
+- `bodyType`: "json" (string)
+
+```js example
+{
+  "id": "my-api-key-body",
+  "type": "apikey",
+  "in": "body",
+  "name": "/json/path",
+  "bodyType": "json",
+}
+```
+
+Api Keys in body support only JSON bodies right now.
+
+In the example `"name": "/json/path"` is selector to specify locatation in object, where the api key should be placed.
+
+```js example
+  {
+    "json": {
+      "path": "actual_api_key"
+    }
+  }
+```
 
 #### Basic Auth
 
