@@ -91,7 +91,7 @@ module.exports = {
     guides,
     {
       type: 'category',
-      label: 'Provider API Quick Starts',
+      label: 'Use Case Examples',
       collapsed: true,
       items: [
         'api-examples/hubspot',
