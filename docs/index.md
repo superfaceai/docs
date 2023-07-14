@@ -5,9 +5,87 @@ id: introduction
 
 # Introduction
 
-Superface is the AI for APIs. It makes creating API integrations faster, and more management so you can focus on developing your application.
+Superface is the AI for APIs. It makes creating API integrations faster, and more manageable so you can focus on developing your application.
 
-## Benefits of using Superface
+## Superface Documentation
+
+<div className="row padding-bottom--lg">
+  <div className="col col--6">
+    <div className="card shadow">
+      <a href="./introduction/getting-started" class="menu__link">
+      <div className="card__body">
+        <h3>🏃 Quick Starts</h3>
+        <p>Examples of how to get up and running creating Comlinks with the Superface CLI and OneSDK.
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+
+<div className="col col--6">
+    <div className="card shadow">
+      <a href="./guides/how-to-create" class="menu__link">
+      <div className="card__body">
+        <h3>🔎 Guides</h3>
+        <p>Looking for more in depth knowledge? Check out our list of guides that get into greater detail.
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+<div className="col col--6">
+    <div className="card shadow">
+      <a href="./api-examples/hubspot" class="menu__link">
+      <div className="card__body">
+        <h3>💼 Use Case Examples</h3>
+        <p>From HubSpot to Pipedrive. Use case examples demonstrate different uses of Superface with real-world APIs.
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+<div className="col col--6">
+    <div className="card shadow">
+      <a href="./examples/nodejs" class="menu__link">
+      <div className="card__body">
+        <h3>💻 SDK Examples</h3>
+        <p>Implementation examples for OneSDK using Node.js, Python and Cloudflare Workers.
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+  <div className="col col--6">
+    <div className="card shadow">
+      <a href="./support" class="menu__link">
+      <div className="card__body">
+        <h3>ℹ️ Help & Support</h3>
+        <p>If you're looking for help, support or want to talk business. We're here for you!
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+<div className="col col--6">
+    <div className="card shadow">
+      <a href="./faq" class="menu__link">
+      <div className="card__body">
+        <h3>❓ FAQs</h3>
+        <p>View some of the frequently asked questions regarding Superface, CLI and OneSDK.
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+:::caution Deprecation Notice
+We recently started deprecating the previous version of Superface CLI (before 4.0.0), OneSDK (before 3.0.0, for Node.js only) and our provider use case catalog. If you are looking for the documentation for these, check out our [Classic Docs](./classic) section.
+:::
+
+## Why Superface?
+
+Superface can be mad beneficial! Here are four reasons why we think you should try it.
 
 <div className="row padding-bottom--lg">
   <div className="col col--6">
@@ -48,7 +126,3 @@ Superface is the AI for APIs. It makes creating API integrations faster, and mor
     </div>
   </div>
 </div>
-
-:::caution Deprecation Notice
-We recently started deprecating the previous version of Superface CLI (before 4.0.0), OneSDK (before 3.0.0, for Node.js only) and our provider use case catalog. If you are looking for the documentation for these, check out our [Classic Docs](./classic) section.
-:::
