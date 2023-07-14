@@ -1,4 +1,4 @@
-# Test use case
+# Testing use cases
 
 ### Prerequisites
 
