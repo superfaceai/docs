@@ -52,10 +52,10 @@ module.exports = {
           label: 'Classic Reference',
         },
         {
-          href: 'https://github.com/superfaceai/docs',
+          href: 'https://github.com/orgs/superfaceai/discussions',
           position: 'right',
           className: 'header-github-link',
-          'aria-label': 'GitHub repository',
+          'aria-label': 'GitHub Discussions',
         },
       ],
     },
