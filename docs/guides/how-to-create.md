@@ -1,12 +1,16 @@
-# Integrate a new API: Overview
+# Overview
 
-This guide walks you through the process of creating a new API integration. You will learn how to setup the development environment, use the CLI to generate Comlinks for providers and use cases, integrate the API in your application, and run it in production.
+The following guides will give you more insight into the deeper workings of the Superface system. You will learn how to setup the development environment, understand how to edit Comlinks for providers and use cases, set up API keys correctly, test your Comlinks and debug requests and responses.
 
-Superface has created new domain-specific language called _Comlink_ for abstracting API integrations. The Comlink language is designed to help developers create reusable, platform-agnostic API integrations.
+## What is _Comlink_
 
-Comlink language documents the integration for humans and describes the integration for machines to perform the API calls and understand API responses.
+Comlink is a term you'll hear a lot - in the CLI, in OneSDK, and throughout these docs - but what is it?
 
-## Understanding the Superface terms
+Comlink is Superface's domain-specific language called for abstracting API integrations. The Comlink language is designed to help our AI create reusable, platform-agnostic API integrations and speed up developer workflow.
+
+The Comlink language documents the integration for humans and describes the integration for machines to perform the API calls and understand API responses.
+
+## Additional terminology
 
 Comlink is probably new to you, so let's cover the terms you will deal with throughout this guide. The _Comlink_ language key concepts are _Profile_, _Use Case_, _Map_, and _Provider_. Let's break down what each of them means:
 
