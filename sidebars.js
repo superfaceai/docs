@@ -120,6 +120,11 @@ module.exports = {
       type: 'doc',
       id: 'reference/glossary',
       label: 'Glossary'
+    },
+    {
+      type: 'doc',
+      id: 'faq',
+      label: 'FAQ'
     }
   ],
   referenceSidebar: [
