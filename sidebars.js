@@ -14,24 +14,17 @@
 const guides = {
   type: 'category',
   label: 'Guides',
-  collapsed: false,
+  collapsed: true,
   items: [
-    {
-      type: 'category',
-      label: 'Integrate a new API',
-      link: { type: 'doc', id: 'guides/how-to-create' },
-      collapsed: true,
-      items: [
+        'guides/how-to-create',
         'guides/setup-the-environment',
         'guides/editing-provider-files',
         'guides/using-multiple-providers',
         //'guides/run-use-case',
         'guides/debugging-onesdk',
-        'guides/test-use-case'
-      ],
-    },
-    'guides/api-keys',
-  ],
+        'guides/test-use-case',
+        'guides/api-keys'
+      ]
 };
 
 const classicGuides = {
@@ -106,7 +99,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Code Examples',
+      label: 'SDK Examples',
       collapsed: true,
       items: [
         'examples/nodejs',
