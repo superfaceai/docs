@@ -1,4 +1,4 @@
-# Testing use cases
+# Testing use case code
 
 ### Prerequisites
 
@@ -161,17 +161,6 @@ expect(() => {
 ```
 
 :::
-
-<!--
-Commented out for now, will investigate more about error format.
-
-:::caution
-
-Be aware that `result.error` might contain timestamp and you have to omit it before storing snapshot of it.
-
-:::
-
--->
 
 ### Recording traffic
 
@@ -412,24 +401,6 @@ To be added
 
 To be added -->
 
-## Compile Comlink source files to AST
-
-Comlink profile and map files (.supr and .suma) needs to be compiled to their AST form (with .ast.json extension).
-
-Run the following command to perform a one-off compilation:
-
-```shell
-npx @superfaceai/cli@latest compile
-```
-
-This will generate `.ast.json` files next to the existing source files linked from `super.json` file.
-
-:::caution
-
-The compilation is **necessary after every change** to local `.suma` and `.supr` files.
-
-:::
-
 ## Running tests
 
 When your tests are ready, run them with Jest CLI:
@@ -439,10 +410,3 @@ npx jest
 ```
 
 You can use `--updateSnapshot` flag when modifying tests or when the expected results change. See [Jest documentation](https://jestjs.io/docs/cli) for further CLI options.
-
-## Examples
-
-- [Integration test for expected result data format](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/communication/send-message/maps/send-message.ts)
-- [Integration test for expected output for given input](https://github.com/superfaceai/station/blob/51b021ddcdccc772c9a2cd1591c9936b9ba64a5d/grid/address/clean-address/maps/clean-address.ts)
-
-> If you wish to use your new use case in another Node.js application, please refer to [the following guide](./run-use-case.md).
