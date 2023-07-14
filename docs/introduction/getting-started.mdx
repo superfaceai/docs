@@ -1,7 +1,5 @@
 # Superface in 5 minutes
 
-Superface is all about providing you the best way to consume digital capabilities provided by APIs.
-
 This guide shows you how to pick a provider, generate Comlinks for the use case you want using the CLI, and use Superface OneSDK to run that use case.
 
 :::info Prerequisites
@@ -50,27 +48,25 @@ superface login
 
 The Superface CLI is used to create Comlinks. They handle use case definition, and the map that is used to create the code you need for your app to communicate correctly with the provider you want to work with.
 
-Start by indexing the documentation for the provider you want to use using the `prepare` command:
+First, prepare the documentation for the provider you want to use.
 
 ```shell
 superface prepare <URL for provider documentation>
 ```
 
-Next, create the profile for the use case you want to achieve, for example _"list all users"_:
+Next, create the Comlink profile for the use case you want to achieve.
 
 ```shell
 superface new <provider-name> "your use case"
 ```
 
-After this step completes, you can use the profile that was created and turn it into a map that you can use in your application.
+Finally, create a Comlink map that you can use in your application.
 
 ```shell
 superface map <provider-name> <scope>/<use-case>
 ```
 
-Don't worry if you don't know what to enter for `<provider-name>` and `<scope.use-case>`, the CLI presents the exact commands you need to run for each step directly in your terminal.
-
-The output from these commands will be a folder named `superface` with the following files:
+The output from all these commands will be a folder named `superface` with the following Comlink files:
 
 ```shell
 superface/
@@ -78,22 +74,25 @@ superface/
   <scope>.<use-case>.profile
   <scope>.<use-case>.<provider>.map.js
   <scope>.<use-case>.<provider>.mjs
-  context/
-    <provider>.index.json
-    <provider>.docs.txt
 ```
+
+You now have all the files you need to use these Comlinks in your application. You can run it using the `superface execute` command from your terminal, but you can also move them over to the app you're developing.
 
 ### Install OneSDK
 
 In your app directory, install the OneSDK library:
 
 ```shell
-npm install @superfaceai/one-sdk
+npm install @superfaceai/one-sdk@beta
 ```
 
-### Code
+### Add code to your app
 
-Now you can use OneSDK in your app. Create an `index.mjs` file with the following JavaScript code:
+Now you can use OneSDK in your app. Create an `index.mjs` file with the following Node.js code.
+
+:::note Not sure what code to use?
+If you want to find the exact code to use here, you can find it in the [My Comlinks](https://superface.ai/app) section of your Superface Dashboard.
+:::
 
 ```js title="index.mjs"
 import { OneClient } from '@superfaceai/one-sdk';
@@ -143,9 +142,9 @@ async function main() {
 main();
 ```
 
-### Run
+### Test and confirm
 
-It's time to run your app! Because the Superface OneSDK is built with WASM, it requires that you pass the `--experimental-wasi-unstable-preview1` flag.
+It's time to run your app! Because the Superface OneSDK is built with Wasm, it requires that you pass the `--experimental-wasi-unstable-preview1` flag when running Node.js (>18.0.0).
 
 ```shell
 node --experimental-wasi-unstable-preview1 index.mjs
@@ -155,22 +154,14 @@ node --experimental-wasi-unstable-preview1 index.mjs
 
 Set the environment variable `ONESDK_LOG` to `debug` to see API calls from OneSDK to the API of your chosen provider:
 
-```shell
-ONESDK_LOG="debug" node --experimental-wasi-unstable-preview1 index.mjs
-```
-
 :::caution
 
 This can print out potentially sensitive information, like API keys and access tokens.
 
 :::
 
-<!--### Understanding runtime integration
-
-During the runtime of the application, OneSDK downloads a Comlink map from Superface servers. The Comlink map instructs the OneSDK how to make the call to GitHub API in order to perform the use case.
-
-OneSDK also downloads the Comlink profile, which contains the definition of the use case for runtime. You can also provide local maps and profiles stored alongside your source code.
-
-You can always check the Comlink map at the profile's detail page for a given provider by clicking the "raw" link. For example here's the [latest map for `vcs/user-repos` and `github`](https://superface.ai/raw/vcs/user-repos.github@2.0.suma).-->
+```shell
+ONESDK_LOG="debug" node --experimental-wasi-unstable-preview1 index.mjs
+```
 
 </div>
