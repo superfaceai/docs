@@ -4,7 +4,7 @@ This guide shows you how to set up and use the Superface CLI to work with an API
 
 :::info Before you start
 
-Superface requires [Node.js](https://nodejs.dev/) version 18 or newer to be installed.
+Superface requires [Node.js](https://nodejs.dev/) version 18.0.0 or newer to be installed.
 
 :::
 
@@ -44,16 +44,34 @@ superface new <provider-name> "your use case"
 
 To convert the profile into the use case map and boilerplate code, run the following command and include the name of the provider and the use case profile you want to use.
 
+By default, Node.js code will be generated, however you can use the additional `python` option to get Python code instead.
+
+#### Node.js
+
 ```shell
 superface map <provider-name> <scope>/<use-case>
+```
+
+#### Python
+
+```shell
+superface map <provider-name> <scope>/<use-case> python
 ```
 
 ### Test it
 
 The resulting code is added to the `superface` folder in your project. To test it you can use the `execute` command.
 
+#### Node.js
+
 ```shell
 superface execute <provider> <scope>/<use-case>
+```
+
+#### Python
+
+```shell
+superface execute <provider> <scope>/<use-case> python
 ```
 
 :::note Provider authentication
