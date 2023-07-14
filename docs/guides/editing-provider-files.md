@@ -1,6 +1,6 @@
 # Editing providers
 
-Comlink Maps make use of the Provider Definition by defining which service to call based on the Service ID and which security scheme to use based on the Security Scheme ID. A Provider Definition keeps the provider information separate so it can be reused across maps that might implement other profiles.
+Comlink maps make use of the Provider Definition by defining which service to call based on the Service ID and which security scheme to use based on the Security Scheme ID. A Provider Definition keeps the provider information separate so it can be reused across maps that might implement other profiles.
 
 Superface's CLI makes every effort to populate the `.provider.json` files with accurate information on security policies, API endpoints and additional parameter information, but there will be occasions where you want to edit those files.
 
