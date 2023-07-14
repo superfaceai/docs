@@ -20,7 +20,6 @@ const guides = {
         'guides/setup-the-environment',
         'guides/editing-provider-files',
         'guides/using-multiple-providers',
-        //'guides/run-use-case',
         'guides/debugging-onesdk',
         'guides/test-use-case',
         'guides/api-keys'
@@ -110,7 +109,7 @@ module.exports = {
     {
       type: 'doc',
       id: 'support',
-      label: 'Help & Support'
+      label: 'Support'
     },
     {
       type: 'doc',
