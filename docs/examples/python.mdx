@@ -1,0 +1,84 @@
+# Python
+
+In this example, we will go over the steps required to implement Superface into your Python application development workflow.
+
+:::info Have you created Comlinks?
+
+This guide assumes that you have already
+installed and run the [Superface CLI](../introduction/quick-start.mdx) to generate the Comlinks for the API
+integration you want to work with. If not, please [start
+here](../introduction/quick-start.mdx).
+
+:::
+
+<div class="count-steps-h3">
+
+### Install OneSDK
+
+```shell
+python -m pip install one-sdk
+```
+
+Finally, create a new file called `__main__.py`, or open whichever file you want to include your integration code in.
+
+### (Optional) Move your Comlinks
+
+If you created your Comlinks with the Superface CLI in a different folder, please move them to a `superface` folder at the root of your application. The following files are expected by OneSDK.
+
+```text
+.
+└── superface/ - directory with all the Comlinks in project root
+    ├── <profileScope>.<profileName>.<providerName>.map.js
+    ├── <profileScope>.<profileName>.profile
+    ├── <providerName>.provider.json
+    └── ...repeat for all the Comlinks
+```
+
+### Add the OneSDK function
+
+```python title="__main__.py"
+import os
+
+from one_sdk import OneClient, PerformError, UnexpectedError
+
+client = OneClient()
+
+profile = client.get_profile("<profileName>")
+use_case = profile.get_usecase("<usecaseName>")
+try:
+    r = use_case.perform(
+        {
+            # Input parameters as defined in profile:
+            '<key>': '<value>'
+        },
+        provider = '<providerName>',
+        # Provider specific integration parameters:
+        parameters = {
+            '<integrationParameterName>': '<integrationParameterValue>'
+        },
+        security = {
+            # Provider specific security values:
+            '<securityValueId>': {
+                # Security values as described in provider or on profile page
+            }
+        }
+    )
+    print(f"RESULT: {r}")
+except Exception as e:
+    if isinstance(e, PerformError):
+        print(f"ERROR RESULT: {e.error_result}")
+    elif isinstance(e, UnexpectedError):
+        print(f"ERROR:", e, file=sys.stderr)
+    else:
+        raise e
+finally:
+    client.send_metrics_to_superface()
+```
+
+### Run the code
+
+```shell
+python __main.py__
+```
+
+</div>

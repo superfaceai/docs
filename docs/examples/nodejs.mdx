@@ -1,0 +1,93 @@
+# Node.js
+
+In this example, we will go over the steps required to implement Superface into your Node.js application development workflow.
+
+:::info Have you created Comlinks?
+
+This guide assumes that you have already
+installed and run the Superface CLI to generate the Comlinks for the API
+integration you want to work with. If not, please [start
+here](../introduction/quick-start.mdx).
+
+:::
+
+<div class="count-steps-h3">
+
+### Install OneSDK
+
+```shell
+npm i @superfaceai/one-sdk@beta
+```
+
+Finally, create a new file called `index.mjs`, or open whichever file you want to include your integration code in.
+
+### (Optional) Move your Comlinks
+
+If you created your Comlinks with the Superface CLI in a different folder, please move them to a `superface` folder at the root of your application. The following files are expected by OneSDK.
+
+```text
+.
+└── superface/ - directory with all the Comlinks in project root
+    ├── <profileScope>.<profileName>.profile - profile file
+    ├── <providerName>.provider.json - provider file
+    ├── <profileScope>.<profileName>.<providerName>.map.js - map file
+    └── ... - repeat for all the Comlinks
+```
+
+### Add the OneSDK function
+
+In order to work with the Comlink files, you need to import the OneClient library from OneSDK. Then you are free to create any standard async function you like to run the code. The example below outlines all the options that are available.
+
+However, if you have generated your Comlinks using the Superface CLI, you already have this function available to you via the `<scope>.<use-case>.<provider>.mjs` file that you will find in the root of your `superface` folder.
+
+```js
+import { OneClient } from '@superfaceai/one-sdk';
+
+async function main() {
+  const client = new OneClient(
+    token: '<your-superface-token>', // optional
+    assetsPath: '<path-to-superface-folder>' //default is ./superface
+  );
+  const profile = await client.getProfile('<profileName>');
+  const useCase = profile.getUseCase('<usecaseName>');
+
+  try {
+    const result = await useCase.perform(
+      {
+        // Input parameters as defined in profile:
+        <key>: '<value>',
+      },
+      {
+        provider: '<providerName>',
+        parameters: {
+          // Provider specific integration parameters:
+          '<integrationParameterName>': '<integrationParameterValue>',
+        },
+        security: {
+          // Provider specific security values:
+          '<securityValueId>': {
+            // Security values as described in provider or on profile page
+          },
+        },
+      }
+    );
+    // output result on success
+    console.log("RESULT:", JSON.stringify(result, null, 2));
+  } catch(e) {
+    // output result on error
+    console.log("ERROR:", JSON.stringify(e, null, 2));
+  }
+}
+
+main();
+```
+
+### Run the code
+
+Because OneSDK is built with Wasm, and WASI support for Node.js is still experimental, to run your file you will need to pass an additional flag.
+
+```shell
+node --experimental-wasi-unstable-preview1 index.mjs
+```
+
+</div>

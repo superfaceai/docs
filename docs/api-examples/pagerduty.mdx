@@ -1,0 +1,120 @@
+# PagerDuty
+
+In this example, we will show you how you can get started working with the [PagerDuty](https://developer.pagerduty.com/) API to produce a working use case that lists the most recent reported incidents.
+
+:::info Before you start
+
+You'll need a PagerDuty API key. For testing purposes you can get one directly from their [API documentation](https://developer.pagerduty.com/api-reference/f1a95bb9397ba-changelog).
+
+:::
+
+<div class="count-steps-h3">
+
+### Install & Authorize Superface
+
+Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+
+```shell
+brew install superfaceai/cli/superface
+```
+
+If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
+
+```shell
+superface login
+```
+
+### Prepare the documentation
+
+PagerDuty's API is available as an [Open API Specification](https://raw.githubusercontent.com/PagerDuty/api-schema/main/reference/REST/openapiv3.json), you can use this as the documentation source.
+
+```shell
+superface prepare https://github.com/PagerDuty/api-schema/blob/main/reference/REST/openapiv3.json "pagerduty"
+```
+
+Once the documentation has been indexed, you will need to edit the `pagerduty.provider.json` that has been created to ensure that the correct API base URL and security policy are used. The exact provider definition you need to use is below:
+
+```json title="pagerduty.provider.json"
+{
+  "name": "pagerduty",
+  "defaultService": "default",
+  "parameters": [],
+  "services": [
+    {
+      "baseUrl": "https://api.pagerduty.com",
+      "id": "default"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "id": "pagerdutyToken"
+    }
+  ]
+}
+```
+
+### Define your use case
+
+Next, you can create a profile for the use case you want to achieve, which in this case is to get a list of companies in the CRM.
+
+```shell
+superface new pagerduty "get incidents"
+```
+
+A file called `incident-management.get-incidents.profile` will be created in the `superface` folder as a result of this. This is a Comlink file that decribes the input and output expectations that the API expects to achieve this use case.
+
+### Turn the Comlink into code
+
+To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
+
+```shell
+superface map pagerduty incident-management/get-incidents
+```
+
+### Add your API key
+
+If you don't already have your PagerDuty API key in your environment, you can add it to your `.env` file as `PAGERDUTY_API_KEY="Token token=<your-pagerduty-api-key>"`.
+
+### Set up your inputs
+
+In order to list the incidents correctly, you will need to modify the boilerplate code from the PagerDuty documentation so it contains a real request object. From the `superface` folder, open `incident-management.get-incidents.pagerduty.mjs` and modify the object that starts on line 23.
+
+```js
+{
+    time_zone : 'UTC',
+    since : '2022-01-01T00:00:00Z',
+    until : '2022-01-31T23:59:59Z',
+    date_range : 'all',
+    sort_by : 'created_at',
+    sort_direction : 'asc',
+    offset: 0,
+    limit: 25,
+}
+```
+
+### Test it
+
+To test it you can use the `execute` command.
+
+```shell
+superface execute pagerduty incident-management/get-incidents
+```
+
+If everything is successful you should see output similar to the response below:
+
+```bash
+RESULT: {
+  "incidents": [
+    {
+      "acknowledgements": [],
+      "alert_counts": {
+        "all": 0,
+        "resolved": 0,
+        "triggered": 0
+      }...
+```
+
+</div>

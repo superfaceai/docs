@@ -1,0 +1,56 @@
+# Integrations monitoring
+
+Superface comes with out-of-the-box monitoring of integrations used by your App. With Superface project you will get insights on your App's API dependencies and their health status. In case of use-case failure, you will also receive an email notification with details about the failing API calls.
+
+## Set up integrations monitoring
+
+### Prerequisites
+
+- Node.js app with OneSDK and a use case set up; see [Getting&nbsp;started](../getting-started.mdx) to create one
+- Registered account on [superface.ai](https://superface.ai/) to access insights
+
+<div class="count-steps-h3">
+
+### Create new project
+
+Create a new project in [Superface](/insights).
+
+<!-- TODO: screenshot -->
+
+### Get your SDK token
+
+Copy the project's SDK token.
+
+### Use the SDK token with your Application
+
+In command line, set the token as `SUPERFACE_SDK_TOKEN` environment variable:
+
+```shell
+export SUPERFACE_SDK_TOKEN="<your token>"
+```
+
+Or set the `sdkAuthToken` parameter during SDK client initialization:
+
+```javascript
+const sdk = SuperfaceClient({ sdkAuthToken: '<your token>' });
+```
+
+Run your application again:
+
+```shell
+node index.js
+```
+
+### Check Insights
+
+Observe how are the use-cases used by your application.
+
+![Project detail from the insights with call statistics and health status of the VCS User Repositories use-case.](../../../assets/integrations-monitoring-dashboard.png)
+
+### Monitor your API dependencies
+
+In the case of API failure Superface will email you with the notification.
+
+![Email stating that github has problems, try using a different provider.](../../../assets/integrations-monitoring-email.png)
+
+</div>

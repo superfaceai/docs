@@ -1,14 +1,14 @@
-# Create a new use case
+# Create a new use case/Comlink
 
-Use case specifies input and result parameters, and error behavior of the API integration. Use case inputs and result should not contain any provider specific parameters and provider implementation details like authentication credentials.
+A _use case_ specifies the inputs, result parameters, and error behavior of the API integration. Use case inputs and results should not contain any provider specific parameters and provider implementation details like authentication credentials.
 
-Use cases are defined through a [Comlink profile](../comlink/reference/profile.mdx). A profile is a set of use cases that serve the same business need. The Comlink profile is a file with `.supr` extension.
+Use cases are defined through a [Comlink profile](../comlink/reference/profile.mdx). A profile is a set of use cases that serve the same business need. Comlink profiles are files with `.profile` extension.
 
 This guide will walk you through the process of defining a new use case within a Comlink profile. You will use the Superface CLI to bootstrap a new profile and learn the syntax.
 
 ## Setup
 
-This guide assumes you have set up a Node.js project with Superface and OneSDK. If you need to set up a new project, please see the [Setup Guide](./setup-the-environment.md).
+This guide assumes you have set up a Node.js project with Superface and OneSDK. If you need to set up a new project, please see the [setup local environment](./setup-the-environment.md) guide.
 
 ## Create New Profile
 
@@ -120,7 +120,7 @@ model DomainError {
   Detail
   A human-readable explanation specific to this occurrence of the problem.
   """
-  detail string! 
+  detail string!
 }
 ```
 
@@ -318,7 +318,8 @@ Both description formats are functionally equivalent so the choice is up to your
 :::
 
 ### Add exmples {#examples}
-It is good practice to add examples showing possible inputs and outcome of the use case. You should provide at least one example of a success response, and one example of an error. Examples start with the `example` keyword, followed by the name of the example. The name of an example  should specify its type, eg. `Success` or `Fail`. Inside the `example` block, input values are defined, followed by the outcome (`result` or `error`). Structure of `input` and `result` or `error` is defined by the rest of the use case.
+
+It is good practice to add examples showing possible inputs and outcome of the use case. You should provide at least one example of a success response, and one example of an error. Examples start with the `example` keyword, followed by the name of the example. The name of an example should specify its type, eg. `Success` or `Fail`. Inside the `example` block, input values are defined, followed by the outcome (`result` or `error`). Structure of `input` and `result` or `error` is defined by the rest of the use case.
 
 ## More About Fields {#fields}
 

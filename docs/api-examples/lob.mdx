@@ -1,0 +1,120 @@
+# Lob
+
+In this example, we will show you how you can get started working with the [Lob API](https://www.lob.com/use-cases/developers) and produce a working use case that adds a new address that can be used to send postcards, letters, and even checks.
+
+:::info Before you start
+
+You will need a Lob API key. Find out how to set that up in the [API Keys](https://dashboard.lob.com/settings/api-keys) section of your Lob Account Settings.
+
+:::
+
+<div class="count-steps-h3">
+
+### Install & Authorize Superface
+
+Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+
+```shell
+brew install superfaceai/cli/superface
+```
+
+If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
+
+```shell
+superface login
+```
+
+### Prepare the documentation
+
+Lob's documentation is available in [Open API Specification format](https://github.com/lob/lob-openapi/blob/main/lob-api-public.yml), this can be used as the documentation reference for this use case.
+
+```shell
+superface prepare https://github.com/lob/lob-openapi/blob/main/lob-api-public.yml lob
+```
+
+Once the documentation has been prepared, you will need to edit the `lob.provider.json` that has been created to ensure that the correct API base URL and security policy are used. The exact provider definition you need to use is below:
+
+```json title="lob.provider.json"
+{
+  "name": "lob",
+  "defaultService": "default",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://api.lob.com"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "lobBasicAuth",
+      "type": "http",
+      "scheme": "basic"
+    }
+  ],
+  "parameters": []
+}
+```
+
+### Define your use case
+
+Next, you can create a profile for the use case you want to achieve, which in this case is to get add a new address to the address list in your Lob account.
+
+```shell
+superface new lob "add a new address"
+```
+
+A file called `address-management.new-address.profile` will be created in the `superface` folder as a result of. This is a Comlink file that decribes the input and output expectations that the API expects to achieve this use case.
+
+### Turn the Comlink into code
+
+To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
+
+```shell
+superface map lob address-management/new-address
+```
+
+### Add your API key
+
+If you don't already have your Lob API key in your environment, please add the following two variables: `LOB_USERNAME` and `LOB_PASSWORD`.
+
+Lob uses the Basic Auth security scheme but only expects that the Username field be populated, with the Password field left blank.
+
+You can use a Test Environment API Key from your [Lob Account Settings](https://dashboard.lob.com/settings/api-keys) as the value for the `LOB_USERNAME`.
+
+```bash
+LOB_USERNAME=<your-lob-api-key>
+LOB_PASSWORD=""
+```
+
+### Test it
+
+To test it you can use the `execute` command.
+
+```shell
+superface execute lob address-management/new-address
+```
+
+If successful, you will see a JSON response of the test address added to your Lob address list.
+
+```json
+RESULT: {
+  "address_city": "SAN FRANCISCO",
+  "address_country": "UNITED STATES",
+  "address_line1": "123 MAIN ST APT 4B",
+  "address_line2": null,
+  "address_state": "CA",
+  "address_zip": "94105-1804",
+  "company": "LOB",
+  "date_created": "2023-07-12T15:23:10.648Z",
+  "date_modified": "2023-07-12T15:23:10.648Z",
+  "description": "John Doe's Home Address",
+  "email": "john.doe@example.com",
+  "id": "adr_0619c5c15f8b9036",
+  "metadata": {},
+  "name": "JOHN DOE",
+  "object": "address",
+  "phone": "555-555-5555"
+}
+```
+
+</div>

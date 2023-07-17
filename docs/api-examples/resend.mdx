@@ -1,0 +1,89 @@
+# Resend
+
+In this example, we will show you how you can get started working with the [Resend](https://resend.com/) email API to produce a working use case that allows you to send an email from an application.
+
+:::info Before you start
+
+You'll need a Resend API token. Find out how to set that up in the [Resend documentation](https://resend.com/docs/introduction).
+
+:::
+
+<div class="count-steps-h3">
+
+### Install & Authorize Superface
+
+Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+
+```shell
+brew install superfaceai/cli/superface
+```
+
+If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
+
+```shell
+superface login
+```
+
+### Prepare the documentation
+
+Resend have an [OAS version](https://raw.githubusercontent.com/resendlabs/resend-openapi/main/resend.yaml) of their API, you can use this as the documentation source.
+
+```shell
+superface prepare https://raw.githubusercontent.com/resendlabs/resend-openapi/main/resend.yaml
+```
+
+Once the documentation has been indexed, you can create a profile for the use case you want to achieve.
+
+```shell
+superface new resend "send an email"
+```
+
+### Turn the Comlink into code
+
+To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider and a use case profile you want to work with.
+
+```shell
+superface map resend email-communication/email-sending
+```
+
+### Set up your inputs
+
+In order to send an email correctly, you will need to modify the boilerplate code from the Resend documentation so it contains a real email address. From the `superface` folder, open `email-communication.email-sending.resend.mjs` and modify the object that starts on line 23. Be sure to enter your own email address as the value for `to`.
+
+```js
+{
+  to: 'youremail@yourdomain.com',
+  from: 'onboarding@resend.dev',
+  subject: 'Hello, World!',
+  html: '<p>Hello, World!</p>',
+  text: 'Hello, World!',
+}
+```
+
+:::note Sending a test email
+Resend only allows test emails to be sent to the email address registered on the account. The `to` value in the example above must be set to this.
+:::
+
+### Add your API token
+
+If you don't already have your Resend API token in your environment, you can add it to your `.env` file as `RESEND_TOKEN=<your-resend-token>"`.
+
+You can create a new API Token from the [API Keys section](https://resend.com/api-keys) of your Resend Account. Please ensure the Permission is set for _Sending Access_.
+
+### Test it
+
+The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command.
+
+```shell
+superface execute resend email-communication/email-sending
+```
+
+If everything is successful you should see output similar to the response below:
+
+```bash
+RESULT: {
+  "id": "9d5c7482-d197-406f-b8f9-9a4c0cb7d5f9"
+}
+```
+
+</div>

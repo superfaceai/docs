@@ -1,0 +1,126 @@
+# HubSpot
+
+In this example, we will show you how you can get started working with the [HubSpot](https://hubspot.com/) API to produce a working use case that lists the companies in a HubSpot CRM.
+
+:::info Before you start
+
+You'll need a HubSpot Private App Access Token. Find out how to set that up in the [HubSpot private apps documentation](https://developers.hubspot.com/docs/api/private-apps).
+
+:::
+
+<div class="count-steps-h3">
+
+### Install & Authorize Superface
+
+Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+
+```shell
+brew install superfaceai/cli/superface
+```
+
+If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
+
+```shell
+superface login
+```
+
+### Prepare the documentation
+
+HubSpot's APIs are available as [Open API Specifications](https://api.hubspot.com/api-catalog-public/v1/apis), for this use case we will use the [Companies OAS document](https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/companies).
+
+```shell
+superface prepare https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/companies "hubspot"
+```
+
+Once the documentation has been indexed, you should check that the API `baseUrl` and `securityScheme` are correct in the `hubspot.provider.json` file. You can copy the example below if needed:
+
+```json title="hubspot.provider.json
+{
+  "name": "hubspot",
+  "defaultService": "default",
+  "parameters": [],
+  "services": [
+    {
+      "baseUrl": "https://api.hubapi.com",
+      "id": "default"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "type": "http",
+      "scheme": "bearer",
+      "id": "bearerAuth"
+    }
+  ]
+}
+```
+
+### Define your use case
+
+```shell
+superface new hubspot "list companies"
+```
+
+A file called `companies-management.read-companies.profile` will be created in the `superface` folder as a result. This is a Comlink file that decribes the input and output expectations that the API expects to achieve this use case.
+
+### Turn the Comlink into code
+
+To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
+
+```shell
+superface map hubspot companies-management/read-companies
+```
+
+### Add your API key
+
+If you don't already have your HubSpot API key in your environment, you can add it to your `.env` file as `HUBSPOT_API_KEY=<your-hubspot-api-key>`.
+
+### Set up your inputs
+
+In order to list the companies correctly, and to save you some time, you will need to modify the boilerplate code from the HubSpot documentation so it contains a real request object. From the `superface` folder, open `companies-management.read-companies.hubspot.mjs` and modify the object that starts on line 23.
+
+```js
+{
+    limit: 1,
+    archived: false
+}
+```
+
+### Test it
+
+To test it you can use the `execute` command.
+
+```shell
+superface execute hubspot companies-management/read-companies
+```
+
+If everything is successful you should see output similar to the response below:
+
+```json
+RESULT: {
+  "paging": {
+    "next": {
+      "after": "64878",
+      "link": "https://api.hubapi.com/crm/v3/objects/companies?archived=false&limit=1&after=64878"
+    }
+  },
+  "results": [
+    {
+      "archived": false,
+      "archivedAt": null,
+      "createdAt": "2022-09-20T15:25:10.907Z",
+      "id": "64878",
+      "properties": {
+        "createdate": "2022-09-20T15:25:10.907Z",
+        "domain": "company.com",
+        "hs_lastmodifieddate": "2022-09-20T15:25:21.684Z",
+        "hs_object_id": "64878",
+        "name": "company.com"
+      },
+      "updatedAt": "2022-09-20T15:25:21.684Z"
+    }
+  ]
+}
+```
+
+</div>

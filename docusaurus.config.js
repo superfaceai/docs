@@ -21,7 +21,7 @@ module.exports = {
       src: '/docs/crisp.js',
       'crisp-website-id': process.env.CRISP_WEBSITE_ID || '',
       defer: true,
-    },
+    }
   ],
 
   themeConfig: {
@@ -38,24 +38,24 @@ module.exports = {
           type: 'doc',
           docId: 'introduction',
           position: 'left',
-          label: 'Docs',
+          label: 'Documentation',
+        },
+        {
+          href: '/classic',
+          label: 'Classic Docs',
+          position: 'right',
         },
         {
           type: 'doc',
-          docId: 'reference/index',
-          position: 'left',
-          label: 'Reference',
-        },
-        {
-          href: '/catalog',
-          label: 'Catalog',
+          docId: 'classic/reference/index',
           position: 'right',
+          label: 'Classic Reference',
         },
         {
-          href: 'https://github.com/superfaceai/docs',
+          href: 'https://github.com/orgs/superfaceai/discussions',
           position: 'right',
           className: 'header-github-link',
-          'aria-label': 'GitHub repository',
+          'aria-label': 'GitHub Discussions',
         },
       ],
     },

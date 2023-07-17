@@ -1,0 +1,167 @@
+# Superface in 5 minutes
+
+This guide shows you how to pick a provider, generate Comlinks for the use case you want using the CLI, and use Superface OneSDK to run that use case.
+
+:::info Prerequisites
+
+This guide assumes you have [Node.js](https://nodejs.dev/) version 18.0.0 or newer installed.
+
+:::
+
+<div class="count-steps-h3">
+
+### Pick a use case
+
+This one is up to you. What do you want to achieve?
+
+A use case example would be _"Send an email and include click tracking"_, _"List all the users in a workspace"_, or _"Add users to a specific group"_.
+
+Ultimately, your use case is up to you.
+
+### Pick a provider
+
+The next step is to **pick a provider you would like to use**. Again, this is up to you but we recommend you look for API providers that have Open API Specification versions of their documentation, or that host their documentation with Readme.io.
+
+We've created some Quick Start guides for popular APIs such as [Notion](../api-examples/notion.mdx), [Slack](../api-examples/slack.mdx) and [Resend](../api-examples/resend.mdx).
+
+:::note Provider authentication
+
+In many cases you also need to set up provider credentials. The Superface CLI will inform you about what tokens to add to your development environment. Learn more about how to handle API credentials in [Setting provider API keys](../guides/api-keys.md).
+
+:::
+
+### Install the Superface CLI
+
+Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+
+```shell
+brew install superfaceai/cli/superface
+```
+
+If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI via your browser.
+
+```shell
+superface login
+```
+
+### Create your Comlinks
+
+The Superface CLI is used to create Comlinks. They handle use case definition, and the map that is used to create the code you need for your app to communicate correctly with the provider you want to work with.
+
+First, prepare the documentation for the provider you want to use.
+
+```shell
+superface prepare <URL for provider documentation>
+```
+
+Next, create the Comlink profile for the use case you want to achieve.
+
+```shell
+superface new <provider-name> "your use case"
+```
+
+Finally, create a Comlink map that you can use in your application.
+
+```shell
+superface map <provider-name> <scope>/<use-case>
+```
+
+The output from all these commands will be a folder named `superface` with the following Comlink files:
+
+```shell
+superface/
+  <provider>.provider.json
+  <scope>.<use-case>.profile
+  <scope>.<use-case>.<provider>.map.js
+  <scope>.<use-case>.<provider>.mjs
+```
+
+You now have all the files you need to use these Comlinks in your application. You can run it using the `superface execute` command from your terminal, but you can also move them over to the app you're developing.
+
+### Install OneSDK
+
+In your app directory, install the OneSDK library:
+
+```shell
+npm install @superfaceai/one-sdk@beta
+```
+
+### Add code to your app
+
+Now you can use OneSDK in your app. Create an `index.mjs` file with the following Node.js code.
+
+:::note Not sure what code to use?
+If you want to find the exact code to use here, you can find it in the [My Comlinks](https://superface.ai/app) section of your Superface Dashboard.
+:::
+
+```js title="index.mjs"
+import { OneClient } from '@superfaceai/one-sdk';
+
+async function main() {
+  const client = new OneClient({
+    assetsPath: './superface',
+  });
+
+  // Assign our CLI generated profile so it matches
+  // the 'name' in the .profile file.
+  // Example: email-communication/email-sending
+
+  const profile = await client.getProfile('<profileName>');
+  const useCase = profile.getUseCase('<usecaseName>'); // The <usecaseName> is also found in the .profile file
+
+  try {
+    const result = await useCase
+      .perform(
+        {
+          // Input parameters as defined in profile:
+          <key>: '<value>',
+        },
+        {
+          provider: '<providerName>',
+          parameters: {
+            // Provider specific integration parameters:
+            '<integrationParameterName>': '<integrationParameterValue>',
+          },
+          security: {
+            // Provider specific security values:
+            '<securityValueId>': {
+              // Security values as described in provider or on profile page
+            },
+          },
+        }
+      );
+
+  // output result on success
+    console.log("RESULT:", JSON.stringify(result, null, 2));
+  } catch(e) {
+    // output result on error
+    console.log("ERROR:", JSON.stringify(e, null, 2));
+  }
+}
+
+main();
+```
+
+### Test and confirm
+
+It's time to run your app! Because the Superface OneSDK is built with Wasm, it requires that you pass the `--experimental-wasi-unstable-preview1` flag when running Node.js (>18.0.0).
+
+```shell
+node --experimental-wasi-unstable-preview1 index.mjs
+```
+
+### Debugging
+
+If you run into errors and need more information about what's happening under the hood, you can set the environment variable `ONESDK_LOG` to `debug` to see API calls from OneSDK to the API of your chosen provider:
+
+:::caution
+
+This can print out potentially sensitive information, like API keys and access tokens.
+
+:::
+
+```shell
+ONESDK_LOG="debug" node --experimental-wasi-unstable-preview1 index.mjs
+```
+
+</div>

@@ -1,0 +1,107 @@
+# Quick Start (CLI)
+
+This guide shows you how to set up and use the Superface CLI to work with an API provider to generate the Comlinks required to work with OneSDK.
+
+:::info Before you start
+
+Superface requires [Node.js](https://nodejs.dev/) version 18.0.0 or newer to be installed.
+
+:::
+
+<div class="count-steps-h3">
+
+### Install & Authorize
+
+Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+
+```shell
+brew install superfaceai/cli/superface
+```
+
+If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI via your browser.
+
+```shell
+superface login
+```
+
+### Prepare your use case
+
+Superface accepts Open API Specification format documentation, either from local files or remote URLs as well as the URL of any documentation hosted by [Readme.io](https://readme.io).
+
+```shell
+superface prepare <url or path to local file> "<optional-provider-name>"
+```
+
+The minimum requirement for `prepare` is the URL or path to local file, however if you want to control the naming of the provider, you can do so.
+
+Once the documentation has been indexed, you can create a profile for the use case you want to achieve.
+
+```shell
+superface new <provider-name> "your use case"
+```
+
+### Turn the Comlink into code
+
+To convert the profile into the use case map and boilerplate code, run the following command and include the name of the provider and the use case profile you want to use.
+
+By default, Node.js code will be generated, however you can use the additional `python` option to get Python code instead.
+
+#### Node.js
+
+```shell
+superface map <provider-name> <scope>/<use-case>
+```
+
+#### Python
+
+```shell
+superface map <provider-name> <scope>/<use-case> python
+```
+
+### Test it
+
+The resulting code is added to the `superface` folder in your project. To test it you can use the `execute` command.
+
+#### Node.js
+
+```shell
+superface execute <provider> <scope>/<use-case>
+```
+
+#### Python
+
+```shell
+superface execute <provider> <scope>/<use-case> python
+```
+
+:::note Provider authentication
+
+In many cases you also need to set up provider credentials. The CLI will inform you of the name of the variable that should be added to your development environment. To learn how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
+
+:::
+
+### What files are created?
+
+After running all the above commands, you will find a folder named `superface` in your current working directory, with the following structure:
+
+```shell
+superface/
+  <provider-name>.provider.json
+  <scope>.<use-case>.profile
+  <scope>.<use-case>.<provider-name>.map.js
+  <scope>.<use-case>.<provider-name>.mjs
+```
+
+These files are used by OneSDK to enabled your application to communicate with the provider you are working with. `<provider-name>`, `<scope>`, and `<use-case>` will be replaced with real values based on the provider and use case you specified.
+
+### Additional commands
+
+`superface whoami` shows the current logged in user.
+
+`superface logout` logs out the current user.
+
+`--quiet` or `-q` flag will reduce the amount of terminal output you see.
+
+For information on each CLI command you can run `superface --help` at any time.
+
+</div>

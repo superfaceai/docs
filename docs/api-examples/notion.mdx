@@ -1,0 +1,99 @@
+# Notion
+
+In this example, we will show you how you can get started working with the [Notion API](https://developers.notion.com) and produce a working use case that allows you to list all of the users in your Notion workspace.
+
+:::info Before you start
+
+You will need to get an API token for a _Notion Internal Integration_ that is valid for the workspace you want to access. Find out how to set that up in the [Notion Authorization documentation](https://developers.notion.com/docs/authorization#making-api-requests-with-an-internal-integration).
+
+Please ensure that the capabilities for your Notion Internal Integration include the User Capability "Read user information without an email address".
+
+:::
+
+<div class="count-steps-h3">
+
+### Install & Authorize Superface
+
+Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+
+```shell
+brew install superfaceai/cli/superface
+```
+
+If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
+
+```shell
+superface login
+```
+
+### Prepare the documentation
+
+Notion's documentation is hosted by Readme.io, which is a format that Superface can accept without any additional changes so you can copy and paste the URL for the `GET users` endpoint.
+
+```shell
+superface prepare https://developers.notion.com/reference/get-users
+```
+
+Once the documentation has been indexed, you will need to edit the `notion.provider.json` that has been created to ensure that the correct API endpoint and security policy are used. The exact provider definition you need to use is below:
+
+```json title="notion.provider.json"
+{
+  "name": "notion",
+  "defaultService": "default",
+  "parameters": [],
+  "services": [
+    {
+      "baseUrl": "https://api.notion.com",
+      "id": "default"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "type": "http",
+      "scheme": "bearer",
+      "id": "bearerAuth"
+    }
+  ]
+}
+```
+
+### Define your use case
+
+```shell
+superface new notion "list all users"
+```
+
+### Turn the Comlink into code
+
+To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
+
+```shell
+superface map notion notion-workspace/user-listing
+```
+
+### Add your API key
+
+If you don't already have your Notion API key in your environment, you can add it to your `.env` file as `NOTION_TOKEN=<your-notion-api-key>`.
+
+### Set up your inputs
+
+In order to list the users correctly, you will need to modify the boilerplate code from the Notion documentation so it contains a real request object. From the `superface` folder, open `notion-workspace.user-listing.notion.mjs` and modify the object that starts on line 23.
+
+```js title="notion-workspace.user-listing.notion.mjs"
+{
+    notionVersion : '2022-06-28',
+    page_size: 10,
+}
+```
+
+### Test it
+
+To test it you can use the `execute` command.
+
+```shell
+superface execute notion notion-workspace/user-listing
+```
+
+If successful, you will see a JSON response listing the users in your workspace.
+
+</div>

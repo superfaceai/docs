@@ -5,74 +5,124 @@ id: introduction
 
 # Introduction
 
-⚡️ Superface will help you quickly use and manage integrations, so that you can focus on developing your application.
+Superface is the AI for APIs. It makes creating API integrations faster, and more manageable so you can focus on developing your application.
 
-💸 Developing integrations over and over is expensive. Use integrations developed by others, just as you'd use npm packages or crates.
+## Superface Documentation
 
-🔐 You data is safe, Superface isn't a proxy nor a middle-man.
+<div className="row padding-bottom--lg">
+  <div className="col col--6">
+    <div className="card shadow">
+      <a href="./introduction/getting-started" class="menu__link">
+      <div className="card__body">
+        <h3>🏃 Quick Starts</h3>
+        <p>Examples of how to get up and running creating Comlinks with the Superface CLI and OneSDK.
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
 
-🎓 This approach gives you a framework to decouple the lifecycle of your application and the integrations it uses.
+<div className="col col--6">
+    <div className="card shadow">
+      <a href="./guides/how-to-create" class="menu__link">
+      <div className="card__body">
+        <h3>🔎 Guides</h3>
+        <p>Looking for more in depth knowledge? Check out our list of guides that get into greater detail.
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+<div className="col col--6">
+    <div className="card shadow">
+      <a href="./api-examples/hubspot" class="menu__link">
+      <div className="card__body">
+        <h3>💼 Use Case Examples</h3>
+        <p>From HubSpot to Pipedrive. Use case examples demonstrate different uses of Superface with real-world APIs.
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+<div className="col col--6">
+    <div className="card shadow">
+      <a href="./examples/nodejs" class="menu__link">
+      <div className="card__body">
+        <h3>💻 SDK Examples</h3>
+        <p>Implementation examples for OneSDK using Node.js, Python and Cloudflare Workers.
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+  <div className="col col--6">
+    <div className="card shadow">
+      <a href="./support" class="menu__link">
+      <div className="card__body">
+        <h3>ℹ️ Help & Support</h3>
+        <p>If you're looking for help, support or want to talk business. We're here for you!
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+<div className="col col--6">
+    <div className="card shadow">
+      <a href="./faq" class="menu__link">
+      <div className="card__body">
+        <h3>❓ FAQs</h3>
+        <p>View some of the frequently asked questions regarding Superface, CLI and OneSDK.
+        </p>
+      </div>
+      </a>
+    </div>
+  </div>
+</div>
 
-💥 Ready for more? Use advanced features like [provider failover](./guides/using-multiple-providers.mdx#failover) and [monitoring](./guides/integrations-monitoring.mdx).
-
-🧐 Superface is a language and a protocol for abstracting integrations as application use cases. It allows use case discovery and distribution of integration code at runtime.
-
-## Fast track ⏱️
-
-The easiest way to start is with [OneSDK](https://github.com/superfaceai/one-sdk-js) for Node.js and with an existing [use case](./reference//glossary.md#usecase). Let's say you want to see what repositories Superface has on GitHub.
-
-Install [Node.js](https://nodejs.org/en/download/) and create a new project with [OneSDK](https://github.com/superfaceai/one-sdk-js):
-
-```shell
-mkdir my_project
-cd my_project
-npm init -y
-npm install --save @superfaceai/one-sdk
-```
-
-Create `index.js` file, and insert the following code:
-
-```js
-const { SuperfaceClient } = require('@superfaceai/one-sdk');
-const sdk = new SuperfaceClient();
-
-async function main() {
-  // Load the profile identified by profile ID and version
-  const profile = await sdk.getProfile('vcs/user-repos@2.0.1');
-
-  // Load use case, pass use case name as argument
-  const useCase = profile.getUseCase('UserRepos');
-
-  // Invoke the use case, pass user in perform input parameter and provider name in perform options
-  const result = await useCase
-    .perform({
-      user: 'superfaceai', // use case input, in our case GitHub user name
-    }, {
-      provider: 'github' // provider name
-    });
-
-  // Handle the result
-  try {
-    const data = result.unwrap();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-main();
-```
-
-Run it:
-
-```shell
-node index.js
-```
-
-:::tip
-
-Check out [how Superface works](./how-superface-works.mdx) to learn more about what goes on under the hood.
-
-Or read [getting started](./getting-started.mdx) for a more detailed step-by-step guide.
-
+:::caution Deprecation Notice
+We recently started deprecating the previous version of Superface CLI (before 4.0.0), OneSDK (before 3.0.0, for Node.js only) and our provider use case catalog. If you are looking for the documentation for these, check out our [Classic Docs](./classic) section.
 :::
+
+## Why Superface?
+
+Superface can be mad beneficial! Here are four reasons why we think you should try it.
+
+<div className="row padding-bottom--lg">
+  <div className="col col--6">
+    <div className="card shadow">
+      <div className="card__body">
+        <h3>💸 Developing integrations over and over is expensive</h3>
+        <p>Use integrations developed by others, just as you'd use npm packages or crates.
+        </p>
+      </div>
+    </div>
+  </div>
+
+<div className="col col--6">
+    <div className="card shadow">
+      <div className="card__body">
+        <h3>🔐 Your data is safe</h3>
+        <p>Superface isn't a proxy nor a middle-man. Your application connects directly to the API you want to use.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div className="col col--6">
+    <div className="card shadow">
+      <div className="card__body">
+        <h3>🎓 Decoupled workflow</h3>
+        <p>This approach gives you a framework to decouple the lifecycle of your application and the integrations it uses.
+        </p>
+      </div>
+    </div>
+  </div>
+    <div className="col col--6">
+    <div className="card shadow">
+      <div className="card__body">
+        <h3>🧐 Abstracted Integrations</h3>
+        <p>Superface is a language and a protocol for abstracting integrations as application use cases. Allowing you to unify your integration approach in code regardless of the API provider.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

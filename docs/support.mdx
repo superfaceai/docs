@@ -1,5 +1,6 @@
 ---
 slug: /support
+displayed_sidebar: mainSidebar
 ---
 
 # Support
@@ -10,79 +11,41 @@ slug: /support
       <div className="card__body">
         <h3>Reach out</h3>
         <p>
-          💬 <a href="#" onClick={() => { $crisp.push(['do', 'chat:open']); }}>
+          💬{' '}
+          <a
+            href="#"
+            onClick={() => {
+              $crisp.push(['do', 'chat:open']);
+            }}
+          >
             Chat
           </a>
           <br />
           ✉️ <a href="mailto:support@superface.ai">support@superface.ai</a>
           <br />
-          🐥 <a href="https://twitter.com/superfaceai" target="_blank">
+          🐥{' '}
+          <a href="https://twitter.com/superfaceai" target="_blank">
             @superfaceai
           </a>
         </p>
       </div>
     </div>
   </div>
-
   <div className="col col--6">
     <div className="card shadow">
       <div className="card__body">
-        <h3>Report bugs and feedback</h3>
+        <h3>GitHub Discussions</h3>
         <p>
-          Give us feedback, report software bugs, and suggest what you'd
-          like to see in Superface.
-          <br />
-        </p>
-        <p>
-          <a href="https://github.com/superfaceai/one-sdk-js" target="_blank">
-            One SDK
-          </a> · <a href="https://github.com/superfaceai/cli" target="_blank">
-            CLI
-          </a> · <a href="https://github.com/superfaceai/station" target="_blank">
-            Capabilities
-          </a> 
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div className="row">
-  <div className="col col--6">
-    <div className="card shadow">
-      <div className="card__body">
-        <h3>Join Discord community</h3>
-        <p>
-          Join other users and our team on Discord to talk anything
-          Superface.
+          Join our team and other users on GitHub Discussions to share ideas,
+          get updates and ask anything Superface.
         </p>
       </div>
       <div className="card__footer">
         <a
-          href="https://discord.gg/sYJq6FYJCW"
+          href="https://github.com/orgs/superfaceai/discussions"
           className="button button--primary button--block"
         >
-          Join Discord
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div className="col col--6">
-    <div className="card shadow">
-      <div className="card__body">
-        <h3>Let's talk</h3>
-        <p>
-          Shedule a Zoom call with us to get one-on-one support and
-          share your feedback.
-        </p>
-      </div>
-      <div className="card__footer">
-        <a
-          href="https://calendly.com/v_superface/superface-product-introduction"
-          className="button button--primary button--block"
-        >
-          Book a Zoom call
+          Ask us a question
         </a>
       </div>
     </div>

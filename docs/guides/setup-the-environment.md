@@ -1,26 +1,24 @@
-# How to setup local environment
+# Setup your local environment
 
-This document guides you through the installation and basic configuration of components needed to create own API integration, so that you can publish it, or use it locally in your application.
+This document guides you through the installation and basic configuration of components needed to create your own API integration that is ready to use in your application.
 
 ## Prerequisites
 
-To install and use Superface CLI, you will need to have installed [Node.js](https://nodejs.dev/learn/how-to-install-nodejs) version 12 or higher, and `npm`.
+To install and use Superface CLI, you will need to have installed [Node.js](https://nodejs.dev/learn/how-to-install-nodejs) >= version 18.0.0, and `npm`.
 
 ## Install the CLI
 
 The Superface CLI is a Node.js application. It provides all the tooling needed to author and manage your integrations with Superface.
 
 ```shell
-npm install --global @superfaceai/cli
+brew install superfaceai/cli/superface
 ```
 
+<!-- ```shell
+npm install --global @superfaceai/cli
+``` -->
+
 ## Create a new project
-
-:::note
-
-If you have OpenAPI specification of the API you want to integrate you can use [Interactive designer](./interactive-designer) to bootstrap the project.
-
-:::
 
 Start with creating a new directory for the project
 
@@ -35,23 +33,15 @@ Optionally create `package.json` by running the following command:
 npm init
 ```
 
-Now initialize Superface local folder structure in the project root.
+Finally, you can install [OneSDK](/reference/one-sdk).
 
 ```shell
-superface init
+npm i @superfaceai/one-sdk@beta
 ```
 
-It will create `superface` folder with superface configuration file `super.json`.
+## (Optional) Visual Studio Code extension
 
-And as last step install [OneSDK](/reference/one-sdk).
-
-```shell
-npm install --save @superfaceai/one-sdk
-```
-
-## (Optional) Install the Visual Studio Code extension
-
-You can install the Visual Code Code extension which will give you:
+You can install the VSCode extension which will give you:
 
 - Syntax highlighting for [Comlink](/comlink)
 - Code snippets
