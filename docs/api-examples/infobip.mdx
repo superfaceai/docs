@@ -36,6 +36,10 @@ superface prepare https://www.infobip.com/docs/api/channels/sms/sms-messaging/ou
 
 Once the documentation has been indexed, you will need to edit the `infobip.provider.json` that has been created to ensure that the correct API endpoint and security policy are used. The exact provider definition you need to use is below:
 
+:::note INFOBIP BASE URL
+InfoBip uses a personalized base URL for each customer. You will need to replace the `baseURL` value in the provider example below with your own. You can find yours on the [API documentation](https://www.infobip.com/docs/api) or [InfoBip Portal Homepage](https://portal.infobip.com/homepage/).
+:::
+
 ```json title="infobip.provider.json"
 {
   "name": "infobip",
@@ -43,7 +47,7 @@ Once the documentation has been indexed, you will need to edit the `infobip.prov
   "services": [
     {
       "id": "default",
-      "baseUrl": "https://lz5x92.api.infobip.com"
+      "baseUrl": "<YOUR_INFOBIP_BASE_URL>"
     }
   ],
   "securitySchemes": [
@@ -78,7 +82,11 @@ superface map infobip sms-messaging/outbound-sms
 
 ### Add your API key
 
-If you don't already have your Infobip API key in your environment, you can add it to your `.env` file as `INFOBIP_API_KEY="App <your-infobip-api-key>"`.
+If you don't already have your Infobip API key in your environment, you can add it to your `.env` file.
+
+:::note
+You need to include the prefix `App` before your API key in your environment, this will ensure that Superface can meet the format required by InfoBip's API. For example, `INFOBIP_API_KEY="App <your-infobip-api-key>"`.
+:::
 
 ### Set up your inputs
 
