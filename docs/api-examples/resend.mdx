@@ -51,13 +51,13 @@ superface map resend email-communication/email-sending
 In order to send an email correctly, you will need to modify the boilerplate code from the Resend documentation so it contains a real email address. From the `superface` folder, open `email-communication.email-sending.resend.mjs` and modify the object that starts on line 23. Be sure to enter your own email address as the value for `to`.
 
 ```js
-     {
-        to : 'youremail@yourdomain.com',
-        from : 'onboarding@resend.dev',
-        subject : 'Hello, World!',
-        html : '<p>Hello, World!</p>',
-        text : 'Hello, World!',
-      }
+{
+  to : 'youremail@yourdomain.com',
+  from : 'onboarding@resend.dev',
+  subject : 'Hello, World!',
+  html : '<p>Hello, World!</p>',
+  text : 'Hello, World!',
+}
 ```
 
 :::note Sending a test email
