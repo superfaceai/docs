@@ -21,6 +21,70 @@
     {
       "source": "/docs/guides/test-capability.md",
       "destination": "/docs/guides/test-use-case.md"
+    },
+    {
+      "source": "/docs/getting-started",
+      "destination": "/docs/introduction/getting-started"
+    },
+    {
+      "source": "/docs/guides/how-to-create",
+      "destination": "/docs/classic/guides/how-to-create"
+    },
+    {
+      "source": "/docs/guides/setup-the-environment",
+      "destination": "/docs/classic/guides/setup-the-environment"
+    },
+    {
+      "source": "/docs/guides/create-new-use-case",
+      "destination": "/docs/classic/guides/create-new-use-case"
+    },
+    {
+      "source": "/docs/guides/add-new-provider",
+      "destination": "/docs/classic/guides/add-new-provider"
+    },
+    {
+      "source": "/docs/guides/map-use-case-to-provider",
+      "destination": "/docs/classic/guides/map-use-case-to-provider"
+    },
+    {
+      "source": "/docs/guides/run-use-case",
+      "destination": "/docs/classicguides/run-use-case/"
+    },
+    {
+      "source": "/docs/guides/test-use-case",
+      "destination": "/docs/classic/guides/test-use-case"
+    },
+    {
+      "source": "/docs/guides/publishing",
+      "destination": "/docs/classic/guides/publishing"
+    },
+    {
+      "source": "/docs/guides/interactive-designer",
+      "destination": "/docs/classic/guides/interactive-designer"
+    },
+    {
+      "source": "/docs/reference",
+      "destination": "/docs/classic/reference"
+    },
+    {
+      "source": "/docs/reference/one-sdk",
+      "destination": "/docs/classic/reference/one-sdk"
+    },
+    {
+      "source": "/docs/how-superface-works",
+      "destination": "/docs/classic/how-superface-works"
+    },
+    {
+      "source": "/docs/advanced-usage",
+      "destination": "/docs/classic/advanced-usage"
+    },
+    {
+      "source": "/docs/verification",
+      "destination": "/docs/classic/verification"
+    },
+    {
+      "source": "/docs/upgrade/one-sdk-v2",
+      "destination": "/docs/classic/upgrade/one-sdk-v2"
     }
   ]
 }
