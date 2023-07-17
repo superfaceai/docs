@@ -60,19 +60,17 @@ In order to send an email correctly, you will need to modify the boilerplate cod
       }
 ```
 
+:::note Sending a test email
+Resend only allows test emails to be sent to the email address registered on the account. The `to` value in the example above must be set to this.
+:::
+
 ### Add your API key
 
 If you don't already have your Resend API token in your environment, you can add it to your `.env` file as `RESEND_TOKEN=<your-resend-token>"`.
 
-You can create a new API Token from the [API Keys section](https://resend.com/api-keys) of your Resend Account.
+You can create a new API Token from the [API Keys section](https://resend.com/api-keys) of your Resend Account. Please ensure the Permission is set for _Sending Access_.
 
 ### Test it
-
-:::note Don't forget your authentication
-
-Superface expects an authorization token for Resend. You can add this as `RESEND_TOKEN` in your environment or create an `.env` file in the `superface` folder that the CLI created. To learn more how to handle API credentials, see [Setting provider API keys](../guides/api-keys.md).
-
-:::
 
 The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command.
 
