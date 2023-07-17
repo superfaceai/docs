@@ -1,6 +1,6 @@
 # Slack
 
-In this example, we will show you how you can get started working with the [Slack API](https://api.slack.com/) to produce a working use case that allows you to list all of the users in your Slack workspace. Here we are using an endpoint from Slack's [Web API](https://api.slack.com/web) that requires a more minimal level of authentication.
+In this example, we will show you how you can get started working with the [Slack API](https://api.slack.com/) to produce a working use case that allows you to list 5 public channels in your Slack workspace. Here we are using an endpoint from Slack's [Web API](https://api.slack.com/web) that requires a more minimal level of authentication.
 
 :::info Before you start
 
@@ -46,7 +46,7 @@ Next, you will need to edit the `slack.provider.json` that has been created to e
   ],
   "securitySchemes": [
     {
-      "id": "bearer_token",
+      "id": "slackBearerToken",
       "type": "http",
       "scheme": "bearer"
     }
@@ -58,7 +58,7 @@ Next, you will need to edit the `slack.provider.json` that has been created to e
 ### Define your use case
 
 ```shell
-superface new slack "list all workspace members"
+superface new slack "list all channels"
 ```
 
 ### Turn the Comlink into code
@@ -66,7 +66,19 @@ superface new slack "list all workspace members"
 To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
 
 ```shell
-superface map slack workspace-management/list-users
+superface map slack slack-channels/fetch-channels
+```
+
+### Set up your inputs
+
+In order to process this request correctly, you will need to modify the boilerplate code from the Slack documentation to remove some values. From the `superface` folder, open `slack-channels.fetch-channels.slack.mjs` and modify the object that starts on line 23.
+
+```js title="slack-channels.fetch-channels.slack.mjs"
+{
+    exclude_archived: true,
+    types : 'public_channel',
+    limit: 5
+},
 ```
 
 ### Add your API key
@@ -78,11 +90,9 @@ If you don't already have your Slack API token in your environment, you can add 
 To test this use case you can use the `execute` command.
 
 ```shell
-superface execute slack workspace-management/list-users
+superface execute slack slack slack-channels/fetch-channels
 ```
 
-If you get an error at this point, you should check the inputs that are being passed as part of the request made by `useCase.perform` in `workspace-management.list-users.slack.mjs`, as you may need to change it to match your own Slack instance.
-
-If everything is successful you will see a JSON response listing the users in your Slack workspace.
+If everything is successful you will see a JSON response listing 5 public channels in your Slack workspace.
 
 </div>
