@@ -41,7 +41,8 @@ module.exports = {
           label: 'Documentation',
         },
         {
-          href: '/classic',
+          type: 'doc',
+          docId: 'classic/index',
           label: 'Classic Docs',
           position: 'right',
         },

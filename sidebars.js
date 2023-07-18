@@ -16,15 +16,15 @@ const guides = {
   label: 'Guides',
   collapsed: true,
   items: [
-        'guides/how-to-create',
-        'guides/setup-the-environment',
-        'guides/editing-provider-files',
-        'guides/setting-security-schemes',
-        'guides/using-multiple-providers',
-        'guides/debugging-onesdk',
-        'guides/test-use-case',
-        'guides/api-keys'
-      ]
+    'guides/how-to-create',
+    'guides/setup-the-environment',
+    'guides/editing-provider-files',
+    'guides/setting-security-schemes',
+    'guides/using-multiple-providers',
+    'guides/debugging-onesdk',
+    'guides/test-use-case',
+    'guides/api-keys'
+  ]
 };
 
 const classicGuides = {
@@ -75,8 +75,7 @@ module.exports = {
           type: 'doc',
           id: 'introduction/getting-started',
           label: 'Superface in 5 minutes'
-        }
-        ,
+        },
         'introduction/quick-start',
         'introduction/quick-start-sdk'
       ]
