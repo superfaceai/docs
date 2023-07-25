@@ -205,3 +205,7 @@ aside.docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme
   /* needed because of invisible .anchor with display: block */
   float: left;
 }
+
+.card {
+  margin-bottom: 1rem;
+}
