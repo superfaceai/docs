@@ -83,7 +83,8 @@ module.exports = {
     guides,
     {
       type: 'category',
-      label: 'Use Case Examples',
+      label: 'API Examples',
+      link: { type: 'doc', id: 'api-examples/index' },
       collapsed: true,
       items: [
         'api-examples/hubspot',
