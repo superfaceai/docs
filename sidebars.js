@@ -101,6 +101,7 @@ module.exports = {
       type: 'category',
       label: 'SDK Examples',
       collapsed: true,
+      link: { type: 'doc', id: 'examples/index' },
       items: [
         'examples/nodejs',
         'examples/cloudflare-workers',
