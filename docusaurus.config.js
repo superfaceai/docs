@@ -30,7 +30,7 @@ module.exports = {
       logo: {
         alt: 'Superface',
         src: 'img/superface_logo.svg',
-        href: '/',
+        href: 'http://superface.ai',
       },
       style: 'dark',
       items: [
