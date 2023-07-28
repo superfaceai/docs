@@ -110,6 +110,11 @@ module.exports = {
     },
     {
       type: 'doc',
+      id: 'videos/index',
+      label: 'Videos'
+    },
+    {
+      type: 'doc',
       id: 'support',
       label: 'Support'
     },
