@@ -109,9 +109,15 @@ module.exports = {
       ]
     },
     {
-      type: 'doc',
-      id: 'videos/index',
-      label: 'Videos'
+      type: 'category',
+      link: { type: 'doc', id: 'videos/index' },
+      label: 'Videos',
+      collapsed: true,
+      items: [
+        'videos/90-seconds',
+        'videos/extended-cli-walkthrough',
+        'videos/output-python-code'
+      ]
     },
     {
       type: 'doc',
