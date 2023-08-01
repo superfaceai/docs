@@ -4,7 +4,7 @@ This guide shows you how to set up and use the Superface CLI to work with an API
 
 :::info Before you start
 
-Superface requires [Node.js](https://nodejs.dev/) version 18.0.0 or newer to be installed.
+Superface CLI requires [Node.js](https://nodejs.dev/) version 18.0.0 or newer to be installed.
 
 :::
 
@@ -38,6 +38,12 @@ Once the documentation has been indexed, you can create a profile for the use ca
 
 ```shell
 superface new <provider-name> "your use case"
+```
+
+If you want to have control over the name of the Comlink profile that is created you can specify the name as part of the `new` command, for example:
+
+```shell
+superface new resend "send an email" resend/send-an-email
 ```
 
 ### Turn the Comlink into code
