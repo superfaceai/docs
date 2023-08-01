@@ -56,3 +56,13 @@ Specific questions related to the Superface CLI.
 ### How do I keep my CLI up to date?
 
 New releases and changelog information can be found in the [Announcements](https://github.com/orgs/superfaceai/discussions/categories/announcements) section of GitHub Discussions. You can also check for updates by running `brew update` and looking for updates to the `superfaceai/cli` tap.
+
+### Is it possible to specify a Comlink profile ID?
+
+Yes. You have the option to either use the default profile ID that Superface chooses for your use case, or you can specify an exact ID. This is done when running the `superface new` command, as follows:
+
+```shell
+superface new resend "send an email" resend/send-an-email
+```
+
+The format you can use is `<provider-name>/<your-chosen-profile-id>`.
