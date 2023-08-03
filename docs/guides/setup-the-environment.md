@@ -8,15 +8,15 @@ To install and use Superface CLI, you will need to have installed [Node.js](http
 
 ## Install the CLI
 
-The Superface CLI is a Node.js application. It provides all the tooling needed to author and manage your integrations with Superface.
+The Superface CLI provides all the tooling needed to author the Comlinks for your integration and can be installed using [Homebrew](https://brew.sh/) on MacOS/Linux or [NPM](https://www.npmjs.com/) on Windows.
 
-```shell
+```shell title="Install with Homebrew"
 brew install superfaceai/cli/superface
 ```
 
-<!-- ```shell
-npm install --global @superfaceai/cli
-``` -->
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
 
 ## Create a new project
 
