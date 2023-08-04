@@ -42,14 +42,14 @@ Once the documentation has been indexed, you can create a profile for the use ca
 superface new pipedrive "list all organizations"
 ```
 
-A file called `organizations-management.get-organizations.profile` will be created in the `superface` folder as a result of. This is a Comlink file that decribes the input and output expectations that the API expects to achieve this use case.
+A file called `organizations-management.get-collection.profile` will be created in the `superface` folder as a result of. This is a Comlink file that decribes the input and output expectations that the API expects to achieve this use case.
 
 ### Turn the Comlink into code
 
 To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
 
 ```shell
-superface map pipedrive organizations-management/get-organizations
+superface map pipedrive organizations-management/get-collection
 ```
 
 ### Add your API key
@@ -60,9 +60,9 @@ For help finding your Pipedrive API Key, please refer to their [How to find the 
 
 ### Set up your inputs
 
-In order to list the organizations correctly, you will need to modify the boilerplate code from the Pipedrive documentation so it contains a real request object. From the `superface` folder, open `organizations-management.get-organizations.pipedrive.mjs` and modify the object that starts on line 23.
+In order to list the organizations correctly, you will need to modify the boilerplate code from the Pipedrive documentation so it contains a real request object. From the `superface` folder, open `organizations-management.get-collection.pipedrive.mjs` and modify the object that starts on line 23.
 
-```js title="organizations-management.get-organizations.pipedrive.mjs"
+```js title="organizations-management.get-collection.pipedrive.mjs"
 {
   start: 0,
   limit: 10,
@@ -75,7 +75,7 @@ In order to list the organizations correctly, you will need to modify the boiler
 To test it you can use the `execute` command.
 
 ```shell
-superface execute pipedrive organizations-management/get-organizations
+superface execute pipedrive organizations-management/get-collection
 ```
 
 If successful, you will see a JSON response listing the contacts in your CRM workspace.
