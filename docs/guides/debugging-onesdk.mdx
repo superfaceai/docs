@@ -14,36 +14,18 @@ You can set the debug level for OneSDK via your environment. There are two optio
 ONESDK_LOG=warn #trace, error, info, warn
 ```
 
-`ONESDK_LOG` sets the general logging level for OneSDK. You can choose from four different logging verbosity levels:
-
-#### Warn
-
-What does Warn do...
-
-#### Error
-
-What does Error do...
-
-#### Info
-
-What does Info do...
-
-#### Trace
-
-What does Trace do...
-
-### ONESDK_DEV_LOG
-
-The OneSDK Dev Log is a greater level of depth, and can be switched on to provide...
-
-```shell
-ONESDK_DEV_LOG=on #off, on
-```
+`ONESDK_LOG` sets the general logging level for OneSDK.
 
 ## Setting debug options at runtime
 
 You can also pass these variables to your application at runtime. For example:
 
 ```shell
-DEBUG=warn node index.mjs
+ONESDK_LOG=trace node index.mjs
+```
+
+You can also provide this option when using the CLI during the `execute` command:
+
+```shell
+ONESDK_LOG=trace superface execute <provider-name> <scope/use-case>
 ```
