@@ -72,13 +72,14 @@ module.exports = {
       label: 'Getting started',
       collapsed: false,
       items: [
+        'introduction/install-superface',
+        'introduction/quick-start',
+        'introduction/quick-start-sdk',
         {
           type: 'doc',
           id: 'introduction/getting-started',
           label: 'Superface in 5 minutes'
-        },
-        'introduction/quick-start',
-        'introduction/quick-start-sdk'
+        }
       ]
     },
     guides,
