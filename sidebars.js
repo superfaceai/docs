@@ -22,6 +22,7 @@ const guides = {
     'guides/setting-security-schemes',
     'guides/comlink-profile-multiple-providers',
     'guides/using-multiple-providers',
+    'guides/integrate-onesdk',
     'guides/debugging-onesdk',
     'guides/test-use-case',
     'guides/api-keys'
