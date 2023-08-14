@@ -156,7 +156,7 @@ node --experimental-wasi-unstable-preview1 index.mjs
 
 ### Debugging
 
-If you run into errors and need more information about what's happening under the hood, you can set the environment variable `ONESDK_LOG` to `debug` to see API calls from OneSDK to the API of your chosen provider:
+If you run into errors and need more information about what's happening under the hood, you can set the environment variable `ONESDK_LOG` to `on` to see API calls from OneSDK to the API of your chosen provider:
 
 :::caution
 
@@ -165,7 +165,7 @@ This can print out potentially sensitive information, like API keys and access t
 :::
 
 ```shell
-ONESDK_LOG="debug" node --experimental-wasi-unstable-preview1 index.mjs
+ONESDK_LOG="on" node --experimental-wasi-unstable-preview1 index.mjs
 ```
 
 </div>
