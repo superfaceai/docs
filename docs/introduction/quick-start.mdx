@@ -1,10 +1,13 @@
-# Quick Start (CLI)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-This guide shows you how to set up and use the Superface CLI to work with an API provider to generate the Comlinks required to work with OneSDK. At this time the CLI can output either Node.js or Python code.
+# Create new Comlinks
+
+This guide shows you how to set up and use the Superface CLI to work with an API provider to generate the Comlinks required to work with OneSDK in Node.js or Python.
 
 :::info Before you start
 
-Superface CLI requires [Node.js](https://nodejs.dev/) version 18.0.0 or newer to be installed.
+Superface CLI requires [Node.js](https://nodejs.dev/) version 18.0.0 or newer to be installed, and Python 3.8 if generating output for Python projects.
 
 :::
 
@@ -12,15 +15,39 @@ Superface CLI requires [Node.js](https://nodejs.dev/) version 18.0.0 or newer to
 
 ### Install & Authorize
 
-The Superface CLI provides all the tooling needed to author the Comlinks for your integration and can be installed using [Homebrew](https://brew.sh/) on MacOS/Linux or [NPM](https://www.npmjs.com/) on Windows.
+The Superface CLI provides all the tooling needed to author the Comlinks for your integration.
+
+<Tabs
+  defaultValue="macos"
+  values={[
+    { label: 'macOS', value: 'macos' },
+    { label: 'Linux', value: 'linux' },
+    { label: 'Windows', value: 'windows' },
+  ]
+}>
+
+<TabItem value="macos">
 
 ```shell title="Install with Homebrew"
 brew install superfaceai/cli/superface
 ```
 
+</TabItem>
+<TabItem value="linux">
+
 ```shell title="Install with NPM"
 npm install -g @superfaceai/cli@latest
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+</Tabs>
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI via your browser.
 
@@ -28,7 +55,7 @@ If you don't have a Superface account already, you can [sign up here](https://su
 superface login
 ```
 
-### Prepare your use case
+### Prepare a use case
 
 Superface accepts Open API Specification format documentation, either from local files or remote URLs as well as the URL of any documentation hosted by [Readme.io](https://readme.io).
 
@@ -50,39 +77,61 @@ If you want to have control over the name of the Comlink profile that is created
 superface new resend "send an email" resend/send-an-email
 ```
 
-### Turn the Comlink into code
+### Map the Comlink to code
 
 To convert the profile into the use case map and boilerplate code, run the following command and include the name of the provider and the use case profile you want to use.
 
 By default, Node.js code will be generated, however you can use the additional `python` option to get Python code instead.
 
-#### Node.js
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' },
+  ]
+}>
+<TabItem value="nodejs">
 
 ```shell
 superface map <provider-name> <scope>/<use-case>
 ```
 
-#### Python
+</TabItem>
+<TabItem value="python">
 
 ```shell
 superface map <provider-name> <scope>/<use-case> python
 ```
 
+</TabItem>
+</Tabs>
+
 ### Test it
 
 The resulting code is added to the `superface` folder in your project. To test it you can use the `execute` command.
 
-#### Node.js
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' },
+  ]
+}>
+<TabItem value="nodejs">
 
 ```shell
 superface execute <provider> <scope>/<use-case>
 ```
 
-#### Python
+</TabItem>
+<TabItem value="python">
 
 ```shell
 superface execute <provider> <scope>/<use-case> python
 ```
+
+</TabItem>
+</Tabs>
 
 :::note Provider authentication
 
