@@ -18,6 +18,7 @@ const guides = {
   items: [
     'guides/how-to-create',
     'guides/setup-the-environment',
+    'introduction/quick-start-sdk',
     'guides/editing-provider-files',
     'guides/setting-security-schemes',
     'guides/comlink-profile-multiple-providers',
@@ -74,7 +75,6 @@ module.exports = {
       items: [
         'introduction/install-superface',
         'introduction/quick-start',
-        'introduction/quick-start-sdk',
         {
           type: 'doc',
           id: 'introduction/getting-started',
