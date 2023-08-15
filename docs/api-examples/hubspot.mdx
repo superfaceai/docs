@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # HubSpot
 
 In this example, we will show you how you can get started working with the [HubSpot](https://hubspot.com/) API to produce a working use case that lists the companies in a HubSpot CRM.
@@ -12,15 +15,39 @@ You'll need a HubSpot Private App Access Token. Find out how to set that up in t
 
 ### Install & Authorize Superface
 
-The Superface CLI provides all the tooling needed to author the Comlinks for your integration and can be installed using [Homebrew](https://brew.sh/) on MacOS/Linux or [NPM](https://www.npmjs.com/) on Windows.
+The Superface CLI provides all the tooling needed to author the Comlinks for your integration.
+
+<Tabs
+  defaultValue="macos"
+  values={[
+    { label: 'macOS', value: 'macos' },
+    { label: 'Linux', value: 'linux' },
+    { label: 'Windows', value: 'windows' },
+  ]
+}>
+
+<TabItem value="macos">
 
 ```shell title="Install with Homebrew"
 brew install superfaceai/cli/superface
 ```
 
+</TabItem>
+<TabItem value="linux">
+
 ```shell title="Install with NPM"
 npm install -g @superfaceai/cli@latest
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+</Tabs>
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
 
@@ -69,11 +96,31 @@ A file called `companies-management.read-companies.profile` will be created in t
 
 ### Turn the Comlink into code
 
-To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
+To turn the Comlink profile into runnable code in either Node.js or Python, use the following command and include the name of the provider and a use case profile you want to work with.
+
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
 
 ```shell
 superface map hubspot companies-management/read-companies
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface map hubspot companies-management/read-companies python
+```
+
+</TabItem>
+</Tabs>
 
 ### Add your API key
 
@@ -81,22 +128,65 @@ If you don't already have your HubSpot API key in your environment, you can add 
 
 ### Set up your inputs
 
-In order to list the companies correctly, and to save you some time, you will need to modify the boilerplate code from the HubSpot documentation so it contains a real request object. From the `superface` folder, open `companies-management.read-companies.hubspot.mjs` and modify the object that starts on line 23.
+In order to list the companies correctly, and to save you some time, you will need to modify the boilerplate code from the HubSpot documentation so it contains a real request object. From the `superface` folder, open `companies-management.read-companies.hubspot.mjs` (or `.py` if you created Python files) and modify the object in the `usecase.perform()` function.
 
-```js
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
+
+```js title="companies-management.read-companies.hubspot.mjs"
 {
     limit: 1,
     archived: false
-}
+},
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```js title="companies-management.read-companies.hubspot.py"
+{
+    limit: 1,
+    archived: false
+},
+```
+
+</TabItem>
+</Tabs>
 
 ### Test it
 
 To test it you can use the `execute` command.
 
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
+
 ```shell
 superface execute hubspot companies-management/read-companies
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface execute hubspot companies-management/read-companies python
+```
+
+</TabItem>
+</Tabs>
 
 If everything is successful you should see output similar to the response below:
 
