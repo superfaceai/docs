@@ -37,7 +37,7 @@ If you created your Comlinks with the Superface CLI in a different folder, pleas
 ### Add the OneSDK function
 
 ```python title="__main__.py"
-import os
+import sys
 
 from one_sdk import OneClient, PerformError, UnexpectedError
 
@@ -64,13 +64,12 @@ try:
         }
     )
     print(f"RESULT: {r}")
+except PerformError as e:
+    print(f"ERROR RESULT: {e.error_result}")
+except UnexpectedError as e:
+    print(f"ERROR: {e}", file=sys.stderr)
 except Exception as e:
-    if isinstance(e, PerformError):
-        print(f"ERROR RESULT: {e.error_result}")
-    elif isinstance(e, UnexpectedError):
-        print(f"ERROR:", e, file=sys.stderr)
-    else:
-        raise e
+    raise e
 finally:
     client.send_metrics_to_superface()
 ```

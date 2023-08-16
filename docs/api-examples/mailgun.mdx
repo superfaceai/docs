@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Mailgun
 
 In this example, we will show you how you can get started working with the [Mailgun](https://mailgun.com/) email API to produce a working use case that allows you to send an email from an application.
@@ -12,11 +15,39 @@ You'll need a Mailgun username and password. Find out how to set that up in the 
 
 ### Install & Authorize Superface
 
-Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+The Superface CLI provides all the tooling needed to author the Comlinks for your integration.
 
-```shell
+<Tabs
+  defaultValue="macos"
+  values={[
+    { label: 'macOS', value: 'macos' },
+    { label: 'Linux', value: 'linux' },
+    { label: 'Windows', value: 'windows' },
+  ]
+}>
+
+<TabItem value="macos">
+
+```shell title="Install with Homebrew"
 brew install superfaceai/cli/superface
 ```
+
+</TabItem>
+<TabItem value="linux">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+</Tabs>
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
 

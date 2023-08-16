@@ -1,4 +1,4 @@
-# Overview
+# Superface terminology
 
 The following guides will give you more insight into the deeper workings of the Superface system. You will learn how to setup the development environment, understand how to edit Comlinks for providers and use cases, set up API keys correctly, test your Comlinks and debug requests and responses.
 
