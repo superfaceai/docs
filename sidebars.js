@@ -75,11 +75,6 @@ module.exports = {
       items: [
         'introduction/install-superface',
         'introduction/quick-start',
-        {
-          type: 'doc',
-          id: 'introduction/getting-started',
-          label: 'Superface in 5 minutes'
-        }
       ]
     },
     guides,
