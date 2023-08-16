@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Resend
 
 In this example, we will show you how you can get started working with the [Resend](https://resend.com/) email API to produce a working use case that allows you to send an email from an application.
@@ -12,15 +15,39 @@ You'll need a Resend API token. Find out how to set that up in the [Resend docum
 
 ### Install & Authorize Superface
 
-The Superface CLI provides all the tooling needed to author the Comlinks for your integration and can be installed using [Homebrew](https://brew.sh/) on MacOS/Linux or [NPM](https://www.npmjs.com/) on Windows.
+The Superface CLI provides all the tooling needed to author the Comlinks for your integration.
+
+<Tabs
+  defaultValue="macos"
+  values={[
+    { label: 'macOS', value: 'macos' },
+    { label: 'Linux', value: 'linux' },
+    { label: 'Windows', value: 'windows' },
+  ]
+}>
+
+<TabItem value="macos">
 
 ```shell title="Install with Homebrew"
 brew install superfaceai/cli/superface
 ```
 
+</TabItem>
+<TabItem value="linux">
+
 ```shell title="Install with NPM"
 npm install -g @superfaceai/cli@latest
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+</Tabs>
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
 
@@ -44,29 +71,77 @@ superface new resend "send an email"
 
 ### Turn the Comlink into code
 
-To turn the profile into the JavaScript map and boilerplate code, run the following command and include the name of the provider and a use case profile you want to work with.
+To turn the Comlink profile into runnable code in either Node.js or Python, use the following command and include the name of the provider and a use case profile you want to work with.
+
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
 
 ```shell
 superface map resend email-communication/email-sending
 ```
 
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface map resend email-communication/email-sending python
+```
+
+</TabItem>
+</Tabs>
+
 ### Set up your inputs
 
-In order to send an email correctly, you will need to modify the boilerplate code from the Resend documentation so it contains a real email address. From the `superface` folder, open `email-communication.email-sending.resend.mjs` and modify the object that starts on line 23. Be sure to enter your own email address as the value for `to`.
+In order to send an email correctly, you will need to modify the boilerplate code from the Resend documentation so it contains a real email address. From the `superface` folder, open `email-communication.email-sending.resend.mjs` (or `.py` if you created Python files) and modify the object in the `usecase.perform()` function.
 
-```js
+:::note Resend has sending restrictions
+
+Resend only allows test emails to be sent to the email address registered on the account. The `to` value in the example below must be set to this.
+
+:::
+
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
+
+```js title="email-communication.email-sending.resend.mjs"
 {
   to: 'youremail@yourdomain.com',
   from: 'onboarding@resend.dev',
   subject: 'Hello, World!',
   html: '<p>Hello, World!</p>',
   text: 'Hello, World!',
-}
+},
 ```
 
-:::note Sending a test email
-Resend only allows test emails to be sent to the email address registered on the account. The `to` value in the example above must be set to this.
-:::
+</TabItem>
+<TabItem value="python">
+
+```js title="email-communication.email-sending.resend.py"
+{
+  to: 'youremail@yourdomain.com',
+  from: 'onboarding@resend.dev',
+  subject: 'Hello, World!',
+  html: '<p>Hello, World!</p>',
+  text: 'Hello, World!',
+},
+```
+
+</TabItem>
+</Tabs>
 
 ### Add your API token
 
@@ -78,9 +153,29 @@ You can create a new API Token from the [API Keys section](https://resend.com/ap
 
 The resulting code from the previous step is added to the `superface` folder in your project. To test it you can use the `execute` command.
 
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
+
 ```shell
 superface execute resend email-communication/email-sending
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface execute resend email-communication/email-sending python
+```
+
+</TabItem>
+</Tabs>
 
 If everything is successful you should see output similar to the response below:
 

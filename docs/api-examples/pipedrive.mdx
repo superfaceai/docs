@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Pipedrive
 
 In this example, we will show you how you can get started working with the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1) and produce a working use case that allows you to list all of the Organizations in your Pipedrive CRM.
@@ -12,15 +15,39 @@ You'll need to get an API token that is valid for the CRM you want to access. Fi
 
 ### Install & Authorize Superface
 
-The Superface CLI provides all the tooling needed to author the Comlinks for your integration and can be installed using [Homebrew](https://brew.sh/) on MacOS/Linux or [NPM](https://www.npmjs.com/) on Windows.
+The Superface CLI provides all the tooling needed to author the Comlinks for your integration.
+
+<Tabs
+  defaultValue="macos"
+  values={[
+    { label: 'macOS', value: 'macos' },
+    { label: 'Linux', value: 'linux' },
+    { label: 'Windows', value: 'windows' },
+  ]
+}>
+
+<TabItem value="macos">
 
 ```shell title="Install with Homebrew"
 brew install superfaceai/cli/superface
 ```
 
+</TabItem>
+<TabItem value="linux">
+
 ```shell title="Install with NPM"
 npm install -g @superfaceai/cli@latest
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+</Tabs>
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
 
@@ -46,11 +73,31 @@ A file called `organizations-management.get-collection.profile` will be created 
 
 ### Turn the Comlink into code
 
-To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
+To turn the Comlink profile into runnable code in either Node.js or Python, use the following command and include the name of the provider and a use case profile you want to work with.
+
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
 
 ```shell
 superface map pipedrive organizations-management/get-collection
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface map pipedrive organizations-management/get-collection python
+```
+
+</TabItem>
+</Tabs>
 
 ### Add your API key
 
@@ -60,23 +107,67 @@ For help finding your Pipedrive API Key, please refer to their [How to find the 
 
 ### Set up your inputs
 
-In order to list the organizations correctly, you will need to modify the boilerplate code from the Pipedrive documentation so it contains a real request object. From the `superface` folder, open `organizations-management.get-collection.pipedrive.mjs` and modify the object that starts on line 23.
+In order to list the organizations correctly, you will need to modify the boilerplate code from the Pipedrive documentation so it contains a real request object. From the `superface` folder, open `organizations-management.get-collection.pipedrive.mjs` (or `.py` if you created Python files) and modify the object in the `usecase.perform()` function.
+
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
 
 ```js title="organizations-management.get-collection.pipedrive.mjs"
 {
   start: 0,
   limit: 10,
   sort : 'name ASC',
-}
+},
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```js title="organizations-management.get-collection.pipedrive.py"
+{
+  start: 0,
+  limit: 10,
+  sort : 'name ASC',
+},
+```
+
+</TabItem>
+</Tabs>
 
 ### Test it
 
 To test it you can use the `execute` command.
 
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
+
 ```shell
 superface execute pipedrive organizations-management/get-collection
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface execute pipedrive organizations-management/get-collection python
+```
+
+</TabItem>
+</Tabs>
 
 If successful, you will see a JSON response listing the contacts in your CRM workspace.
 
