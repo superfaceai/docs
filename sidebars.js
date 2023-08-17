@@ -75,7 +75,18 @@ module.exports = {
       items: [
         'introduction/install-superface',
         'introduction/quick-start',
-      ]
+        {
+          type: 'category',
+          label: 'Superface basics',
+          link: {type: 'doc', id: 'basics/index'},
+          collapsed: false,
+          items: [
+            'basics/what-is-superface',
+            'basics/cli-commands-explained'
+          ]
+        }
+      ],
+
     },
     guides,
     {
