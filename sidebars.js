@@ -82,6 +82,7 @@ module.exports = {
           collapsed: false,
           items: [
             'basics/what-is-superface',
+            'basics/supported-documentation',
             'basics/cli-commands-explained'
           ]
         }
