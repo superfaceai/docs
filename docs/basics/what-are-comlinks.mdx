@@ -1,1 +1,53 @@
-# What are Comlinks?
+# Comlinks overview
+
+Comlink (short for Communication Link), at its core, is a language for defining the words we use to describe the capability of an API separate from the details for implementing that capability. It allows for declarative descriptions of API integrations in a way that separates the design-time semantics from the run-time implementation details.
+
+## Where are Comlinks?
+
+The Comlink language is propriatory to Superface, and is at the heart of how the CLI and OneSDK work with the AI to turn your use case into code that can be used to achieve it. A Comlink describes a use case, and how that use case should be executed using a specific API provider.
+
+## Comlink elements
+
+The Superface CLI is your starting point for creating Comlinks, it will output the files that are part of what we refer to as 'a Comlink' for each use case you want to create.
+
+Comlinks are made up of three files, a **Provider**, a **Profile**, and a **Map**. All three are used with Superface's OneSDK to execute an API use case.
+
+### Comlink Provider
+
+**File:** `superface/<api-provider-name>.provider.json`
+
+**Created by:** `superface prepare`
+
+Define an API provider's API services, base URL and security schemes to use in a Comlink Map. It tells Superface where to connect to, and how to authenticate any requests.
+
+[More details on Providers](/docs/reference/glossary#provider)
+
+### Comlink Profile
+
+**File:** `superface/<use-case-name>.profile`
+
+**Created by:** `superface new`
+
+Describes use case specific business capabilities separate from the implementation details, including what input and response objects are required, what error states are available and what example input and output objects should look like.
+
+[More details on Profiles](/docs/reference/glossary#profile)
+
+### Comlink Map
+
+**File:** `superface/<use-case-name>.<api-provider-name>.map.js`
+
+**Created by:** `superface map`
+
+Describes implementation details for fulfilling a business capability from a Comlink Profile.
+
+[More details on Maps](/docs/reference/glossary#map)
+
+## What are Comlinks used for?
+
+Comlinks are used by Superface's OneSDK to execute the use cases that you define. With a Comlink in place you have everything you need to start implementing that use case into your application.
+
+Check out examples of implementations of OneSDK, with Comlinks:
+
+- [Node.js](/docs/examples/nodejs)
+- [Python](/docs/examples/python)
+- [Cloudflare Workers](/docs/examples/cloudflare-workers)
