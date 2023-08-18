@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Infobip
 
 In this example, we will show you how you can get started working with the [Infobip](https://www.infobip.com/docs) API to produce a working use case that can send an SMS message to any number.
@@ -12,11 +15,39 @@ You'll need an Infobip account. Sign up and get free message credit, and a share
 
 ### Install & Authorize Superface
 
-Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+The Superface CLI provides all the tooling needed to author the Comlinks for your integration.
 
-```shell
+<Tabs
+  defaultValue="macos"
+  values={[
+    { label: 'macOS', value: 'macos' },
+    { label: 'Linux', value: 'linux' },
+    { label: 'Windows', value: 'windows' },
+  ]
+}>
+
+<TabItem value="macos">
+
+```shell title="Install with Homebrew"
 brew install superfaceai/cli/superface
 ```
+
+</TabItem>
+<TabItem value="linux">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+</Tabs>
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
 
@@ -74,11 +105,31 @@ A file called `sms-messaging-outbound-sms.profile` will be created in the `super
 
 ### Turn the Comlink into code
 
-To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
+To turn the Comlink profile into runnable code in either Node.js or Python, use the following command and include the name of the provider and a use case profile you want to work with.
+
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
 
 ```shell
 superface map infobip sms-messaging/outbound-sms
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface map infobip sms-messaging/outbound-sms python
+```
+
+</TabItem>
+</Tabs>
 
 ### Add your API key
 
@@ -90,9 +141,19 @@ You need to include the prefix `App` before your API key in your environment, th
 
 ### Set up your inputs
 
-In order to send an email correctly, you will need to modify the boilerplate code from the Infobip documentation so it contains a real number that can receive an SMS. From the `superface` folder, open `sms-messaging.outbound-sms.infobip.mjs` and modify the object that starts on line 23 so it is the same as the object shown below.
+In order to send an email correctly, you will need to modify the boilerplate code from the Infobip documentation so it contains a real number that can receive an SMS. From the `superface` folder, open `sms-messaging.outbound-sms.infobip.mjs` (or `.py` if you created Python files) and modify the object in the `usecase.perform()` function.
 
-```js
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
+
+```js title="sms-messaging.outbound-sms.infobip.mjs"
 {
     from : 'InfoSMS',
     to : '+0987654321', // replace with your own number
@@ -100,13 +161,47 @@ In order to send an email correctly, you will need to modify the boilerplate cod
 },
 ```
 
+</TabItem>
+<TabItem value="python">
+
+```js title="sms-messaging.outbound-sms.infobip.py"
+{
+    from : 'InfoSMS',
+    to : '+0987654321', // replace with your own number
+    text : 'Hello, this is an example SMS.'
+},
+```
+
+</TabItem>
+</Tabs>
+
 ### Test it
 
 To test this use case you can use the `execute` command. Switch to the `superface` directory and run:
 
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
+
 ```shell
-superface execute resend email-communication/email-sending
+superface execute infobip sms-messaging/outbound-sms
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface execute infobip sms-messaging/outbound-sms python
+```
+
+</TabItem>
+</Tabs>
 
 If everything is successful you should see output similar to the response below:
 

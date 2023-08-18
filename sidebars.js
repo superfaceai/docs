@@ -18,8 +18,10 @@ const guides = {
   items: [
     'guides/how-to-create',
     'guides/setup-the-environment',
+    'introduction/quick-start-sdk',
     'guides/editing-provider-files',
     'guides/setting-security-schemes',
+    'guides/comlink-profile-multiple-providers',
     'guides/using-multiple-providers',
     'guides/debugging-onesdk',
     'guides/test-use-case',
@@ -71,13 +73,8 @@ module.exports = {
       label: 'Getting started',
       collapsed: false,
       items: [
-        {
-          type: 'doc',
-          id: 'introduction/getting-started',
-          label: 'Superface in 5 minutes'
-        },
+        'introduction/install-superface',
         'introduction/quick-start',
-        'introduction/quick-start-sdk'
       ]
     },
     guides,

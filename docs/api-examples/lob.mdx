@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Lob
 
 In this example, we will show you how you can get started working with the [Lob API](https://www.lob.com/use-cases/developers) and produce a working use case that adds a new address that can be used to send postcards, letters, and even checks.
@@ -12,11 +15,39 @@ You will need a Lob API key. Find out how to set that up in the [API Keys](https
 
 ### Install & Authorize Superface
 
-Start by insalling the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+The Superface CLI provides all the tooling needed to author the Comlinks for your integration.
 
-```shell
+<Tabs
+  defaultValue="macos"
+  values={[
+    { label: 'macOS', value: 'macos' },
+    { label: 'Linux', value: 'linux' },
+    { label: 'Windows', value: 'windows' },
+  ]
+}>
+
+<TabItem value="macos">
+
+```shell title="Install with Homebrew"
 brew install superfaceai/cli/superface
 ```
+
+</TabItem>
+<TabItem value="linux">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+</Tabs>
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
 
@@ -67,11 +98,31 @@ A file called `address-management.new-address.profile` will be created in the `s
 
 ### Turn the Comlink into code
 
-To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
+To turn the Comlink profile into runnable code in either Node.js or Python, use the following command and include the name of the provider and a use case profile you want to work with.
+
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
 
 ```shell
 superface map lob address-management/new-address
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface map lob address-management/new-address python
+```
+
+</TabItem>
+</Tabs>
 
 ### Add your API key
 
@@ -90,9 +141,29 @@ LOB_PASSWORD=""
 
 To test it you can use the `execute` command.
 
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
+
 ```shell
 superface execute lob address-management/new-address
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface execute lob address-management/new-address python
+```
+
+</TabItem>
+</Tabs>
 
 If successful, you will see a JSON response of the test address added to your Lob address list.
 

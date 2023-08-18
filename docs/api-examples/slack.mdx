@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Slack
 
 In this example, we will show you how you can get started working with the [Slack API](https://api.slack.com/) to produce a working use case that allows you to list 5 public channels in your Slack workspace. Here we are using an endpoint from Slack's [Web API](https://api.slack.com/web) that requires a more minimal level of authentication.
@@ -12,11 +15,39 @@ You'll need a Slack API token that is valid for the workspace you want to access
 
 ### Install & Authorize Superface
 
-Start by installing the Superface CLI. You can use [Homebrew](https://brew.sh/) for this.
+The Superface CLI provides all the tooling needed to author the Comlinks for your integration.
 
-```shell
+<Tabs
+  defaultValue="macos"
+  values={[
+    { label: 'macOS', value: 'macos' },
+    { label: 'Linux', value: 'linux' },
+    { label: 'Windows', value: 'windows' },
+  ]
+}>
+
+<TabItem value="macos">
+
+```shell title="Install with Homebrew"
 brew install superfaceai/cli/superface
 ```
+
+</TabItem>
+<TabItem value="linux">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+</Tabs>
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI.
 
@@ -63,15 +94,45 @@ superface new slack "list all channels"
 
 ### Turn the Comlink into code
 
-To turn the Comlink profile into runnable code, use the following command and include the name of the provider and a use case profile you want to work with.
+To turn the Comlink profile into runnable code in either Node.js or Python, use the following command and include the name of the provider and a use case profile you want to work with.
+
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
 
 ```shell
 superface map slack slack-channels/fetch-channels
 ```
 
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface map slack slack-channels/fetch-channels python
+```
+
+</TabItem>
+</Tabs>
+
 ### Set up your inputs
 
-In order to process this request correctly, you will need to modify the boilerplate code from the Slack documentation to remove some values. From the `superface` folder, open `slack-channels.fetch-channels.slack.mjs` and modify the object that starts on line 23.
+In order to process this request correctly, you will need to modify the boilerplate code from the Slack documentation to remove some values. From the `superface` folder, open `slack-channels.fetch-channels.slack.mjs` (or `.py` if you created Python files) and modify the object in the `usecase.perform()` function.
+
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
 
 ```js title="slack-channels.fetch-channels.slack.mjs"
 {
@@ -81,6 +142,20 @@ In order to process this request correctly, you will need to modify the boilerpl
 },
 ```
 
+</TabItem>
+<TabItem value="python">
+
+```js title="slack-channels.fetch-channels.slack.py"
+{
+    exclude_archived: true,
+    types: 'public_channel',
+    limit: 5
+},
+```
+
+</TabItem>
+</Tabs>
+
 ### Add your API key
 
 If you don't already have your Slack API token in your environment, you can add it to your `.env` file as `SLACK_TOKEN=<your-slack-api-token>"`.
@@ -89,9 +164,29 @@ If you don't already have your Slack API token in your environment, you can add 
 
 To test this use case you can use the `execute` command.
 
+<Tabs
+  defaultValue="nodejs"
+  values={[
+    { label: 'Node.js', value: 'nodejs' },
+    { label: 'Python', value: 'python' }
+  ]
+}>
+
+<TabItem value="nodejs">
+
 ```shell
 superface execute slack slack slack-channels/fetch-channels
 ```
+
+</TabItem>
+<TabItem value="python">
+
+```shell
+superface execute slack slack slack-channels/fetch-channels python
+```
+
+</TabItem>
+</Tabs>
 
 If everything is successful you will see a JSON response listing 5 public channels in your Slack workspace.
 
