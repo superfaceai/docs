@@ -81,7 +81,7 @@ module.exports = {
           link: {type: 'doc', id: 'basics/index'},
           collapsed: false,
           items: [
-            'basics/what-is-superface',
+            'basics/what-are-comlinks',
             'basics/supported-documentation',
             'basics/cli-commands-explained'
           ]
