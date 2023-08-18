@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Superface in 5 minutes
 
 This guide shows you how to pick a provider, generate Comlinks for the use case you want using the CLI, and use Superface OneSDK to run that use case.
@@ -32,15 +35,39 @@ In many cases you also need to set up provider credentials. The Superface CLI wi
 
 ### Install the Superface CLI
 
-The Superface CLI provides all the tooling needed to author the Comlinks for your integration and can be installed using [Homebrew](https://brew.sh/) on MacOS/Linux or [NPM](https://www.npmjs.com/) on Windows.
+The Superface CLI provides all the tooling needed to author the Comlinks for your integration.
+
+<Tabs
+  defaultValue="macos"
+  values={[
+    { label: 'macOS', value: 'macos' },
+    { label: 'Linux', value: 'linux' },
+    { label: 'Windows', value: 'windows' },
+  ]
+}>
+
+<TabItem value="macos">
 
 ```shell title="Install with Homebrew"
 brew install superfaceai/cli/superface
 ```
 
+</TabItem>
+<TabItem value="linux">
+
 ```shell title="Install with NPM"
 npm install -g @superfaceai/cli@latest
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```shell title="Install with NPM"
+npm install -g @superfaceai/cli@latest
+```
+
+</TabItem>
+</Tabs>
 
 If you don't have a Superface account already, you can [sign up here](https://superface.ai/create-account). You can use your account to authenticate the CLI via your browser.
 
@@ -156,7 +183,7 @@ node --experimental-wasi-unstable-preview1 index.mjs
 
 ### Debugging
 
-If you run into errors and need more information about what's happening under the hood, you can set the environment variable `ONESDK_LOG` to `debug` to see API calls from OneSDK to the API of your chosen provider:
+If you run into errors and need more information about what's happening under the hood, you can set the environment variable `ONESDK_LOG` to `on` to see API calls from OneSDK to the API of your chosen provider:
 
 :::caution
 
@@ -165,7 +192,7 @@ This can print out potentially sensitive information, like API keys and access t
 :::
 
 ```shell
-ONESDK_LOG="debug" node --experimental-wasi-unstable-preview1 index.mjs
+ONESDK_LOG="on" node --experimental-wasi-unstable-preview1 index.mjs
 ```
 
 </div>
