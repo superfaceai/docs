@@ -1,4 +1,4 @@
-# Integrate OneSDK
+# Using Comlinks with OneSDK
 
 After the using the Superface CLI to create Comlinks for the use case you want to achieve it's time to start integrating them into your application.
 
