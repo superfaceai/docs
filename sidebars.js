@@ -18,14 +18,30 @@ const guides = {
   items: [
     'guides/how-to-create',
     'guides/setup-the-environment',
-    'introduction/quick-start-sdk',
-    'guides/editing-provider-files',
-    'guides/setting-security-schemes',
-    'guides/comlink-profile-multiple-providers',
-    'guides/using-multiple-providers',
-    'guides/debugging-onesdk',
-    'guides/test-use-case',
-    'guides/api-keys'
+    {
+      type: 'category',
+      label: 'CLI',
+      collapsed: false,
+      items: [
+        'guides/editing-provider-files',
+        'guides/setting-security-schemes',
+        'guides/comlink-profile-multiple-providers',
+        'guides/api-keys',
+      ]
+    },
+
+    {
+      type: 'category',
+      label: 'OneSDK',
+      collapsed: false,
+      items: [
+        'introduction/quick-start-sdk',
+        'guides/integrate-onesdk',
+        'guides/debugging-onesdk',
+        'guides/test-use-case',
+        'guides/using-multiple-providers',
+      ]
+    }
   ]
 };
 
@@ -102,7 +118,7 @@ module.exports = {
       items: [
         'examples/nodejs',
         'examples/cloudflare-workers',
-        'examples/python'
+        'examples/python',
       ]
     },
     {
