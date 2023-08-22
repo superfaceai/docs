@@ -1,4 +1,4 @@
-# Reuse Comlink profiles with multiple providers
+# Reuse Comlinks with multiple providers
 
 When using the Superface CLI, it is possible to generate Comlink profiles for use cases and map them to different providers.
 

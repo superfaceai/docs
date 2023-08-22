@@ -6,9 +6,11 @@ The following guides will give you more insight into the deeper workings of the 
 
 Comlink is a term you'll hear a lot - in the CLI, in OneSDK, and throughout these docs - but what is it?
 
-Comlink is Superface's domain-specific language called for abstracting API integrations. The Comlink language is designed to help our AI create reusable, platform-agnostic API integrations and speed up developer workflow.
+Comlink is Superface's domain-specific language for abstracting API integrations. The Comlink language is designed to help our AI create reusable, platform-agnostic API integrations and speed up developer workflow.
 
 The Comlink language documents the integration for humans and describes the integration for machines to perform the API calls and understand API responses.
+
+You do not need to learn the Comlink language in order to work with Superface.
 
 ## Additional terminology
 

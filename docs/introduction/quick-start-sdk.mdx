@@ -176,10 +176,16 @@ It's time to run your app!
 
 <TabItem value="nodejs">
 
-Because the Superface OneSDK is built with WASM, it requires that you pass the `--experimental-wasi-unstable-preview1` flag.
+Because the Superface OneSDK is built with WASM, it requires that you pass the `--experimental-wasi-unstable-preview1` flag if using Node.js version `18.17.0` or earlier.
 
 ```shell
 node --experimental-wasi-unstable-preview1 index.mjs
+```
+
+For later versions of Node.js, you can run the script as normal:
+
+```shell
+node index.mjs
 ```
 
 </TabItem>

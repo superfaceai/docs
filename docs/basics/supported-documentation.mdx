@@ -1,0 +1,162 @@
+# Supported API doc types
+
+The key to the successful creation of use case Comlinks is indexing the correct type of documentation using the Superface CLI.
+
+Currently, Superface supports three documention types:
+
+- Open API Specification
+- Readme.com hosted documentation
+- Text files with .txt extensions
+
+This guide explains more about what each type is, what they look like and how you use them.
+
+## Open API Specification
+
+### What is OAS?
+
+[Open API Specification](https://spec.openapis.org/oas/latest.html) is a programming language-agnostic interface description for HTTP APIs. It allows humans and, in Superface's case, computers to discover and understand the capabilities of a service without requiring access to source code, additional documentation, or inspection of request/response network traffic.
+
+Open API Specifications have many uses, from API design to automatic generation of documentation. It is the flavour of documentation input that Superface likes to eat.
+
+### OAS file types
+
+Open API specification files can be written in both YAML (`.yaml`, `.yml`) and JSON (`.json`) format.
+
+### Where to find API OAS
+
+Providers don't always make their OAS files easy to find. If you can't locate one, check the following places for the API provider you want to use:
+
+- Documentation
+- Their GitHub org
+- Google - "_Provider_ API open api specification"
+
+### Examples
+
+In order to familiarize yourself with what Open API Specification files look like, it helps to dig through some examples. Below are links to the specifications for three different APIs:
+
+- [Resend](https://raw.githubusercontent.com/resendlabs/resend-openapi/main/resend.yaml)
+- [HubSpot](https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/companies)
+- [PagerDuty](https://github.com/PagerDuty/api-schema/blob/main/reference/REST/openapiv3.json)
+
+### CLI useage example
+
+The following command will start the process of indexing the Resend Open API specification to create [Comlinks](/docs/basics/what-are-comlinks).
+
+```
+superface prepare https://raw.githubusercontent.com/resendlabs/resend-openapi/main/resend.yaml`
+```
+
+## Readme.com documentation
+
+[Readme.com](https://readme.com) is a popular platform for hosting API documentation. One of the benefits of it is that it can automatically generatea full documentation website from just a single API specification file.
+
+Because of this, you can use most documentation that is hosted by Readme.io with the Superface CLI.
+
+### Examples
+
+- [Notion](https://developers.notion.com/reference/intro)
+- [Intercom](https://developers.intercom.com/intercom-api-reference/reference/welcome)
+- [Miro](https://developers.miro.com/reference/api-reference)
+
+### URL to use with CLI
+
+Typically, on any Readme.com hosted documentation there will be a navigation link to _API Reference_, there you will find all the different endpoints for the API you want to use. You can take any of those URLs and use them with the CLI. For example, for Notion's User's endpoint:
+
+```
+superface prepare https://developers.notion.com/reference/get-users
+```
+
+## Text files
+
+Can't find an OAS, or Readme.com documentation to use with the CLI? All is not lost. Plain text is your friend.
+
+You can create `.txt` files of the documentation you want to use using a basic delimiter to ensure the AI can differentiate between different sections.
+
+### Example
+
+Below is an example of two endpoints from [Pipedrive's Activities](https://developers.pipedrive.com/docs/api/v1/Activities) resource:
+
+```text
+Activities
+
+Activities are appointments/tasks/events on a calendar that can be associated with a deal, a lead, a person and an organization. Activities can be of different type (such as call, meeting, lunch or a custom type - see ActivityTypes object) and can be assigned to a particular user. Note that activities can also be created without a specific date/time.
+
+
+================================================================================
+
+
+Get all activities assigned to a particular user
+GET/v1/activities
+Returns all activities assigned to a particular user.
+Query parameters
+user_id
+INTEGER
+The ID of the user whose activities will be fetched. If omitted, the user associated with the API token will be used. If 0, activities for all company users will be fetched based on the permission sets.
+filter_id
+INTEGER
+The ID of the filter to use (will narrow down results if used together with user_id parameter)
+type
+STRING
+The type of the activity, can be one type or multiple types separated by a comma. This is in correlation with the key_string parameter of ActivityTypes.
+limit
+INTEGER
+For pagination, the limit of entries to be returned. If not provided, 100 items will be returned.
+start
+INTEGER
+For pagination, the position that represents the first result for the page
+start_date
+STRING
+Use the activity due date where you wish to begin fetching activities from. Insert due date in YYYY-MM-DD format.
+FORMATDATE
+end_date
+STRING
+Use the activity due date where you wish to stop fetching activities from. Insert due date in YYYY-MM-DD format.
+FORMATDATE
+done
+NUMBER
+Whether the activity is done or not. 0 = Not done, 1 = Done. If omitted returns both done and not done activities.
+VALUES
+0
+1
+
+
+Response
+200
+OK
+{"success":true,"data":[{"id":8,"company_id":22122,"user_id":1234,"done":false,"type":"deadline","reference_type":"scheduler-service","reference_id":7,"conference_meeting_client":"871b8bc88d3a1202","conference_meeting_url":"https://pipedrive.zoom.us/link","conference_meeting_id":"01758746701","due_date":"2020-06-09","due_time":"10:00","duration":"01:00","busy_flag":true,"add_time":"2020-06-08 12:37:56","marked_as_done_time":"2020-08-08 08:08:38","last_notification_time":"2020-08-08 12:37:56","last_notification_user_id":7655,"notification_language_id":1,"subject":"Deadline","public_description":"This is a description","calendar_sync_include_context":"","location":"Mustamäe tee 3, Tallinn, Estonia","org_id":5,"person_id":1101,"deal_id":300,"lead_id":"46c3b0e1-db35-59ca-1828-4817378dff71","active_flag":true,"update_time":"2020-08-08 12:37:56","update_user_id":5596,"gcal_event_id":"","google_calendar_id":"","google_calendar_etag":"","source_timezone":"","rec_rule":"RRULE:FREQ=WEEKLY;BYDAY=WE","rec_rule_extension":"","rec_master_activity_id":1,"series":[],"note":"A note for the activity","created_by_user_id":1234,"location_subpremise":"","location_street_number":"3","location_route":"Mustamäe tee","location_sublocality":"Kristiine","location_locality":"Tallinn","location_admin_area_level_1":"Harju maakond","location_admin_area_level_2":"","location_country":"Estonia","location_postal_code":"10616","location_formatted_address":"Mustamäe tee 3, 10616 Tallinn, Estonia","attendees":[{"email_address":"attendee@pipedrivemail.com","is_organizer":0,"name":"Attendee","person_id":25312,"status":"noreply","user_id":integer}],"participants":[{"person_id":17985,"primary_flag":false},{"person_id":1101,"primary_flag":true}],"org_name":"Organization","person_name":"Person","deal_title":"Deal","owner_name":"Creator","person_dropbox_bcc":"company@pipedrivemail.com","deal_dropbox_bcc":"company+deal300@pipedrivemail.com","assigned_to_user_id":1235,"file":{"id":"376892,","clean_name":"Audio 10:55:07.m4a","url":"https://pipedrive-files.s3-eu-west-1.amazonaws.com/Audio-recording.m4a"}}],"related_objects":{"user":{"1234":{"id":1234,"name":"Creator","email":"john.doe@pipedrive.com","has_pic":false,"pic_hash":string,"active_flag":true}},"organization":{"5":{"id":5,"name":"Organization","people_count":2,"owner_id":8877,"address":"Mustamäe tee 3a, 10615 Tallinn","cc_email":"org@pipedrivemail.com"}},"person":{"1101":{"id":1101,"name":"Person","email":[{"label":"work","value":"person@pipedrive.com","primary":true}],"phone":[{"label":"work","value":"3421787767","primary":true}],"owner_id":8877}},"deal":{"300":{"id":300,"title":"Deal","status":"open","value":856,"currency":"EUR","stage_id":1,"pipeline_id":1}}},"additional_data":{"pagination":{"start":0,"limit":100,"more_items_in_collection":false,"next_start":1}}}
+
+================================================================================
+
+Get details of an activity
+GET /v1/activities/{id}
+Returns the details of a specific activity.
+Path parameters
+id
+INTEGER
+REQUIRED
+The ID of the activity
+
+Response
+200
+OK
+{"success":true,"data":{"id":8,"company_id":22122,"user_id":1234,"done":false,"type":"deadline","reference_type":"scheduler-service","reference_id":7,"conference_meeting_client":"871b8bc88d3a1202","conference_meeting_url":"https://pipedrive.zoom.us/link","conference_meeting_id":"01758746701","due_date":"2020-06-09","due_time":"10:00","duration":"01:00","busy_flag":true,"add_time":"2020-06-08 12:37:56","marked_as_done_time":"2020-08-08 08:08:38","last_notification_time":"2020-08-08 12:37:56","last_notification_user_id":7655,"notification_language_id":1,"subject":"Deadline","public_description":"This is a description","calendar_sync_include_context":"","location":"Mustamäe tee 3, Tallinn, Estonia","org_id":5,"person_id":1101,"deal_id":300,"lead_id":"46c3b0e1-db35-59ca-1828-4817378dff71","active_flag":true,"update_time":"2020-08-08 12:37:56","update_user_id":5596,"gcal_event_id":"","google_calendar_id":"","google_calendar_etag":"","source_timezone":"","rec_rule":"RRULE:FREQ=WEEKLY;BYDAY=WE","rec_rule_extension":"","rec_master_activity_id":1,"series":[],"note":"A note for the activity","created_by_user_id":1234,"location_subpremise":"","location_street_number":"3","location_route":"Mustamäe tee","location_sublocality":"Kristiine","location_locality":"Tallinn","location_admin_area_level_1":"Harju maakond","location_admin_area_level_2":"","location_country":"Estonia","location_postal_code":"10616","location_formatted_address":"Mustamäe tee 3, 10616 Tallinn, Estonia","attendees":[{"email_address":"attendee@pipedrivemail.com","is_organizer":0,"name":"Attendee","person_id":25312,"status":"noreply","user_id":integer}],"participants":[{"person_id":17985,"primary_flag":false},{"person_id":1101,"primary_flag":true}],"org_name":"Organization","person_name":"Person","deal_title":"Deal","owner_name":"Creator","person_dropbox_bcc":"company@pipedrivemail.com","deal_dropbox_bcc":"company+deal300@pipedrivemail.com","assigned_to_user_id":1235,"file":{"id":"376892,","clean_name":"Audio 10:55:07.m4a","url":"https://pipedrive-files.s3-eu-west-1.amazonaws.com/Audio-recording.m4a"}},"related_objects":{"user":{"1234":{"id":1234,"name":"Creator","email":"john.doe@pipedrive.com","has_pic":false,"pic_hash":string,"active_flag":true}},"organization":{"5":{"id":5,"name":"Organization","people_count":2,"owner_id":8877,"address":"Mustamäe tee 3a, 10615 Tallinn","cc_email":"org@pipedrivemail.com"}},"person":{"1101":{"id":1101,"name":"Person","email":[{"label":"work","value":"person@pipedrive.com","primary":true}],"phone":[{"label":"work","value":"3421787767","primary":true}],"owner_id":8877}},"deal":{"300":{"id":300,"title":"Deal","status":"open","value":856,"currency":"EUR","stage_id":1,"pipeline_id":1}}}}
+
+```
+
+As you can see, each of the two endpoints is separated by a `==========` delimiter, and in between each one is:
+
+- The request method (GET, POST, PUT etc)
+- Input values including expected types and whether they are required
+- Success response object
+
+### CLI useage example
+
+The Superface CLI accepts any local `.txt`, `.yml`, or `json` files as well as remote URLs. For exmaple if you had a local `pipdrive.txt`:
+
+```
+superface prepare pipedrive.txt
+```
+
+## Need help?
+
+If you're having issues with getting documentation into a format to use with Superface, let us know via [GitHub Discussions](https://github.com/orgs/superfaceai/discussions).
