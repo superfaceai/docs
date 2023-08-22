@@ -175,10 +175,16 @@ main();
 
 ### Test and confirm
 
-It's time to run your app! Because the Superface OneSDK is built with Wasm, it requires that you pass the `--experimental-wasi-unstable-preview1` flag when running Node.js (>18.0.0).
+It's time to run your app! Because the Superface OneSDK is built with WebAssembly and uses WASI, it requires that you pass the `--experimental-wasi-unstable-preview1` flag when running Node.js version < `18.17.0`.
 
 ```shell
 node --experimental-wasi-unstable-preview1 index.mjs
+```
+
+For later versions of Node.js, you can run the command as usual with no flag:
+
+```shell
+node index.mjs
 ```
 
 ### Debugging
@@ -192,7 +198,7 @@ This can print out potentially sensitive information, like API keys and access t
 :::
 
 ```shell
-ONESDK_LOG="on" node --experimental-wasi-unstable-preview1 index.mjs
+ONESDK_LOG="on" node index.mjs
 ```
 
 </div>

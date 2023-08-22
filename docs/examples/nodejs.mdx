@@ -84,10 +84,16 @@ main();
 
 ### Run the code
 
-Because OneSDK is built with Wasm, and WASI support for Node.js is still experimental, to run your file you will need to pass an additional flag.
+If using a version of Node.js before `18.17.0` you will need to enable WASI by providing an extra flag:
 
 ```shell
 node --experimental-wasi-unstable-preview1 index.mjs
+```
+
+For later versions of Node.js you can run the script as normal:
+
+```shell
+node index.mjs
 ```
 
 </div>
