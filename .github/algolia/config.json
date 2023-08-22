@@ -1,6 +1,7 @@
 {
   "index_name": "production",
   "start_urls": ["https://superface.ai/docs/"],
+  "stop_urls": ["https://superface.ai/docs/classic/"],
   "selectors": {
     "lvl0": {
       "selector": "article h1",
