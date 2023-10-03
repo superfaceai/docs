@@ -114,7 +114,8 @@ module.exports = {
       items: [
         'api-examples/hubspot',
         'api-examples/infobip',
-        'api-examples/lob',
+        // Temporary disabled
+        // 'api-examples/lob',
         'api-examples/notion',
         'api-examples/pagerduty',
         'api-examples/pipedrive',
