@@ -60,7 +60,7 @@ superface login
 PagerDuty's API is available as an [Open API Specification](https://raw.githubusercontent.com/PagerDuty/api-schema/main/reference/REST/openapiv3.json), you can use this as the documentation source.
 
 ```shell
-superface prepare https://github.com/PagerDuty/api-schema/blob/main/reference/REST/openapiv3.json "pagerduty"
+superface prepare https://raw.githubusercontent.com/PagerDuty/api-schema/main/reference/REST/openapiv3.json "pagerduty"
 ```
 
 Once the documentation has been indexed, you will need to edit the `pagerduty.provider.json` that has been created to ensure that the correct API base URL and security policy are used. The exact provider definition you need to use is below:
