@@ -41,18 +41,6 @@ module.exports = {
           label: 'Documentation',
         },
         {
-          type: 'doc',
-          docId: 'classic/index',
-          label: 'Classic Docs',
-          position: 'right',
-        },
-        {
-          type: 'doc',
-          docId: 'classic/reference/index',
-          position: 'right',
-          label: 'Classic Reference',
-        },
-        {
           href: 'https://github.com/orgs/superfaceai/discussions',
           position: 'right',
           className: 'header-github-link',
