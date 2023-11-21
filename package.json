@@ -115,5 +115,8 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.0.0",
     "prettier": "2.7.1"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
