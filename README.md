@@ -59,7 +59,7 @@ This repository contains the documentation website code and Markdown source file
 
 ## Tech Stack
 
-These docs are built using [Docusaurus 2](https://docusaurus.io/).
+These docs are built using [Docusaurus 3](https://docusaurus.io/).
 
 <details>
   <summary><strong>Details</strong></summary>
