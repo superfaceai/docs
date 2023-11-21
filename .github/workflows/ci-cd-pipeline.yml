@@ -41,7 +41,7 @@ jobs:
       - uses: actions/setup-node@v3
         name: Setup Node.js
         with:
-          node-version: lts/*
+          node-version: '18.x'
       - uses: amondnet/vercel-action@v20
         name: Deploy to Vercel
         id: vercel_preview
