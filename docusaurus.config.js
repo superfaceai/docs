@@ -29,7 +29,7 @@ module.exports = {
       title: undefined,
       logo: {
         alt: 'Superface',
-        src: 'img/superface_logo.svg',
+        src: 'img/sf-logotype-black.svg',
         href: 'https://superface.ai',
       },
       style: 'dark',
@@ -73,7 +73,7 @@ module.exports = {
       ],
       logo: {
         alt: 'Superface',
-        src: 'img/superface_logo.svg',
+        src: 'img/sf-logotype-orange.svg',
         href: 'https://superface.ai/',
       },
     },
