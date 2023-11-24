@@ -1,0 +1,61 @@
+# Configuring providers
+All Superface tools have a *provider* as part of their configuration. The provider is where necessary elements such as API keys, and additional parameters that are needed to connect to an external service are defined.
+
+![A list of Providers in Superface](/img/agent/3-configuring-providers.png)
+
+The providers are listed in alpabetical order of the name of the external service they represent.
+
+A fully configured provider will have a green dot next to it. If it's green, it's good to go.
+
+If there is a red dot next to the name then some additional configuration is needed.
+
+## Setting configurations
+To set up configuration options for a provider you can click on the cog icon to see the specific settings required.
+
+For example, here are the configuration parameters required for the Mixpanel provider shown in the image above.
+
+![The Mixpanel provider configuration options](/img/agent/4-mixpanel-provider-config.png)
+
+Typically a provider outlines the security configuration as well as any additional parameters that are required by the third-party API your tool is connecting to. In this case we can see that Mixpanel requires both of these.
+
+To set up your provider, fill out all of the blank fields and click **Save Changes**.
+
+## Provider file example
+Below you can see the provider file for Mixpanel. This is where the parameters and security scheme detals you can see on the screen are defined.
+
+```json
+{
+  "name": "mixpanel",
+  "defaultService": "default",
+  "parameters": [
+    {
+      "name": "project_id",
+      "description": "The ID of the Mixpanel project"
+    },
+    {
+      "name": "workspace_id",
+      "description": "The ID of the workspace to query"
+    }
+  ],
+  "services": [
+    {
+      "baseUrl": "https://eu.mixpanel.com/api/query",
+      "id": "default"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "type": "http",
+      "scheme": "basic",
+      "id": "ServiceAccount"
+    }
+  ]
+}
+```
+
+## Replacing a provider
+If you need to replace a provider at any time you can click on the edit icon to upload a new version.
+
+![The Mixpanel provider configuration options](/img/agent/4a-config-replacement.png)
+
+All tools can be updated by replacing the Comlink files at any time.

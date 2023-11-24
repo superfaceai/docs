@@ -1,0 +1,40 @@
+# Scheduling tasks
+Once you have completed any task in the Superface agent it is possible to set it up on a recurrent schedule.
+
+To do this in the main agent interface, click on **Schedules** next to the title of your task at the top of the screen.
+
+![Tasks can be set to run on schedules using the Schedules feature](/img/agent/7-schedules.png)
+
+Next, you will see the schedule configuration screen for this task.
+
+![The schedule configuration screen for a task](/img/agent/7a-schedule-overview.png)
+
+## Setting a schedule
+To add a schedule, select a time period from the drop down list and click on **Add Schedule**
+
+![The schedule selection drop down](/img/agent/7b-schedule-dropdown.png)
+
+The schedule options currently available are:
+- Every minute
+- Every hour
+- Daily at 6am
+- Weekly on Monday
+- Custom
+
+## Define a custom schedule
+The custom schedule option is the most flexible because it allows you to define the exact time and frequency you want your task to run.
+
+Custom schedules are defined using CRON formatting.
+
+![Custom scheduling](/img/agent/7c-custom-schedule.png)
+
+In the above example the custom schedule is set up to run at 0800 every Monday.
+
+From left to right the numbers (or asterisks) used represent, the minute, the hour, the day of the month, the month, the day of the week.
+
+We have included a visual representation of the CRON you set so you can make sure you get it right.
+
+## Replays of scheduled tasks
+Every time your task is triggered, a *run* will be added to the list on the schedule page.
+
+The output from the task will be added to your Chat History in the main agent interface.
