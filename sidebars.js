@@ -86,29 +86,35 @@ module.exports = {
     'introduction',
     {
       type: 'category',
-      label: 'Getting started',
+      label: 'Superface Agent',
+      link: {type: 'doc', id: 'agent/index'},
       collapsed: false,
+      items: [
+        'agent/interface',
+        'agent/adding-tools',
+        'agent/configure-providers',
+        'agent/updating-tools',
+        'agent/changing-models',
+        'agent/custom-instructions',
+        'agent/scheduling-tasks'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Developing Tools',
+      link: {type: 'doc', id: 'agent/index'},
+      collapsed: true,
       items: [
         'introduction/install-superface',
         'introduction/quick-start',
-        {
-          type: 'category',
-          label: 'Superface basics',
-          link: {type: 'doc', id: 'basics/index'},
-          collapsed: false,
-          items: [
-            'basics/what-are-comlinks',
-            'basics/supported-documentation',
-            'basics/cli-commands-explained'
-          ]
-        }
-      ],
-
+        'basics/what-are-comlinks',
+        'basics/supported-documentation',
+        'basics/cli-commands-explained'
+      ]
     },
-    guides,
     {
       type: 'category',
-      label: 'API Examples',
+      label: 'Tool Examples',
       link: { type: 'doc', id: 'api-examples/index' },
       collapsed: true,
       items: [
@@ -123,7 +129,8 @@ module.exports = {
         'api-examples/slack'
       ]
     },
-    {
+    guides,
+    /*{
       type: 'category',
       label: 'SDK Examples',
       collapsed: true,
@@ -133,7 +140,7 @@ module.exports = {
         'examples/cloudflare-workers',
         'examples/python',
       ]
-    },
+    },*/
     {
       type: 'doc',
       id: 'support',
