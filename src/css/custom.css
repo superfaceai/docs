@@ -7,6 +7,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  /*
   --ifm-color-primary: #5850ec;
   --ifm-color-primary-dark: #3d33e9;
   --ifm-color-primary-darker: #2f25e7;
@@ -15,6 +16,18 @@
   --ifm-color-primary-lighter: #817bf1;
   --ifm-color-primary-lightest: #aaa6f5;
   --ifm-code-font-size: 95%;
+  */
+
+  --ifm-color-primary: #222222;
+  --ifm-color-primary-dark: #1f1f1f;
+  --ifm-color-primary-darker: #1d1d1d;
+  --ifm-color-primary-darkest: #181818;
+  --ifm-color-primary-light: #252525;
+  --ifm-color-primary-lighter: #272727;
+  --ifm-color-primary-lightest: #2c2c2c;
+  --ifm-background-surface-color: #faf3e0;
+
+  --ifm-background-color: #ffffff;
 
   --sf-java-primary: #1ee2c7;
   --tailwind-gray-600: #4b5563;
@@ -24,11 +37,12 @@
   --ifm-navbar-height: 4rem;
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --sf-v2-background-light: #e9e7cf;
-  --sf-v2-nav-item: #121418;
+  --sf-v2-background-light: #faf3e0;
+  --sf-v2-nav-item: #222222;
 }
 
 html[data-theme='dark'] {
+  /*
   --ifm-color-primary: #33c3b0;
   --ifm-color-primary-dark: #2eb09e;
   --ifm-color-primary-darker: #2ba696;
@@ -36,6 +50,15 @@ html[data-theme='dark'] {
   --ifm-color-primary-light: #41cdbb;
   --ifm-color-primary-lighter: #4bd0be;
   --ifm-color-primary-lightest: #68d8c9;
+  */
+
+  --ifm-color-primary: #fe4a49;
+  --ifm-color-primary-dark: #fe2a28;
+  --ifm-color-primary-darker: #fe1918;
+  --ifm-color-primary-darkest: #e40301;
+  --ifm-color-primary-light: #fe6a6a;
+  --ifm-color-primary-lighter: #fe7b7a;
+  --ifm-color-primary-lightest: #ffabab;
 
   --ifm-background-color: var(--tailwind-gray-900);
   --ifm-background-surface-color: var(--tailwind-gray-900);
@@ -60,11 +83,15 @@ html[data-theme='dark'] {
 
 /* Navbar */
 .navbar--dark {
-  --ifm-navbar-background-color: var(--sf-v2-background-light);
+  --ifm-navbar-background-color: var(--ifm-background-surface-color);
 }
 
 .navbar__item {
   --ifm-navbar-link-hover-color: var(--sf-v2-nav-item);
+}
+
+.navbar__item:hover {
+  --ifm-navbar-link-hover-color: #fe4a49;
 }
 
 .navbar__brand img {

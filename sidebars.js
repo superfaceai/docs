@@ -83,7 +83,11 @@ const classicGuides = {
 
 module.exports = {
   mainSidebar: [
-    'introduction',
+    {
+      type: 'doc',
+      label: 'Introduction',
+      id: 'introduction'
+    },
     {
       type: 'category',
       label: 'Superface Agent',
@@ -101,32 +105,32 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Developing Tools',
-      link: {type: 'doc', id: 'agent/index'},
-      collapsed: true,
+      label: 'Developing Superface Tools',
+      link: {type: 'doc', id: 'develop/index'},
+      collapsed: false,
       items: [
         'introduction/install-superface',
         'introduction/quick-start',
         'basics/what-are-comlinks',
         'basics/supported-documentation',
-        'basics/cli-commands-explained'
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Tool Examples',
-      link: { type: 'doc', id: 'api-examples/index' },
-      collapsed: true,
-      items: [
-        'api-examples/hubspot',
-        'api-examples/infobip',
-        // Temporary disabled
-        // 'api-examples/lob',
-        'api-examples/notion',
-        'api-examples/pagerduty',
-        'api-examples/pipedrive',
-        'api-examples/resend',
-        'api-examples/slack'
+        'basics/cli-commands-explained',
+        {
+          type: 'category',
+          label: 'Tool Examples',
+          link: { type: 'doc', id: 'api-examples/index' },
+          collapsed: true,
+          items: [
+            'api-examples/hubspot',
+            'api-examples/infobip',
+            // Temporary disabled
+            // 'api-examples/lob',
+            'api-examples/notion',
+            'api-examples/pagerduty',
+            'api-examples/pipedrive',
+            'api-examples/resend',
+            'api-examples/slack'
+          ]
+        }
       ]
     },
     guides,

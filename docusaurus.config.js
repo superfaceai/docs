@@ -25,6 +25,11 @@ module.exports = {
   ],
 
   themeConfig: {
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
+    },
     navbar: {
       title: undefined,
       logo: {
@@ -32,20 +37,15 @@ module.exports = {
         src: 'img/sf-logotype-black.svg',
         href: 'https://superface.ai',
       },
-      style: 'dark',
+      
+      //style: 'dark',
       items: [
         {
           type: 'doc',
           docId: 'introduction',
           position: 'left',
           label: 'Documentation',
-        },
-        {
-          href: 'https://github.com/orgs/superfaceai/discussions',
-          position: 'right',
-          className: 'header-github-link',
-          'aria-label': 'GitHub Discussions',
-        },
+        }
       ],
     },
 
