@@ -109,11 +109,9 @@ module.exports = {
       link: {type: 'doc', id: 'develop/index'},
       collapsed: false,
       items: [
-        'introduction/install-superface',
-        'introduction/quick-start',
-        'basics/what-are-comlinks',
+        'develop/install-superface',
+        'develop/using-cli',
         'basics/supported-documentation',
-        'basics/cli-commands-explained',
         {
           type: 'category',
           label: 'Tool Examples',
@@ -134,31 +132,20 @@ module.exports = {
       ]
     },
     guides,
-    /*{
+    {
       type: 'category',
-      label: 'SDK Examples',
+      label: 'References',
       collapsed: true,
-      link: { type: 'doc', id: 'examples/index' },
       items: [
-        'examples/nodejs',
-        'examples/cloudflare-workers',
-        'examples/python',
+        'reference/cli-command-reference',
+        'reference/what-are-comlinks',
+        'reference/glossary'
       ]
-    },*/
+    },
     {
       type: 'doc',
       id: 'support',
       label: 'Support'
-    },
-    {
-      type: 'doc',
-      id: 'feedback',
-      label: 'Feedback'
-    },
-    {
-      type: 'doc',
-      id: 'reference/glossary',
-      label: 'Glossary'
     },
     {
       type: 'doc',
