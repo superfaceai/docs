@@ -45,6 +45,12 @@ module.exports = {
           docId: 'introduction',
           position: 'left',
           label: 'Documentation',
+        },
+        {
+          href: 'https://github.com/orgs/superfaceai/discussions',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub Discussions',
         }
       ],
     },

@@ -13,8 +13,15 @@
 
 const guides = {
   type: 'category',
-  label: 'Guides',
+  label: 'Advanced Development',
   collapsed: true,
+  link: {
+    type: 'generated-index',
+    title: 'Advanced Development',
+    description: 'Want to dig deep into Superface tool development and the concepts? This is where you need to start.',
+    slug: '/docs/advanced-development',
+    keywords: ['advanced']
+  },
   items: [
     'guides/how-to-create',
     'guides/setup-the-environment',
@@ -136,6 +143,13 @@ module.exports = {
       type: 'category',
       label: 'References',
       collapsed: true,
+      link: {
+        type: 'generated-index',
+        title: 'References',
+        description: 'Command references and terminology information.',
+        slug: '/docs/references',
+        keywords: ['references']
+      },
       items: [
         'reference/cli-command-reference',
         'reference/what-are-comlinks',
