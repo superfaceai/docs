@@ -61,7 +61,8 @@ html[data-theme='dark'] {
   --ifm-color-primary-lightest: #ffabab;
 
   --ifm-background-color: var(--tailwind-gray-900);
-  --ifm-background-surface-color: var(--tailwind-gray-900);
+  --ifm-background-surface-color: #050c1f;
+  /*--ifm-background-surface-color: var(--tailwind-gray-900);*/
 
   --sf-v2-background-light: var(--tailwind-gray-800);
   --sf-v2-nav-item: white;
@@ -240,4 +241,22 @@ aside.docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme
 
 .card {
   margin-bottom: 1rem;
+}
+
+.demo-button {
+  background-color: #fe4a49;
+  padding: 0.4rem 1.75rem 0.4rem 1.75rem;
+  border-radius: 9999px;
+  color: #fff;
+  -webkit-transition: background-color 0.5s ease-out;
+  -moz-transition: background-color 0.5s ease-out;
+  -o-transition: background-color 0.5s ease-out;
+  transition: background-color 0.5s ease-out;
+}
+
+.demo-button:hover{
+  cursor:pointer;
+  background-color: #e40301;
+  color: #ffffff;
+  border-color: 2px #fe4a49 solid;
 }

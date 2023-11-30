@@ -47,6 +47,17 @@ module.exports = {
           label: 'Documentation',
         },
         {
+          href: '../blog',
+          label: 'Blog',
+          position: 'left'
+        },
+        {
+          label: 'Book a demo',
+          href: '../get-demo',
+          position: 'right',
+          className: 'demo-button', 'aria-label': 'Book a demo'
+        },
+        {
           href: 'https://github.com/orgs/superfaceai/discussions',
           position: 'right',
           className: 'header-github-link',
