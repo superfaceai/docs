@@ -245,13 +245,16 @@ aside.docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme
 
 .demo-button {
   background-color: #fe4a49;
-  padding: 0.4rem 1.75rem 0.4rem 1.75rem;
+  padding: 0.6rem 1.75rem 0.6rem 1.75rem;
   border-radius: 9999px;
   color: #fff;
   -webkit-transition: background-color 0.5s ease-out;
   -moz-transition: background-color 0.5s ease-out;
   -o-transition: background-color 0.5s ease-out;
   transition: background-color 0.5s ease-out;
+  margin-right: 1rem;
+  font-weight: 600;
+  line-height: 1.18;
 }
 
 .demo-button:hover{

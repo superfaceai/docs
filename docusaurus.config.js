@@ -47,13 +47,13 @@ module.exports = {
           label: 'Documentation',
         },
         {
-          href: '../blog',
+          href: 'http://superface.ai/blog',
           label: 'Blog',
           position: 'left'
         },
         {
           label: 'Book a demo',
-          href: '../get-demo',
+          href: 'http://superface.ai/get-demo',
           position: 'right',
           className: 'demo-button', 'aria-label': 'Book a demo'
         },
