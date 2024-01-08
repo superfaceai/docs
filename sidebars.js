@@ -97,6 +97,15 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Connect GPTs to APIs',
+      link: {type: 'doc', id: 'gpts/index'},
+      collapsed: false,
+      items: [
+        'gpts/setup'
+      ]
+    },
+    {
+      type: 'category',
       label: 'Superface Agent',
       link: {type: 'doc', id: 'agent/index'},
       collapsed: false,
