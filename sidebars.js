@@ -104,21 +104,21 @@ module.exports = {
         'gpts/setup'
       ]
     },
-    // {
-    //   type: 'category',
-    //   label: 'Superface Agent',
-    //   link: {type: 'doc', id: 'agent/index'},
-    //   collapsed: true,
-    //   items: [
-    //     'agent/interface',
-    //     // 'agent/adding-tools',
-    //     // 'agent/configure-providers',
-    //     // 'agent/updating-tools',
-    //     'agent/changing-models',
-    //     'agent/custom-instructions',
-    //     'agent/scheduling-tasks'
-    //   ]
-    // },
+    {
+      type: 'category',
+      label: 'Superface Agent',
+      link: {type: 'doc', id: 'agent/index'},
+      collapsed: true,
+      items: [
+        'agent/interface',
+        // 'agent/adding-tools',
+        // 'agent/configure-providers',
+        // 'agent/updating-tools',
+        'agent/changing-models',
+        'agent/custom-instructions',
+        'agent/scheduling-tasks'
+      ]
+    },
     {
       type: 'category',
       label: 'Tools',
