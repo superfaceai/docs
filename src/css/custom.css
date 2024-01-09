@@ -25,11 +25,12 @@
   --ifm-color-primary-light: #252525;
   --ifm-color-primary-lighter: #272727;
   --ifm-color-primary-lightest: #2c2c2c;
-  --ifm-background-surface-color: #faf3e0;
+  --ifm-background-surface-color: #ffffff;
 
   --ifm-background-color: #ffffff;
 
   --sf-java-primary: #1ee2c7;
+  --button-green: #00E5B8;
   --tailwind-gray-600: #4b5563;
   --tailwind-gray-800: #1f2937;
   --tailwind-gray-900: #111827;
@@ -37,7 +38,7 @@
   --ifm-navbar-height: 4rem;
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --sf-v2-background-light: #faf3e0;
+  --sf-v2-background-light: #ffffff;
   --sf-v2-nav-item: #222222;
 }
 
@@ -50,8 +51,17 @@ html[data-theme='dark'] {
   --ifm-color-primary-light: #41cdbb;
   --ifm-color-primary-lighter: #4bd0be;
   --ifm-color-primary-lightest: #68d8c9;
-  */
+*/
+  --ifm-color-primary: #ffffff;
+  --ifm-color-primary-dark: #e6e6e6;
+  --ifm-color-primary-darker: #d9d9d9;
+  --ifm-color-primary-darkest: #b3b3b3;
+  --ifm-color-primary-light: #ffffff;
+  --ifm-color-primary-lighter: #ffffff;
+  --ifm-color-primary-lightest: #ffffff;
+  
 
+  /*
   --ifm-color-primary: #fe4a49;
   --ifm-color-primary-dark: #fe2a28;
   --ifm-color-primary-darker: #fe1918;
@@ -59,7 +69,7 @@ html[data-theme='dark'] {
   --ifm-color-primary-light: #fe6a6a;
   --ifm-color-primary-lighter: #fe7b7a;
   --ifm-color-primary-lightest: #ffabab;
-
+*/
   --ifm-background-color: var(--tailwind-gray-900);
   --ifm-background-surface-color: #050c1f;
   /*--ifm-background-surface-color: var(--tailwind-gray-900);*/
@@ -92,7 +102,8 @@ html[data-theme='dark'] {
 }
 
 .navbar__item:hover {
-  --ifm-navbar-link-hover-color: #fe4a49;
+  --ifm-navbar-link-hover-color: #000000;
+  text-decoration: underline;
 }
 
 .navbar__brand img {
@@ -244,10 +255,10 @@ aside.docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme
 }
 
 .demo-button {
-  background-color: #fe4a49;
+  background-color: var(--button-green);
   padding: 0.6rem 1.75rem 0.6rem 1.75rem;
-  border-radius: 9999px;
-  color: #fff;
+  border-radius: 10px;
+  color: #000;
   -webkit-transition: background-color 0.5s ease-out;
   -moz-transition: background-color 0.5s ease-out;
   -o-transition: background-color 0.5s ease-out;
@@ -259,7 +270,6 @@ aside.docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme
 
 .demo-button:hover{
   cursor:pointer;
-  background-color: #e40301;
-  color: #ffffff;
-  border-color: 2px #fe4a49 solid;
+  background-color: #04C59F;
+  color: #000;
 }
