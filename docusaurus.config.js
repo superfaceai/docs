@@ -16,14 +16,6 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
 
-  scripts: [
-    {
-      src: '/docs/crisp.js',
-      'crisp-website-id': process.env.CRISP_WEBSITE_ID || '',
-      defer: true,
-    }
-  ],
-
   themeConfig: {
     colorMode: {
       defaultMode: 'light',
@@ -90,7 +82,7 @@ module.exports = {
       ],
       logo: {
         alt: 'Superface',
-        src: 'img/sf-logotype-orange.svg',
+        src: 'img/sf-logotype-white.svg',
         href: 'https://superface.ai/',
       },
     },
