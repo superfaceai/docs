@@ -1,0 +1,110 @@
+# Create Tools
+
+Superface offers a web based builder named _Authoring_ Hub that uses Open API Specification files to generate tools that you can add to your account for use with your GPT or Agent.
+
+You can launch the Authoring Hub by clicking on _Create Tools_ in your Account menu, or by heading to [https://pod.superface.ai/authoring](https://pod.superface.ai/authoring).
+
+![The authoring hub for tools will be empty until a tool has been started.](/img/tools/authoring-hub.png)
+
+If it is your first time creating a tool, there won't be much to look at.
+
+The first step is to add a _Provider_. This is the Open API Specification for the platform or API you want to connect to Superface.
+
+## Step 1: Add a Provider
+
+Start by clicking on **+ Provider**, a popup will appear and you can either paste an Open API Specification, or provide a URL for one (URLs for documentation hosted by Readme.io will also be accepted here).
+
+![The connect new provider modal](/img/tools/authoring-connect-provider.png)
+
+You don't have to provide a name, however if you want control over the naming you can provide one. Typically the name should be for the service you are creating a tool for (eg. _electricity-maps, hubspot, my-company-api_).
+
+Clicking _Connect Provider_ will index the Open API Specification and get it ready for you to make a tool with. You will see the progress on your screen as well as any errors that may occur.
+
+## Step 2: Check the provider
+
+Once indexing is complete you will be redirected to a page similar to the one below.
+
+![The provider setup](/img/tools/authoring-provider-setup.png)
+
+You can check the setup for the Provider by looking at the JSON output. It outlines:
+
+- The name of the service
+- The base URL of the API to connect to
+- The security scheme required to connect to the API
+- Any additional parameters that are required
+
+If you think anything is missing, you can add the elements you need by using the shortcut templates above the box.
+
+![Shortcut templates are available to help make your provider correct](/img/tools/authoring-shortcut-templates.png)
+
+## Step 3: Create a tool
+
+If everything looks correct, it's time to create a tool!
+
+In the _Create new tool_ section you can describe your use case in plain English, and Superface will work out how to achieve it using the Open API Specification you already provided.
+
+For example, this _Electricity Maps_ example, we want to get the latest carbon intensity data for a particular zone, so our prompt can be:
+
+![Shortcut templates are available to help make your provider correct](/img/tools/authoring-tool-prompt.png)
+
+Below the prompt is the provider you want to create the tool with (in this example, it's _electricity-maps_).
+
+### Scopes and names
+
+Superface uses scopes and names as part of the naming convention for the capabilities a tool can offer. You can provide scopes and names if you want, but we will also infer them from the information we have.
+
+In this example, we are looking to get _intensity_ data about carbon use. There are other aspects of carbon data available too, such as _history_ so we could name this tool `carbon/intensity`. Later if we create a tool for historical carbon usage, we can name it `carbon/history`.
+
+![The prompt is filled out and ready to go, using a custom scope/name](/img/tools/authoring-prompt-complete.png)
+
+Click **Create** to create your new tool.
+
+## Step 4: Map
+
+After Superface determines what is required by the API to achieve your use case, you will see a page that looks similar to the one below, with areas for _Profile_, _Map_ and _Provider_.
+
+![The profile only display.](/img/tools/authoring-profile-only.png)
+
+Click on the _Select Provider_ drop down that is highlighted in red. Then select the provider you created earlier. This will then populate the Provider box on the screen.
+
+![The profile and the provider.](/img/tools/authoring-profile-provider.png)
+
+The _Profile_ was created by Superface, based on your earlier use case prompt. It outlines what inputs are required and what the result of a successful run should look like, along with example data that the AI can use to guide users to the correct inputs.
+
+The final step in tool creation is to create a _Map_. This will build a function that will call the API directly to achieve your use case, based on the data in the _Profile_ and the _Provider_.
+
+Click **Map with AI** to start this process.
+
+![The Map with AI button.](/img/tools/authoring-map-with-ai.png)
+
+Again, you will see the progress as it happens, along with any errors.
+
+![The Map with AI button.](/img/tools/authoring-working-on-map.png)
+
+## Step 5: Install your tool
+
+After the map has been created, your browser will return to the previous screen. The _Map_ section should now be populated.
+
+![The completed profile, map and provider.](/img/tools/authoring-complete-map.png)
+
+Superface now has everything it needs to provide the capability you requested.
+
+Click on **Install** to add it to your list of added tools.
+
+![The tool has now been added to the list of available tools, but it needs one further configuration step.](/img/tools/authoring-tool-added.png)
+
+As you can see in the image above, there is a red dot next to the tool name. This means that there is a piece of configuration missing.
+
+Click on _Config_ to add it and compete the setup.
+
+## Step 6: Configure your tool
+
+Typically, the final step will be to add any authentication information to the configuration for your tool. In this example, an API Key is required.
+
+![The API Key section of the tool config](/img/tools/authoring-final-config.png)
+
+Once the API Key is added, click on _Save Changes_.
+
+![Green is good. This tool is ready to use.](/img/tools/authoring-tool-complete.png)
+
+Green is good! The tool is setup and read for you to use with your GPT, or Agent.
