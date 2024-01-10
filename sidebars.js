@@ -107,6 +107,16 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Tools',
+      link: {type: 'doc', id: 'tools/index'},
+      collapsed: false,
+      items: [
+        'tools/adding-tools',
+        'tools/create-tools'
+      ]
+    },
+    {
+      type: 'category',
       label: 'Superface Agent',
       link: {type: 'doc', id: 'agent/index'},
       collapsed: true,
@@ -118,16 +128,6 @@ module.exports = {
         'agent/changing-models',
         'agent/custom-instructions',
         'agent/scheduling-tasks'
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Tools',
-      link: {type: 'doc', id: 'tools/index'},
-      collapsed: false,
-      items: [
-        'tools/adding-tools',
-        'tools/create-tools'
       ]
     },
     {
