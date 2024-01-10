@@ -101,7 +101,8 @@ module.exports = {
       link: {type: 'doc', id: 'gpts/index'},
       collapsed: false,
       items: [
-        'gpts/setup'
+        'gpts/setup',
+        'gpts/limits'
       ]
     },
     {
