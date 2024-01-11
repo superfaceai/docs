@@ -130,34 +130,34 @@ module.exports = {
         'agent/scheduling-tasks'
       ]
     },
-    // {
-    //   type: 'category',
-    //   label: 'Developing Superface Tools',
-    //   link: {type: 'doc', id: 'develop/index'},
-    //   collapsed: true,
-    //   items: [
-    //     'develop/install-superface',
-    //     'develop/using-cli',
-    //     'basics/supported-documentation',
-    //     {
-    //       type: 'category',
-    //       label: 'Tool Examples',
-    //       link: { type: 'doc', id: 'api-examples/index' },
-    //       collapsed: true,
-    //       items: [
-    //         'api-examples/hubspot',
-    //         'api-examples/infobip',
-    //         // Temporary disabled
-    //         // 'api-examples/lob',
-    //         'api-examples/notion',
-    //         'api-examples/pagerduty',
-    //         'api-examples/pipedrive',
-    //         'api-examples/resend',
-    //         'api-examples/slack'
-    //       ]
-    //     }
-    //   ]
-    // },
+    {
+      type: 'category',
+      label: 'Develop Superface Tools',
+      link: {type: 'doc', id: 'develop/index'},
+      collapsed: true,
+      items: [
+        'develop/install-superface',
+        'develop/using-cli',
+        'basics/supported-documentation',
+        {
+          type: 'category',
+          label: 'Tool Examples',
+          link: { type: 'doc', id: 'api-examples/index' },
+          collapsed: true,
+          items: [
+            'api-examples/hubspot',
+            'api-examples/infobip',
+            // Temporary disabled
+            // 'api-examples/lob',
+            'api-examples/notion',
+            'api-examples/pagerduty',
+            'api-examples/pipedrive',
+            'api-examples/resend',
+            'api-examples/slack'
+          ]
+        }
+      ]
+    },
     // guides,
     // {
     //   type: 'category',
