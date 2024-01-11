@@ -96,6 +96,11 @@ module.exports = {
       id: 'introduction'
     },
     {
+      type: 'doc',
+      label: 'Start here',
+      id: 'gpts/first-time-users'
+    },
+    {
       type: 'category',
       label: 'Connect GPTs to APIs',
       link: {type: 'doc', id: 'gpts/index'},
