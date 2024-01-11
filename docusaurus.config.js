@@ -45,6 +45,12 @@ module.exports = {
           position: 'left'
         },
         {
+          label: 'Connect GPTs to APIs',
+          href: 'http://superface.ai/gpt',
+          position: 'right',
+          className: 'demo-button', 'aria-label': 'Book a demo'
+        },
+        {
           label: 'Book a demo',
           href: 'http://superface.ai/content/get-demo',
           position: 'right',

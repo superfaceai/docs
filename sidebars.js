@@ -103,7 +103,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Connect GPTs to APIs',
-      //link: {type: 'doc', id: 'gpts/index'},
+      link: {type: 'doc', id: 'gpts/index'},
       collapsed: false,
       items: [
         'gpts/setup',
