@@ -27,6 +27,7 @@ module.exports = {
       logo: {
         alt: 'Superface',
         src: 'img/sf-logotype-black.svg',
+        srcDark: 'img/sf-logotype-white.svg',
         href: 'https://superface.ai',
       },
       
@@ -45,7 +46,7 @@ module.exports = {
         },
         {
           label: 'Book a demo',
-          href: 'http://superface.ai/get-demo',
+          href: 'http://superface.ai/content/get-demo',
           position: 'right',
           className: 'demo-button', 'aria-label': 'Book a demo'
         },
