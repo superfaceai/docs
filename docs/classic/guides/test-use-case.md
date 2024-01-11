@@ -60,7 +60,7 @@ describe('scope/profile-name/provider', () => {
 
 This test example will hit live APIs.
 
-If your capabilities require authorization, you can load keys from enviroment variables as described in [Run Capability](guides/run-use-case#set-environment-variables)
+If your capabilities require authorization, you can load keys from enviroment variables as described in [Run Capability](./run-use-case#set-environment-variables)
 
 If you want to reduce amount of calls to live APIs, see section about [recording traffic](#recording-traffic).
 

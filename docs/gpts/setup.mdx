@@ -1,0 +1,75 @@
+import AuthenticationPopUp from '/img/gpts/authentication-pop-up.png';
+
+# Setup your GPT
+
+To connect your custom GPT to Superface you need to add an Action to your GPT configuration. You can do this from the **Configure** section of the OpenAI GPT editor.
+
+:::note What are Actions in GPTs?
+Actions allow you to further customize your GPTs. To find out more about them take a look at the OpenAI [Actions in GPTs](https://platform.openai.com/docs/actions) documentation.
+:::
+
+In the configuration scroll to the bottom of the screen until you see the **Actions** section, then click on **Create new action**
+
+![The OpenAI Action setup can be found at the bottom of your GPT configuration page.](/img/gpts/openai-actions-button.png)
+
+To set up a new action requires authentication, a schema and a privacy policy. All of these are provided on the **GPT Actions** section of Superface.
+
+## Authentication
+
+To set the authentication for your new Action, click on the cog icon in the authentication section at the top of the **Add actions** page.
+
+![The OpenAI Action authentication settings.](/img/gpts/authentication.png)
+
+The authentication settings dialogue will open.
+
+<img src={AuthenticationPopUp} width="400" />
+
+The Authentication Type is _API Key_ and the _Auth Type_ is `Bearer`.
+
+Copy the _Action Authentication Token_ from your GPT Actions page in Superface and paste it into the _API Key_ field.
+
+![The authentication token for the API Key field can be found in the GPT Actions settings page of Superface.](/img/gpts/action-auth.png)
+
+Click on Save. Your authentication is now set up.
+
+## Schema
+
+Next, you need to import the action schema that defines the different tools that your GPT will be able to access. We recommend using the _Import from URL_ option for this.
+
+![The schema setup section.](/img/gpts/schema.png)
+
+Click on _Import from URL_ and paste the URL of the _Action Schema_ from your Superface GPT Actions settings. You can get this by clicking _Copy Import URL_.
+
+![The import from URL section.](/img/gpts/action-schema.png)
+
+After pasting your import URL in your GPT configuration, click on _Import_ and OpenAI will fetch the schema from Superface.
+
+![Paste your Superface schema URL into the Import from URL text field.](/img/gpts/schema-paste.png)
+
+Once the import has completed you will see the full schema loaded into the Schema window
+
+![The imported schema will load into the schema textarea.](/img/gpts/imported-schema.png)
+
+## Available actions
+
+Once the schema is imported from Superface, you will see the full list of available actions that your GPT can use.
+
+![The available actions all have their own button for testing.](/img/gpts/available-actions.png)
+
+### Testing an action
+
+Any of the available actions can be individually tested by clicking on Test. The results, or any errors, will be shown in the Preview window.
+
+![All tests will show in the Preview pane on the right of the screen.](/img/gpts/test-preview.png)
+
+## Privacy policy
+
+Custom GPTs have the option of linking to an external Privacy Policy. To help you with this Superface automatically generates a bespoke Privacy Policy URL for you to use. It lists all the tools/APIs that your GPT will have access to and will stay up to date as you add or remove tools in future.
+
+![Example of the Privacy Policy page that Superface generates for you.](/img/gpts/privacy-policy.png)
+
+You can find the URL for the Privacy policy on the _GPT Actions_ settings page in Superface. It can be added to the _Privacy policy_ section of your Action settings in OpenAI.
+
+:::warning
+If you make your GPT public, users will have access to any of your connected tools and APIs using _your_ credentials.
+:::

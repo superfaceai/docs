@@ -13,8 +13,15 @@
 
 const guides = {
   type: 'category',
-  label: 'Guides',
+  label: 'Advanced Development',
   collapsed: true,
+  link: {
+    type: 'generated-index',
+    title: 'Advanced Development',
+    description: 'Want to dig deep into Superface tool development and the concepts? This is where you need to start.',
+    slug: '/docs/advanced-development',
+    keywords: ['advanced']
+  },
   items: [
     'guides/how-to-create',
     'guides/setup-the-environment',
@@ -83,77 +90,102 @@ const classicGuides = {
 
 module.exports = {
   mainSidebar: [
-    'introduction',
+    {
+      type: 'doc',
+      label: 'Introduction',
+      id: 'introduction'
+    },
     {
       type: 'category',
-      label: 'Getting started',
+      label: 'Connect GPTs to APIs',
+      link: {type: 'doc', id: 'gpts/index'},
       collapsed: false,
       items: [
-        'introduction/install-superface',
-        'introduction/quick-start',
+        'gpts/setup',
+        //'gpts/limits'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Tools',
+      link: {type: 'doc', id: 'tools/index'},
+      collapsed: false,
+      items: [
+        'tools/adding-tools',
+        'tools/create-tools'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Superface Agent',
+      link: {type: 'doc', id: 'agent/index'},
+      collapsed: true,
+      items: [
+        'agent/interface',
+        // 'agent/adding-tools',
+        // 'agent/configure-providers',
+        // 'agent/updating-tools',
+        'agent/changing-models',
+        'agent/custom-instructions',
+        'agent/scheduling-tasks'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Develop Superface Tools',
+      link: {type: 'doc', id: 'develop/index'},
+      collapsed: true,
+      items: [
+        'develop/install-superface',
+        'develop/using-cli',
+        'basics/supported-documentation',
         {
           type: 'category',
-          label: 'Superface basics',
-          link: {type: 'doc', id: 'basics/index'},
-          collapsed: false,
+          label: 'Tool Examples',
+          link: { type: 'doc', id: 'api-examples/index' },
+          collapsed: true,
           items: [
-            'basics/what-are-comlinks',
-            'basics/supported-documentation',
-            'basics/cli-commands-explained'
+            'api-examples/hubspot',
+            'api-examples/infobip',
+            // Temporary disabled
+            // 'api-examples/lob',
+            'api-examples/notion',
+            'api-examples/pagerduty',
+            'api-examples/pipedrive',
+            'api-examples/resend',
+            'api-examples/slack'
           ]
         }
-      ],
-
-    },
-    guides,
-    {
-      type: 'category',
-      label: 'API Examples',
-      link: { type: 'doc', id: 'api-examples/index' },
-      collapsed: true,
-      items: [
-        'api-examples/hubspot',
-        'api-examples/infobip',
-        // Temporary disabled
-        // 'api-examples/lob',
-        'api-examples/notion',
-        'api-examples/pagerduty',
-        'api-examples/pipedrive',
-        'api-examples/resend',
-        'api-examples/slack'
       ]
     },
-    {
-      type: 'category',
-      label: 'SDK Examples',
-      collapsed: true,
-      link: { type: 'doc', id: 'examples/index' },
-      items: [
-        'examples/nodejs',
-        'examples/cloudflare-workers',
-        'examples/python',
-      ]
-    },
+    // guides,
+    // {
+    //   type: 'category',
+    //   label: 'References',
+    //   collapsed: true,
+    //   link: {
+    //     type: 'generated-index',
+    //     title: 'References',
+    //     description: 'Command references and terminology information.',
+    //     slug: '/docs/references',
+    //     keywords: ['references']
+    //   },
+    //   items: [
+    //     'reference/cli-command-reference',
+    //     'reference/what-are-comlinks',
+    //     'reference/glossary'
+    //   ]
+    // },
     {
       type: 'doc',
       id: 'support',
       label: 'Support'
     },
-    {
-      type: 'doc',
-      id: 'feedback',
-      label: 'Feedback'
-    },
-    {
-      type: 'doc',
-      id: 'reference/glossary',
-      label: 'Glossary'
-    },
-    {
-      type: 'doc',
-      id: 'faq',
-      label: 'FAQ'
-    }
+    // {
+    //   type: 'doc',
+    //   id: 'faq',
+    //   label: 'FAQ'
+    // }
   ],
   referenceSidebar: [
     'reference/index',

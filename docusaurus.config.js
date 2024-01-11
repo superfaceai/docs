@@ -16,23 +16,21 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
 
-  scripts: [
-    {
-      src: '/docs/crisp.js',
-      'crisp-website-id': process.env.CRISP_WEBSITE_ID || '',
-      defer: true,
-    }
-  ],
-
   themeConfig: {
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
+    },
     navbar: {
       title: undefined,
       logo: {
         alt: 'Superface',
-        src: 'img/superface_logo.svg',
+        src: 'img/sf-logotype-black.svg',
         href: 'https://superface.ai',
       },
-      style: 'dark',
+      
+      //style: 'dark',
       items: [
         {
           type: 'doc',
@@ -41,11 +39,22 @@ module.exports = {
           label: 'Documentation',
         },
         {
+          href: 'http://superface.ai/blog',
+          label: 'Blog',
+          position: 'left'
+        },
+        {
+          label: 'Book a demo',
+          href: 'http://superface.ai/get-demo',
+          position: 'right',
+          className: 'demo-button', 'aria-label': 'Book a demo'
+        },
+        {
           href: 'https://github.com/orgs/superfaceai/discussions',
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub Discussions',
-        },
+        }
       ],
     },
 
@@ -73,7 +82,7 @@ module.exports = {
       ],
       logo: {
         alt: 'Superface',
-        src: 'img/superface_logo.svg',
+        src: 'img/sf-logotype-white.svg',
         href: 'https://superface.ai/',
       },
     },
@@ -84,12 +93,12 @@ module.exports = {
       additionalLanguages: ['hcl'],
     },
 
-    algolia: {
-      appId: 'RQ4GPZIHBP',
-      apiKey: '6efca96741656c108c8746f7f2aa3da1',
-      indexName: 'production',
-      contextualSearch: false,
-    },
+    // algolia: {
+    //   appId: 'RQ4GPZIHBP',
+    //   apiKey: '6efca96741656c108c8746f7f2aa3da1',
+    //   indexName: 'production',
+    //   contextualSearch: false,
+    // },
   },
 
   presets: [
