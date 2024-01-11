@@ -130,62 +130,62 @@ module.exports = {
         'agent/scheduling-tasks'
       ]
     },
-    {
-      type: 'category',
-      label: 'Developing Superface Tools',
-      link: {type: 'doc', id: 'develop/index'},
-      collapsed: true,
-      items: [
-        'develop/install-superface',
-        'develop/using-cli',
-        'basics/supported-documentation',
-        {
-          type: 'category',
-          label: 'Tool Examples',
-          link: { type: 'doc', id: 'api-examples/index' },
-          collapsed: true,
-          items: [
-            'api-examples/hubspot',
-            'api-examples/infobip',
-            // Temporary disabled
-            // 'api-examples/lob',
-            'api-examples/notion',
-            'api-examples/pagerduty',
-            'api-examples/pipedrive',
-            'api-examples/resend',
-            'api-examples/slack'
-          ]
-        }
-      ]
-    },
-    guides,
-    {
-      type: 'category',
-      label: 'References',
-      collapsed: true,
-      link: {
-        type: 'generated-index',
-        title: 'References',
-        description: 'Command references and terminology information.',
-        slug: '/docs/references',
-        keywords: ['references']
-      },
-      items: [
-        'reference/cli-command-reference',
-        'reference/what-are-comlinks',
-        'reference/glossary'
-      ]
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Developing Superface Tools',
+    //   link: {type: 'doc', id: 'develop/index'},
+    //   collapsed: true,
+    //   items: [
+    //     'develop/install-superface',
+    //     'develop/using-cli',
+    //     'basics/supported-documentation',
+    //     {
+    //       type: 'category',
+    //       label: 'Tool Examples',
+    //       link: { type: 'doc', id: 'api-examples/index' },
+    //       collapsed: true,
+    //       items: [
+    //         'api-examples/hubspot',
+    //         'api-examples/infobip',
+    //         // Temporary disabled
+    //         // 'api-examples/lob',
+    //         'api-examples/notion',
+    //         'api-examples/pagerduty',
+    //         'api-examples/pipedrive',
+    //         'api-examples/resend',
+    //         'api-examples/slack'
+    //       ]
+    //     }
+    //   ]
+    // },
+    // guides,
+    // {
+    //   type: 'category',
+    //   label: 'References',
+    //   collapsed: true,
+    //   link: {
+    //     type: 'generated-index',
+    //     title: 'References',
+    //     description: 'Command references and terminology information.',
+    //     slug: '/docs/references',
+    //     keywords: ['references']
+    //   },
+    //   items: [
+    //     'reference/cli-command-reference',
+    //     'reference/what-are-comlinks',
+    //     'reference/glossary'
+    //   ]
+    // },
     {
       type: 'doc',
       id: 'support',
       label: 'Support'
     },
-    {
-      type: 'doc',
-      id: 'faq',
-      label: 'FAQ'
-    }
+    // {
+    //   type: 'doc',
+    //   id: 'faq',
+    //   label: 'FAQ'
+    // }
   ],
   referenceSidebar: [
     'reference/index',
