@@ -273,3 +273,6 @@ aside.docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme
   background-color: #04C59F;
   color: #000;
 }
+.markdown a {
+  text-decoration: underline;
+}
