@@ -1,0 +1,47 @@
+# HubSpot
+
+The HubSpot tool for Superface allows you to quickly add the following capabilities:
+
+- Create, List or Search, Update and Delete _Companies_
+- Create, List or Search, Update and Delete _Deals_
+- Create, List of Search, Update and Delete _Contacts_
+- List Organization owners
+
+## Requirements
+
+You will need a HubSpot account with the ability to create a [Private App](https://developers.hubspot.com/docs/api/private-apps).
+
+To do this, click on _Settings_ and in the Account Setup section, click on _Integrations > Private Apps_
+
+![Private Apps in HubSpot](/img/tools/tools-hubspot-privateapps.png)
+
+Start by clicking _Create a Private App_.
+
+Give your app a name. You can use "Superface" to keep things clear or have HubSpot generate a random name for you. A logo and description are not required.
+
+Next, click on _Scopes_, this will allow you to select the permissions your application (or in this case, Superface), can access. Select all of the CRM scopes shown below.
+
+![The CRM Scope settings in HubSpot](/img/tools/tools-hubspot-scopes.png)
+
+Complete the setup by clicking _Create App_. You will then be shown the PAT (Personal Access Token) that you can use to authenticate Superface. You can copy it from the pop up and it is available at any time from the _Auth_ section of your Prviate App settings.
+
+![The CRM Scope settings in HubSpot](/img/tools/tools-hubspot-pat.png)
+
+## Authentication
+
+In Superface, click on the Config button for the HubSpot tool.
+
+Paste the access token you got from HubSpot into the `Token` field of the Security section and click on Save Changes.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- Create a new contact with name Hubert Bossington
+- Create a deal with name Big Winners with stage Qualified To Buy
