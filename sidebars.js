@@ -123,9 +123,11 @@ module.exports = {
         'tools/google-mail',
         'tools/google-search',
         'tools/google-sheets',
+        'tools/hubspot',
         'tools/ibm-nlu',
         'tools/infobip',
         'tools/jira',
+        'tools/notion',
         'tools/create-tools'
       ]
     },
