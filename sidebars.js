@@ -117,6 +117,15 @@ module.exports = {
       collapsed: false,
       items: [
         'tools/adding-tools',
+        'tools/github',
+        'tools/google-calendar',
+        'tools/google-drive',
+        'tools/google-mail',
+        'tools/google-search',
+        'tools/google-sheets',
+        'tools/ibm-nlu',
+        'tools/infobip',
+        'tools/jira',
         'tools/create-tools'
       ]
     },
