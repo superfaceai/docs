@@ -1,0 +1,36 @@
+# Marketstack
+
+The Marketstack tool for Superface allows you to quickly add the following capabilities:
+
+- Retrieve end-of-day stock prices for specified stock symbols.
+
+## Requirements
+
+You will need a [Marketstack](https://marketstack.com/signup) account and an API key.
+
+There is a free plan available however you will be required to enter credit card information in order to activate the account. Once this is done you will be able to access your API key from your dashboard.
+
+## Authentication
+
+From your Marketstack dashboard, copy the API Access Key.
+
+![The API Access Key in Marketstack](/img/tools/tools-marketstack-apikey.png)
+
+Then, in Superface, click on the Config button for the Marketstack tool and add the API Access Key to the `API Key` field in the Security section.
+
+![The API Access Key in Marketstack](/img/tools/tools-marketstack-config.png)
+
+Click on Save Changes to update the configuration.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- Get the price for APPL
+- Which was better priced today, APPL or MSFT?
