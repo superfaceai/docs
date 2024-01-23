@@ -1,0 +1,42 @@
+# Infobip
+
+The Infobip tool for Superface allows you to quickly add the following capabilities:
+
+- Send an SMS message to a phone number
+
+## Requirements
+
+In order to use the [Infobip](https://infobip.com) tool you will first need to register an Infobip account and add a source of credit in order to send SMS messages. You will also need to rent a valid SMS number which can vary in cost depending on location and capability.
+
+## Authentication
+
+To use the Infobip tool with Superface you will need:
+
+- The `API Base URL` for your account
+- Your `API Key`
+
+These can both be located on the dashboard of your Infobip account.
+
+![Infobip Dashboard](/img/tools/tools-infobip-apikey.png)
+
+In the Superface config for the Infobip tool you need to enter values for these fields:
+
+1. The `SUBDOMAIN` is the API Base URL value before `.api.infobip.com`, for example the subdomain for `s45fdg.api.infobip.com` is `s45fdg`.
+2. The username should be set to `apikey`.
+3. In the password field you can paste your API Key.
+
+![Authenticate the permissions on Google](/img/tools/tools-infobip-credentials.png)
+
+Click on Save Changes to update the tool with the new credentials.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- Send an SMS to `<phone number>` from `<your Infobip SMS number>` with the message "Hello, world!"
