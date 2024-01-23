@@ -127,7 +127,9 @@ module.exports = {
         'tools/ibm-nlu',
         'tools/infobip',
         'tools/jira',
+        'tools/marketstack',
         'tools/notion',
+        'tools/open-weather-map',
         'tools/create-tools'
       ]
     },
