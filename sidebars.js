@@ -112,13 +112,19 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Tools',
+      label: 'Managing Tools',
       link: {type: 'doc', id: 'tools/index'},
       collapsed: false,
       items: [
         'tools/adding-tools',
         'tools/create-tools',
-        'tools/github',
+        {
+          type: 'category',
+          label: 'Tools',
+          link: {type: 'doc', id: 'tools/available-tools'},
+          collapsed: false,
+          items: [
+            'tools/github',
         'tools/google-calendar',
         'tools/google-drive',
         'tools/google-mail',
@@ -133,11 +139,13 @@ module.exports = {
         'tools/open-weather-map',
         'tools/pipedrive',
         'tools/resend',
+        'tools/slack',
         'tools/weather-api',
         'tools/world-time-api',
         'tools/wttr-in',
         'tools/zendesk'
-        
+          ]
+        }
       ]
     },
     {
