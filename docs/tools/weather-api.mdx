@@ -1,0 +1,37 @@
+# Weather API
+
+The Weather API tool for Superface allows you to quickly add the following capabilities:
+
+- Retrieve current weather information for a specified location.
+- Retrieve historical weather data for a specific city.
+
+## Requirements
+
+You will need an [Weather API](https://www.weatherapi.com/) account and a API key.
+
+Weather API offers a free account with up to 1 million API calls per month, and up to 7 days of historical weather data.
+
+## Authentication
+
+From your [Weather API dashboard](https://www.weatherapi.com/my/), click to copy your API Key from the top of the page.
+
+![The Weather API Dashboard with the API Key at the top](/img/tools/tools-weatherapi-apikey.png)
+
+Next, in Superface, click on the Config button for the Weather API tool and paste your API Key into the `API Key` field in the Security section.
+
+![The config in Superface with the API Key field](/img/tools/tools-weatherapi-config.png)
+
+Click on Save Changes to update the tool with the new configuration.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- What is the weather in Prague, Czechia?
+- What was the highest temperature in Burnaby, British Columbia in the last 7 days?
