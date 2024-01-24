@@ -1,0 +1,45 @@
+# Pipedrive
+
+The Pipedrive tool for Superface allows you to quickly add the following capabilities:
+
+- Create deals, leads, notes, activities, organizations, people and products
+- Retrieve deals, leads, notes, activities, organizations, people and products
+- Update deals, leads, notes, activities, organizations and people
+- Manage users
+- Retrieve deal stages
+
+:::warning Capability Limitations
+
+The Pipedrive tool adds 33 capabilities to your account. OpenAI only allows for 30 per GPT Action, so you may need to remove some capabilities in order to stay within this limit.
+
+:::
+
+## Requirements
+
+You will need an [Pipedrive](https://pipedrive.com) account and a personal API key.
+
+## Authentication
+
+From your Pipedrive dashboard, click on _Settings > Personal Preferences_, then click on the _API_ tab.
+
+![The Pipedrive Personal Preferences Page](/img/tools/tools-pipedrive-apikey.png)
+
+Copy _Your personal API token_ then paste it into the _API Key_ field in the Pipedrive tool config in Superface.
+
+![Adding the API Key in Superface](/img/tools/tools-pipedrive-config.png)
+
+Click on Save Changes to update the configuration.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- What are the current open deals?
+- Create a new person called Samantha Jones with email smjones@example.com
+- Which deal had the most recent activity and what was it?

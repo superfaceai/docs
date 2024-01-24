@@ -1,0 +1,47 @@
+# IBM NLU (Sentiment Analysis)
+
+The IBM Natural Language Understanding tool for Superface allows you to quickly add the following capabilities:
+
+- Analyze Sentiment
+
+## Requirements
+
+In order to use the IBM Watson Natural Language Understanding tool you will first need to register an account. You can do this via the [IBM Cloud website](https://www.ibm.com/products/natural-language-understanding).
+
+Once you have an account you will need to create a Natural Language Understanding instance. You can do this from the [IBM Cloud Catalog](https://cloud.ibm.com/catalog?category=ai&search=label%3Aibm_created).
+
+You must choose the region that your NLU instance will be created in. If you are not sure, choose the city that is closest to you.
+
+We recommend choosing the Lite pricing plan which offers 30,000 NLU items per month for free. If you need more than this you can always upgrade later.
+
+## Authentication
+
+To use the IBM Natural Language Understanding tool with Superface you will need the API key for the NLU instance you have created. You can find this through the [Resource List](https://cloud.ibm.com/resources) in your IBM Cloud account.
+
+![The IBM Cloud Resource List](/img/tools/tools-ibmnlu-resourcelist.png)
+
+Click to copy the API key from the Credentials section:
+
+![The credentials section](/img/tools/tools-ibmnlu-apikey.png)
+
+In the Superface config for the IBM NLU tool you need to enter values for three fields:
+
+1. The `REGION` is the location of your NLU instance. You can find this by looking at the URL in the credentials section, for example `eu-de` is the location code for Frankfurt.
+2. The username should be set to `apikey`.
+3. In the password field you can paste your API Key.
+
+![Authenticate the permissions on Google](/img/tools/tools-ibmnlu-superface.png)
+
+Click on Save Changes to update the tool with the new credentials.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- What is the sentiment of this: "I was very happy with the performance of Superface after setting up their built in tools, it allowed me to connect my GPT to other services very quickly."

@@ -1,0 +1,41 @@
+# Slack
+
+The Slack tool for Superface allows you to quickly add the following capabilities:
+
+- Fetches a channel history of messages and events.
+- Retrieve a list of channels in a workspace, including public channels, private channels, direct messages, and group messages.
+- Send a Slack message into a channel.
+
+## Requirements
+
+You will need a [Slack](https://slack.com) account.
+
+:::warning Are you logged into the right Slack account?
+
+Before you grant Superface access to Slack, double check that you are logged into the Slack workspace that you want to use.
+
+:::
+
+## Authentication
+
+Superface connects to Slack using OAuth. To connect your account, click on the _Sign in with Slack_ button in the Security section of the Slack tool.
+
+![Sign in with Slack button in the Config section of the Slack tool](/img/tools/tools-slack-auth.png)
+
+You will be redirected to Slack to authorize the connection. If you are already logged in you will see an overview of permissions like this:
+
+![Slack permissions overview](/img/tools/tools-slack-auth2.png)
+
+Click on _Allow_ and you will be returned to the Slack tool configuration page.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- Show me a list of channels

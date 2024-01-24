@@ -112,12 +112,40 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Tools',
+      label: 'Managing Tools',
       link: {type: 'doc', id: 'tools/index'},
       collapsed: false,
       items: [
         'tools/adding-tools',
-        'tools/create-tools'
+        'tools/create-tools',
+        {
+          type: 'category',
+          label: 'Tools',
+          link: {type: 'doc', id: 'tools/available-tools'},
+          collapsed: true,
+          items: [
+            'tools/github',
+        'tools/google-calendar',
+        'tools/google-drive',
+        'tools/google-mail',
+        'tools/google-search',
+        'tools/google-sheets',
+        'tools/hubspot',
+        'tools/ibm-nlu',
+        'tools/infobip',
+        'tools/jira',
+        'tools/marketstack',
+        'tools/notion',
+        'tools/open-weather-map',
+        'tools/pipedrive',
+        'tools/resend',
+        'tools/slack',
+        'tools/weather-api',
+        'tools/world-time-api',
+        'tools/wttr-in',
+        'tools/zendesk'
+          ]
+        }
       ]
     },
     {

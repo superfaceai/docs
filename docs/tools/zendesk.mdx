@@ -1,0 +1,47 @@
+# Zendesk Support
+
+The Zendesk Support tool for Superface allows you to quickly add the following capabilities:
+
+- Fetch ticket properties excluding comments
+- Retrieve and display user and related information
+- Retrieve a list of available groups.
+- Fetches comments associated with a specific ticket, sorted by creation date.
+- Retrieve a list of all tickets
+- Retrieve a list of users (customers), agents (employes), and admins.
+
+## Requirements
+
+You will need a [Zendesk Support](https://zendesk.com) account and permissions to perform the above actions.
+
+## Authentication
+
+In order to maintain security, we recommend that you use the username and API token combination for the Zendesk tool. This can be enabled from _Zendesk Admin > Apps and Integrations > APIs > Zendesk API_.
+
+![The Zendesk API section of the Zendesk Admin section](/img/tools/tools-zendesk-api.png)
+
+Ensure that _Token access_ is switched on.
+
+You will need to create a token to use with your account username. You must copy the token as soon as it is generated because Zendesk will only show this once and you will not be able to access it again.
+
+Next, in Superface, click on the Config button for the Zendesk Support tool and enter the following information in the Security section.
+
+- Domain: The subdomain for your Zendesk account. For example the domain in `https://mysupport.zendesk.com` is `mysupport`
+- Username: Your username, followed by `/token`. For example, `myusername@mycompany.com/token`.
+- Password: The token that you generated previously.
+
+![The Zendesk Support Config in Superface](/img/tools/tools-zendesk-config.png)
+
+Click on Save Changes to update the configuration.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- List the open tickets
+- How many tickets are there with the tag 'zendesk'?

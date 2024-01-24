@@ -1,0 +1,42 @@
+# Notion
+
+The Notion tool for Superface allows you to quickly add the following capabilities:
+
+- List users in a Notion workspace
+
+## Requirements
+
+You will need a pre-existing Notion workspace with Workspace Owner permission to set up an Internal Integration. This can be done from the [My Integrations](https://www.notion.so/my-integrations) section of Notion. If you cannot access this, please ask your Notion workspace owner.
+
+![Notion's My Integrations section](/img/tools/tools-notion-myintegrations.png)
+
+- Click on _Create new integration_.
+- Select the workspace to associate the integration with.
+- Choose a name for your integration (we recommend _Superface_).
+- Click on Submit.
+
+Now your integration is setup, you can copy the _Internal Integration Token_ from the _Secrets_ tab.
+
+![Notion's My Integrations section](/img/tools/tools-notion-secret.png)
+
+## Authentication
+
+In Superface, click on the Config button for the Notion tool and set the following values:
+
+- `Token`. Use the _Internal Integration Token_ from Notion.
+
+![The Superface config for Notion](/img/tools/tools-notion-security.png)
+
+Click on Save Changes to update the tool with the new credentials.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- List the users in Notion

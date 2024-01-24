@@ -1,0 +1,37 @@
+# OpenWeatherMap
+
+The OpenWeatherMap tool for Superface allows you to quickly add the following capabilities:
+
+- Retrieve current weather information for a specified location.
+
+## Requirements
+
+You will need an [OpenWeatherMap](https://openweathermap.org/api) API account and an API key.
+
+There is a free plan available that offers up to 1000 API calls per day for free, however any overages will be billed meaning that a credit card is required to activate the account.
+
+## Authentication
+
+From your Marketstack dashboard, copy or create a new API Key.
+
+![OpenWeatherMap API Keys](/img/tools/tools-openweathermap-apikeys.png)
+
+Then, in Superface, click on the Config button for the OpenWeatherMap tool and add the API Access Key to the `API Key` field in the Security section.
+
+![Adding the API key in Superface](/img/tools/tools-openweathermap-security.png)
+
+Click on Save Changes to update the configuration.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- What is the weather in Košice, Slovakia?
+- What temp is it in Prague?
+- Is it sunny in Redwoo City, CA?
