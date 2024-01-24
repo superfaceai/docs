@@ -117,6 +117,7 @@ module.exports = {
       collapsed: false,
       items: [
         'tools/adding-tools',
+        'tools/create-tools',
         'tools/github',
         'tools/google-calendar',
         'tools/google-drive',
@@ -132,7 +133,11 @@ module.exports = {
         'tools/open-weather-map',
         'tools/pipedrive',
         'tools/resend',
-        'tools/create-tools'
+        'tools/weather-api',
+        'tools/world-time-api',
+        'tools/wttr-in',
+        'tools/zendesk'
+        
       ]
     },
     {
