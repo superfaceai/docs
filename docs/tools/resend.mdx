@@ -1,0 +1,45 @@
+# Resend
+
+The Resend tool for Superface allows you to quickly add the following capabilities:
+
+- Send an email with optional cc, bcc, and replyTo inputs.
+
+## Requirements
+
+You will need an [Resend](https://resend.com) account and a API key with _sending access_ permission.
+
+## Authentication
+
+From your Resend dashboard, click on _API Keys_, then the _Create API Key_ button.
+
+![The API Keys page in Resend](/img/tools/tools-resend-apikeys.png)
+
+In the popup:
+
+- Set a name for your API Key.
+- Set the Permission to _Sending access_.
+- Select a specific sending domain if you have one, otherwise use All Domains.
+
+![Image of the pop up modal with the fields you need to fill out for the API Key](/img/tools/tools-resend-apikeysetup.png)
+
+Click on _Add_ to create the new API key.
+
+For security reasons Resend will only show you the API key _once_, so you must copy it immediately. You will not be able to access this key later.
+
+Next, in Superface, click on the Config button for the Resend tool and paste your Resend API Key into the `Token` field in the Security section.
+
+![The config in Superface with the Token field](/img/tools/tools-resend-config.png)
+
+Click on Save Changes to update the tool with the new configuration.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- Send an email from `<email-address>` to `<email-address>` with the subject "Hello, World!" and the message "Live and direct from Superface".
