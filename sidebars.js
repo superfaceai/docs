@@ -122,7 +122,7 @@ module.exports = {
           type: 'category',
           label: 'Tools',
           link: {type: 'doc', id: 'tools/available-tools'},
-          collapsed: false,
+          collapsed: true,
           items: [
             'tools/github',
         'tools/google-calendar',
