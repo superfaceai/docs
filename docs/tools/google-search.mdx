@@ -4,19 +4,34 @@ The Google Search tool for Superface allows you to quickly add the following cap
 
 - Perform a custom search
 
+## Requirements
+
+The Google Custom Search API requires a Google Cloud Account. You can set up a free edition [via the documentation](https://developers.google.com/custom-search/v1/introduction).
+
+Additionally, you will need a Programmable Search Engine. This is a custom search engine that you define for yourself. It can either be a specific set of pages, or the entire web.
+
+To set up a Programmable Search Engine, follow the steps outlined in the [PSE Control Panel](https://programmablesearchengine.google.com/controlpanel).
+
 ## Authentication
 
-In order to use the Google Search tool you must authenticate your Google account. You can do this from the Config section.
+In order to use the Google Search tool you must generate an API Key for that capability in Google Cloud. You can do this directly from the [Programmable Search Engine](https://developers.google.com/custom-search/v1/introduction) documentation by clicking on _Get a key_ button.
 
-![Connect to Google to authenticate the access you need](/img/tools/tools-google-calendar.png)
+![Get a key](/img/tools/tools-google-search-getkey.png)
 
-You will be redirected to Google to authenticate the required permissions:
+Now you should have:
 
-![Authenticate the permissions on Google](/img/tools/tools-google-calendar-auth.png)
+- A CX ID for your Programmable Search Engine (They look like this: `e522fcff67c3e4d4b`).
+- An API Key with ability to access Programmable Search Engine.
 
-Select the Google account you want to use. Then give Superface the required permissions by clicking on **Allow**.
+You can add these into the configuration for the Google Search tool in Superface by clicking on the Config button.
 
-![Authenticate the permissions on Google](/img/tools/tools-google-calendar-auth2.png)
+![The params and security settings for the Google Search tool in Superface](/img/tools/tools-google-search-config.png)
+
+- Add your CX ID into the field labelled `cx`
+- Add your API key into the field labelled `API Key`.
+- Click on Save Changes.
+
+Your Google Search tool is now set up and ready to be used.
 
 :::note Import your schema
 
@@ -28,4 +43,4 @@ Remember to re-import the schema in your GPT to update it with the new capabilit
 
 To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
 
-- ""
+- Search for "How to Connect GPTs to APIs"
