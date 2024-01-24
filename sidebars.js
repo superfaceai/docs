@@ -130,6 +130,7 @@ module.exports = {
         'tools/marketstack',
         'tools/notion',
         'tools/open-weather-map',
+        'tools/pipedrive',
         'tools/create-tools'
       ]
     },
