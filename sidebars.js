@@ -131,6 +131,7 @@ module.exports = {
         'tools/notion',
         'tools/open-weather-map',
         'tools/pipedrive',
+        'tools/resend',
         'tools/create-tools'
       ]
     },
