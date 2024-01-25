@@ -143,6 +143,7 @@ module.exports = {
         'tools/weather-api',
         'tools/world-time-api',
         'tools/wttr-in',
+        'tools/x',
         'tools/zendesk'
           ]
         }
