@@ -1,0 +1,35 @@
+# Microsoft Teams
+
+The Microsoft Teams tool for Superface allows you to quickly add the following capabilities:
+
+- Send a message to a specific chat.
+- Retrieve the list of messages in a chat.
+- Retrieve the list of chats that the user is part of.
+
+## Requirements
+
+You will need a [Microsoft Teams](https://slack.com) account.
+
+## Authentication
+
+Superface connects to Microsoft Teams using OAuth. To connect your account, click on the _Sign in with Microsoft_ button in the Security section of the Slack tool.
+
+![Sign in with Microsoft button](/img/tools/tools-msteams-signin.png)
+
+You will be redirected to Microsoft to authorize the connection.
+
+![The Microsoft sign in flow](/img/tools/tools-msteams-login.png)
+
+After this you will be returned to the Slack tool configuration page.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- Show me a list of chats
