@@ -135,6 +135,7 @@ module.exports = {
         'tools/infobip',
         'tools/jira',
         'tools/marketstack',
+        'tools/microsoft-teams',
         'tools/notion',
         'tools/open-weather-map',
         'tools/pipedrive',
