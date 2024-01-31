@@ -107,6 +107,7 @@ module.exports = {
       collapsed: false,
       items: [
         'gpts/setup',
+        'gpts/user-authentication'
         //'gpts/limits'
       ]
     },
