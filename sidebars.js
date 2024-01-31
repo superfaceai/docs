@@ -125,27 +125,27 @@ module.exports = {
           collapsed: true,
           items: [
             'tools/github',
-        'tools/google-calendar',
-        'tools/google-drive',
-        'tools/google-mail',
-        'tools/google-search',
-        'tools/google-sheets',
-        'tools/hubspot',
-        'tools/ibm-nlu',
-        'tools/infobip',
-        'tools/jira',
-        'tools/marketstack',
-        'tools/microsoft-teams',
-        'tools/notion',
-        'tools/open-weather-map',
-        'tools/pipedrive',
-        'tools/resend',
-        'tools/slack',
-        'tools/weather-api',
-        'tools/world-time-api',
-        'tools/wttr-in',
-        'tools/x',
-        'tools/zendesk'
+            'tools/google-calendar',
+            'tools/google-drive',
+            'tools/google-mail',
+            'tools/google-search',
+            'tools/google-sheets',
+            'tools/hubspot',
+            'tools/ibm-nlu',
+            'tools/infobip',
+            'tools/jira',
+            'tools/marketstack',
+            'tools/microsoft-teams',
+            'tools/notion',
+            'tools/open-weather-map',
+            'tools/pipedrive',
+            'tools/resend',
+            'tools/slack',
+            'tools/weather-api',
+            'tools/world-time-api',
+            'tools/wttr-in',
+            'tools/x',
+            'tools/zendesk'
           ]
         }
       ]
@@ -166,61 +166,10 @@ module.exports = {
       ]
     },
     {
-      type: 'category',
-      label: 'Develop Superface Tools',
-      link: {type: 'doc', id: 'develop/index'},
-      collapsed: true,
-      items: [
-        'develop/install-superface',
-        'develop/using-cli',
-        'basics/supported-documentation',
-        {
-          type: 'category',
-          label: 'Tool Examples',
-          link: { type: 'doc', id: 'api-examples/index' },
-          collapsed: true,
-          items: [
-            'api-examples/hubspot',
-            'api-examples/infobip',
-            // Temporary disabled
-            // 'api-examples/lob',
-            'api-examples/notion',
-            'api-examples/pagerduty',
-            'api-examples/pipedrive',
-            'api-examples/resend',
-            'api-examples/slack'
-          ]
-        }
-      ]
-    },
-    // guides,
-    // {
-    //   type: 'category',
-    //   label: 'References',
-    //   collapsed: true,
-    //   link: {
-    //     type: 'generated-index',
-    //     title: 'References',
-    //     description: 'Command references and terminology information.',
-    //     slug: '/docs/references',
-    //     keywords: ['references']
-    //   },
-    //   items: [
-    //     'reference/cli-command-reference',
-    //     'reference/what-are-comlinks',
-    //     'reference/glossary'
-    //   ]
-    // },
-    {
       type: 'doc',
       id: 'support',
       label: 'Support'
     },
-    // {
-    //   type: 'doc',
-    //   id: 'faq',
-    //   label: 'FAQ'
-    // }
   ],
   referenceSidebar: [
     'reference/index',
