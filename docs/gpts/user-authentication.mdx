@@ -1,0 +1,41 @@
+# User Authentication
+
+Superface allows you to connect to external APIs and SaaS platforms in two ways.
+
+1. **Using your own credentials**. This is good for personal GPTs or where you are happy to share that access with others.
+2. **User supplied credentials**. This will ensure that the end users of your GPT can supply their own credentials in order to access a specific API or platform.
+
+## Selecting User Authentication
+
+In your account you can select which authentication type you want to use for your GPT, and you can edit this at any time by clicking on **GPT Actions**.
+
+![The authentication type selector in the GPT Actions setup page](/img/gpts/gpt-user-authentication.png)
+
+Your authentication choice will be automatically saved.
+
+## Authentication flow for users
+
+With **Use GPT user-provided credentials** selected, the users of your GPT will need to login, or supply their own API keys, to access use the tools you have added to Superface.
+
+The flow for that authentication works like this:
+
+1. A user of your GPT writes a prompt (requesting a list of chats from [Microsoft Teams](../tools/microsoft-teams), for example).
+2. Superface responds with a message asking them to configure the tool for themselves by providing their account information (show below).
+
+![The response from Superface in a GPT](/img/gpts/gpt-prompt-userauth.png)
+
+3. The user clicks the link to provide their authentication. This will open a new window for the authentication service provided by Superface.
+
+![The Superface authentication window](/img/gpts/gpt-user-login.png)
+
+4. After authenticating successfully, the user will redirected back to the authentication page.
+
+![A successful authentication](/img/gpts/gpt-user-loggedin.png)
+
+The user can now confirm that the required authentication is in place and their original prompt will be re-tried.
+
+:::note Authentication expiration
+
+Superface uses a temporary ID provided by OpenAI to recognize the users of your GPT. This ID is valid for up to 24 hours, but can expire at any time. If the ID expires, the user must provide their credentials again.
+
+:::
