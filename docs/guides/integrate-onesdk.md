@@ -48,7 +48,7 @@ Each implementation can be cloned and deployed. Instructions for this are in the
 
 ## Moving from CLI to SDK
 
-If you have created the Comlinks for your use case using the [Superface CLI](/docs/develop/install-superface), there are three files you must ensure you move over to your production application in order for OneSDK to work.
+If you have created the Comlinks for your use case using the Superface CLI, there are three files you must ensure you move over to your production application in order for OneSDK to work.
 
 - Provider - `<api-provider-name.provider.json`
 - Profile - `<use-case-profile-name>.profile`
