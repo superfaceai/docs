@@ -1,0 +1,57 @@
+# PostHog
+
+The PostHog tool for Superface allows you to quickly add the following capabilities:
+
+- Fetch session recording detail from the PostHog API using the Project ID and Session Recording ID.
+- Retrieve a list of events for a specified project using its ID.
+- Retrieve the list of projects for the current organization.
+- Retrieve a list of session recordings for a specific project using the project ID.
+
+## Requirements
+
+You will need:
+
+- A [PostHog](https://posthog.com) account
+- A personal API key.
+- To know the geographic location of your PostHog account (either US or EU).
+
+## Authentication
+
+Start by setting up a Personal API key in PostHog, that will allow Superface to access your account.
+
+To do this, open your PostHog account settings and click on _User > Personal API Keys_.
+
+![The Personal API Key section in PostHog](/img/tools/tools-posthog-personalapikey.png)
+
+Click **Creare personal API key** and set up a new API key specifically for Superface.
+
+Next, in Superface click on the config button for the PostHog tool.
+
+![The PostHog setup in Superface](/img/tools/tools-posthog-superfacesetup.png)
+
+Set the `DOMAIN` field to either:
+
+- `app` if your PostHog account is using their US Cloud location
+- `eu` if using their EU location
+
+Then enter the API key that you created in the `Token` field.
+
+Click on _Save Changes_ and the PostHog tool is ready to use.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Project IDs in PostHog
+
+Some of the capabilities that the PostHog tool offers require you to supply a `project_id`. You will be prompted to enter this in order to complete any tasks that require it. If you can't remember the project ID you can use the _"List Project IDs"_ prompt to see all the projects you have access to and their associated IDs.
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- Show me a list of session recordings
+- List Project IDs
+- Show me events from the past 24 hours
