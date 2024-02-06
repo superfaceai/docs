@@ -140,6 +140,7 @@ module.exports = {
             'tools/notion',
             'tools/open-weather-map',
             'tools/pipedrive',
+            'tools/posthog',
             'tools/resend',
             'tools/slack',
             'tools/weather-api',
