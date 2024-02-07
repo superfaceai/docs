@@ -153,6 +153,11 @@ module.exports = {
       ]
     },
     {
+      type: 'doc',
+      label: 'Superface GPT',
+      id: 'superface-gpt'
+    },
+    {
       type: 'category',
       label: 'Superface Agent',
       link: {type: 'doc', id: 'agent/index'},

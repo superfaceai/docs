@@ -1,0 +1,66 @@
+# Superface GPT
+
+Superface GPT offers a ready-made selection of actions that enable you to add functionality from the following platforms to your ChatGPT session, or custom GPT.
+
+- Google Mail
+- Google Sheets
+- Google Calendar
+- Slack
+- Jira
+- Notion
+- Microsoft Teams
+
+## How to get it
+
+To start using these actions in your own GPTs, you need to:
+
+1. [Click here to open the GPT.](https://chat.openai.com/g/g-XElhtlxOR-superface)
+2. Pin it to your sidebar by clicking _Keep in sidebar_.
+
+![Click on the menu to find Keep in Sidebar](/img/gpts/superfacegpt-keepinsidebar.png)
+
+## How to use Superface GPT
+
+It is then possible to interact with this GPT by typing `@superface` in the message bar.
+
+![Superface appears in the message bar](/img/gpts/superfacegpt-atsuperface.png)
+
+By clicking on Superface, you will then be able to interact with any of the available actions.
+
+![Superface is ready to accept prompts](/img/gpts/superfacegpt-talkingtosuperface.png)
+
+## Authentication
+
+You will need to provide your own authentication for any of the tools you want to use. The flow for that authentication works like this:
+
+1. You write a prompt that uses one of the tools provided by Superface.
+2. Superface will respond with a message asking you to configure the tool by logging in, or providing your own API key.
+
+![The response from Superface in a GPT](/img/gpts/superfacegpt-googlesheets.png)
+
+3. This will open a new window for the secure authentication service provided by Superface.
+
+![The Superface authentication window](/img/gpts/superfacegpt-googlesheetsauth.png)
+
+4. After authenticating successfully, you will redirected back to the authentication page.
+
+![A successful authentication](/img/gpts/superfacegpt-userloggedin.png)
+
+You can now confirm that the required authentication is in place and their original prompt will be attempted again.
+
+![A successful Google sheet creation](/img/gpts/superfacegpt-success.png)
+
+:::note Authentication expiration
+
+Superface uses a temporary ID provided by OpenAI to recognize you. This ID is valid for up to 24 hours, but can expire at any time. If the ID expires, you will be asked to re-authenticate.
+
+:::
+
+## Conversation starters
+
+There are a selection of prompts available to get you started.
+
+- Create a new Google spreadsheet
+- List taks in Jira project `<name>` that were not updated in over a week
+- Send message to Slack channel `<channel>`
+- Send message to MS Teams channel `<channel>`
