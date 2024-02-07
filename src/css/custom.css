@@ -282,4 +282,7 @@ aside.docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme
   text-decoration: underline;
 }
 
+.row .col ol li a {
+  text-decoration: underline;
+}
 
