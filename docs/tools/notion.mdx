@@ -2,7 +2,13 @@
 
 The Notion tool for Superface allows you to quickly add the following capabilities:
 
+- Create a new page in a specified database or as a child of an existing page.
+- Retrieve a specific database's details.
+- Retrieve a specific property of a page in Notion using the 'page_id' and 'property_id'. Returns the property detail.
+- Retrieve a specific page's details.
+- Retrieve user data.
 - List users in a Notion workspace
+- Search for pages and databases with a specific title.
 
 ## Requirements
 
@@ -18,6 +24,16 @@ You will need a pre-existing Notion workspace with Workspace Owner permission to
 Now your integration is setup, you can copy the _Internal Integration Token_ from the _Secrets_ tab.
 
 ![Notion's My Integrations section](/img/tools/tools-notion-secret.png)
+
+## Connections
+
+In Notion, your pages and databases need to be connected to your integration in order to make them available to it.
+
+In each top level section you want to use with Superface, click on the page settings menu bar in the top right of the page and find your integration in the _Connections_ section.
+
+![The Connection section of the main Notion settings](/img/tools/tools-notion-connection.png)
+
+There you can either add a connection to an integration or modify the settings for one that is already connected.
 
 ## Authentication
 

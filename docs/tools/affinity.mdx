@@ -1,0 +1,39 @@
+# Affinity
+
+The Affinity tool for Superface allows you to quickly add the following capabilities:
+
+- Fetches all opportunities from Affinity meeting search criteria from the team's data.
+- Finds and retrieves organizations from Affinity's database.
+- Fetches all persons from Affinity meeting the search criteria.
+- Retrieve all fields and their values from Affinity for a specific organization, person or list entry.
+- Retrieve a specific list from Affinity by its name and obtain field values for its list entries.
+- Fetches a specific person from Affinity based on person ID.
+
+## Requirements
+
+You will need:
+
+- An [Affinity](https://www.affinity.co/) CRM account
+
+## Authentication
+
+This tool uses Basic Authentication.
+
+![The authentication for Affinity in Superface](/img/tools/tools-affinity-auth.png)
+
+Enter your personal username and password. This will authenticate the tool as you so it can take the same actions as you would within the CRM.
+
+Click on _Save Changes_ and the Affinity tool is ready to use.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- Show me the details for the organization `<organization name>`
+- List all open opportunities from the past 7 days

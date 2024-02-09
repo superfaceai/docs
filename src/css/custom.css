@@ -274,15 +274,19 @@ aside.docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme
   color: #000;
 }
 
-.row .col a {
+/* .row .col a {
   text-decoration: none;
-}
+} */
 
 .row .col p a {
   text-decoration: underline;
 }
 
 .row .col ol li a {
+  text-decoration: underline;
+}
+
+article ul li a {
   text-decoration: underline;
 }
 
