@@ -1,0 +1,33 @@
+# Greenhouse
+
+The Greenhouse tool for Superface allows you to quickly add the following capabilities:
+
+- Retrieve all jobs using the `board_token`, returning a list of jobs.
+- Retrieve specific job detail using the job ID.
+
+## Requirements
+
+You will need a [Greenhouse](https://www.greenhouse.com/) board or job ID. This can be found in the URL of a job board.
+
+For example:
+
+- The board ID in `https://boards.greenhouse.io/prefect/` is `prefect`
+- The job ID in `https://boards.greenhouse.io/techstars57/jobs/7117490002` is `7117490002`
+
+## Authentication
+
+This tool uses data for publicly available job boards powered by Greenhouse and does not require any authentication.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- Show me all the jobs for board `<board id>`.
+- List all the jobs from board `<board id>` that are older than 60 days.
+- Show me the details for `<job id>` on from `<board id`.
