@@ -144,6 +144,7 @@ module.exports = {
             'tools/pipedrive',
             'tools/posthog',
             'tools/resend',
+            'tools/salesforce',
             'tools/slack',
             'tools/weather-api',
             'tools/world-time-api',
