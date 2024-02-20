@@ -1,0 +1,49 @@
+# Salesforce
+
+The Salesforce tool for Superface allows you to quickly add the following capabilities:
+
+- List all the opportunities.
+- List all opportunities owned by you.
+- Retrieve opportunity detail
+- List all leads
+- List accounts
+
+## Requirements
+
+You will need a [Salesforce](https://www.salesforce.com/) account to authenticate with Superface.
+
+## Authentication
+
+You must provide the domain name for your Salesforce instance as well as connecting your personal Salesforce account.
+
+![The Salesforce authentication in Superface](/img/tools/tools-salesforce-auth.png)
+
+### Identifying your domain
+
+When logged into Salesforce, take a look at the address bar of your browser. The URL should look something like `https://superface-dev-ed.develop.lightning.force.com`. The domain you need for Superface is everything that comes after `https://` and before `.lightning.force.com`.
+
+In the example above, the domain would be `superface-dev-ed.develop`.
+
+### Salesforce authentication
+
+Next, you need to connect your Salesforce account by clicking _Sign in with Salesforce_. If you are already signed in you will be redirected to the authentication flow below. If not, you may be asked to log in first.
+
+![The Salesforce authentication flow](/img/tools/tools-salesforce-authallow.png)
+
+Check that you are happy with the level of permissions and click on _Allow_.
+
+If the connection is successful you will be redirected back to the Superface tool hub.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- List all the open opportunities
+- Get more details about the `<company name>` opportunity
+- Show me my leads
