@@ -1,0 +1,38 @@
+# Microsoft Calendar
+
+The Microsoft Calendar tool for Superface allows you to quickly add the following capabilities:
+
+- Create a new event in a user's calendar or the default calendar of a Microsoft 365 group.
+- Update the properties of an event object in Microsoft Calendar.
+- Retrieve a list of events in the user's mailbox, including single instance meetings and event series.
+- Retrieve the properties and relationships of a specified event object. Returns event data in HTML format and supports extensions for custom properties.
+- This action allows the organizer of a meeting to send a cancellation message and cancel the event.
+
+## Requirements
+
+You will need a [Microsoft 365](https://www.microsoft.com/microsoft-365) account.
+
+## Authentication
+
+Superface connects to Microsoft Calendar using OAuth. To connect your account, click on the _Sign in with Microsoft_ button in the Security section of the tool configuration page.
+
+![Sign in with Microsoft button](/img/tools/tools-msteams-signin.png)
+
+You will be redirected to Microsoft to authorize the connection.
+
+![The Microsoft sign in flow](/img/tools/tools-msteams-login.png)
+
+After this you will be returned to the tool configuration page.
+
+:::note Import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- What's on my calendar today?
+- Create a new meeting called 'Team Meeting' on Friday at 11am

@@ -138,6 +138,7 @@ module.exports = {
             'tools/infobip',
             'tools/jira',
             'tools/marketstack',
+            'tools/microsoft-calendar',
             'tools/microsoft-teams',
             'tools/notion',
             'tools/open-weather-map',
