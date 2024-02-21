@@ -45,6 +45,12 @@ module.exports = {
           position: 'left'
         },
         {
+          label: 'Try Superface in ChatGPT',
+          href: 'https://chat.openai.com/g/g-XElhtlxOR-superface',
+          position: 'right',
+          className: 'demo-button-chatgpt', 'aria-label': 'Book a demo'
+        },
+        {
           label: 'Connect GPTs to APIs',
           href: '/gpt',
           position: 'right',

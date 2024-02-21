@@ -266,12 +266,28 @@ aside.docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme
   margin-right: 1rem;
   font-weight: 600;
   line-height: 1.18;
+  text-decoration: none;
 }
 
-.demo-button:hover{
+.demo-button:hover, .demo-button-chatgpt:hover {
   cursor:pointer;
   background-color: #04C59F;
   color: #000;
+  text-decoration: none;;
+}
+
+.demo-button-chatgpt {
+  background-color: var(--button-green);
+  padding: 0.6rem 1.75rem 0.6rem 1.75rem;
+  border-radius: 10px;
+  color: #000;
+  -webkit-transition: background-color 0.5s ease-out;
+  -moz-transition: background-color 0.5s ease-out;
+  -o-transition: background-color 0.5s ease-out;
+  transition: background-color 0.5s ease-out;
+  margin-right: 1rem;
+  font-weight: 600;
+  line-height: 1.18;
 }
 
 /* .row .col a {
