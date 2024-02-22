@@ -1,18 +1,28 @@
 # Creating Tools
 
-Superface offers a web based builder named _Authoring_ Hub that uses Open API Specification files to generate tools that you can add to your account for use with your GPT or Agent.
+Superface offers a web based tool builder that allows you to:
 
-You can launch the Authoring Hub by clicking on _Create Tools_ in your Account menu, or by heading to [https://pod.superface.ai/authoring](https://pod.superface.ai/authoring).
+- Create new tools for specific providers such as Slack, Resend or Pipedrive.
+- Create any new tools you need using Open API Specifications.
 
-![The authoring hub for tools will be empty until a tool has been started.](/img/tools/authoring-hub.png)
+Access the Authoring Hub by clicking on _Create Tools_ in your Account menu, or by heading to [https://pod.superface.ai/authoring](https://pod.superface.ai/authoring).
 
-If it is your first time creating a tool, there won't be much to look at.
+![The authoring hub for tools will be empty until a tool has been started.](/img/tools/authoring-index.png)
 
-The first step is to add a _Provider_. This is the Open API Specification for the platform or API you want to connect to Superface.
+If it is your first time creating a tool, you need to choose whether you want to add a tool that Superface does not currently support, or if you want to add a new use case for one of the existing Superface tools.
 
-## Step 1: Add a Provider
+- [I want to add something completely new](#add-a-new-tool)
+- [I want to add a use case for a Superface tool (start from step 3)](#step-3-create-a-use-case)
 
-Start by clicking on **+ Provider**, a popup will appear and you can either paste an Open API Specification, or provide a URL for one (URLs for documentation hosted by Readme.io will also be accepted here).
+## Add a new use case/tool
+
+:::info Requirements
+In order to add a new tool to Superface you will need a URL or a copy of the Open API Specification for the API of the service you want to connect to.
+:::
+
+### Step 1: Upload documentation
+
+Start by clicking on **+ Add tool**, a popup will appear and you can either paste an Open API Specification, or provide a URL for it (URLs for documentation hosted by Readme.io will also be accepted here).
 
 ![The connect new provider modal](/img/tools/authoring-connect-provider.png)
 
@@ -24,7 +34,7 @@ Clicking _Connect Provider_ will index the Open API Specification and get it rea
 
 Once indexing is complete you will be redirected to a page similar to the one below.
 
-![The provider setup](/img/tools/authoring-provider-setup.png)
+![The provider setup](/img/tools/authoring-check-provider.png)
 
 You can check the setup for the Provider by looking at the JSON output. It outlines:
 
@@ -37,74 +47,52 @@ If you think anything is missing, you can add the elements you need by using the
 
 ![Shortcut templates are available to help make your provider correct](/img/tools/authoring-shortcut-templates.png)
 
-## Step 3: Create a tool
+If everything looks correct, it's time to create your use case by clicking _Create use case_.
 
-If everything looks correct, it's time to create a tool!
+## Step 3: Create a use case
 
-In the _Create new tool_ section you can describe your use case in plain English, and Superface will work out how to achieve it using the Open API Specification you already provided.
+Before defining your use case, you must install the provider for the tool. You can do this by clicking on _Install_. Once complete, you can proceed with writing your use case prompt.
 
-For example, this _Electricity Maps_ example, we want to get the latest carbon intensity data for a particular zone, so our prompt can be:
+![First you must install the provider](/img/tools/authoring-install-first.png)
 
-![Shortcut templates are available to help make your provider correct](/img/tools/authoring-tool-prompt.png)
+Next, define what the action for your tool should take by writing it out as natural language. For example, with this _dbt_ tool, we want to invite new users to our account:
 
-Below the prompt is the provider you want to create the tool with (in this example, it's _electricity-maps_).
+![Write your use case prompt as a natural language input](/img/tools/authoring-prompt-example.png)
 
-### Scopes and names
+Click **Create new use case** to continue.
 
-Superface uses scopes and names as part of the naming convention for the capabilities a tool can offer. You can provide scopes and names if you want, but we will also infer them from the information we have.
+Superface will then determine how to achieve your use case using the documentation you provided earlier.
 
-In this example, we are looking to get _intensity_ data about carbon use. There are other aspects of carbon data available too, such as _history_ so we could name this tool `carbon/intensity`. Later if we create a tool for historical carbon usage, we can name it `carbon/history`.
+![Superface determines how to achieve a use case and shows you progress](/img/tools/authoring-working-on-use-case.png)
 
-![The prompt is filled out and ready to go, using a custom scope/name](/img/tools/authoring-prompt-complete.png)
+## Step 4: Test and edit
 
-Click **Create** to create your new tool.
+After Superface determines what is required by the API to achieve your use case, you will see a page that looks similar to the one below.
 
-## Step 4: Map
+![The profile tester](/img/tools/authoring-profile-test.png)
 
-After Superface determines what is required by the API to achieve your use case, you will see a page that looks similar to the one below, with areas for _Profile_, _Map_ and _Provider_.
+There are three areas on this page:
 
-![The profile only display.](/img/tools/authoring-profile-only.png)
+The **use case interface** defines the expected inputs that are needed to make your use case possible, as well as what a successful response will look like. This is determined from the documentation you provided.
 
-Click on the _Select Provider_ drop down that is highlighted in red. Then select the provider you created earlier. This will then populate the Provider box on the screen.
+The **chat window** on the right is pre-populated with your requested use case prompt. You can test it directly from here to see if you get the response you are looking for.
 
-![The profile and the provider.](/img/tools/authoring-profile-provider.png)
+First, test your prompt to see what you get.
 
-The _Profile_ was created by Superface, based on your earlier use case prompt. It outlines what inputs are required and what the result of a successful run should look like, along with example data that the AI can use to guide users to the correct inputs.
+![Missing configuration](/img/tools/authoring-config-missing.png)
 
-The final step in tool creation is to create a _Map_. This will build a function that will call the API directly to achieve your use case, based on the data in the _Profile_ and the _Provider_.
+In order to complete requests with your tool, Superface needs the correct authorization. If this is not already set up, you will be asked to configure it. Click on _Configure_ to enter the API credentials.
 
-Click **Map with AI** to start this process.
+If you are happy with the output from your prompt, you can move on to installing it.
 
-![The Map with AI button.](/img/tools/authoring-map-with-ai.png)
-
-Again, you will see the progress as it happens, along with any errors.
-
-![The Map with AI button.](/img/tools/authoring-working-on-map.png)
+If you think your prompt can do better, you can choose to _Change the inital prompt_ and provide greater specificity.
 
 ## Step 5: Install your tool
 
-After the map has been created, your browser will return to the previous screen. The _Map_ section should now be populated.
+To install your tool click on _Install use case_. A modal will appear with the files that are going to be installed on your account. This is for information only.
 
-![The completed profile, map and provider.](/img/tools/authoring-complete-map.png)
+![The installation modal](/img/tools/authoring-files-to-be-installed.png)
 
 Superface now has everything it needs to provide the capability you requested.
 
-Click on **Install** to add it to your list of added tools.
-
-![The tool has now been added to the list of available tools, but it needs one further configuration step.](/img/tools/authoring-tool-added.png)
-
-As you can see in the image above, there is a red dot next to the tool name. This means that there is a piece of configuration missing.
-
-Click on _Config_ to add it and compete the setup.
-
-## Step 6: Configure your tool
-
-Typically, the final step will be to add any authentication information to the configuration for your tool. In this example, an API Key is required.
-
-![The API Key section of the tool config](/img/tools/authoring-final-config.png)
-
-Once the API Key is added, click on _Save Changes_.
-
-![Green is good. This tool is ready to use.](/img/tools/authoring-tool-complete.png)
-
-Green is good! The tool is setup and read for you to use with your GPT, or Agent.
+Click on **Install use case** again to add it to your list of tools.
