@@ -119,6 +119,7 @@ module.exports = {
       items: [
         'tools/adding-tools',
         'tools/create-tools',
+        'tools/editing-tools',
         {
           type: 'category',
           label: 'Tools',
