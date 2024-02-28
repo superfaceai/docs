@@ -13,3 +13,57 @@ There you will see a list of any use cases you have previously created as well a
 Click on the name of the use case you want to edit to open it:
 
 ![The profile tester](/img/tools/authoring-profile-test.png)
+
+## What you can edit
+
+There are three aspects of the tool that are editable from this section:
+
+### Intial prompt (recommended)
+
+**TL;DR Try this first before editing other aspects of the tool. It may help you achieve what you want faster.**
+
+Getting your use case prompt correct so that you're returning exactly the data that you want, the way that you want it might require a few attempts. You can edit the prompt you used to create the use case by clicking the _Change initial prompt_ button in the Use Case Interface section.
+
+:::info Note
+If you change the initial prompt, the use case interface will be recreated which will override any changes you might have made to it.
+:::
+
+In some cases, you may find that adding additional specificity to your prompt achieves better results.
+
+For example, a prompt of _"Get all members"_ would work fine. However, if you're only interested in names and locations of those members then a prompt of _"Get the first name, last name, and location of all members"_ would result in a more limited and controlled use case which is recommended.
+
+### Use case interface
+
+![The use case interface](/img/tools/authoring-edit-use-case-interface.png)
+
+Use case interfaces are written in a language we created to describe API use cases called [Comlink](https://superface.ai/docs/comlink).
+
+The use case interface defines:
+
+- The use case task
+- Any inputs that are required by the API to achieve the use case
+- What data a successful result will contain
+- What data an error will contain
+- The expected type for every value in all of the above
+
+Edit the use case interface if you want to control the amount data that is returned when you use your tool. Often, an API will return a _lot_ of values, only some of which is immediately useful to you.
+
+We recommend limiting extraneous data from being included in the API responses by removing what you don't need from the profile if you can.
+
+You _can_ do this here, but changing your initial prompt to be more specific about the values you want will also work, and you would not need to edit the use case interface.
+
+The use case interface will automatically save any changes you make. There is no need to reload the page and you can test your changes immediately.
+
+### Use case map function
+
+![The use case map function editing section](/img/tools/authoring-edit-use-case-map-function.png)
+
+Located at the bottom of the page is the Map function. It is the generated code for your tool that executes on demand to call the API with the values defined in the profile and then handle the response data that is returned.
+
+Edit the map function if you:
+
+- See API errors relating to authentication, not found, or invalid input data
+- Want to more tightly control the structure of responses
+- Further process results before they are returned to the user
+
+The use case map function is written in JavaScript. Any changes you make will be saved automatically and are immediately available to test.
