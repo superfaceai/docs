@@ -1,0 +1,43 @@
+# Todoist
+
+The Todoist Tool for Superface allows you to quickly add the following capabilities:
+
+- Create a new task
+- Update a task
+- Get info about a task
+- Close a task
+- Delete a task
+- List tasks
+- Create a project
+- Find a project
+- List labels
+
+## Authentication
+
+In order to use the Todoist tool you must authenticate your account using an API token.
+
+### Where to find your Todoist API token
+
+All Todoist accounts have an API token that can be used with this tool. Find yours by logging into your Todoist account and clicking on your name then _Settings > Integrations > Developer_ and copy the API token from that section.
+
+![The developer section of the Todoist settings](/img/tools/tools-todoist-developer.png)
+
+After copying the API token, you can paste it into the `Token` field of the Todist tool configuration in Superface.
+
+![The config for the Todoist tool in Superface](/img/tools/tools-todoist-apikey.png)
+
+Click on Save to complete the tool setup.
+
+:::note Re-import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- "What tasks are currently open?"
+- "Add a new task called Todoist Documentation with a due date of tomorrow in the Superface project"
+- "Mark the Todoist Documentation task as complete"
