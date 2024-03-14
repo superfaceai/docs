@@ -148,6 +148,7 @@ module.exports = {
             'tools/resend',
             'tools/salesforce',
             'tools/slack',
+            'tools/todoist',
             'tools/weather-api',
             'tools/world-time-api',
             'tools/wttr-in',
