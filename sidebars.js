@@ -127,6 +127,7 @@ module.exports = {
           collapsed: true,
           items: [
             'tools/affinity',
+            'tools/ares',
             'tools/github',
             'tools/google-calendar',
             'tools/google-drive',
