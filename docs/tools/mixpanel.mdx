@@ -1,0 +1,66 @@
+# Mixpanel
+
+The Mixpanel tool for Superface allows you to quickly add the following capabilities:
+
+- Create a new annotation in a specified project. Requires a role of at least Analyst.
+- Retrieve unique, total, or average data for a set of events over a specified period.
+- Retrieve data for a specific funnel (Rate limit of 60 queries per hour and a maximum of 5 concurrent queries).
+- Retrieve data from Mixpanel Insights reports.
+- Retrieve all annotations for a specific project.
+- Retrieve the names and `funnel_ids` of your saved funnels.
+- Retrieve a list of the most common event names over the last 31 days.
+- Retrieve a list of user profiles that fit specified parameters.
+- Retrieve the top events for today, including their counts and the normalized percent change from yesterday.
+
+:::note Filter values may be required
+Some capabilities do require specific values for filtering or querying. You can reference the [Mixpanel Query API documentation](https://developer.mixpanel.com/reference/query-api) for specific details on what query values are needed.
+:::
+
+## Parameters
+
+There are two parameters required to set up the Mixpanel tool.
+
+![The parameters section of the Mixpanel config](/img/tools/tools-mixpanel-parameters.png)
+
+Both the `PROJECT_ID` and the `SERVER` can be found in the Mixpanel _Project Settings_. You can access this by opening the project you want to work with in Mixpanel and expanding the settings menu.
+
+![The project settings menu in Mixpanel](/img/tools/tools-mixpanel-projectsettings.png)
+
+For `SERVER`, enter either:
+
+- `api` if your data residency is US.
+- `eu` if your data residency is within the EU.
+
+## Authentication
+
+Mixpanel recommends that third party tools are connected to its service using Service Accounts. Theese are specific accounts to be used with other tools that will make requests for data, rather than using an account that is assigned to a specific Mixpanel user.
+
+To set up a Service Account in Mixpanel, open the _Project Settings_ and click on _Service Accounts_.
+
+Click on _Add Service Account_ to create a new account.
+
+![The service account set up in Mixpanel](/img/tools/tools-mixpanel-serviceaccounts.png)
+
+We recommend that you set the Project Role to _Analyst_. This will ensure the correct level of access to use all of the available tools that Superface provides for Mixpanel.
+
+You are free to set the expiration to whatever you choose. Click on _Add_ to set up the new Service Account.
+
+![The service account credentials](/img/tools/tools-mixpanel-credentials.png)
+
+Copy the `Username` and `Secret` over to the config section of the Mixpanel tool in Superface. Use the `Secret` as the value for `Password`.
+
+![The service account credentials](/img/tools/tools-mixpanel-security.png)
+
+:::note Re-import your schema
+
+Remember to re-import the schema in your GPT to update it with the new capabilities added by this tool.
+
+:::
+
+## Example prompts
+
+To test that everything is working as it should be, from your GPT or the Superface Agent you can try asking:
+
+- "Use the Mixpanel top events data and show me a table"
+- "Show me a list of our funnels"
+- "Give me more details on funnel `<funnel name>`"

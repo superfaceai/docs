@@ -142,6 +142,7 @@ module.exports = {
             'tools/marketstack',
             'tools/microsoft-calendar',
             'tools/microsoft-teams',
+            'tools/mixpanel',
             'tools/notion',
             'tools/open-weather-map',
             'tools/pipedrive',
