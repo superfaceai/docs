@@ -1,0 +1,15 @@
+# Authentication
+
+Every Superface account has an authentication token assigned to it. This token is used to authenticate API calls, but also to determine which set of tools and their associated functions should be returned for use by your agent.
+
+## Your API token
+
+You can find the API token in your Superface account by clicking on Hub API and copying it.
+
+## Authentication type
+
+The Superface API uses `Bearer` authentication, and expects this as part of the headers that as passed with each request for every endpoint.
+
+```
+Authentication-Type: Bearer <your token goes here>
+```

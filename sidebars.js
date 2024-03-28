@@ -113,6 +113,28 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'API for Agent Building',
+      link: {type: 'doc', id: 'api/index'},
+      collapsed: false,
+      items: [
+        'api/index',
+        'api/authentication',
+        'api/endpoints',
+        'api/sessions',
+        {
+          type: 'category',
+          label: 'Function Calling Examples',
+          link: {type: 'doc', id: 'api/examples/index'},
+          collapsed: false,
+          items: [
+            'api/examples/openai',
+            'api/examples/mistral',
+          ]
+        }
+      ]
+    },
+    {
+      type: 'category',
       label: 'Managing Tools',
       link: {type: 'doc', id: 'tools/index'},
       collapsed: false,

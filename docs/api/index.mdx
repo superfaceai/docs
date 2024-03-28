@@ -1,0 +1,41 @@
+# Overview
+
+Superface offers the ability to connec to and use the tools it provides via API. This is particularly useful for developers who are building their own agents, and want to offer users the ability to connect to external APIs and services but don't want to build their integrations for themselves.
+
+## How it works
+
+LLMs such as OpenAI, Mistral, and services like LangChain allow developers to define and use "tools" to extend the functionality and connectivity of those models.
+
+These tools are defined and represented as JSON objects that outline what the tool is, what it does, and what parameters and value types are required in order to use it correctly.
+
+For example, a simple tool for the service Wttr.in when defined in this way looks like this:
+
+```json
+{
+  "type": "function",
+  "function": {
+    "name": "weather__current-weather__CurrentWeather",
+    "description": "Retrieve current weather information for a specified location.\n",
+    "parameters": {
+      "type": "object",
+      "required": ["city"],
+      "properties": {
+        "city": {
+          "type": "string",
+          "nullable": false,
+          "description": "Name of the city including state and country, e.g.: \"Prague, Czech Republic\" or \"New York City, NY, USA\"",
+          "title": "city"
+        },
+        "units": {
+          "enum": ["C", "F", "K"],
+          "description": "Units used to represent temperature - Fahrenheit, Celsius, Kelvin\nCelsius by default",
+          "title": "units"
+        }
+      },
+      "nullable": true
+    }
+  }
+}
+```
+
+At a minimum, this structured decription can be used by an LLM to determine which information it should gather before executing an API call to a specific service. Better still, it can use it to determine _which_ tool, or tools, should be used to complete the prompt you entered.
