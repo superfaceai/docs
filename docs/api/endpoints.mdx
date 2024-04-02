@@ -1,1 +1,144 @@
 # API Endpoints
+
+In order to use the tools that Superface offers in your own Agent you don't have to use lots of different endpoints. In fact, using Superface significantly cut down the amount of code you need to write to communicate with external APIs.
+
+## /fd
+
+`GET https://pod.superface.ai/api/hub/fd`
+
+Returns a list of the functions currently available for use by users. The API token that is used to authenticate this endpoint will be used to determine which Superface account is used.
+
+### Example
+
+```curl
+curl -H "Authorization: Bearer <auth_token>" https://pod.superface.ai/api/hub/fd
+```
+
+### Response
+
+The response will be an array of function objects similar to this example for retrieving the current weather from Wttr.in.
+
+```json
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "weather__current-weather__CurrentWeather",
+      "description": "Retrieve current weather information for a specified location.\n",
+      "parameters": {
+        "type": "object",
+        "required": ["city"],
+        "properties": {
+          "city": {
+            "type": "string",
+            "nullable": false,
+            "description": "Name of the city including state and country, e.g.: \"Prague, Czech Republic\" or \"New York City, NY, USA\"",
+            "title": "city"
+          },
+          "units": {
+            "enum": ["C", "F", "K"],
+            "description": "Units used to represent temperature - Fahrenheit, Celsius, Kelvin\nCelsius by default",
+            "title": "units"
+          }
+        },
+        "nullable": true
+      }
+    }
+  }
+]
+```
+
+## /session
+
+`POST https://pod.superface.ai/api/hub/session`
+
+Users need to configure their own access credentials for the tools that you offer. In order to do this, we provide a temporary URL that you can use to prompt your users to set up their access.
+
+This URL will expire 15 minutes after generation.
+
+In order to ensure that users can configure, edit or remove access at any time. You need to assign them an ID and use it when calling `/session`. We recommend that your user IDs are formatted as follows: `your_agent_name|unique_user_id` and that you store this for your users so they can access their configuration in future.
+
+### Example
+
+```curl
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <auth_token>" \
+    -H "x-superface-user-id: <your_agent_name|unique_user_id>" \
+    https://pod.superface.ai/api/hub/session
+```
+
+### Response
+
+```json
+{
+  "status": "success",
+  "configuration_url": "https://pod.superface.ai/api/hub/session/psxis99ux9",
+  "assistant_hint": "Tell user to go to URL at 'configuration_url' to configure to open configuration. Always show the whole URL to the user. The 'configuration_url' expires in 15 minutes."
+}
+```
+
+## /perform
+
+`POST https://pod.superface.ai/api/hub/perform/<tool_and_function_name>`
+
+Calls a specific function by the name defined in the function description. At a minimum this endpoint expects the body object to contain any parameters that are required by this tool and function. Those parameters are also listed in the function description.
+
+The `x-superface-user-id` header is also required so Superface knows which user's configuration to use when performing the functions.
+
+### Example
+
+```curl
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <auth_token>" \
+    -H "x-superface-user-id: <your_agent_name|unique_user_id>" \
+    -d '{"city": "prague, cz"}' \
+    https://pod.superface.ai/api/hub/perform/<tool_and_function_name>
+```
+
+### Response
+
+A successful response object will look something similar to the JSON shown below. An `assistant_hint` is provided to help your agent understand how to process this response.
+
+```json
+{
+  "status": "success",
+  "assistant_hint": "Format the result in 'result' field to the user. If the user asked for a specific format, respect it",
+  "result": {
+    "description": "What a sense of achievement!",
+    "end": {
+      "dateTime": "2024-04-03T16:54:47+02:00",
+      "timeZone": "Europe/Prague"
+    },
+    "kind": "calendar#event",
+    "organizer": {
+      "email": "martyn.davies@superface.ai",
+      "self": true
+    },
+    "reminders": {
+      "useDefault": true
+    },
+    "sequence": 0,
+    "start": {
+      "dateTime": "2024-04-03T16:39:47+02:00",
+      "timeZone": "Europe/Prague"
+    },
+    "status": "confirmed",
+    "summary": "Feel successful with Superface"
+  }
+}
+```
+
+If the user has not configured access to the tool they are trying to use, or the credentials they entered have now expired, the response body will be a prompt for the user that will include a new `action_url`.
+
+```json
+{
+  "status": "requires_action",
+  "assistant_hint": "Tell user to go to URL at 'action_url' to configure access to 'google-calendar'. Then try calling tool again. Always show the whole URL to the user. The 'action_url' expires in 15 minutes.",
+  "action_type": "configure_access",
+  "action_url": "https://pod.superface.ai/api/hub/session/9uzs6qz3t8"
+}
+```
+
+Once this step has been completed, the `/perform` action can be run again to complete the task.
