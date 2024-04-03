@@ -1,1 +1,185 @@
-# Open AI
+# OpenAI
+
+The following example outlines how to use OpenAI Function Calling and the Superface API.
+
+If you want to run this example for yourself as a Jupyter Notebook, you can [download the `.ipynb` file](/notebooks/superface_agent_hub_openai_example.ipynb).
+
+## Prerequisites
+
+```python
+pip install openai
+```
+
+## Setup
+
+Import the dependencies, and setup the required constants.
+
+```python
+import openai
+import json
+import random
+import requests as r
+from openai import OpenAI
+from IPython.display import display, Markdown
+
+# Set a random number of your choice, but don't change it
+# once you have run the notebook, otherwise you will create another user.
+SUPERFACE_USER_ID_CONSTANT =
+
+# Use the number to create a unique ID
+SUPERFACE_USER_ID = "sfoaidemo|" + str(SUPERFACE_USER_ID_CONSTANT)
+
+# Default URL for Superface
+SUPERFACE_BASE_URL = "https://pod.superface.ai/api/hub"
+
+# Set the Superface authentication token
+SUPERFACE_AUTH_TOKEN="<your-superface-auth-token>"
+
+# Set the OpenAI API Key
+OPENAI_API_KEY="<your-open-api-key>"
+```
+
+## OpenAI setup
+
+Next, set up the basis of the OpenAI SDK including which model to use. The system prompt below can be changed, but it is worth including if you have space for it to ensure that the prompts returned by Superface's API are handled correctly in context.
+
+```python
+# OpenAI Config
+client = OpenAI(api_key=OPENAI_API_KEY)
+GPT_MODEL = "gpt-4-turbo-preview"
+INIT_INSTRUCTIONS = """
+You are a helpful assistant.
+Respond to the following prompt by using function_call and then summarize actions.
+Ask for clarification if a user request is ambiguous.
+Display the agent_hint from the response to the user if it is present.
+"""
+```
+
+## Helper functions
+
+Below, we have defined two helper functions.
+
+- The first gets the list of available tools from your Superface account using the [`/fd`](../endpoints) endpoint.
+- The second performs the action that the LLM selects using the [`/perform`](../endpoints#perform) endpoint.
+
+These helpers are for example purposes and you are welcome to build different ways to approach these in whatever manner you choose.
+
+```python
+# Helper function to return the tool function descriptors
+def get_superface_tools():
+  headers = {"Authorization": "Bearer "+ SUPERFACE_AUTH_TOKEN}
+  tools = r.get(SUPERFACE_BASE_URL + "/fd", headers=headers)
+  return tools.json()
+
+# Helper function to perform the action for all the functions.
+# This is the only API call required regardless of what the function is.
+def perform_action(tool_name=None, tool_body=None):
+  headers = {"Authorization": "Bearer "+ SUPERFACE_AUTH_TOKEN, "x-superface-user-id": SUPERFACE_USER_ID}
+  perform = r.post(SUPERFACE_BASE_URL + "/perform/" + tool_name, headers=headers, json=tool_body)
+  return json.dumps(perform.json())
+
+# Helper function for calling the OpenAI Chat Completions API
+def perform_chat_request(messages, tools=None, tool_choice=None, model=GPT_MODEL):
+  try:
+    response = client.chat.completions.create(
+      model=model,
+      messages=messages,
+      tools=tools,
+      tool_choice=tool_choice,
+    )
+    return response
+  except Exception as e:
+    print("Unable to generate ChatCompletion response")
+    print(f"Exception: {e}")
+    return e
+```
+
+## Prompt
+
+```python
+# User prompt - The weather tool requires no authentication
+prompt = "What is the weather in Prague?"
+```
+
+## Passing functions to OpenAI
+
+The code below represents starting a new chat session, similar to when you first load ChatGPT.
+
+- The `system` prompt is loaded first to instruct the LLM on how to handle any further messages.
+- The initial user prompt is defined as the subsequent message
+- The system prompt, the user prompt, and the list of function definitions from Superface are passed over to the LLM
+
+```python
+messages = []
+messages.append({"role": "system", "content": INIT_INSTRUCTIONS})
+
+messages.append({
+  "role": "user",
+  "content": prompt
+})
+
+chat_response = perform_chat_request(
+  messages, tools=get_superface_tools()
+)
+```
+
+## Perform function call
+
+The OpenAI LLM responds with a decision that it needs to use a function to complete the task in the user's prompt. Good news though, you passed in a list of function definitions and it has selected one (or perhaps multiple) that seems appropriate to do it.
+
+```python
+assistant_message = chat_response.choices[0].message
+messages.append(assistant_message)
+
+# Uncomment assistant_message if you want to see the response from OpenAI
+#assistant_message
+
+tool_calls = assistant_message.tool_calls
+
+if (assistant_message.tool_calls):
+
+# Assistant wants to call a tool, run it
+
+for tool_call in tool_calls:
+function_name = tool_call.function.name
+function_args = json.loads(tool_call.function.arguments)
+function_response = perform_action(function_name, function_args)
+#print(function_response)
+
+    messages.append(
+      {
+        "tool_call_id": tool_call.id,
+        "role": "tool",
+        "name": function_name,
+        "content": function_response,
+      }
+    )
+
+    second_chat_response = perform_chat_request(messages, tools=get_superface_tools())
+    #print(second_chat_response)
+
+    if second_chat_response.choices[0].message.content:
+      display(Markdown(second_chat_response.choices[0].message.content))
+```
+
+## Final response
+
+The final response will be something similar to:
+
+```text
+The current weather in Prague, Czech Republic is partly cloudy with a temperature of 13°C, and it feels like 13°C.
+```
+
+## Summary
+
+The code shown here is basic example of how to set up OpenAI to accept a prompt and, using the supplied function defintions, decide which function is appropriate to use.
+
+Almost all of the code could be written differently, so it's up to you how you want to approach building the right elements into your agent.
+
+At a minimum, you need:
+
+- A way to retrieve the function definitions from the `/fd` endpoint
+- A way to create a user session using the `/session` endpoint
+- A way to execute the selected function using the `/perform` endpoint
+
+For more information on how to work with Function Calling with OpenAI, see the [OpenAI Function Calling](https://platform.openai.com/docs/guides/function-calling) documentation.
