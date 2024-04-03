@@ -114,7 +114,6 @@ module.exports = {
     {
       type: 'category',
       label: 'API for Agent Building',
-      link: {type: 'doc', id: 'api/index'},
       collapsed: false,
       items: [
         'api/index',
