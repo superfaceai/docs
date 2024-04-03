@@ -123,7 +123,7 @@ module.exports = {
         'api/sessions',
         {
           type: 'category',
-          label: 'Function Calling Examples',
+          label: 'Examples',
           link: {type: 'doc', id: 'api/examples/index'},
           collapsed: false,
           items: [
