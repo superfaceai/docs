@@ -113,7 +113,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'API for Agent Building',
+      label: 'API for Agent Builders',
       collapsed: false,
       items: [
         'api/index',
