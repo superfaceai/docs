@@ -1,1 +1,167 @@
-# Mistral AI
+# MistralAI
+
+The below example demonstrates how to use the Superface API to provide access to external tools in a MinstralAI powered agent.
+
+If you want to run this example for yourself as a Jupyter Notebook, you can [download the `.ipynb` file](/notebooks/superface_agent_hub_mistralai_example.ipynb).
+
+## Prerequisities
+
+Install the following dependencies
+
+```bash
+pip install pandas "mistralai>=0.1.2"
+```
+
+## Setup
+
+```python
+import json
+import random
+import requests as r
+from mistralai.client import MistralClient
+from mistralai.models.chat_completion import ChatMessage
+from IPython.display import display, Markdown
+
+# Set a random number of your choice, but don't change it
+# once you have run the notebook, otherwise you will create another user.
+SUPERFACE_USER_ID_CONSTANT = 123456789
+
+# Use the number to create a unique ID
+SUPERFACE_USER_ID = "sfmstrlaidemo|" + str(SUPERFACE_USER_ID_CONSTANT)
+
+# Default URL for Superface
+SUPERFACE_BASE_URL = "https://pod.superface.ai/api/hub"
+
+# Set the Superface authentication token
+SUPERFACE_AUTH_TOKEN="<your-superface-auth-token>"
+
+# Mistral API Key
+MISTRAL_API_KEY = "<your-mistral-api-key>"
+
+# A new array for the user, system and LLM messages to be stored
+messages = []
+```
+
+## MistralAI Setup
+
+Using the MistralAI SDK set up the client and the model
+
+```python
+# Setup MistralAI
+model = "mistral-large-latest"
+client = MistralClient(api_key="MISTRAL_API_KEY")
+```
+
+## Helper functions
+
+Below, we have defined two helper functions.
+
+- The first gets the list of available tools from your Superface account using the [`/fd`](../endpoints) endpoint.
+- The second performs the action that the LLM selects using the [`/perform`](../endpoints#perform) endpoint.
+
+These helpers are for example purposes and you are welcome to build different ways to approach these in whatever manner you choose.
+
+```python
+# Helper function to return the tool function descriptors
+def get_superface_tools():
+  headers = {"Authorization": "Bearer "+ SUPERFACE_AUTH_TOKEN}
+  tools = r.get(SUPERFACE_BASE_URL + "/fd", headers=headers)
+  return tools.json()
+
+# Helper function to perform the action for all the functions.
+# This is the only API call required regardless of what the function is.
+def perform_action(tool_name=None, tool_body=None):
+  headers = {"Authorization": "Bearer "+ SUPERFACE_AUTH_TOKEN, "x-superface-user-id": SUPERFACE_USER_ID}
+  perform = r.post(SUPERFACE_BASE_URL + "/perform/" + tool_name, headers=headers, json=tool_body)
+  return json.dumps(perform.json())
+```
+
+## Prompt
+
+```python
+# User prompt - The weather tool requires no authentication
+prompt = "What is the weather in Prague?"
+```
+
+## Passing functions to MistralAI
+
+The code below represents starting a new chat session.
+
+- The initial user prompt is defined first
+- The model, the user prompt, and the list of function definitions from Superface are passed over to the LLM. The `tool_choice` is set to auto so the LLM has freedom to decide for itself what it wants to use.
+
+```python
+messages = [
+    ChatMessage(role="user", content=prompt)
+]
+
+response = client.chat(
+    model=model,
+    messages=messages,
+    tools=get_superface_tools(),
+    tool_choice="auto"
+)
+
+# Output the response so we see what Mistral is doing
+response
+
+# Add the response message to the message history so it stays in context
+messages.append(response.choices[0].message)
+```
+
+## Perform function call
+
+From the user prompt and list of function defintions above, Mistral will make a decision about which function definition it wants to use, and what the expected parameters are to complete the task.
+
+These can be extracted from the message history, and used to call the API to get the result using the `perform_action` helper function.
+
+The response is then added to the `messages` array, so that the Mistral LLM can determine a final result to present to the user.
+
+```python
+# Extract tool intents and params from the assistant response
+tool_call = response.choices[0].message.tool_calls[0]
+function_name = tool_call.function.name
+function_params = json.loads(tool_call.function.arguments)
+
+# Pass the function name and arguments to Superface
+run_function = perform_action(function_name, function_params)
+
+messages.append(ChatMessage(role="tool", name=function_name, content=run_function))
+
+# Show the complete message history so far
+messages
+```
+
+## Final response
+
+All of the information required by Mistral's LLM is now in place, so we pass the full `messages` array back to the model so that it can determine the output to the prompt the user submitted.
+
+```python
+response = client.chat(
+  model=model,
+  messages=messages
+)
+
+# Prettify the response as Markdown
+display(Markdown(response.choices[0].message.content))
+```
+
+The output for this example will look something like this:
+
+```text
+The current weather in Prague, Czech Republic is sunny with a temperature of 13°C. It feels like 13°C.
+```
+
+## Summary
+
+The code shown here is basic example of how to set up MistralAI to accept a prompt and, using the supplied function defintions, decide which function is appropriate to use.
+
+It's up to you how you want to approach building the right elements into your agent.
+
+At a minimum, you need the following ways to interface with Superface's API:
+
+- A way to retrieve the function definitions from the `/fd` endpoint
+- A way to create a user session using the `/session` endpoint
+- A way to execute the selected function using the `/perform` endpoint
+
+For more detail on how Function Calling works with MistralAI, [check out their documentation](https://docs.mistral.ai/guides/function-calling/).
