@@ -1,1 +1,72 @@
 # Session Management
+
+Superface provides a user interface that allows users to securely configure the accounts they will use with any of the tools you are providing via your agent.
+
+In order to manage this, we handle sessions in a way that allows users access to their configuration at any time, whilst providing your agent with the correct prompts to help the user get set up.
+
+## Identifying users
+
+In order to ensure that your users are able to access their tool configuration at any time, and to ensure Superface is able to identify which of your users is which you must create a unique ID for each user.
+
+This ID is used when creating a session via the `/session` endpoint, and also when calling the `/perform` endpoint to execute a particular function on behalf of a user.
+
+### Unique ID format
+
+How you format the unique ID for your users is up to you as long as the same ID is always used to identify a particular user. You may already have a unique IDs assigned to your users and you are welcome to use them with Superface as well.
+
+For example, an alphanumeric string such as `youragentname|unique_user_id` would be sufficient.
+
+:::note Remember to store the unique ID
+Remember to store this ID as part of your user's profile. Superface's API will need it to continue to identify their tool configurations.
+:::
+
+## Create a new session
+
+To create a new session via the API, use the [`/session`](./endpoints#session) endpoint making sure to include the `x-superface-user-id` header, with your user's unique ID as the value.
+
+Depending on the purpose of your agent you can choose when to create a session for a user, but it needs to be done at the point you require a user to configure their access to a tool (or tools), or if you want to provide them with a URL to modify or revoke access.
+
+```curl
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <auth_token>" \
+    -H "x-superface-user-id: <your_agent_name|unique_user_id>" \
+    https://pod.superface.ai/api/hub/session
+```
+
+The response to this request will look similar to this:
+
+```json
+{
+  "status": "success",
+  "configuration_url": "https://pod.superface.ai/api/hub/session/psxis99ux9",
+  "assistant_hint": "Tell user to go to URL at 'configuration_url' to configure to open configuration. Always show the whole URL to the user. The 'configuration_url' expires in 15 minutes."
+}
+```
+
+The `configuration_url` is provided by Superface and allows the user to securely authenticate their own credentials for any of the tools you have made available.
+
+An `assistant_hint` is provided as a helper for your agent so that it can understand the context of the response to this request.
+
+### URL expiry
+
+The `configuration_url` will expire after 15 minutes. However, as long as `x-superface-user-id` is inculded in the headers of your request to `/session` a new URL can be generated that will allow the user to access to their tool authentications at any time.
+
+## Session Prompts
+
+The API will respond with prompts that enable to user to set up, or re-authenticate tools in the following scenarios:
+
+- The `/perform` endpoint is called, but the user's authentication for the tool required is not set up, or has expired.
+- No session exists for the user identified in the `x-superface-user-id` header.
+
+In these cases the response will default to:
+
+```json
+{
+  "status": "success",
+  "configuration_url": "https://pod.superface.ai/api/hub/session/psxis99ux9",
+  "assistant_hint": "Tell user to go to URL at 'configuration_url' to configure to open configuration. Always show the whole URL to the user. The 'configuration_url' expires in 15 minutes."
+}
+```
+
+The `assistant_hint` will change depending on the context. For example if a user's credentials have expired for a particular service, such as Google, this detail will be included so your agent can present the most appropriate context to the user.
