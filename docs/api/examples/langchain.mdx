@@ -1,0 +1,125 @@
+# LangChain
+
+LangChain is a framework for developing applications that are powered by language models. The LangChain ecosystem is always growing and has a vibrant community that is constantly providing new updates for the latest models and tools.
+
+In this example we will focus on building a simple agent that can consume and use the functions definitions provided by Superface using the [LangChain.js library](https://js.langchain.com/docs/get_started/introduction), OpenAI and Node.js.
+
+You can get all the code for this example on [GitHub](https://github.com/superfaceai/hubapi-example-langchain)
+
+## Example breakdown
+
+This example expands on [LangChain's OpenAI Tool Calling](https://js.langchain.com/docs/integrations/chat/openai#tool-calling) example. Their hardcoded tool for weather has been removed, and replaced with real API calls to the Superface Hub API to get the weather in real time.
+
+We will call out the additions that we made below.
+
+```javascript
+const { ChatOpenAI } = require('@langchain/openai');
+const { ToolMessage } = require('@langchain/core/messages');
+const axios = require('axios');
+
+const OPENAI_API_KEY = '<your-openai-api-key>';
+const SUPERFACE_AUTH_TOKEN = '<your-superface-auth-token>';
+const SUPERFACE_BASE_URL = 'https://pod.superface.ai/api/hub';
+const PROMPT = "What's the weather like in Prague and in Kosice?";
+
+(async () => {
+```
+
+Below we define two helper functions. The first retrieves the list of avaiable tools from the Superface account attached to the `SUPERFACE_AUTH_TOKEN` that was used.
+
+The second function handles calling the API with the specific function and required payload.
+
+```javascript
+async function getSuperfaceTools() {
+  try {
+    const response = await axios.get(`${SUPERFACE_BASE_URL}/fd`, {
+      headers: {
+        Authorization: `Bearer ${SUPERFACE_AUTH_TOKEN}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function performAction(functionName, toolCallArguments) {
+  try {
+    const actionResponse = await axios.post(
+      `${SUPERFACE_BASE_URL}/perform/${functionName}`,
+      toolCallArguments,
+      {
+        headers: {
+          Authorization: `Bearer ${SUPERFACE_AUTH_TOKEN}`,
+          'Content-Type': 'application/json',
+          'x-superface-user-id': 'sflangchainexample|123',
+        },
+      }
+    );
+
+    let result = JSON.stringify(actionResponse.data);
+    console.log(`SUPERFACE RESPONSE: ${result}`);
+    return result;
+  } catch (error) {
+    console.error(`PERFORM ERROR: ${error.response}`);
+    return error.response.data;
+  }
+}
+```
+
+Then we're back to setting up LangChain's OpenAI bindings. Below we set up the model we want to use as well as ensuring that the latest tools are loaded in via the `getSuperfaceTools()` helper function.
+
+```javascript
+// Bind function to the model as a tool
+const chat = new ChatOpenAI({
+  modelName: 'gpt-4-1106-preview',
+  maxTokens: 128,
+  openAIApiKey: OPENAI_API_KEY,
+}).bind({
+  tools: await getSuperfaceTools(),
+  tool_choice: 'auto',
+});
+```
+
+Create an initial prompt from a "human". In this case the human wants to know about the weather.
+
+```javascript
+// Ask initial question that requires multiple tool calls
+const res = await chat.invoke([['human', PROMPT]]);
+```
+
+OpenAI will choose a tool that is most appropriate for the prompt that was submitted, this could require more than one tool call so the code below handles this, and passes each one over to the `performAction()` helper function.
+
+```javascript
+  // Format the results from calling the tool calls back to OpenAI as ToolMessages
+  const toolMessages = res.additional_kwargs.tool_calls?.map(async toolCall => {
+    const toolCallResult = await performAction(
+      toolCall.function.name,
+      JSON.parse(toolCall.function.arguments)
+    );
+```
+
+Each response is re-formatted as a `ToolMessage`
+
+```javascript
+    return new ToolMessage({
+      tool_call_id: toolCall.id,
+      name: toolCall.function.name,
+      content: toolCallResult,
+    });
+  });
+```
+
+Finally, all the messages, and the responses from the Superface Hub API for the selected tool are passed back to OpenAI so it can determine and present the final result for the submitted prompt.
+
+```javascript
+  // Send the results back as the next step in the conversation
+  const finalResponse = await chat.invoke([
+    ['human', PROMPT],
+    res,
+    ...(await Promise.all(toolMessages ?? [])),
+  ]);
+
+  console.log(finalResponse.content);
+})();
+```
