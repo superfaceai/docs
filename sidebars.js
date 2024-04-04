@@ -128,6 +128,7 @@ module.exports = {
           items: [
             'api/examples/openai',
             'api/examples/mistral',
+            'api/examples/langchain'
           ]
         }
       ]
