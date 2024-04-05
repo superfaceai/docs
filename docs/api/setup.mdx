@@ -10,15 +10,17 @@ Start by registering a new account for [Superface](https://pod.superface.ai).
 
 Think about which tools you want to be able to access via the Hub API. You can add any tools that Superface has already built from the Tools section.
 
-If you are expecting that users will provide their own credentials for these tools in order to use them in your agent, or application, you don't need to configure them.
+If you want to add your own tools, you can do this by using our Tool Authoring system. You can see more about how to do this in the [Create Tools documentation](../tools/create-tools).
+
+If you are expecting that users will provide their own credentials for these tools in order to use them in your agent, or application, you don't need to configure them any further.
 
 ![The tools choice in the Superface UI](/img/api/hub-api-tool-choice.png)
 
 ## Step 3: Check your function definitions
 
-After adding some tools (you'll have the Wttr.in tool by default). They will show up in your function defintions schema. This is what LLMs use to understand which tools are available and what they can do.
+After adding some tools (you'll have the Wttr.in tool by default). They will show up in your Tool Function Defintions schema. This schema is used by LLMs to understand which tools are available and what they can do.
 
-You can find this by clicking on Hub, and selecting Hub API.
+You can find yours by clicking on Hub, and selecting Hub API.
 
 ![The Hub API main screen](/img/api/hub-api-function-definitions.png)
 
@@ -26,7 +28,7 @@ You can see what the defintions look like by clicking on _Function Definitions J
 
 ## Step 4: Set your authentication
 
-There are two ways to handle how tools are authenticated. You must choose the option that best suits your end use case.
+There are two ways to handle how tools are authenticated when using Hub API. You must choose the option that best suits your end use case.
 
 ![The user authentication choices](/img/api/hub-api-authentication.png)
 
