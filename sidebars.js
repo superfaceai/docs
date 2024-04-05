@@ -117,8 +117,9 @@ module.exports = {
       collapsed: false,
       items: [
         'api/index',
-        'api/authentication',
+        'api/setup',
         'api/endpoints',
+        'api/authentication',
         'api/sessions',
         {
           type: 'category',
