@@ -1,0 +1,45 @@
+# Setup a Hub
+
+The following steps will get you setup to use tools via the Hub API.
+
+## Step 1: Sign up
+
+Start by registering a new account for [Superface](https://pod.superface.ai).
+
+## Step 2: Add tools
+
+Think about which tools you want to be able to access via the Hub API. You can add any tools that Superface has already built from the Tools section.
+
+If you want to add your own tools, you can do this by using our Tool Authoring system. You can see more about how to do this in the [Create Tools documentation](../tools/create-tools).
+
+If you are expecting that users will provide their own credentials for these tools in order to use them in your agent, or application, you don't need to configure them any further.
+
+![The tools choice in the Superface UI](/img/api/hub-api-tool-choice.png)
+
+## Step 3: Check your function definitions
+
+After adding some tools (you'll have the Wttr.in tool by default). They will show up in your Tool Function Defintions schema. This schema is used by LLMs to understand which tools are available and what they can do.
+
+You can find yours by clicking on Hub, and selecting Hub API.
+
+![The Hub API main screen](/img/api/hub-api-function-definitions.png)
+
+You can see what the defintions look like by clicking on _Function Definitions JSON_. This will show you the JSON schema that will be returned from the `/fd` endpoint when called.
+
+## Step 4: Set your authentication
+
+There are two ways to handle how tools are authenticated when using Hub API. You must choose the option that best suits your end use case.
+
+![The user authentication choices](/img/api/hub-api-authentication.png)
+
+**Use my credentials**: If you plan on only using your own accounts, or private APIs that you and your colleagues have access to then _Use my credentials_ is fine. You will need to configure these tools from the Tools section if you choose this.
+
+**Users provide their own credentials**: If you are going to offer public access to an agent, or application, and require that users provide their own account credentials for the tools on offer, choose _Users provide their own credentials_. This will ensure that they are prompted to authenticate securely before a tool can be used.
+
+## Step 5: Start building
+
+That's all the setup that is required in the Superface interface. Your Hub now has tools and is ready for you to start building your implementation.
+
+:::note Are multiple hubs possible?
+Superface does not currently offer the ability to manage multiple Hub configurations under one account. If you want to build multiple projects, or use both a development and production hub, you will need to create an account for each project.
+:::

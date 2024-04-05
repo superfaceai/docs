@@ -1,0 +1,23 @@
+# Authentication
+
+Every Superface account has an authentication token assigned to it. This token is used to authenticate API calls, but also to determine which set of tools and their associated functions should be returned for use by your agent.
+
+## API token
+
+You can find the API token in the [Hub API](https://pod.superface.ai/hub/api) section of your Superface account.
+
+![The authentication token section of the Hub API in Superface](/img/api/hub-api-auth-token.png)
+
+## Authentication setup
+
+The Superface API uses `Bearer` authentication, and expects this as part of the headers that as passed with each request for every endpoint.
+
+```
+Authorization: Bearer <your_auth_token>
+```
+
+For example:
+
+```curl
+curl -H "Authorization: Bearer <your_auth_token>" https://pod.superface.ai/api/hub/fd
+```

@@ -113,6 +113,30 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Hub API',
+      collapsed: false,
+      items: [
+        'api/index',
+        'api/setup',
+        'api/endpoints',
+        'api/authentication',
+        'api/sessions',
+        {
+          type: 'category',
+          label: 'Examples',
+          link: {type: 'doc', id: 'api/examples/index'},
+          collapsed: false,
+          items: [
+            'api/examples/openai',
+            'api/examples/mistral',
+            'api/examples/langchain',
+            'api/examples/anthropic',
+          ]
+        }
+      ]
+    },
+    {
+      type: 'category',
       label: 'Managing Tools',
       link: {type: 'doc', id: 'tools/index'},
       collapsed: false,

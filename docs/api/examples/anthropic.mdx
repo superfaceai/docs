@@ -1,0 +1,225 @@
+# Anthropic
+
+Anthropic are building a series of Large Language Models under the name Claude. In this example we show how to use their approach to [function calls and tools](https://docs.anthropic.com/claude/docs/tool-use) (currenly in Beta).
+
+The tool function definitions and execution of the API calls for the selected tool(s) is handled by Superface using the [Hub API endpoints](../endpoints). The choice of which tool to use, and other decision making is handled by Claude.
+
+You can download this example as a [runnable .ipynb notebook](/notebooks/superface_hub_api_anthropic_weather_example.ipynb).
+
+## Prerequisites
+
+The Anthropic Python SDK is required for this example.
+
+```python
+pip install anthropic
+```
+
+## Setup
+
+Import the dependencies and configure the required constants. Some of these, such as those relating to the `SUPERFACE_USER_ID` are for example purposes. In a production environment you would handle this differenly, as outlined in the [Session Management guide](../sessions).
+
+```python
+import anthropic
+import json
+import requests as r
+from IPython.display import display, Markdown
+
+# Set a random number of your choice, but don't change it
+# once you have run the notebook, otherwise you will create another user.
+SUPERFACE_USER_ID_CONSTANT =
+
+# Use the number to create a unique ID
+SUPERFACE_USER_ID = "sfoaidemo|" + str(SUPERFACE_USER_ID_CONSTANT)
+
+# Default URL for Superface
+SUPERFACE_BASE_URL = "https://pod.superface.ai/api/hub"
+
+# Set the Superface authentication token
+SUPERFACE_API_TOKEN="<your-superface-api-token"
+
+# Set the OpenAI API Key
+ANTHROPIC_API_KEY="<your-anthropic-api-key"
+```
+
+## Anthropic Setup
+
+To initialize the Anthropic SDK, pass in your API key.
+
+```python
+client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+```
+
+## Helper functions
+
+There are a lot of repetitive tasks when dealing with LLMs so having some helper functions to cut down on code helps. First we define two helpers to use with Superface's Hub API.
+
+```python
+# Helper function to return the tool function descriptors
+def get_superface_tools():
+    headers = {"Authorization": "Bearer "+ SUPERFACE_AUTH_TOKEN}
+    tools = r.get(SUPERFACE_BASE_URL + "/fd", headers=headers)
+    return tools.json()
+
+# Helper function to perform the action for all the functions.
+# This is the only API call required regardless of what the function is.
+def perform_action(tool_name=None, tool_body=None):
+    headers = {"Authorization": "Bearer "+ SUPERFACE_AUTH_TOKEN, "x-superface-user-id": SUPERFACE_USER_ID}
+    perform = r.post(SUPERFACE_BASE_URL + "/perform/" + tool_name, headers=headers, json=tool_body)
+    return json.dumps(perform.json())
+```
+
+The first function, `get_superface_tools()`, retrieves the function descriptions for any tools that have been added in your Superface account. At the very least, you'll already have the Wttr.in tool that this example uses.
+
+The second function, `perform_action()`, is responsible for executing the API request for the tool and specific function that Claude will choose. It also ensures that this request is authenticated as a specific user using the `x-superface-user-id` header.
+
+### Transform function descriptions
+
+The JSON schema for defining tools that Anthropic requires is _slightly_ different to that used by OpenAI, MistraAI and LangChain. To account for this, the helper function below reformats the JSON response from `get_superface_tools()`.
+
+```python
+def get_formatted_tools():
+    original_tools = get_superface_tools()
+    formatted_tools = []
+
+    for tool in original_tools:
+    formatted_tools.append(tool['function'])
+
+    for tool in formatted_tools:
+    tool['input_schema'] = tool.pop("parameters")
+
+    return formatted_tools
+```
+
+The final helper is to communicate with Claude. This is also where the model selection, initial system prompt, list of tools and message history are set up.
+
+```python
+
+def talk_to_claude(role=None, message=None):
+    messages.append({"role": role, "content": message})
+    response = client.beta.tools.messages.create(
+        model="claude-3-opus-20240229",
+        max_tokens=1024,
+        system="Today is April 5, 2024",
+        tools=get_formatted_tools(),
+        messages=messages
+    )
+    return response
+```
+
+## Message history
+
+This example needs a "memory" of all the interactions between the user, the API and Claude. An array is a good way to do this:
+
+```python
+messages = []
+```
+
+## Prompt
+
+Next, set up the initial user prompt. Asking about the weather is the most simplistic example you can do but it's also the example that Anthropic use for their [function calling documentation](https://docs.anthropic.com/claude/docs/tool-use) so we've mirrored that here to help you compare.
+
+```python
+response = talk_to_claude("user", "What's the weather like in Prague?")
+print(response)
+```
+
+## What is Claude thinking?
+
+Claude likes to think. The first response to a user prompt will contain what Claude thinks the best approach is for obtaining the result. It can vary slightly depending on the amount of inputs a tool expects.
+
+```text
+<thinking>
+To get the current weather forecast for Prague, I should use the weather__current-weather__CurrentWeather function. Let's check if I have the required parameters:
+
+city: The user provided "Prague" as the city. To be more precise, I'll specify "Prague, Czech Republic".
+units: This is an optional parameter. The user did not specify units, so I can omit this and the function will use the default of Celsius.
+
+I have the required city parameter, so I can proceed with calling the function.
+</thinking>
+```
+
+Additionally, as part of the response Claude will provide the name of the selected tool, and the required inputs so that a call to the Superface Hub API can be made.
+
+## Perform function call
+
+If Claude wants to use a tool (which is this case is true), add the last response to the message history, then extract the function name, and the inputs and use the `perform_action()` helper to pass them to the Hub API.
+
+```python
+if (response.content[1] and response.content[1].type == "tool_use"):
+  claude_response = response.content[1]
+  messages.append({
+      "role": "assistant",
+      "content": [
+          {
+              "type": "text",
+              "text": response.content[0].text
+          },
+          {
+              "type": claude_response.type,
+              "id": claude_response.id,
+              "name": claude_response.name,
+              "input": claude_response.input
+          }
+      ]
+  })
+
+  function_name = claude_response.name
+  function_inputs = claude_response.input
+  tool_use_id = claude_response.id
+
+  superface_response = perform_action(function_name, function_inputs)
+
+superface_response
+```
+
+The response from Superface in this instance will look similar to this:
+
+```json
+{
+  "status": "success",
+  "assistant_hint": "Format the result in 'result' field to the user. If the user asked for a specific format, respect it",
+  "result": {
+    "description": "Partly cloudy",
+    "feelsLike": 16,
+    "temperature": 16
+  }
+}
+```
+
+## Final response
+
+Now that the Hub API has executed the function and returned a result, this needs to be added to the message history and sent back to Claude to determine a final response.
+
+```python
+tool_response_content = [{
+    "type": "tool_result",
+    "tool_use_id": tool_use_id,
+    "content": superface_response
+
+}]
+claude_response = talk_to_claude("user", tool_response_content)
+```
+
+Claude will reply with the final response which can also be added to the message history:
+
+```python
+messages.append({"role": "assistant", "content": claude_response.content[0].text})
+```
+
+In notebook form, this can be displayed nicely to the user:
+
+```python
+display(Markdown(claude_response.content[0].text))
+```
+
+```text
+Current weather in Prague, Czech Republic: Temperature: 16°C Feels like: 16°C Description: Partly cloudy
+```
+
+## Summary
+
+This example builds on the function calling example that Anthropic use, however, with Superface's Hub API you can access many varied APIs, including your own custom tools.
+
+The approach to implementing those would be similar, especialy when you consider that just a single function is required to execute any of the functions an LLM selects and Superface will handle it from there.
+
+For more information on how to implement function calling with Anthropic Claude3, take a look at their [documentation}(https://docs.anthropic.com/claude/docs/tool-use).
