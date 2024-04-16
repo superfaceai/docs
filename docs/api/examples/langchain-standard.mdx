@@ -1,0 +1,130 @@
+# LangChain (Tool Calling)
+
+The Superface tool function descriptions are available as JSON schema that follows the OpenAI tool definition. Although this format is common amongst other LLMs, there are some slight differences depending on the model you choose to use.
+
+LangChain have tooling that standarizes how functions are passed to LLMs, as well as how the response from the model is handled, regardless of the model you want to use.
+
+Using LangChain is our recommended approach if you are using LLMs such as Anthropic, Cohere or Gemini Pro.
+
+## Example breakdown
+
+To begin working with LangChain, the core package must be installed.
+
+```bash
+pip install langchain
+```
+
+You will also need to install the wrapper for the API of the LLM that you want to use. For example, with Anthropic:
+
+```bash
+pip install langchain-anthropic
+```
+
+### Setup
+
+Then setup the necessary packages:
+
+```python
+import json
+import requests as r
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.messages import AIMessage, HumanMessage
+```
+
+### Helper function
+
+A helper function is required to retrieve the function descriptions for the tools that have been added to your Superface account. You can read more about the `fd` endpoint in our [Endpoints documentation](../endpoints).
+
+```python
+SUPERFACE_BASE_URL = "https://pod.superface.ai/api/hub"
+SUPERFACE_AUTH_TOKEN="<your-superface-auth-token>"
+
+def get_superface_tools():
+  headers = {"Authorization": "Bearer "+ SUPERFACE_AUTH_TOKEN}
+  tools = r.get(SUPERFACE_BASE_URL + "/fd", headers=headers)
+  return tools.json()
+```
+
+### LLM setup
+
+Next, set up the LLM you want to use (in this example we use [Anthropic's Claude 3 Opus](https://www.anthropic.com/claude)):
+
+```python
+from langchain_anthropic import ChatAnthropic
+
+llm = ChatAnthropic(model="claude-3-opus-20240229", temperature=0, api_key=ANTHROPIC_API_KEY)
+```
+
+Then bind the tools from Superface to the LLM using the helper function and LangChains `bind_tools` function:
+
+```python
+tools = get_superface_tools()
+llm_anthropic = llm.bind_tools(tools)
+```
+
+### Invoke the query
+
+Finally, set up a query and invoke it along with the selection of tools.
+
+```python
+query = "What is the weather in Prague?"
+result_anthropic = llm_anthropic.invoke(query)
+result_anthropic
+```
+
+The result will be output as:
+
+```python
+AIMessage(content=[{'text': '<thinking>\nThe user is asking for the current weather in Prague. The relevant tool is weather__current-weather__CurrentWeather, which takes the required parameter "city" and an optional "units" parameter.\n\nThe user directly provided the city name "Prague", so we have the value for the required "city" parameter. \n\nThe optional "units" parameter was not provided, but that is okay since it will default to Celsius if not specified.\n\nSince we have the required parameter, we can proceed with the API call.\n</thinking>', 'type': 'text'}, {'id': 'toolu_012DorWutbzM3Nf64TvHergT', 'input': {'city': 'Prague, Czech Republic'}, 'name': 'weather__current-weather__CurrentWeather', 'type': 'tool_use'}], response_metadata={'id': 'msg_01TnL7gHzLhC4FXWhNP6rdRY', 'model': 'claude-3-opus-20240229', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'input_tokens': 577, 'output_tokens': 176}}, id='run-8e283a7d-8a3f-4ea6-9a8a-c19ba68a413e-0', tool_calls=[{'name': 'weather__current-weather__CurrentWeather', 'args': {'city': 'Prague, Czech Republic'}, 'id': 'toolu_012DorWutbzM3Nf64TvHergT'}])
+```
+
+### Find the tool calls
+
+It is possible to extract the tool calls array from this response so that your agent/application can run them using [Superface's `/perform` endpoint](../endpoints).
+
+```python
+result_anthropic.tool_calls
+```
+
+Results in:
+
+```json
+[
+  {
+    "name": "weather__current-weather__CurrentWeather",
+    "args": { "city": "Prague, Czech Republic" },
+    "id": "toolu_012DorWutbzM3Nf64TvHergT"
+  }
+]
+```
+
+## Using different LLMs
+
+So, what would you need to change to use Superface and LangChain with a different LLM? Only the LLM setup needs to be different. Here is how it would change from Anthropic, to Cohere, or Gemini Pro:
+
+### Anthropic
+
+```python
+from langchain_anthropic import ChatAnthropic
+llm = ChatAnthropic(model="claude-3-opus-20240229", temperature=0, api_key=ANTHROPIC_API_KEY)
+```
+
+### Cohere
+
+```python
+from langchain_cohere import ChatCohere
+llm = ChatCohere(model="command-r", temperature=0, api_key=COHERE_API_KEY)
+```
+
+### Gemini Pro
+
+```python
+from langchain_google_vertexai import ChatVertexAI
+llm = ChatVertexAI(model_name="gemini-pro", temperature=0, convert_system_message_to_human=True, api_key=VERTEXAI_API_KEY)
+```
+
+:::note Usage with create_tool_calling_agent
+Currently, LangChain's `create_tool_calling_agent` for building agents that take advantage of their standardized tool formatting will not work directly with the JSON response from the `/fd` endpoint Superface provides.
+
+Tools defined with JSON must be converted to a Python dict that inherits from their BaseTool class in order to work correctly.
+:::

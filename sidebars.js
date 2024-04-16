@@ -127,10 +127,11 @@ module.exports = {
           link: {type: 'doc', id: 'api/examples/index'},
           collapsed: false,
           items: [
-            'api/examples/openai',
-            'api/examples/mistral',
-            'api/examples/langchain',
             'api/examples/anthropic',
+            'api/examples/mistral',
+            'api/examples/openai',
+            'api/examples/langchain',
+            'api/examples/langchain-standard'
           ]
         }
       ]
