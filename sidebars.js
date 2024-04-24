@@ -104,7 +104,7 @@ module.exports = {
       type: 'category',
       label: 'Connect GPTs to APIs',
       link: {type: 'doc', id: 'gpts/index'},
-      collapsed: false,
+      collapsed: true,
       items: [
         'gpts/setup',
         'gpts/user-authentication',
@@ -113,8 +113,23 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'AI Agent',
+      link: {type: 'doc', id: 'agent/index'},
+      collapsed: true,
+      items: [
+        'agent/interface',
+        // 'agent/adding-tools',
+        // 'agent/configure-providers',
+        // 'agent/updating-tools',
+        'agent/changing-models',
+        'agent/custom-instructions',
+        'agent/scheduling-tasks'
+      ]
+    },
+    {
+      type: 'category',
       label: 'Hub API',
-      collapsed: false,
+      collapsed: true,
       items: [
         'api/index',
         'api/setup',
@@ -136,11 +151,12 @@ module.exports = {
         }
       ]
     },
+
     {
       type: 'category',
       label: 'Managing Tools',
       link: {type: 'doc', id: 'tools/index'},
-      collapsed: false,
+      collapsed: true,
       items: [
         'tools/adding-tools',
         'tools/create-tools',
@@ -189,21 +205,6 @@ module.exports = {
       type: 'doc',
       label: 'Superface GPT',
       id: 'superface-gpt'
-    },
-    {
-      type: 'category',
-      label: 'Superface Agent',
-      link: {type: 'doc', id: 'agent/index'},
-      collapsed: true,
-      items: [
-        'agent/interface',
-        // 'agent/adding-tools',
-        // 'agent/configure-providers',
-        // 'agent/updating-tools',
-        'agent/changing-models',
-        'agent/custom-instructions',
-        'agent/scheduling-tasks'
-      ]
     },
     {
       type: 'doc',
