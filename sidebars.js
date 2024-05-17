@@ -123,7 +123,8 @@ module.exports = {
         // 'agent/updating-tools',
         'agent/changing-models',
         'agent/custom-instructions',
-        'agent/scheduling-tasks'
+        'agent/scheduling-tasks',
+        'agent/example-videos'
       ]
     },
     {
