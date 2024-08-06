@@ -185,6 +185,7 @@ module.exports = {
             'tools/microsoft-calendar',
             'tools/microsoft-teams',
             'tools/mixpanel',
+            "tools/monday-work-management",
             'tools/notion',
             'tools/open-weather-map',
             'tools/pipedrive',
