@@ -357,6 +357,11 @@
       "source": "/docs/integrations-monitoring",
       "destination": "/docs/connectivity",
       "permanent": false
+    },
+    {
+      "source": "/docs/(.*)",
+      "destination": "/docs",
+      "permanent": false
     }
   ]
 }
