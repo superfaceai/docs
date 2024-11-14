@@ -22,7 +22,7 @@
       "permanent": false
     },
     {
-      "source": "/docs/agent/*",
+      "source": "/docs/agent/(.*)",
       "destination": "https://docs.superface.ai/13c52fa0eedf80fba9eeff733daa7eeb",
       "permanent": false
     },
@@ -307,32 +307,32 @@
       "permanent": false
     },
     {
-      "source": "/docs/classic/*",
+      "source": "/docs/classic/(.*)",
       "destination": "/docs/connectivity",
       "permanent": false
     },
     {
-      "source": "/docs/comlink/*",
+      "source": "/docs/comlink/(.*)",
       "destination": "/docs/connectivity",
       "permanent": false
     },
     {
-      "source": "/docs/reference/*",
+      "source": "/docs/reference/(.*)",
       "destination": "/docs/connectivity",
       "permanent": false
     },
     {
-      "source": "/docs/tutorials/*",
+      "source": "/docs/tutorials/(.*)",
       "destination": "/docs/connectivity",
       "permanent": false
     },
     {
-      "source": "/docs/guides/*",
+      "source": "/docs/guides/(.*)",
       "destination": "/docs/connectivity",
       "permanent": false
     },
     {
-      "source": "/docs/upgrade/*",
+      "source": "/docs/upgrade/(.*)",
       "destination": "/docs/connectivity",
       "permanent": false
     },
