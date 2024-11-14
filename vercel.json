@@ -1,0 +1,362 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/docs",
+      "permanent": false
+    },
+    {
+      "source": "/docs",
+      "destination": "https://docs.superface.ai",
+      "permanent": false
+    },
+    {
+      "source": "/docs/support",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80c8827bd4a1b802a5cf#13d52fa0eedf80f090a0ce69353133dd",
+      "permanent": false
+    },
+    {
+      "source": "/docs/agent",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80fba9eeff733daa7eeb",
+      "permanent": false
+    },
+    {
+      "source": "/docs/agent/*",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80fba9eeff733daa7eeb",
+      "permanent": false
+    },
+    {
+      "source": "/docs/connectivity",
+      "destination": "https://docs.superface.ai/13d52fa0eedf808fa43de14afb8a285e",
+      "permanent": false
+    },
+    {
+      "source": "/docs/superface-gpt",
+      "destination": "https://docs.superface.ai/13c52fa0eedf808e8ceee67cbd9c90d9",
+      "permanent": false
+    },
+    {
+      "source": "/docs/gpts",
+      "destination": "https://docs.superface.ai/13d52fa0eedf800e9b05fa6babc4f506",
+      "permanent": false
+    },
+    {
+      "source": "/docs/gpts/first-time-users",
+      "destination": "https://docs.superface.ai/13d52fa0eedf800e9b05fa6babc4f506",
+      "permanent": false
+    },
+    {
+      "source": "/docs/gpts/setup",
+      "destination": "https://docs.superface.ai/13c52fa0eedf8055bbc3ddb0e51f83be",
+      "permanent": false
+    },
+    {
+      "source": "/docs/gpts/user-authentication",
+      "destination": "https://docs.superface.ai/13c52fa0eedf8029a287f52f8555d218",
+      "permanent": false
+    },
+    {
+      "source": "/docs/gpts/limits",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80ebb5e1c056b9fca611",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api",
+      "destination": "https://docs.superface.ai/13d52fa0eedf8061a1e9d0466a526b06",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api/setup",
+      "destination": "https://docs.superface.ai/13c52fa0eedf805eb41bf05383aaa7ad",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api/endpoints",
+      "destination": "https://docs.superface.ai/13c52fa0eedf802699a7d8732bab9ea2",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api/authentication",
+      "destination": "https://docs.superface.ai/13c52fa0eedf809784b2d66cf4bcf8b5",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api/sessions",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80d2b3e0e29dc8027ada",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api/examples",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80488276ff4180af2c52",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api/examples/openai",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80fbb362c6cde4e6eca9",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api/examples/mistral",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80f8b234d05171a95500",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api/examples/anthropic",
+      "destination": "https://docs.superface.ai/13c52fa0eedf804c82e0c97e10d9bbe1",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api/examples/langchain",
+      "destination": "https://docs.superface.ai/13c52fa0eedf805c9e7cf71d9c303218",
+      "permanent": false
+    },
+    {
+      "source": "/docs/api/examples/langchain-standard",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80d9957af7491f7033ab",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools",
+      "destination": "https://docs.superface.ai/13d52fa0eedf808f8d4ce72f2eb92092",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/adding-tools",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80adb3e0ef3719e5a316",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/create-tools",
+      "destination": "https://docs.superface.ai/13c52fa0eedf809bb2f2ece7347bb635",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/editing-tools",
+      "destination": "https://docs.superface.ai/13c52fa0eedf8084af06cbba8dd97256",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/available-tools",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80058f89e5cb7ba07c41",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/affinity",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80bf8648f4f58cd20546",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/ares",
+      "destination": "https://docs.superface.ai/13c52fa0eedf8054bd08d7360c71d805",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/github",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80fdbb5dc5ce8c38946a",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/google-calendar",
+      "destination": "https://docs.superface.ai/13c52fa0eedf809fb4a1dad869511b0e",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/google-drive",
+      "destination": "https://docs.superface.ai/13c52fa0eedf807da1a8eff2705948fb",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/google-mail",
+      "destination": "https://docs.superface.ai/13c52fa0eedf809a857ceb16df46b058",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/google-search",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80afbbc9c6e4e74d17b8",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/google-sheets",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80938338ebd3f1bfe4a0",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/google-contacts",
+      "destination": "https://docs.superface.ai/13c52fa0eedf809a857ceb16df46b058",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/greenhouse",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80ef8a1cc8cba691c5ce",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/hubspot",
+      "destination": "https://docs.superface.ai/13c52fa0eedf8062be11f0e3d6a7b037",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/ibm-nlu",
+      "destination": "https://docs.superface.ai/13c52fa0eedf8064bc8ac1085b30a66d",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/infobip",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80778cd3f7e3ef705b72",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/jira",
+      "destination": "https://docs.superface.ai/13c52fa0eedf804f9fccee67a628f40e",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/marketstack",
+      "destination": "https://docs.superface.ai/13c52fa0eedf805fb75adca2bae599c9",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/microsoft-calendar",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80dd8a74ea8018c30784",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/microsoft-teams",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80a3ad7ec62d1073ebc3",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/mixpanel",
+      "destination": "https://docs.superface.ai/13c52fa0eedf8005a189d685e9b1a9a2",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/monday-work-management",
+      "destination": "https://docs.superface.ai/13c52fa0eedf8061a3bcc7b4d2d9a2da",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/notion",
+      "destination": "https://docs.superface.ai/13c52fa0eedf8074b909e11f7315b7f7",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/open-weather-map",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80a5bfd1dea44c8d4e51",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/pipedrive",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80909d1fc2bc512dfd1f",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/posthog",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80ef96e3d62f5767983f",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/resend",
+      "destination": "https://docs.superface.ai/13c52fa0eedf804ca16bc1c594d8bbe8",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/salesforce",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80b48dd1f4bc33993aaf",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/slack",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80e29528da503f04f44c",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/todoist",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80479ae3e3c116ea2d00",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/weather-api",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80f7b62be0f02e55b884",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/world-time-api",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80c99032c35b23631f1b",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/wttr-in",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80c5bf48f420a092407b",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/x",
+      "destination": "https://docs.superface.ai/13c52fa0eedf801fa464c16f73006de3",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tools/zendesk",
+      "destination": "https://docs.superface.ai/13c52fa0eedf80aa96e6c190172c92cd",
+      "permanent": false
+    },
+    {
+      "source": "/docs/legacy-docs-redirects---------------------------------",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/docs/classic/*",
+      "destination": "/docs/connectivity",
+      "permanent": false
+    },
+    {
+      "source": "/docs/comlink/*",
+      "destination": "/docs/connectivity",
+      "permanent": false
+    },
+    {
+      "source": "/docs/reference/*",
+      "destination": "/docs/connectivity",
+      "permanent": false
+    },
+    {
+      "source": "/docs/tutorials/*",
+      "destination": "/docs/connectivity",
+      "permanent": false
+    },
+    {
+      "source": "/docs/guides/*",
+      "destination": "/docs/connectivity",
+      "permanent": false
+    },
+    {
+      "source": "/docs/upgrade/*",
+      "destination": "/docs/connectivity",
+      "permanent": false
+    },
+    {
+      "source": "/docs/getting-started",
+      "destination": "/docs/connectivity",
+      "permanent": false
+    },
+    {
+      "source": "/docs/how-superface-works",
+      "destination": "/docs/connectivity"
+    },
+    {
+      "source": "/docs/advanced-usage",
+      "destination": "/docs/connectivity"
+    },
+    {
+      "source": "/docs/verification",
+      "destination": "/docs/connectivity"
+    },
+    {
+      "source": "/docs/integrations-monitoring",
+      "destination": "/docs/connectivity",
+      "permanent": false
+    }
+  ]
+}
