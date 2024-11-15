@@ -22,6 +22,11 @@
       "permanent": false
     },
     {
+      "source": "/docs/agent/get-started",
+      "destination": "https://docs.superface.ai/13c52fa0eedf8120846cd83dd501facc",
+      "permanent": false
+    },
+    {
       "source": "/docs/agent/(.*)",
       "destination": "https://docs.superface.ai/13c52fa0eedf80fba9eeff733daa7eeb",
       "permanent": false
