@@ -92,6 +92,11 @@
       "permanent": false
     },
     {
+      "source": "/docs/api/privacy-policy",
+      "destination": "https://docs.superface.ai/15a52fa0eedf8068b215d4576b500c2d",
+      "permanent": false
+    },
+    {
       "source": "/docs/api/examples",
       "destination": "https://docs.superface.ai/13c52fa0eedf80488276ff4180af2c52",
       "permanent": false
