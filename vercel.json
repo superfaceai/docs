@@ -67,6 +67,11 @@
       "permanent": false
     },
     {
+      "source": "/docs/claude/setup",
+      "destination": "https://docs.superface.ai/18152fa0eedf809f8b86e8916d8f21cf",
+      "permanent": false
+    },
+    {
       "source": "/docs/api",
       "destination": "https://docs.superface.ai/13d52fa0eedf8061a1e9d0466a526b06",
       "permanent": false
